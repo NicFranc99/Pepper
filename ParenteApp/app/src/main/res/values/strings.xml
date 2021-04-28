@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Better Call Pepper</string>
+    <string name="tab_text_1">Persone</string>
+    <string name="tab_text_2">Cronologia</string>
+    <string name="title_activity_settings">Impostazioni</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <string name="NEWS_CHANNEL_ID">news</string>
+    <string name="CHANNEL_NEWS">News</string>
+    <string name="CHANNEL_DESCRIPTION">Get informed with new updates</string>
+    <string name="DEBUG_TAG">LearningPushNotifications</string>
+    <string name="title_activity_login">Login</string>
+    <string name="prompt_email">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Accedi</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Benvenuto "</string>
+    <string name="invalid_username">Username non valido</string>
+    <string name="invalid_password">La password è composta da minimo 5 caratteri</string>
+    <string name="login_failed">"Login fallito"</string>
+</resources>
