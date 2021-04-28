@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="ExtraText"
+    android:id = "@+id/profilo"
+    >
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="143dp"
+        android:layout_height="41dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-146dp"
+        android:layout_marginLeft="-146dp"
+        android:layout_marginTop="158dp"
+        android:layout_toEndOf="@+id/buttonDelete"
+        android:layout_toRightOf="@+id/buttonDelete"
+        android:paddingBottom="10dp"
+        android:text="Spiderman"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+
+        />
+
+    <ImageView
+        android:id="@+id/buttonDelete"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:backgroundTint="#C6C6C6" />
+    <!--android:id="@+id/imageView"-->
+
+
+    <!-- <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
+        android:background="#FF0000"
+        android:padding="10dp"
+        android:text="Call" /> -->
+
+
+</RelativeLayout>
