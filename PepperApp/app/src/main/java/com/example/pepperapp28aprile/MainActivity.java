@@ -36,6 +36,8 @@ import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.example.pepperapp28aprile.Globals.myAppID;
+
 public class MainActivity extends AppCompatActivity {
 
     private String currentFragment;
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run () {
-                String sURL = "https://bettercallpepper.altervista.org/api/getParentCall.php?parId=2";
+                String sURL = "https://bettercallpepper.altervista.org/api/getParentCall.php?parid=" + myAppID;
                 String name = "";
                 String surname = "";
                 // Connect to the URL using java's native library
@@ -95,14 +97,12 @@ public class MainActivity extends AppCompatActivity {
                     // Convert to a JSON object to print data
                     JsonParser jp = new JsonParser(); //from gson
                     JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
-                    JsonArray rootarr = root.getAsJsonArray(); //May be an array, may be an object.
-
-                    for (int i = 0; i < rootarr.size(); i++) {
-                        JsonObject rootelem = rootarr.get(i).getAsJsonObject();
-                        name = rootelem.get("name").getAsString();
-                        surname = rootelem.get("surname").getAsString();
-                    }
+                    //JsonArray rootarr = root.getAsJsonArray(); //May be an array, may be an object.
+                    JsonObject rootelem = root.getAsJsonArray().get(0).getAsJsonObject();
+                    name = rootelem.get("name").getAsString();
+                    surname = rootelem.get("surname").getAsString();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 if(name != "") {
                     notificationBuilder.setContentText("Stai ricevendo una chiamata da " + name + " " + surname);

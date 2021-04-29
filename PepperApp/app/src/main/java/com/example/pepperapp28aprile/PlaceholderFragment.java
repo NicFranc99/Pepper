@@ -93,7 +93,7 @@ public class PlaceholderFragment extends Fragment {
             peopleList = new ArrayList<>();
             gridView = (GridView) fragmentLayout.findViewById(R.id.mygridview);
 
-            String sURL = "https://bettercallpepper.altervista.org/api/getElderlies.php?appid="+ Globals.myAppID;
+            String sURL = "https://bettercallpepper.altervista.org/api/getParents.php?appid="+ Globals.myAppID;
 
             // Connect to the URL using java's native library
             URL url = null;
