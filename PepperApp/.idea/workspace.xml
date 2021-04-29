@@ -25,26 +25,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/family.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/hokme.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/quadrato.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/sfondo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/videocall.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_resizable_return.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_resizable_videocall.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_resizable_shop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_resizable_family.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_return.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_shop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ui_pepper_retail.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ui_qrcode_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ui_qrcode_logo_resizable.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_resizable_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_loading.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_loading.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/Globals.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/RejectActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/WebActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainMenuFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MyListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MyListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PeopleListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PeopleListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/Persona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PlaceholderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PlaceholderFragment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[emulator-5578]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -77,14 +77,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res/values" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/app/src/main/res/values" />
     </key>
   </component>
@@ -188,22 +190,30 @@
       <screen x="0" y="27" width="1920" height="985" />
     </state>
     <state x="543" y="277" width="824" height="491" key="AndroidCreateResourceFileDialog/0.27.1920.985@0.27.1920.985" timestamp="1619643235534" />
-    <state width="1874" height="245" key="GridCell.Tab.0.bottom" timestamp="1619642980112">
+    <state x="743" y="277" width="424" height="491" key="FileChooserDialogImpl" timestamp="1619690006525">
       <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="245" key="GridCell.Tab.0.bottom/0.27.1920.985@0.27.1920.985" timestamp="1619642980112" />
-    <state width="1874" height="245" key="GridCell.Tab.0.center" timestamp="1619642980111">
+    <state x="743" y="277" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.985@0.27.1920.985" timestamp="1619690006525" />
+    <state width="1874" height="180" key="GridCell.Tab.0.bottom" timestamp="1619691961735">
       <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="245" key="GridCell.Tab.0.center/0.27.1920.985@0.27.1920.985" timestamp="1619642980111" />
-    <state width="1874" height="245" key="GridCell.Tab.0.left" timestamp="1619642980110">
+    <state width="1874" height="180" key="GridCell.Tab.0.bottom/0.27.1920.985@0.27.1920.985" timestamp="1619691961735" />
+    <state width="1874" height="180" key="GridCell.Tab.0.center" timestamp="1619691961735">
       <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="245" key="GridCell.Tab.0.left/0.27.1920.985@0.27.1920.985" timestamp="1619642980110" />
-    <state width="1874" height="245" key="GridCell.Tab.0.right" timestamp="1619642980111">
+    <state width="1874" height="180" key="GridCell.Tab.0.center/0.27.1920.985@0.27.1920.985" timestamp="1619691961735" />
+    <state width="1874" height="180" key="GridCell.Tab.0.left" timestamp="1619691961734">
       <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="245" key="GridCell.Tab.0.right/0.27.1920.985@0.27.1920.985" timestamp="1619642980111" />
+    <state width="1874" height="180" key="GridCell.Tab.0.left/0.27.1920.985@0.27.1920.985" timestamp="1619691961734" />
+    <state width="1874" height="180" key="GridCell.Tab.0.right" timestamp="1619691961735">
+      <screen x="0" y="27" width="1920" height="985" />
+    </state>
+    <state width="1874" height="180" key="GridCell.Tab.0.right/0.27.1920.985@0.27.1920.985" timestamp="1619691961735" />
+    <state x="698" y="203" width="513" height="640" key="RollbackChangesDialog" timestamp="1619689760113">
+      <screen x="0" y="27" width="1920" height="985" />
+    </state>
+    <state x="698" y="203" width="513" height="640" key="RollbackChangesDialog/0.27.1920.985@0.27.1920.985" timestamp="1619689760113" />
     <state x="623" y="242" width="672" height="678" key="search.everywhere.popup" timestamp="1619644675718">
       <screen x="0" y="27" width="1920" height="985" />
     </state>

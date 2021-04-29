@@ -12,6 +12,13 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
         <activity
+            android:name=".RejectActivity"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
+            android:name=".WebActivity"
+            android:theme="@style/ThemeBlue.NoActionBar" >
+        </activity>
+        <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/ThemeBlue.NoActionBar" /> <!-- launchMode="singleTask in order to keep only one instance of the app alive -->

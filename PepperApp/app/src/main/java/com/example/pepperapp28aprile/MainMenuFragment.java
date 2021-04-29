@@ -68,7 +68,8 @@ public class MainMenuFragment extends Fragment {
                 String img = rootelem.get("propic").getAsString();
                 String name = rootelem.get("name").getAsString();
                 String surname = rootelem.get("surname").getAsString();
-                peopleList.add(new Persona(img, name, surname));
+                int id = rootelem.get("id").getAsInt();
+                peopleList.add(new Persona(img, id, name, surname));
             }
         } catch (Exception e) {
             System.out.println("Erroreeeee");

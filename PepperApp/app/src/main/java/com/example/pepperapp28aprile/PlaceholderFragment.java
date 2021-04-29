@@ -93,7 +93,7 @@ public class PlaceholderFragment extends Fragment {
             peopleList = new ArrayList<>();
             gridView = (GridView) fragmentLayout.findViewById(R.id.mygridview);
 
-            String sURL = "https://bettercallpepper.altervista.org/api/getElderlies.php?appid=1";
+            String sURL = "https://bettercallpepper.altervista.org/api/getElderlies.php?appid="+ Globals.myAppID;
 
             // Connect to the URL using java's native library
             URL url = null;
@@ -112,7 +112,8 @@ public class PlaceholderFragment extends Fragment {
                     String img = rootelem.get("propic").getAsString();
                     String name = rootelem.get("name").getAsString();
                     String surname = rootelem.get("surname").getAsString();
-                    peopleList.add(new Persona(img, name, surname));
+                    int id = rootelem.get("id").getAsInt();
+                    peopleList.add(new Persona(img, id, name, surname));
                 }
             } catch (Exception e) {
                 System.out.println("Erroreeeee");
@@ -136,7 +137,7 @@ public class PlaceholderFragment extends Fragment {
             callList = new ArrayList<>();
             ListView listView = (ListView) fragmentLayout.findViewById(R.id.mylistview);
 
-           String sURL = "https://bettercallpepper.altervista.org/api/getCalls.php?appid=1";
+           String sURL = "https://bettercallpepper.altervista.org/api/getCalls.php?appid="+ Globals.myAppID;
 
             // Connect to the URL using java's native library
             URL url = null;

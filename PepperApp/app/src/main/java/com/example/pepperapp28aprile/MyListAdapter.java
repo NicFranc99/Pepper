@@ -20,6 +20,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import static com.example.pepperapp28aprile.Globals.myAppID;
+
 //we need to extend the ArrayAdapter class as we are building an adapter
 public class MyListAdapter extends ArrayAdapter<Persona> {
 
@@ -84,6 +86,8 @@ public class MyListAdapter extends ArrayAdapter<Persona> {
             public void onClick(View view) {
                 //we will call this method to remove the selected value from the list
                 //we are passing the position which is to be removed in the method
+                myAppID = p.getId();
+                System.out.println("MYAPP" + myAppID);
                 startProfile(view);
             }
         });

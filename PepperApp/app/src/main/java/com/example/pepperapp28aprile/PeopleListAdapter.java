@@ -2,8 +2,10 @@ package com.example.pepperapp28aprile;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +87,7 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
                 System.out.println("chiama");
                 //we will call this method to remove the selected value from the list
                 //we are passing the position which is to be removed in the method 
-                removeHero(position); //PARTE LA CHIAMATA: DA FARE
+                removeHero(position,view); //PARTE LA CHIAMATA: DA FARE
             }
         });
 
@@ -94,7 +96,7 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
     }
 
     //this method will remove the item from the list 
-    private void removeHero(final int position) {
+    private void removeHero(final int position,View view) {
         //Creating an alert dialog to confirm the deletion
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Sei sicuro di voler chiamare "+ peopleList.get(position).getName() +"?");
@@ -103,11 +105,9 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
         builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-                //removing the item 
-                peopleList.remove(position);
-
-                //reloading the list 
+                //removing the item
+                startWeb(view, peopleList.get(position).getId()); //
+                //reloading the list
                 notifyDataSetChanged();
             }
         });
@@ -123,5 +123,13 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
         //creating and displaying the alert dialog 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public void startWeb(View view, int id) {
+        Intent intent = new Intent(this.getContext(), WebActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("id", id); //Your id
+        intent.putExtras(b);
+        this.getContext().startActivity(intent);
     }
 }
