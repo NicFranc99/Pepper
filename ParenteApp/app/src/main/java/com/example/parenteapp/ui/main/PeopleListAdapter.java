@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -113,7 +114,7 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
                 public void onClick(DialogInterface dialogInterface, int i) {
 
                     //removing the item
-                    startWeb(view);
+                    startWeb(view, peopleList.get(position).getId());
 
                     //reloading the list
                     notifyDataSetChanged();
@@ -133,8 +134,11 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
             alertDialog.show();
         }
 
-        public void startWeb(View view) {
+        public void startWeb(View view, int id) {
         Intent intent = new Intent(this.getContext(), WebActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("id", id); //Your id
+        intent.putExtras(b);
         this.getContext().startActivity(intent);
     }
     }
