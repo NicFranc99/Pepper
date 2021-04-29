@@ -26,6 +26,8 @@ import androidx.core.content.ContextCompat;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.parenteapp.Globals.myAppID;
+
 public class WebActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     private WebView mWebView;
@@ -33,7 +35,7 @@ public class WebActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_web);
         if (checkPermission()) {
             //main logic or main code
 
@@ -105,7 +107,9 @@ public class WebActivity extends AppCompatActivity {
         mWebView.setScrollbarFadingEnabled(true);
         mWebView.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36");
 
-        String url = "https://bettercallpepper.altervista.org/VideoChat/?room=Stanza&mode=c";
+        int id = getIntent().getExtras().getInt("id");
+
+        String url = "https://bettercallpepper.altervista.org/VideoChat/?room="+myAppID + "_" + id +"&mode=c";
 
         Map<String, String> noCacheHeaders = new HashMap<String, String>(2);
         noCacheHeaders.put("Pragma", "no-cache");
