@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -23,6 +24,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,10 +61,36 @@ public class WebActivity extends AppCompatActivity {
     private void init(){
         mWebView = (WebView)findViewById(R.id.web_view);
         mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Toast.makeText(WebActivity.this, "shouldOverrideUrlLoading " + url, Toast.LENGTH_SHORT).show();
-                return false; // false display frameset, true not show Frameset
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                if (url.contains("http://exitme")) {
+                    String sURL = "https://bettercallpepper.altervista.org/api/updateCallStatus.php?parid="+myAppID+"&eldid="+getIntent().getExtras().getInt("id")+"&status=0";
+
+                    // Connect to the URL using java's native library
+                    URL uurl = null;
+                    try {
+                        uurl = new URL(sURL);
+                        URLConnection request = uurl.openConnection();
+                        BufferedReader in = new BufferedReader(
+                                new InputStreamReader(request.getInputStream()));
+                        String inputLine;
+                        StringBuffer content = new StringBuffer();
+                        while ((inputLine = in.readLine()) != null) {
+                            content.append(inputLine);
+                        }
+                        in.close();
+                        System.out.println("Url opened");
+                        //request.connect();
+                    } catch (Exception e) {
+                        System.out.println("Erroreeeee");
+                        e.printStackTrace();
+                    }
+                    finish();  // close activity
+                }
+                else
+                    view.loadUrl(url);
+
+                return true;
             }
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -84,6 +121,23 @@ public class WebActivity extends AppCompatActivity {
                 permissions,
                 1010);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        String sURL = "https://bettercallpepper.altervista.org/api/addParentCall.php?parid=" + myAppID + "&eldid=" + getIntent().getExtras().getInt("id");
+        // Connect to the URL using java's native library
+        URL addurl = null;
+        try {
+            addurl = new URL(sURL);
+            URLConnection request = addurl.openConnection();
+            request.connect();
+
+            // Convert to a JSON object to print data
+            JsonParser jp = new JsonParser(); //from gson
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+        } catch (Exception e) { }
+
+
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onPermissionRequest(final PermissionRequest request) {
@@ -107,9 +161,7 @@ public class WebActivity extends AppCompatActivity {
         mWebView.setScrollbarFadingEnabled(true);
         mWebView.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36");
 
-        int id = getIntent().getExtras().getInt("id");
-
-        String url = "https://bettercallpepper.altervista.org/VideoChat/?room="+myAppID + "_" + id +"&mode=c";
+        String url = "https://bettercallpepper.altervista.org/VideoChat/?room="+myAppID + "_" + getIntent().getExtras().getInt("id") +"&mode=c";
 
         Map<String, String> noCacheHeaders = new HashMap<String, String>(2);
         noCacheHeaders.put("Pragma", "no-cache");
