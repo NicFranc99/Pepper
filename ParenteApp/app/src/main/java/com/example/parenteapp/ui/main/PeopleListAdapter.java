@@ -2,6 +2,7 @@ package com.example.parenteapp.ui.main;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -18,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.parenteapp.R;
+import com.example.parenteapp.SettingsActivity;
+import com.example.parenteapp.WebActivity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -90,7 +93,7 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
                 public void onClick(View view) {
                     //we will call this method to remove the selected value from the list
                     //we are passing the position which is to be removed in the method
-                    removeHero(position);
+                    removeHero(position, view);
                 }
             });
 
@@ -99,7 +102,7 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
         }
 
         //this method will remove the item from the list
-        private void removeHero (final int position){
+        private void removeHero (int position, View view){
             //Creating an alert dialog to confirm the deletion
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Sei sicuro di voler chiamare " + peopleList.get(position).getName() + "?");
@@ -110,7 +113,7 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
                 public void onClick(DialogInterface dialogInterface, int i) {
 
                     //removing the item
-                    peopleList.remove(position);
+                    startWeb(view);
 
                     //reloading the list
                     notifyDataSetChanged();
@@ -129,4 +132,9 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
+
+        public void startWeb(View view) {
+        Intent intent = new Intent(this.getContext(), WebActivity.class);
+        this.getContext().startActivity(intent);
+    }
     }
