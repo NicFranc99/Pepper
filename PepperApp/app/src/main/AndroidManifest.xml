@@ -19,6 +19,9 @@
             android:theme="@style/ThemeBlue.NoActionBar" >
         </activity>
         <activity
+            android:name=".AcceptActivity"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/ThemeBlue.NoActionBar" /> <!-- launchMode="singleTask in order to keep only one instance of the app alive -->

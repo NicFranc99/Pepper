@@ -2,11 +2,13 @@ package com.example.parenteapp;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.parenteapp.ui.main.*;
@@ -30,9 +32,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.parenteapp.ui.main.SectionsPagerAdapter;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -44,6 +43,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.app.Notification.DEFAULT_SOUND;
+import static android.app.Notification.DEFAULT_VIBRATE;
+import static com.example.parenteapp.Globals.myAppID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,26 +82,39 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "CHANNEL_ID");
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "1");
 
-        Intent activityIntent = new Intent(this, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this,
-                1, activityIntent, 0);
+        Intent accept = new Intent(this, AcceptActivity.class);
+        PendingIntent acceptIntent = PendingIntent.getActivity(this,
+                1, accept, 0);
 
         Intent reject = new Intent(this, RejectActivity.class);
         PendingIntent rejectintent = PendingIntent.getActivity(this,
                 1, reject, 0);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String name = getString(R.string.app_name);
+            String description = getString(R.string.CHANNEL_DESCRIPTION);
+            int importance = NotificationManager.IMPORTANCE_HIGH; //Important for heads-up notification
+            NotificationChannel channel = new NotificationChannel("1", name, importance);
+            channel.setDescription(description);
+            channel.setShowBadge(true);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
         notificationBuilder.setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_icon_large)
                 .setContentTitle("Chiamata in arrivo")
                 .setContentText("Stai ricevendo una chiamata da Tizio")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setContentIntent(contentIntent)
+                .setContentIntent(acceptIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
-                .addAction(R.mipmap.ic_launcher, "Accetta", contentIntent)
+                .addAction(R.mipmap.ic_launcher, "Accetta", acceptIntent)
                 .addAction(R.mipmap.ic_launcher, "Rifiuta", rejectintent)
                 .build();
 
@@ -109,9 +125,10 @@ public class MainActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run () {
-                String sURL = "https://bettercallpepper.altervista.org/api/getElderCall.php?eldid=1";
+                String sURL = "https://bettercallpepper.altervista.org/api/getParentCall.php?parid=" + myAppID;
                 String name = "";
                 String surname = "";
+                int recv = 0;
                 // Connect to the URL using java's native library
                 URL url = null;
                 try {
@@ -128,12 +145,13 @@ public class MainActivity extends AppCompatActivity {
                         JsonObject rootelem = rootarr.get(i).getAsJsonObject();
                         name = rootelem.get("name").getAsString();
                         surname = rootelem.get("surname").getAsString();
+                        Globals.receiveCallID = rootelem.get("id").getAsInt();
                     }
                 } catch (Exception e) {
                 }
                 if(name != "") {
                     notificationBuilder.setContentText("Stai ricevendo una chiamata da " + name + " " + surname);
-                    notificationManager.notify(1, notificationBuilder.build());
+                    notificationManager.notify(001, notificationBuilder.build());
                     System.out.println("Clock");
                 }
             }

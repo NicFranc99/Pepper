@@ -1,30 +1,24 @@
-package com.example.parenteapp;
+package com.example.pepperapp28aprile;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.parenteapp.ui.main.Persona;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import static com.example.parenteapp.Globals.myAppID;
-import static com.example.parenteapp.Globals.receiveCallID;
+import static com.example.pepperapp28aprile.Globals.myAppID;
+import static com.example.pepperapp28aprile.Globals.receiveCallID;
 
-public class RejectActivity extends Activity {
+public class AcceptActivity extends Activity {
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String sURL = "https://bettercallpepper.altervista.org/api/updateCallStatus.php?parid="+ myAppID +"&eldid="+receiveCallID+"&status=0";
+        String sURL = "https://bettercallpepper.altervista.org/api/updateCallStatus.php?parid="+receiveCallID+"&eldid="+myAppID+"&status=0";
 
         // Connect to the URL using java's native library
         URL url = null;
@@ -46,6 +40,16 @@ public class RejectActivity extends Activity {
             System.out.println("Erroreeeee");
             e.printStackTrace();
         }
+        MainActivity.deleteNotification();
+        startWeb();
         finish();
+    }
+
+    public void startWeb() {
+        Intent intent = new Intent(this, WebActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("type", 0);
+        intent.putExtras(b);
+        startActivity(intent);
     }
 }

@@ -3,13 +3,16 @@ package com.example.parenteapp;
 import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.PermissionRequest;
@@ -38,6 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.parenteapp.Globals.myAppID;
+import static com.example.parenteapp.Globals.receiveCallID;
 
 public class WebActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -85,6 +89,7 @@ public class WebActivity extends AppCompatActivity {
                         System.out.println("Erroreeeee");
                         e.printStackTrace();
                     }
+                    view.loadUrl("");
                     finish();  // close activity
                 }
                 else
@@ -123,8 +128,13 @@ public class WebActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
-        String sURL = "https://bettercallpepper.altervista.org/api/addParentCall.php?parid=" + myAppID + "&eldid=" + getIntent().getExtras().getInt("id");
+        String sURL;
+        String url;
+        System.out.println("Type: " + getIntent().getExtras().getInt("type"));
+        if(getIntent().getExtras().getInt("type") != 0)
+            sURL = "https://bettercallpepper.altervista.org/api/addParentCall.php?parid=" + myAppID + "&eldid=" + getIntent().getExtras().getInt("id");
+        else
+            sURL = "https://bettercallpepper.altervista.org/api/updateCall.php?parid=" + myAppID + "&eldid=" + receiveCallID+"&status=-";
         // Connect to the URL using java's native library
         URL addurl = null;
         try {
@@ -161,7 +171,12 @@ public class WebActivity extends AppCompatActivity {
         mWebView.setScrollbarFadingEnabled(true);
         mWebView.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36");
 
-        String url = "https://bettercallpepper.altervista.org/VideoChat/?room="+myAppID + "_" + getIntent().getExtras().getInt("id") +"&mode=c";
+        if(getIntent().getExtras().getInt("type") != 0)
+            url = "https://bettercallpepper.altervista.org/VideoChat/?room="+myAppID + "_" + getIntent().getExtras().getInt("id") +"&mode=c";
+        else
+            url = "https://bettercallpepper.altervista.org/VideoChat/?room="+myAppID + "_" + receiveCallID +"&mode=j";
+
+        System.out.println(url);
 
         Map<String, String> noCacheHeaders = new HashMap<String, String>(2);
         noCacheHeaders.put("Pragma", "no-cache");
@@ -183,6 +198,34 @@ public class WebActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.CAMERA},
                 PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        int close = 0;
+        Intent setIntent = new Intent(this, MainActivity.class);
+        Log.d("CDA", "onBackPressed Called");
+        AlertDialog.Builder builder = new AlertDialog.Builder(WebActivity.this);
+        builder.setTitle("Stai per chiudere la chiamata. Sei sicuro?");
+
+        //if the response is positive in the alert
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mWebView.loadUrl("");
+                startActivity(setIntent);
+            }
+        });
+
+        //if response is negative nothing is being done
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override

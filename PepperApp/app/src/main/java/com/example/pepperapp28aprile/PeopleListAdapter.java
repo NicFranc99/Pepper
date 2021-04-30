@@ -129,6 +129,7 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
         Intent intent = new Intent(this.getContext(), WebActivity.class);
         Bundle b = new Bundle();
         b.putInt("id", id); //Your id
+        b.putInt("type", 1);
         intent.putExtras(b);
         this.getContext().startActivity(intent);
     }
