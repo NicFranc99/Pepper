@@ -20,6 +20,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -94,7 +95,6 @@ public class WebActivity extends AppCompatActivity {
                 }
                 else
                     view.loadUrl(url);
-
                 return true;
             }
             @Override
@@ -132,7 +132,7 @@ public class WebActivity extends AppCompatActivity {
         String url;
         System.out.println("Type: " + getIntent().getExtras().getInt("type"));
         if(getIntent().getExtras().getInt("type") != 0)
-            sURL = "https://bettercallpepper.altervista.org/api/addElderCall.php?eldid=" + myAppID + "&parid=" + getIntent().getExtras().getInt("id");
+            sURL = "https://bettercallpepper.altervista.org/api/addParentCall.php?eldid=" + myAppID + "&parid=" + getIntent().getExtras().getInt("id");
         else
             sURL = "https://bettercallpepper.altervista.org/api/updateCall.php?parid=" + receiveCallID + "&eldid=" + myAppID+"&status=-";
         // Connect to the URL using java's native library

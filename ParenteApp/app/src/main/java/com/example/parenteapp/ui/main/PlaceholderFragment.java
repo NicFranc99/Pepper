@@ -131,7 +131,7 @@ public class PlaceholderFragment extends Fragment {
                         callList = new ArrayList<>();
                         listView = (ListView) fragmentLayout.findViewById(R.id.mylistview);
 
-                        String sURL = "https://bettercallpepper.altervista.org/api/getCalls.php?appid=" + Globals.myAppID;
+                        String sURL = "https://bettercallpepper.altervista.org/api/getCallsParents.php?appid=" + Globals.myAppID;
 
                         // Connect to the URL using java's native library
                         URL url = null;

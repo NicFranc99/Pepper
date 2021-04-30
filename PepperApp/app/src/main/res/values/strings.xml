@@ -65,6 +65,7 @@
     <string name="spanish">spanish</string>
     <string name="german">german</string>
     <string name="ret">return</string>
+    <string name="CHANNEL_DESCRIPTION">Description</string>
 
 
     <!--switches-->

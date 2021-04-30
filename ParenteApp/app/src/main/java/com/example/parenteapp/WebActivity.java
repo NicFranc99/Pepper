@@ -132,7 +132,7 @@ public class WebActivity extends AppCompatActivity {
         String url;
         System.out.println("Type: " + getIntent().getExtras().getInt("type"));
         if(getIntent().getExtras().getInt("type") != 0)
-            sURL = "https://bettercallpepper.altervista.org/api/addParentCall.php?parid=" + myAppID + "&eldid=" + getIntent().getExtras().getInt("id");
+            sURL = "https://bettercallpepper.altervista.org/api/addElderCall.php?parid=" + myAppID + "&eldid=" + getIntent().getExtras().getInt("id");
         else
             sURL = "https://bettercallpepper.altervista.org/api/updateCall.php?parid=" + myAppID + "&eldid=" + receiveCallID+"&status=-";
         // Connect to the URL using java's native library

@@ -26,13 +26,15 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import static com.example.pepperapp28aprile.Globals.myAppID;
+
 public class MainMenuFragment extends Fragment {
 
     private static final String TAG = "MSI_MainMenuFragment";
     private MainActivity ma;
 
     private ArrayList<Persona> peopleList;
-    private ListView listView;
+    public static ListView listView;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class MainMenuFragment extends Fragment {
         listView = (ListView) fragmentLayout.findViewById(R.id.mylistview);
 
 
-        String sURL = "https://bettercallpepper.altervista.org/api/getElderlies.php?appid=1";
+        String sURL = "https://bettercallpepper.altervista.org/api/getElderliesList.php";
 
         // Connect to the URL using java's native library
         URL url = null;
@@ -84,5 +86,4 @@ public class MainMenuFragment extends Fragment {
 
         return fragmentLayout;
     }
-
 }
