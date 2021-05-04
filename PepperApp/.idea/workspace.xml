@@ -25,21 +25,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ParenteApp/app/src/main/java/com/example/parenteapp/WebActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ParenteApp/app/src/main/java/com/example/parenteapp/WebActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ParenteApp/app/src/main/java/com/example/parenteapp/ui/main/PlaceholderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ParenteApp/app/src/main/java/com/example/parenteapp/ui/main/PlaceholderFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainMenuFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PlaceholderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PlaceholderFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/WebActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/WebActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[1448cc1e]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[192.168.209.82:5555]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -182,6 +178,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="768" y="227" width="374" height="592" key="#com.intellij.ide.util.MemberChooser" timestamp="1620137380761">
+      <screen x="0" y="27" width="1920" height="985" />
+    </state>
+    <state x="768" y="227" width="374" height="592" key="#com.intellij.ide.util.MemberChooser/0.27.1920.985@0.27.1920.985" timestamp="1620137380761" />
     <state x="743" y="388" width="433" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1619798021487">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -199,26 +199,22 @@
     </state>
     <state x="743" y="277" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.985@0.27.1920.985" timestamp="1619690006525" />
     <state x="743" y="264" key="FileChooserDialogImpl/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619794516681" />
-    <state width="0" height="0" key="GridCell.Tab.0.bottom" timestamp="1619798979993">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="937" height="100" key="GridCell.Tab.0.bottom" timestamp="1620138553542">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="180" key="GridCell.Tab.0.bottom/0.27.1920.985@0.27.1920.985" timestamp="1619691961735" />
-    <state width="0" height="0" key="GridCell.Tab.0.bottom/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619798979993" />
-    <state width="0" height="0" key="GridCell.Tab.0.center" timestamp="1619798979993">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="937" height="100" key="GridCell.Tab.0.bottom/0.27.1920.985@0.27.1920.985" timestamp="1620138553542" />
+    <state width="937" height="100" key="GridCell.Tab.0.center" timestamp="1620138553542">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="180" key="GridCell.Tab.0.center/0.27.1920.985@0.27.1920.985" timestamp="1619691961735" />
-    <state width="0" height="0" key="GridCell.Tab.0.center/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619798979993" />
-    <state width="0" height="0" key="GridCell.Tab.0.left" timestamp="1619798979993">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="937" height="100" key="GridCell.Tab.0.center/0.27.1920.985@0.27.1920.985" timestamp="1620138553542" />
+    <state width="937" height="100" key="GridCell.Tab.0.left" timestamp="1620138553542">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="180" key="GridCell.Tab.0.left/0.27.1920.985@0.27.1920.985" timestamp="1619691961734" />
-    <state width="0" height="0" key="GridCell.Tab.0.left/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619798979993" />
-    <state width="0" height="0" key="GridCell.Tab.0.right" timestamp="1619798979993">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="937" height="100" key="GridCell.Tab.0.left/0.27.1920.985@0.27.1920.985" timestamp="1620138553542" />
+    <state width="937" height="100" key="GridCell.Tab.0.right" timestamp="1620138553542">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="180" key="GridCell.Tab.0.right/0.27.1920.985@0.27.1920.985" timestamp="1619691961735" />
-    <state width="0" height="0" key="GridCell.Tab.0.right/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619798979993" />
+    <state width="937" height="100" key="GridCell.Tab.0.right/0.27.1920.985@0.27.1920.985" timestamp="1620138553542" />
     <state x="698" y="203" width="513" height="640" key="RollbackChangesDialog" timestamp="1619689760113">
       <screen x="0" y="27" width="1920" height="985" />
     </state>
