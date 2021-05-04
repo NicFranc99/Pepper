@@ -44,9 +44,21 @@ public class Call {
         int seconds = calltime % 60;
         int hours = calltime / 60;
         int minutes = hours % 60;
+        String fulltime;
         hours = hours / 60;
-        return hours + ":" + minutes + ":" + seconds;
-
+        if(hours < 10)
+            fulltime = "0" + hours + " : ";
+        else
+            fulltime = hours + " : ";
+        if(minutes < 10)
+            fulltime += "0" + minutes + " : ";
+        else
+            fulltime += minutes + " : ";
+        if(seconds < 10)
+            fulltime += "0" + seconds;
+        else
+            fulltime += seconds;
+        return fulltime;
     }
 
     public String getCallmsg()
