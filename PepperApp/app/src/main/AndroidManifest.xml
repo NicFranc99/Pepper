@@ -25,6 +25,7 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/ThemeBlue.NoActionBar" /> <!-- launchMode="singleTask in order to keep only one instance of the app alive -->
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">

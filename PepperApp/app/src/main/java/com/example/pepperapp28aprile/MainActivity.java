@@ -28,8 +28,12 @@ import android.widget.EditText;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import com.aldebaran.qi.sdk.builder.AnimateBuilder;
+import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.object.actuation.Animate;
+import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -193,11 +197,26 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
         // Create a new say action.
-        Say say = SayBuilder.with(qiContext) // Create the builder with the context.
-                .withText("Ciao belli!") // Set the text to say.
+        Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context.
+                .withText("Ciao, io sono pepper!") // Set the text to say.
                 .build(); // Build the say action.
 
-        say.run();
+        ciaoSonoPepper.async().run();
+
+
+        Animation animazioneSaulto = AnimationBuilder.with(qiContext)
+                .withResources(R.raw.hello_a005)
+                .build();
+
+                // Create the second action.
+        Animate animate = AnimateBuilder.with(qiContext)
+                .withAnimation(animazioneSaulto)
+                .build();
+
+        // Run the second action asynchronously.
+        animate.async().run();
+
+
     }
 
     @Override
