@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.wihoho:face-recognition:1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.wihoho/face-recognition/1.0/b57cd064546600e663ed4610fee5f0272175e1e5/face-recognition-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.wihoho/face-recognition/1.0/ec9d53626e526142f522737fa33da5d22c7f19b0/face-recognition-1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.wihoho/face-recognition/1.0/ccfb11359323576ba9e19366ab253a87f3fe4e3c/face-recognition-1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

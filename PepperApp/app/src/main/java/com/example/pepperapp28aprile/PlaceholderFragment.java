@@ -113,6 +113,7 @@ public class PlaceholderFragment extends Fragment {
                     String name = rootelem.get("name").getAsString();
                     String surname = rootelem.get("surname").getAsString();
                     int id = rootelem.get("id").getAsInt();
+
                     peopleList.add(new Persona(img, id, name, surname));
                 }
             } catch (Exception e) {

@@ -3,7 +3,7 @@
 
     <!-- colors used by Pepper Speechbar -->
 
-
+    <color name="sfondo_avviso">#24e0ff</color>
     <color name="purple_200">#07176C</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

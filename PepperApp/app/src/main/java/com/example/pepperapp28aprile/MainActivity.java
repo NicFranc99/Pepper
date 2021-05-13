@@ -1,5 +1,6 @@
 package com.example.pepperapp28aprile;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -9,12 +10,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -58,6 +59,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private String currentFragment;
     private FragmentManager fragmentManager;
     static NotificationManager notificationManager;
+    private boolean chiamataGestita;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         QiSDK.register(this, this);
         setContentView(R.layout.activity_main);
         this.fragmentManager = getSupportFragmentManager();
+        chiamataGestita = false;
 
         setFragment(new LoadingFragment());
         System.out.println("ciao");
@@ -79,6 +82,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         Intent reject = new Intent(this, RejectActivity.class);
         PendingIntent rejectintent = PendingIntent.getActivity(this,
                 1, reject, 0);
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String name = getString(R.string.app_name);
@@ -113,9 +117,14 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         timer.schedule(new TimerTask() {
             @Override
             public void run () {
-                String sURL = "https://bettercallpepper.altervista.org/api/getElderCall.php?eldid=" + myAppID;
-                String name = "";
-                String surname = "";
+                String sURL = "https://bettercallpepper.altervista.org/api/getElderCall.php?eldid=all";
+                String nameMittente = "";
+                String surnameMittente  = "";
+                String nameDestinatario = "";
+                String surnameDestinatario = "";
+                String imageMittente = "";
+                String imageDestinatario = "";
+
                 // Connect to the URL using java's native library
                 URL url = null;
                 try {
@@ -128,20 +137,47 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                     JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
                     //JsonArray rootarr = root.getAsJsonArray(); //May be an array, may be an object.
                     JsonObject rootelem = root.getAsJsonArray().get(0).getAsJsonObject();
-                    name = rootelem.get("name").getAsString();
-                    surname = rootelem.get("surname").getAsString();
+                    nameMittente = rootelem.get("name").getAsString();
+                    surnameMittente = rootelem.get("surname").getAsString();
+                    imageMittente = rootelem.get("propic").getAsString();
+                    nameDestinatario = rootelem.get("ename").getAsString();
+                    surnameDestinatario = rootelem.get("esurname").getAsString();
+                    imageDestinatario = rootelem.get("epropic").getAsString();
+
+
                     receiveCallID = rootelem.get("id").getAsInt();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if(name != "") {
-                    notificationBuilder.setContentText("Stai ricevendo una chiamata da " + name + " " + surname);
-                    notificationManager.notify(1, notificationBuilder.build());
+                if(nameMittente != "") {
+                    chiamataInArrivo(nameMittente,surnameMittente,nameDestinatario,surnameDestinatario, imageDestinatario, imageMittente);
+                /*    notificationBuilder.setContentText("Stai ricevendo una chiamata da " + nameMittente + " " + surnameMittente);
+                    notificationManager.notify(1, notificationBuilder.build());*/
                     System.out.println("Clock");
                 }
             }
         }, 1000, 5000);
 
+    }
+
+    public void setChiamataGestita(){
+        chiamataGestita = false;
+        System.out.println("gestita");
+    }
+
+
+    private void chiamataInArrivo(String nameMittente, String surnameMittente, String nameDestinatario, String surnameDestinatario, String imgDest, String imgMit) {
+        if(!chiamataGestita){
+            chiamataGestita = true;
+            AvvisoFragment avviso = new AvvisoFragment();
+            avviso.setNameMittente(nameMittente);
+            avviso.setSurnameMittente(surnameMittente);
+            avviso.setNameDestinatario(nameDestinatario);
+            avviso.setSurnameDestinatario(surnameDestinatario);
+            avviso.setImageDest(imgDest);
+            avviso.setImageMitt(imgMit);
+            setFragment(avviso);
+        }
     }
 
     public static void deleteNotification()
@@ -181,7 +217,8 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         transaction.setCustomAnimations(R.anim.enter_fade_in_right, R.anim.exit_fade_out_left, R.anim.enter_fade_in_left, R.anim.exit_fade_out_right);
         transaction.replace(R.id.placeholder, fragment, "currentFragment");
         transaction.addToBackStack(null);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
+        //transaction.commit();
     }
 
     public Integer getThemeId() {
@@ -220,6 +257,21 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     }
 
     @Override
+    public void onBackPressed() {
+        int close = 0;
+        if(getFragment() instanceof AvvisoFragment){
+            Intent intent = new Intent(this, RejectActivity.class);
+            this.startActivity(intent);
+            System.out.println("RIFIUTA con indietro" );
+            setFragment(new MainMenuFragment());
+        }
+        else if(getFragment() instanceof MainMenuFragment || getFragment() instanceof LoadingFragment){
+            android.os.Process.killProcess (android.os.Process.myPid ());
+        }
+
+    }
+
+    @Override
     public void onRobotFocusLost() {
 
     }
@@ -235,4 +287,5 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         QiSDK.unregister(this, this);
         super.onDestroy();
     }
+
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AvvisoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/sfondo_avviso"/>
+
+    <TextView
+        android:id="@+id/textInArrivo"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:text="Chiamata in arrivo per"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/imgMittente"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="100dp"/>
+
+    <ImageView
+        android:id="@+id/imgDestinatario"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="600dp"/>
+
+    <Button
+        android:id="@+id/accetta"
+        android:text="ACCETTA"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="270dp"
+
+        android:layout_gravity="center_horizontal"
+
+        android:background="@color/green_rating_start" />
+
+    <Button
+        android:id="@+id/rifiuta"
+        android:text="RIFIUTA"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="330dp"
+
+        android:layout_gravity="center_horizontal"
+
+        android:background="@color/red" />
+
+
+
+
+</FrameLayout>
