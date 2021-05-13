@@ -53,6 +53,7 @@ import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
 import static com.example.pepperapp28aprile.Globals.myAppID;
 import static com.example.pepperapp28aprile.Globals.receiveCallID;
+import static com.example.pepperapp28aprile.Globals.senderCallID;
 
 public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
@@ -60,11 +61,13 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private FragmentManager fragmentManager;
     static NotificationManager notificationManager;
     private boolean chiamataGestita;
+    private QiContext qiContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         QiSDK.register(this, this);
+
         setContentView(R.layout.activity_main);
         this.fragmentManager = getSupportFragmentManager();
         chiamataGestita = false;
@@ -144,7 +147,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                     surnameDestinatario = rootelem.get("esurname").getAsString();
                     imageDestinatario = rootelem.get("epropic").getAsString();
 
-
+                    senderCallID = rootelem.get("eid").getAsInt();
                     receiveCallID = rootelem.get("id").getAsInt();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -169,6 +172,9 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private void chiamataInArrivo(String nameMittente, String surnameMittente, String nameDestinatario, String surnameDestinatario, String imgDest, String imgMit) {
         if(!chiamataGestita){
             chiamataGestita = true;
+
+            annunciaChiamata(nameDestinatario);
+
             AvvisoFragment avviso = new AvvisoFragment();
             avviso.setNameMittente(nameMittente);
             avviso.setSurnameMittente(surnameMittente);
@@ -230,22 +236,63 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         return null;
     }
 
+    public void annunciaChiamata(String nomeDest){
+        Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context.
+                .withText("Hey, è in arrivo una chiamata per " + nomeDest) // Set the text to say.
+                .build(); // Build the say action.
 
-    @Override
-    public void onRobotFocusGained(QiContext qiContext) {
+        ciaoSonoPepper.async().run();
+
+        Animation animazioneArrivoChiamata = AnimationBuilder.with(qiContext)
+                .withResources(R.raw.show_tablet_a004)
+                .build();
+
+        // Create the second action.
+        Animate animate = AnimateBuilder.with(qiContext)
+                .withAnimation(animazioneArrivoChiamata)
+                .build();
+
+        // Run the second action asynchronously.
+        animate.async().run();
+
+
+    }
+
+    public void salutoIniziale(){
+        Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context.
+                .withText("Ciao, io sono Pepper!") // Set the text to say.
+                .build(); // Build the say action.
+
+        ciaoSonoPepper.async().run();
+
+        Animation animazioneArrivoChiamata = AnimationBuilder.with(qiContext)
+                .withResources(R.raw.show_tablet_a004)
+                .build();
+
+        // Create the second action.
+        Animate animate = AnimateBuilder.with(qiContext)
+                .withAnimation(animazioneArrivoChiamata)
+                .build();
+
+        // Run the second action asynchronously.
+        animate.async().run();
+
+    }
+
+    public void menu(){
         // Create a new say action.
         Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context.
-                .withText("Ciao, io sono pepper!") // Set the text to say.
+                .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!") // Set the text to say.
                 .build(); // Build the say action.
 
         ciaoSonoPepper.async().run();
 
 
         Animation animazioneSaulto = AnimationBuilder.with(qiContext)
-                .withResources(R.raw.hello_a005)
+                .withResources(R.raw.show_tablet_a004)
                 .build();
 
-                // Create the second action.
+        // Create the second action.
         Animate animate = AnimateBuilder.with(qiContext)
                 .withAnimation(animazioneSaulto)
                 .build();
@@ -253,6 +300,20 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         // Run the second action asynchronously.
         animate.async().run();
 
+    }
+
+    @Override
+    public void onRobotFocusGained(QiContext qiContext) {
+
+        this.qiContext = qiContext;
+        System.out.println("focusgained");
+
+        if(getFragment() instanceof LoadingFragment){
+            salutoIniziale();
+        }
+        if(getFragment() instanceof MainMenuFragment){
+            menu();
+        }
 
     }
 

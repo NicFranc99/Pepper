@@ -10,6 +10,7 @@ import java.net.URLConnection;
 
 import static com.example.pepperapp28aprile.Globals.myAppID;
 import static com.example.pepperapp28aprile.Globals.receiveCallID;
+import static com.example.pepperapp28aprile.Globals.senderCallID;
 
 public class RejectActivity extends Activity {
 
@@ -17,7 +18,7 @@ public class RejectActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String sURL = "https://bettercallpepper.altervista.org/api/updateCallStatus.php?eldid="+ myAppID +"&parid="+receiveCallID+"&status=0";
+        String sURL = "https://bettercallpepper.altervista.org/api/updateCallStatus.php?eldid="+ senderCallID +"&parid="+receiveCallID+"&status=0";
 
         // Connect to the URL using java's native library
         URL url = null;
