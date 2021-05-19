@@ -1,6 +1,7 @@
 package com.example.pepperapp28aprile;
 
-
+import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.StrictMode;
@@ -12,6 +13,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.aldebaran.qi.sdk.object.humanawareness.HumanAwareness;
@@ -25,14 +27,29 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.*;
+
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static com.example.pepperapp28aprile.Globals.myAppID;
 
@@ -40,6 +57,7 @@ public class MainMenuFragment extends Fragment {
 
     private static final String TAG = "MSI_MainMenuFragment";
     private MainActivity ma;
+    private Trainer trainer;
 
     private ArrayList<Persona> peopleList;
     public static ListView listView;
@@ -93,7 +111,7 @@ public class MainMenuFragment extends Fragment {
         //View customList = inflater.inflate(R.layout.custom_list, container, false);
 
         GridView gridview = (GridView) fragmentLayout.findViewById(R.id.gridview);
-        gridview.setAdapter(new MyListAdapter(getActivity(),R.layout.custom_list, peopleList));
+        gridview.setAdapter(new MyListAdapter(getActivity(),R.layout.custom_list, peopleList,trainer));
 
         return fragmentLayout;
     }
@@ -112,12 +130,27 @@ public class MainMenuFragment extends Fragment {
         return result;
     }
 
+    private static void downloadFile(URL url, String fileName) throws Exception {
+
+        try (InputStream in = url.openStream();
+             BufferedInputStream bis = new BufferedInputStream(in);
+             FileOutputStream fos = new FileOutputStream(fileName)) {
+
+            byte[] data = new byte[1024];
+            int count;
+            while ((count = bis.read(data, 0, 1024)) != -1) {
+                fos.write(data, 0, count);
+            }
+        }
+    }
+
+
     private void addestra(ArrayList<Persona> peopleList){
         try{
 
             // Build a trainer
 
-            Trainer trainer = Trainer.builder()
+            trainer = Trainer.builder()
                     .metric(new CosineDissimilarity())
                     .featureType(FeatureType.PCA)
                     .numberOfComponents(3)
@@ -126,15 +159,37 @@ public class MainMenuFragment extends Fragment {
 
             URL url;
             File initialFile = null;
-            for(int i = 0; i<peopleList.size(); i++){
+            System.out.println(peopleList);
+            for(int i = 0; i<peopleList.size(); i++)
+            {
                 //File initialFile = new File("sdcard/faces/simone1.pgm");
                 for(int k = 1; k<= 4 ; k++){
-                    url = new URL("https://bettercallpepper.altervista.org/img/training/"+
-                            peopleList.get(i).urlFullName()+"/"+peopleList.get(i).urlFullName()+"_"+k+".pgm");
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    String fileName = peopleList.get(i).urlFullName()+"_"+k+".pgm";
+                    url = new URL("https://bettercallpepper.altervista.org/img/training/"+(
+                            peopleList.get(i).urlFullName()+"/"+ fileName).toLowerCase());
+
+                    System.out.println(url.toString());
+
+
+                    /*FileUtils.copyURLToFile(
+                            url,
+                            new File("/sdcard/faces/"+fileName.toLowerCase()),
+                            60000,
+                            60000);*/
+
+                    downloadFile(url,"/sdcard/faces/"+fileName);
+                    initialFile = new File("/sdcard/faces/"+fileName);
+
+
+                  /*  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                       // initialFile = Paths.get(url.toURI().getPath()).toFile();
                         initialFile = Paths.get(url.toURI()).toFile();
+                        System.out.println("initial file: " + initialFile.getPath());
+
                     }
-                    else throw new Exception();
+                    else throw new Exception();*/
+                    //trainer.add(vectorize(FileManager.convertPGMtoMatrix(initialFile.getPath())), peopleList.get(i).urlFullName());
+
                     trainer.add(vectorize(FileManager.convertPGMtoMatrix(initialFile.getPath())), peopleList.get(i).urlFullName());
                 }
             }
@@ -148,30 +203,36 @@ public class MainMenuFragment extends Fragment {
 
             // recognize
 
+
+
+
 /*
             initialFile = new File("sdcard/faces/irene4.pgm");
             assertEquals("irene", trainer.recognize(vectorize(FileManager.convertPGMtoMatrix(initialFile.getPath()))));
 */
 
-        /*
+
+
+   /*         initialFile = new File("sdcard/faces/simone4.pgm");
+            System.out.println("voglio simone, riconosco" + trainer.recognize(vectorize(FileManager.convertPGMtoMatrix(initialFile.getPath()))));
+            //assertEquals("simone", trainer.recognize(vectorize(FileManager.convertPGMtoMatrix(initialFile.getPath()))));
+
+            //
+
+            System.out.println("END");
+
+
+                 /*
         filePath = "/home/ubuntu/Scrivania/faces/simone4.pgm";
         inputStream = Resources.class.getResourceAsStream(filePath);
         tempFile = File.createTempFile("pic", ",pgm");
         tempFile.deleteOnExit();
         ByteStreams.copy(inputStream, new FileOutputStream(tempFile));*/
 
-   /*         initialFile = new File("sdcard/faces/simone4.pgm");
-            System.out.println("voglio simone, riconosco" + trainer.recognize(vectorize(FileManager.convertPGMtoMatrix(initialFile.getPath()))));
-            //assertEquals("simone", trainer.recognize(vectorize(FileManager.convertPGMtoMatrix(initialFile.getPath()))));
-
-            //    initialFile = new File("sdcard/faces/prova.pgm");
-            //   System.out.println("voglio simone, riconosco" + trainer.recognize(vectorize(FileManager.convertPGMtoMatrix(initialFile.getPath()))));
-
-            System.out.println("END");
-*/
         }catch(Exception e) {
             e.printStackTrace();
 
         }
     }
+
 }

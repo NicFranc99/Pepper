@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +26,11 @@ import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.github.wihoho.Trainer;
+import com.github.wihoho.jama.Matrix;
+import com.github.wihoho.training.FileManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -42,6 +47,7 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
 
     //the list values in the List of type hero
     List<Persona> peopleList;
+    private Trainer trainer;
 
     //activity context 
     Context context;
@@ -50,12 +56,13 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
     int resource;
 
     //constructor initializing the values 
-    public MyListAdapter(Context context, int resource, List<Persona> peopleList) {
+    public MyListAdapter(Context context, int resource, List<Persona> peopleList, Trainer trainer) {
         //arrayAdapter = new ArrayAdapter<Persona>(context, resource, peopleList);
         super(context, resource, peopleList);
         this.context = context;
         this.resource = resource;
         this.peopleList = peopleList;
+        this.trainer = trainer;
     }
 
     //this will return the ListView Item as a View
@@ -105,13 +112,45 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
                 myAppID = p.getId();
                 System.out.println("MYAPP" + myAppID);
 
-                startProfile(view,p.getName());
+
+                File file = null; //WebRiconoscimento
+                String labelAttesa = p.getName() + "_" + p.getSurname().replace(" ", "_");
+                String labelFound = null;
+                try {
+                    labelFound = trainer.recognize(vectorize(FileManager.convertPGMtoMatrix(file.getPath())));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(labelAttesa == labelFound)
+                    startProfile(view,p.getName());
+                else{
+                    //Context context = getApplicationContext();
+                    CharSequence text = "Volto non riconosciuto";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             }
         });
 
         //finally returning the view
         return view;
     }
+
+    private Matrix vectorize(Matrix input) {
+        int m = input.getRowDimension();
+        int n = input.getColumnDimension();
+
+        Matrix result = new Matrix(m * n, 1);
+        for (int p = 0; p < n; p++) {
+            for (int q = 0; q < m; q++) {
+                result.set(p * m + q, 0, input.get(q, p));
+            }
+        }
+        return result;
+    }
+
 
     public void startProfile(View view,String name) {
         Intent intent = new Intent(context, ProfileActivity.class);

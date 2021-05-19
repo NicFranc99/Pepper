@@ -27,7 +27,7 @@ public class Persona {
     }
 
     public String urlFullName() {
-        String complete = name + "_" + surname;
+        String complete = name + "_" + surname.replace(" ", "_");
         complete.replace(" ", "_");
         return complete;
     }
@@ -45,8 +45,11 @@ public class Persona {
         return name;
     }
 
-    public String getStatus() {
+    public String getSurname() {
         return surname;
     }
 
+    public String toString() {
+        return name+"_"+surname;
+    }
 }
