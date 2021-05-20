@@ -48,7 +48,7 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
 
     //the list values in the List of type hero
     List<Persona> peopleList;
-    private Trainer trainer;
+    public static Trainer trainer;
 
     //activity context 
     Context context;
@@ -113,30 +113,10 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
                 myAppID = p.getId();
                 System.out.println("MYAPP" + myAppID);
 
+                startWeb(view,p);
 
-                try {
-                    downloadFile(new URL("https://bettercallpepper.altervista.org/Riconoscimento/login.pgm"),"/sdcard/faces/login.pgm");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                File file = new File("/sdcard/faces/login.pgm"); //WebRiconoscimento
-                String labelAttesa = p.getName() + "_" + p.getSurname().replace(" ", "_");
-                String labelFound = null;
-                try {
-                    labelFound = trainer.recognize(vectorize(FileManager.convertPGMtoMatrix(file.getPath())));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if(labelAttesa == labelFound)
-                    startProfile(view,p.getName());
-                else{
-                    //Context context = getApplicationContext();
-                    CharSequence text = "Volto non riconosciuto";
-                    int duration = Toast.LENGTH_SHORT;
 
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
+
             }
         });
 
@@ -144,31 +124,23 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
         return view;
     }
 
-    private Matrix vectorize(Matrix input) {
-        int m = input.getRowDimension();
-        int n = input.getColumnDimension();
 
-        Matrix result = new Matrix(m * n, 1);
-        for (int p = 0; p < n; p++) {
-            for (int q = 0; q < m; q++) {
-                result.set(p * m + q, 0, input.get(q, p));
-            }
-        }
-        return result;
+
+
+
+
+
+    private void startWeb(View view, Persona p) {
+        Intent intent = new Intent(this.getContext(), WebActivityRecognition.class);
+        Bundle b = new Bundle();
+        b.putString("name",p.getName());
+        b.putString("surname",p.getSurname());
+        //b.putInt("id", id); //Your id
+        //b.putInt("type", 1);
+        intent.putExtras(b);
+        this.getContext().startActivity(intent);
+
     }
-
-
-    public void startProfile(View view,String name) {
-        Intent intent = new Intent(context, ProfileActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.editText);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
-        System.out.println("start profile");
-        ProfileActivity.name = name;
-        context.startActivity(intent);
-    }
-
-
     //this method will remove the item from the list 
  /*   private void removeHero(final int position) {
         //Creating an alert dialog to confirm the deletion
