@@ -4,6 +4,7 @@ import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -130,8 +131,9 @@ public class MainMenuFragment extends Fragment {
         return result;
     }
 
-    static void downloadFile(URL url, String fileName) throws Exception {
+    static void downloadFile(URL url, String fileName) {
 
+        System.out.println("Downloading from "+url.toString()+" to "+fileName);
         try (InputStream in = url.openStream();
              BufferedInputStream bis = new BufferedInputStream(in);
              FileOutputStream fos = new FileOutputStream(fileName)) {
@@ -141,6 +143,9 @@ public class MainMenuFragment extends Fragment {
             while ((count = bis.read(data, 0, 1024)) != -1) {
                 fos.write(data, 0, count);
             }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -177,8 +182,10 @@ public class MainMenuFragment extends Fragment {
                             60000,
                             60000);*/
 
-                    downloadFile(url,"/sdcard/faces/"+fileName);
-                    initialFile = new File("/sdcard/faces/"+fileName);
+                    downloadFile(url,Environment
+                            .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/faces/"+fileName.toLowerCase());
+                    initialFile = new File(Environment
+                            .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/faces/"+fileName.toLowerCase());
 
 
                   /*  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
@@ -77,11 +78,13 @@ public class WebActivityRecognition extends AppCompatActivity {
         String name = getIntent().getExtras().getString("name");
         String surname = getIntent().getExtras().getString("surname");
             try {
-                downloadFile(new URL("https://bettercallpepper.altervista.org/Riconoscimento/login.pgm"),"/sdcard/faces/login.pgm");
+                downloadFile(new URL("https://bettercallpepper.altervista.org/Riconoscimento/login.pgm"),Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/faces/login.pgm");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            File file = new File("/sdcard/faces/login.pgm"); //WebRiconoscimento
+            File file = new File(Environment
+                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/faces/login.pgm"); //WebRiconoscimento
             String labelAttesa = name + "_" + surname.replace(" ", "_");
             String labelFound = null;
             try {
@@ -131,8 +134,9 @@ public class WebActivityRecognition extends AppCompatActivity {
                     view.loadUrl("");
                     finish();  // close activity
                 }
-                else if (url.contains("http://exitme2")){
+                else if (url.contains("http://exit2me")){
                     startMenu(view);
+                    view.loadUrl("");
                     finish();
                 }
                 return true;
@@ -155,16 +159,18 @@ public class WebActivityRecognition extends AppCompatActivity {
 //		mWebView.loadDataWithBaseURL("", url, "text/html", "utf-8", "");
 
         String[] permissions =
-                {Manifest.permission.READ_EXTERNAL_STORAGE,
+                {
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.INTERNET,
                         Manifest.permission.RECORD_AUDIO,
-                        Manifest.permission.CAMERA};
+                        Manifest.permission.CAMERA
+                };
 
         ActivityCompat.requestPermissions(
                 this,
                 permissions,
-                1010);
+                1);
 
      //   StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
        // StrictMode.setThreadPolicy(policy);

@@ -115,16 +115,18 @@ public class WebActivity extends AppCompatActivity {
 //		mWebView.loadDataWithBaseURL("", url, "text/html", "utf-8", "");
 
         String[] permissions =
-                {Manifest.permission.READ_EXTERNAL_STORAGE,
+                {
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.INTERNET,
                         Manifest.permission.RECORD_AUDIO,
-                        Manifest.permission.CAMERA};
+                        Manifest.permission.CAMERA
+                };
 
         ActivityCompat.requestPermissions(
                 this,
                 permissions,
-                1010);
+                200);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
