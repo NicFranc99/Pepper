@@ -38,6 +38,7 @@ import java.net.URL;
 import java.util.List;
 
 import static com.example.pepperapp28aprile.Globals.myAppID;
+import static com.example.pepperapp28aprile.MainMenuFragment.downloadFile;
 
 //we need to extend the ArrayAdapter class as we are building an adapter
 public class MyListAdapter extends ArrayAdapter<Persona>  {
@@ -113,7 +114,12 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
                 System.out.println("MYAPP" + myAppID);
 
 
-                File file = null; //WebRiconoscimento
+                try {
+                    downloadFile(new URL("https://bettercallpepper.altervista.org/Riconoscimento/login.pgm"),"/sdcard/faces/login.pgm");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                File file = new File("/sdcard/faces/login.pgm"); //WebRiconoscimento
                 String labelAttesa = p.getName() + "_" + p.getSurname().replace(" ", "_");
                 String labelFound = null;
                 try {

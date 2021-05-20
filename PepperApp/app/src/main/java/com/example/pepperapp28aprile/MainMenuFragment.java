@@ -130,7 +130,7 @@ public class MainMenuFragment extends Fragment {
         return result;
     }
 
-    private static void downloadFile(URL url, String fileName) throws Exception {
+    static void downloadFile(URL url, String fileName) throws Exception {
 
         try (InputStream in = url.openStream();
              BufferedInputStream bis = new BufferedInputStream(in);
