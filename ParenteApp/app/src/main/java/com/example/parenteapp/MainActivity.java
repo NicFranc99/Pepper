@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
-        ImageView btn = findViewById(R.id.imageButton);
 
         //Globals.myAppID = 100;
 
@@ -71,13 +70,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-            }
-        });
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startSettings(view);
             }
         });
 
@@ -156,11 +148,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }, 1000, 5000);
-    }
-
-    public void startSettings(View view) {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
     }
 
     public static void deleteNotification()
