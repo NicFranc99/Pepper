@@ -46,7 +46,6 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
         tabs.setupWithViewPager(viewPager);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        ImageView btn = findViewById(R.id.imageButton);
 
        fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,22 +54,6 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
                         .setAction("Action", null).show();
             }
         });
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startSettings(view);
-            }
-        });
-
-    }
-
-    public void startSettings(View view) {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.editText);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
     }
 
     @Override
