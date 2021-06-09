@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.parenteapp.R;
-import com.example.parenteapp.SettingsActivity;
 import com.example.parenteapp.WebActivity;
 
 import java.io.BufferedInputStream;

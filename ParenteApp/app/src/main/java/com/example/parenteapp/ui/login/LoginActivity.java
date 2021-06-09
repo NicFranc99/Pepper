@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.parenteapp.MainActivity;
 import com.example.parenteapp.R;
-import com.example.parenteapp.SettingsActivity;
 import com.example.parenteapp.ui.login.LoginViewModel;
 import com.example.parenteapp.ui.login.LoginViewModelFactory;
 

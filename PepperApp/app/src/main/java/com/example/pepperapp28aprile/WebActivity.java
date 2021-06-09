@@ -47,6 +47,7 @@ import static com.example.pepperapp28aprile.Globals.receiveCallID;
 public class WebActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     private WebView mWebView;
+    public static String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,8 @@ public class WebActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     view.loadUrl("");
+                    ProfileActivity.name = name;
+
                     finish();  // close activity
                 }
                 else
@@ -205,6 +208,7 @@ public class WebActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         int close = 0;
+        ProfileActivity.name = name;
         Intent setIntent = new Intent(this, ProfileActivity.class);
         Log.d("CDA", "onBackPressed Called");
         AlertDialog.Builder builder = new AlertDialog.Builder(WebActivity.this);

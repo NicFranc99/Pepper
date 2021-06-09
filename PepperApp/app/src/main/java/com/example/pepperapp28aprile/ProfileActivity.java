@@ -31,6 +31,7 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         QiSDK.register(this, this);
+        WebActivity.name = name;
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
 
         setContentView(R.layout.fragment_main_persone);

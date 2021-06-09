@@ -78,16 +78,17 @@ public class WebActivityRecognition extends AppCompatActivity {
         String name = getIntent().getExtras().getString("name");
         String surname = getIntent().getExtras().getString("surname");
             try {
-                downloadFile(new URL("https://bettercallpepper.altervista.org/Riconoscimento/login.pgm"),Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/faces/login.pgm");
+                downloadFile(new URL("https://bettercallpepper.altervista.org/Riconoscimento/login.pgm"),/*Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+*/"/sdcard/faces/login.pgm");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            File file = new File(Environment
-                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/faces/login.pgm"); //WebRiconoscimento
+            File file = new File(/*Environment
+                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+*/"/sdcard/faces/login.pgm"); //WebRiconoscimento
             String labelAttesa = name + "_" + surname.replace(" ", "_");
             String labelFound = null;
             try {
+                System.out.println("start riconoscimento");
                 labelFound = MyListAdapter.trainer.recognize(vectorize(MyFileManager.convertPGMtoMatrix(file.getPath())));
                 System.out.println("riconosco "+ labelFound);
             } catch (

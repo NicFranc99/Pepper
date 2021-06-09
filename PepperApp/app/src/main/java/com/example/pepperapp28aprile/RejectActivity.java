@@ -1,6 +1,7 @@
 package com.example.pepperapp28aprile;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import java.io.BufferedReader;
@@ -40,6 +41,10 @@ public class RejectActivity extends Activity {
             System.out.println("Erroreeeee");
             e.printStackTrace();
         }
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
         finish();
     }
 }

@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
@@ -63,6 +64,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     static NotificationManager notificationManager;
     private boolean chiamataGestita;
     private QiContext qiContext;
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,30 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
         setContentView(R.layout.activity_main);
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
+
+        if (checkPermission()) {
+            //main logic or main code
+
+            // . write your main code to execute, It will execute if the permission is already given.
+
+        } else {
+            requestPermission();
+        }
+
+        String[] permissions =
+                {
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.INTERNET,
+                        Manifest.permission.RECORD_AUDIO,
+                        Manifest.permission.CAMERA
+                };
+
+        ActivityCompat.requestPermissions(
+                this,
+                permissions,
+                1);
+
         this.fragmentManager = getSupportFragmentManager();
         chiamataGestita = false;
 
@@ -165,6 +191,60 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
     }
 
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(MainActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+
+                    // main logic
+                } else {
+                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            showMessageOKCancel("You need to allow access permissions",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermission();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    private boolean checkPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            return false;
+        }
+        return true;
+    }
+
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA},
+                PERMISSION_REQUEST_CODE);
+    }
+
     public void setChiamataGestita(){
         chiamataGestita = false;
         System.out.println("gestita");
@@ -239,6 +319,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     }
 
     public void annunciaChiamata(String nomeDest){
+        try{
         Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context.
                 .withText("Hey, è in arrivo una chiamata per " + nomeDest) // Set the text to say.
                 .build(); // Build the say action.
@@ -256,6 +337,9 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
         // Run the second action asynchronously.
         animate.async().run();
+        }catch(Exception e){
+            System.out.println("ex");
+        }
 
 
     }
