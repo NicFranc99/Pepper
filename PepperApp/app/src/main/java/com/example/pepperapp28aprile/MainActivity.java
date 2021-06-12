@@ -63,7 +63,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private FragmentManager fragmentManager;
     static NotificationManager notificationManager;
     private boolean chiamataGestita;
-    private QiContext qiContext;
+    public static QiContext qiContext;
     private static final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
@@ -74,7 +74,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         setContentView(R.layout.activity_main);
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
 
-        if (checkPermission()) {
+        /*if (checkPermission()) {
             //main logic or main code
 
             // . write your main code to execute, It will execute if the permission is already given.
@@ -95,7 +95,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         ActivityCompat.requestPermissions(
                 this,
                 permissions,
-                1);
+                1);*/
 
         this.fragmentManager = getSupportFragmentManager();
         chiamataGestita = false;
@@ -276,7 +276,9 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     @Override
     public void onUserInteraction() {
         if (getFragment() instanceof LoadingFragment) {
+            //menu();
             setFragment(new MainMenuFragment());
+
             //countDownNoInteraction.start();
         } /*else {
             countDownNoInteraction.reset();

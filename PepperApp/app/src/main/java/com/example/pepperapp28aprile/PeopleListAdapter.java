@@ -98,21 +98,21 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
     //this method will remove the item from the list 
     private void removeHero(final int position,View view) {
         //Creating an alert dialog to confirm the deletion
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Sei sicuro di voler chiamare "+ peopleList.get(position).getName() +"?");
+        //AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        //builder.setTitle("Sei sicuro di voler chiamare "+ peopleList.get(position).getName() +"?");
 
         //if the response is positive in the alert 
-        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+        /*builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(DialogInterface dialogInterface, int i) {*/
                 //removing the item
                 startWeb(view, peopleList.get(position).getId()); //
                 //reloading the list
                 notifyDataSetChanged();
-            }
-        });
+            //}
+        //});
 
-        //if response is negative nothing is being done 
+      /*  //if response is negative nothing is being done
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -122,7 +122,7 @@ public class PeopleListAdapter extends ArrayAdapter<Persona> {
 
         //creating and displaying the alert dialog 
         AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        alertDialog.show();*/
     }
 
     public void startWeb(View view, int id) {

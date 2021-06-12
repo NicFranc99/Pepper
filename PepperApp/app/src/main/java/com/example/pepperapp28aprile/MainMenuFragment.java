@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.builder.SayBuilder;
+import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
+import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.aldebaran.qi.sdk.object.humanawareness.HumanAwareness;
+import com.aldebaran.qi.sdk.object.locale.Language;
+import com.aldebaran.qi.sdk.object.locale.Locale;
+import com.aldebaran.qi.sdk.object.locale.Region;
 import com.github.wihoho.Trainer;
 import com.github.wihoho.constant.FeatureType;
 import com.github.wihoho.jama.Matrix;
@@ -69,8 +77,26 @@ public class MainMenuFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
+
         this.ma = (MainActivity) getActivity();
         //ma.status.reset();
+
+        //ma.menu();
+
+                 SayBuilder.with(MainActivity.qiContext)
+                .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!")
+                .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
+                .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                .buildAsync().andThenCompose(say -> {
+                    Log.d(TAG, "Say started : " + "text");
+                    return say.async().run();
+                });
+
+       /* Say ciaoSonoPepper = SayBuilder.with(MainActivity.qiContext) // Create the builder with the context.
+                .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!") // Set the text to say.
+                .build(); // Build the say action.
+
+        ciaoSonoPepper.async().run();*/
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

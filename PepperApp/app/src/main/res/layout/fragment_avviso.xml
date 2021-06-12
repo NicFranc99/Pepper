@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AvvisoFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -57,7 +58,7 @@
         android:layout_marginTop="500dp"
         android:background="@color/red"
         android:text="RIFIUTA"
-        app:icon="@android:drawable/sym_call_missed" />
+        app:icon="@android:drawable/sym_call_missed"/>
 
 
 </FrameLayout>

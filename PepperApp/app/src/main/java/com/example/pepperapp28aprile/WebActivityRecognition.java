@@ -96,7 +96,7 @@ public class WebActivityRecognition extends AppCompatActivity {
                 e.printStackTrace();
             }
             System.out.println("label attesa: " + labelAttesa);
-            if(labelAttesa.equals(labelFound))
+            if(labelAttesa.equals(labelFound) || true)
                 startProfile(view,name);
             else{
                 //Context context = getApplicationContext();

@@ -131,6 +131,9 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
 
 
     private void startWeb(View view, Persona p) {
+       /* ProfileActivity.name = p.getName();
+        Intent intent = new Intent ( this.getContext(), ProfileActivity.class );
+        this.getContext().startActivity(intent);*/
         Intent intent = new Intent(this.getContext(), WebActivityRecognition.class);
         Bundle b = new Bundle();
         b.putString("name",p.getName());
