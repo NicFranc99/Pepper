@@ -96,8 +96,8 @@ public class MainMenuFragment extends Fragment {
         //ma.status.reset();
 
         //ma.menu();
-/*
-                 SayBuilder.with(MainActivity.qiContext)
+
+          /*       SayBuilder.with(MainActivity.qiContext)
                 .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!")
                 .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
                 .withBodyLanguageOption(BodyLanguageOption.DISABLED)

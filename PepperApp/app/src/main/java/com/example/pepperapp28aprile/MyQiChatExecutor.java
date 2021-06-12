@@ -1,6 +1,8 @@
 package com.example.pepperapp28aprile;
 
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
@@ -27,6 +29,7 @@ class MyQiChatExecutor extends BaseQiChatExecutor {
         //animate(qiContext);
         switch (params.get(0)){
             case "chiamata" : {
+                ProfileActivity.startWeb = params.get(1);
                 System.out.println("chiamata" + params.get(1));
                 break;
             }
@@ -38,5 +41,6 @@ class MyQiChatExecutor extends BaseQiChatExecutor {
         // This is called when chat is canceled or stopped
         Log.i("MyQiChatExecutor", "QiChatExecutor stopped");
     }
+
 
 }

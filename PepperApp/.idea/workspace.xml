@@ -31,19 +31,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MyQiChatExecutor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/file.top" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainMenuFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MyListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MyListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MyQiChatExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MyQiChatExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/ProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/ProfileActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main_menu.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@emulator-5578]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -125,7 +126,6 @@
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
       <option name="ALL_USERS" value="false" />
-      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -176,7 +176,7 @@
       </method>
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -236,25 +236,25 @@
     </state>
     <state x="743" y="277" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.985@0.27.1920.985" timestamp="1621441038540" />
     <state x="743" y="264" key="FileChooserDialogImpl/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619794516681" />
-    <state width="1648" height="214" key="GridCell.Tab.0.bottom" timestamp="1623515870248">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="156" key="GridCell.Tab.0.bottom" timestamp="1623518690455">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="83" key="GridCell.Tab.0.bottom/0.27.1920.985@0.27.1920.985" timestamp="1623510163009" />
+    <state width="1874" height="156" key="GridCell.Tab.0.bottom/0.27.1920.985@0.27.1920.985" timestamp="1623518690455" />
     <state width="1648" height="214" key="GridCell.Tab.0.bottom/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623515870248" />
-    <state width="1648" height="214" key="GridCell.Tab.0.center" timestamp="1623515870247">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="156" key="GridCell.Tab.0.center" timestamp="1623518690454">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="83" key="GridCell.Tab.0.center/0.27.1920.985@0.27.1920.985" timestamp="1623510163009" />
+    <state width="1874" height="156" key="GridCell.Tab.0.center/0.27.1920.985@0.27.1920.985" timestamp="1623518690454" />
     <state width="1648" height="214" key="GridCell.Tab.0.center/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623515870247" />
-    <state width="1648" height="214" key="GridCell.Tab.0.left" timestamp="1623515870247">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="156" key="GridCell.Tab.0.left" timestamp="1623518690454">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="83" key="GridCell.Tab.0.left/0.27.1920.985@0.27.1920.985" timestamp="1623510163008" />
+    <state width="1874" height="156" key="GridCell.Tab.0.left/0.27.1920.985@0.27.1920.985" timestamp="1623518690454" />
     <state width="1648" height="214" key="GridCell.Tab.0.left/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623515870247" />
-    <state width="1648" height="214" key="GridCell.Tab.0.right" timestamp="1623515870247">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1874" height="156" key="GridCell.Tab.0.right" timestamp="1623518690454">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state width="1874" height="83" key="GridCell.Tab.0.right/0.27.1920.985@0.27.1920.985" timestamp="1623510163009" />
+    <state width="1874" height="156" key="GridCell.Tab.0.right/0.27.1920.985@0.27.1920.985" timestamp="1623518690454" />
     <state width="1648" height="214" key="GridCell.Tab.0.right/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623515870247" />
     <state x="698" y="203" width="513" height="640" key="RollbackChangesDialog" timestamp="1619689760113">
       <screen x="0" y="27" width="1920" height="985" />

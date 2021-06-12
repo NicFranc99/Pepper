@@ -31,7 +31,15 @@ import com.aldebaran.qi.sdk.object.conversation.Topic;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +50,10 @@ import static com.example.pepperapp28aprile.MainActivity.qiContext;
 public class ProfileActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
     public static String name;
+
+    public static QiContext qiContext;
+
+    public static String startWeb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +77,14 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
+
+        this.qiContext = qiContext;
         // Create a new say action.
         Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context.
-                .withText("Ciao "+ name + ", Chi vuoi chiamare? Clicca sulla sua foto!") // Set the text to say.
+                .withText("Ciao "+ name + ", Chi vuoi chiamare? Clicca sulla sua foto oppure dimmelo a voce!") // Set the text to say.
                 .build(); // Build the say action.
 
-        ciaoSonoPepper.async().run();
+        ciaoSonoPepper.run();
 
 
         Animation animazioneSaulto = AnimationBuilder.with(qiContext)
@@ -86,8 +100,44 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
         animate.async().run();
 
         startTopic(R.raw.file, endReason -> {
-            System.out.println("Fine Reason");
+            callByVoice(null, startWeb);
         });
+    }
+
+    public void callByVoice(View view, String pepperString) {
+
+        System.out.println(getPeopleList());
+        for(Persona p: getPeopleList())
+            if(pepperString.toLowerCase().contains(p.getName().toLowerCase()) )
+                startWeb(view, p.getId());
+    }
+
+    public List<Persona> getPeopleList() {
+        List<Persona> peopleList = new ArrayList<>();
+        String sURL = "https://bettercallpepper.altervista.org/api/getParents.php?appid="+ Globals.myAppID;
+        // Connect to the URL using java's native library
+        URL url = null;
+        try {
+            url = new URL(sURL);
+            URLConnection request = url.openConnection();
+            request.connect();
+            // Convert to a JSON object to print data
+            JsonParser jp = new JsonParser(); //from gson
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+            JsonArray rootarr = root.getAsJsonArray(); //May be an array, may be an object.
+            for (int i = 0; i < rootarr.size(); i++) {
+                JsonObject rootelem = rootarr.get(i).getAsJsonObject();
+                String img = rootelem.get("propic").getAsString();
+                String name = rootelem.get("name").getAsString();
+                String surname = rootelem.get("surname").getAsString();
+                int id = rootelem.get("id").getAsInt();
+                peopleList.add(new Persona(img, id, name, surname));
+            }
+        } catch (Exception e) {
+            System.out.println("Erroreeeee");
+            e.printStackTrace();
+        }
+        return peopleList;
     }
 
     @Override
@@ -124,6 +174,8 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
 
     private void startTopic(Integer topicResource, QiChatbot.OnEndedListener chatEndedListener){
         try{
+
+            System.out.println("sono nel topic");
 
             final Topic topic = TopicBuilder.with(qiContext)
                     .withResource(topicResource).build();
