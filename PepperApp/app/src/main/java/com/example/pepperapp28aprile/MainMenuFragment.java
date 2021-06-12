@@ -82,7 +82,7 @@ public class MainMenuFragment extends Fragment {
         //ma.status.reset();
 
         //ma.menu();
-
+/*
                  SayBuilder.with(MainActivity.qiContext)
                 .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!")
                 .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
@@ -90,7 +90,7 @@ public class MainMenuFragment extends Fragment {
                 .buildAsync().andThenCompose(say -> {
                     Log.d(TAG, "Say started : " + "text");
                     return say.async().run();
-                });
+                });*/
 
        /* Say ciaoSonoPepper = SayBuilder.with(MainActivity.qiContext) // Create the builder with the context.
                 .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!") // Set the text to say.
