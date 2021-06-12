@@ -1,6 +1,7 @@
 package com.example.pepperapp28aprile;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.Image;
 import android.os.Build;
@@ -23,9 +24,17 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.builder.ChatBuilder;
+import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
+import com.aldebaran.qi.sdk.builder.TopicBuilder;
 import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
+import com.aldebaran.qi.sdk.object.conversation.Chat;
+import com.aldebaran.qi.sdk.object.conversation.Chatbot;
+import com.aldebaran.qi.sdk.object.conversation.QiChatExecutor;
+import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.object.conversation.Topic;
 import com.aldebaran.qi.sdk.object.humanawareness.HumanAwareness;
 import com.aldebaran.qi.sdk.object.locale.Language;
 import com.aldebaran.qi.sdk.object.locale.Locale;
@@ -63,8 +72,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.example.pepperapp28aprile.Globals.myAppID;
+import static com.example.pepperapp28aprile.MainActivity.qiContext;
 
 public class MainMenuFragment extends Fragment {
 
@@ -79,6 +92,7 @@ public class MainMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         this.ma = (MainActivity) getActivity();
+
         //ma.status.reset();
 
         //ma.menu();
@@ -147,7 +161,6 @@ public class MainMenuFragment extends Fragment {
         return fragmentLayout;
     }
 
-
     Matrix vectorize(Matrix input) {
         int m = input.getRowDimension();
         int n = input.getColumnDimension();
@@ -181,8 +194,8 @@ public class MainMenuFragment extends Fragment {
     }
 
 
-    private void addestra(ArrayList<Persona> peopleList){
-        try{
+    private void addestra(ArrayList<Persona> peopleList) {
+        try {
 
             // Build a trainer
 
@@ -196,13 +209,12 @@ public class MainMenuFragment extends Fragment {
             URL url;
             File initialFile = null;
             System.out.println(peopleList);
-            for(int i = 0; i<peopleList.size(); i++)
-            {
+            for (int i = 0; i < peopleList.size(); i++) {
                 //File initialFile = new File("sdcard/faces/simone1.pgm");
-                for(int k = 1; k<= 11 ; k++){
-                    String fileName = peopleList.get(i).urlFullName()+"_"+k+".pgm";
-                    url = new URL("https://bettercallpepper.altervista.org/img/training/"+(
-                            peopleList.get(i).urlFullName()+"/"+ fileName).toLowerCase());
+                for (int k = 1; k <= 11; k++) {
+                    String fileName = peopleList.get(i).urlFullName() + "_" + k + ".pgm";
+                    url = new URL("https://bettercallpepper.altervista.org/img/training/" + (
+                            peopleList.get(i).urlFullName() + "/" + fileName).toLowerCase());
 
                     System.out.println(url.toString());
 
@@ -214,9 +226,9 @@ public class MainMenuFragment extends Fragment {
                             60000);*/
 
                     downloadFile(url,/*Environment
-                            .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+*/"/sdcard/faces/"+fileName.toLowerCase());
+                            .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+*/"/sdcard/faces/" + fileName.toLowerCase());
                     initialFile = new File(/*Environment
-                            .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+*/"/sdcard/faces/"+fileName.toLowerCase());
+                            .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+*/"/sdcard/faces/" + fileName.toLowerCase());
 
 
                   /*  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -267,10 +279,9 @@ public class MainMenuFragment extends Fragment {
         tempFile.deleteOnExit();
         ByteStreams.copy(inputStream, new FileOutputStream(tempFile));*/
 
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
     }
-
 }

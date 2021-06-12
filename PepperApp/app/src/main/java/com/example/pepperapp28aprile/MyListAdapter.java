@@ -131,9 +131,12 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
 
 
     private void startWeb(View view, Persona p) {
-       /* ProfileActivity.name = p.getName();
+        ProfileActivity.name = p.getName();
         Intent intent = new Intent ( this.getContext(), ProfileActivity.class );
-        this.getContext().startActivity(intent);*/
+        this.getContext().startActivity(intent);
+
+        /*
+
         Intent intent = new Intent(this.getContext(), WebActivityRecognition.class);
         Bundle b = new Bundle();
         b.putString("name",p.getName());
@@ -141,7 +144,7 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
         //b.putInt("id", id); //Your id
         //b.putInt("type", 1);
         intent.putExtras(b);
-        this.getContext().startActivity(intent);
+        this.getContext().startActivity(intent);*/
 
     }
     //this method will remove the item from the list 

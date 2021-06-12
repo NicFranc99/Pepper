@@ -1,0 +1,151 @@
+topic: ~questionario ()
+
+concept:(chiama) [chiama telefona chiamami "mi chiami" ]
+
+concept:(hello) [ciao ]
+
+
+
+concept:(greetings) ^rand["ok vado a dopo" "va bene, ciao" "ok, quando vuoi puoi chiamarmi. Ciao"]
+
+concept:(askForQuestionario) ["sono qui per il questionario mattutino, va bene?"]
+
+#concept:(execute) [telepresenza telefonare chiamare parente]
+#u:(~execute) Ok, chiamiamo un parente ^execute(myExecutor)
+
+concept:(positiveFeedback) ^rand["perfetto!""alla grande!""ottimo""buona notizia!""bene!"]
+
+concept:(acceptance) ["si""va bene""ok"]
+
+concept:(si) ["si"]
+
+concept:(no) ["no"]
+
+concept:(idk) ["non so" "non lo so" "non saprei"]
+
+concept:(refused) ["non voglio" "non ne ho voglia" "no" "vattene" "non voglio farlo"]
+
+concept:(non_capito) ["non ho capito" "puoi ripetere" "ripeti" "non ho sentito"]
+
+#u:(~hello {pepper}) ~hello, ~askForActions
+
+
+
+
+u:({pepper} ~chiama _*) ok chiamo $1 ^execute(myExecutor,"chiamata", $1)  ^nextProposal ^endDiscuss(success)
+
+
+
+
+
+
+u:(~hello {pepper}) ~hello, ~askForQuestionario
+
+    u1:(~acceptance {pepper}) ~positiveFeedback, "Cominciamo subito, ti farò alcune domande, ricòrdati di rispondere, con un sì, oppure no. Se non capisci la domanda, dimmelo pùre!" ^nextProposal
+
+    u1:(~refused {pepper}) "Mi dispiace che tu non voglia farlo, lo comunicherò ad un operatore. Chiamami più tardi se hai bisogno di qualcosa" ^execute(myExecutor,"noQuestionario")  ^endDiscuss(success)
+
+proposal: ^execute(myExecutor,"print1")  ^nextProposal
+
+proposal: prima domanda:  ^nextProposal
+
+proposal: Ti sei svegliato ben riposato questa mattina?
+    u1: (~si {pepper}) ~positiveFeedback ^execute(myExecutor,"domanda1","si") ^nextProposal
+    u1: (~no {pepper}) "Mi dispiace" ^execute(myExecutor,"domanda1","no") ^nextProposal
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Mi dispiace, non ho capito, ^sameProposal
+
+proposal: ^execute(myExecutor,"print2") ^nextProposal
+
+proposal:  Sei di buon umore e sereno?
+    u1: (~si {pepper}) ~positiveFeedback ^execute(myExecutor,"domanda2","si") ^nextProposal
+    u1: (~no {pepper}) "ok," ^execute(myExecutor,"domanda2","no") ^nextProposal
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Non ho capito cosa vuoi dirmi, ^sameProposal
+
+proposal: ^execute(myExecutor,"print3")  ^nextProposal
+
+proposal: Ma per caso^nextProposal
+
+proposal: Hai dei dolori fisici in questo momento?
+    u1: (~si {pepper}) "Mannaggia!"  ^execute(myExecutor,"domanda3","si")  ^nextProposal
+    u1: (~no {pepper}) ~positiveFeedback  ^execute(myExecutor,"domanda3","no")  ^nextProposal
+    #u1: (_*) "ok," ^execute(myExecutor,"domanda3",$1) ^nextProposal
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Non ho capito, ^sameProposal
+
+proposal:^execute(myExecutor,"print4") ^nextProposal
+
+proposal: E invece ultimamente ^nextProposal
+
+proposal: Ti senti tiste, scoraggiato?
+    u1: (~si {pepper}) "Mi dispiace molto!"  ^execute(myExecutor,"domanda4","si")  ^nextProposal
+    u1: (~no {pepper}) ~positiveFeedback   ^execute(myExecutor,"domanda4","no")  ^nextProposal
+    u1: ({mi sento} _*) "ho capito," ^execute(myExecutor,"domanda4",$1) ^nextProposal
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Mi dispiace, non ho compreso, ^sameProposal
+
+proposal: ^execute(myExecutor,"print5") ^nextProposal
+
+proposal:Sei nervoso? Ultimamente ti sei innervosito?
+    u1: (~si {pepper}) "Ok,"  ^execute(myExecutor,"domanda5","si")  ^nextProposal
+    u1: (~no {pepper}) ~positiveFeedback   ^execute(myExecutor,"domanda5","no")  ^nextProposal
+   #u1: (_*) "ok,"  ^execute(myExecutor,"domanda5",$1)  ^nextProposal
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Non ho capito, ripeto, ^sameProposal
+
+
+proposal: ^execute(myExecutor,"print6")  ^nextProposal
+
+proposal: manca poco alla fine del questionario, ma adesso parliamo di cose positive! ^nextProposal
+
+proposal: Quanto sei felice? Molto, abbastanza, poco o per nulla?
+    u1: (molto {pepper}) "Ok," ~positiveFeedback  ^execute(myExecutor,"domanda6","molto")  ^nextProposal
+    u1: (abbastanza {pepper}) ~positiveFeedback  ^execute(myExecutor,"domanda6","abbastanza")  ^nextProposal
+    u1: (poco  {pepper}) "Ok,  " ^execute(myExecutor,"domanda6","poco")  ^nextProposal
+    u1: (per nulla {pepper})  "Mi dispiace " ^execute(myExecutor,"domanda6","per_nulla")  ^nextProposal
+    #u1: ( _* ) "Ricevuto, manca poco alla fine del questionario"  ^execute(myExecutor,"domanda6",$1)  ^nextProposal
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Non ho capito cosa vuoi dirmi, ^sameProposal
+
+proposal:^execute(myExecutor,"print7") ^nextProposal
+
+proposal: mi servirebbe sapere se ^nextProposal
+
+proposal:Ultimamente ti senti annoiato?
+    u1: (~si {pepper}) "Mi dispiace!"  ^execute(myExecutor,"domanda7","si")  ^nextProposal
+    u1: (~no {pepper}) "Ottimo!"  ^execute(myExecutor,"domanda7","no")  ^nextProposal
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Non ho capito, ^sameProposal
+
+proposal:^execute(myExecutor,"print8") ^nextProposal
+
+proposal: In questi giorni ^nextProposal
+
+proposal: Credi di sentirti tranquillo?
+    u1: (~si {pepper}) ~positiveFeedback  ^execute(myExecutor,"domanda8","si")  ^nextProposal
+    u1: (~no {pepper}) "ok,"  ^execute(myExecutor,"domanda8","no") ^nextProposal
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Mi dispiace, non ho compreso, ^sameProposal
+
+
+proposal: ^execute(myExecutor,"print9") ^nextProposal
+
+proposal: Ti senti teso in questi giorni?
+    u1: (~si {pepper}) "ok, ultima domanda"   ^execute(myExecutor,"domanda9","si") ^nextProposal
+    u1: (~no {pepper}) ~positiveFeedback, ultima domanda  ^execute(myExecutor,"domanda9","no")  ^nextProposal
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Non ho capito, ^sameProposal
+
+proposal: ^execute(myExecutor,"print10") ^nextProposal
+
+proposal: "Ti senti energico?"
+    u1: (~si {pepper}) ~positiveFeedback, ^execute(myExecutor,"domanda10","si") il questionario è completato... chiamami più tardi se hai bisogno di me! ^endDiscuss(success)
+    u1: (~no {pepper}) "Ok, il questionario è completato... chiamami più tardi se hai bisogno di me!"  ^execute(myExecutor,"domanda10","no")  ^endDiscuss(success)
+    u1: (~non_capito) ^sameProposal
+    u1:(e:Dialog/NotUnderstood) Non ho capito, ^sameProposal
+
+
+
+
+#u:(e:Dialog/SpeakFailure) Non so rispondere a questo
