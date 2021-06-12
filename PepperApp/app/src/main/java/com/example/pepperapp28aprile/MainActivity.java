@@ -155,6 +155,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                 String surnameDestinatario = "";
                 String imageMittente = "";
                 String imageDestinatario = "";
+                String id ="";
 
                 // Connect to the URL using java's native library
                 URL url = null;
@@ -168,6 +169,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                     JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
                     //JsonArray rootarr = root.getAsJsonArray(); //May be an array, may be an object.
                     JsonObject rootelem = root.getAsJsonArray().get(0).getAsJsonObject();
+                    id = rootelem.get("id").getAsString();
                     nameMittente = rootelem.get("name").getAsString();
                     surnameMittente = rootelem.get("surname").getAsString();
                     imageMittente = rootelem.get("propic").getAsString();
@@ -181,6 +183,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                     e.printStackTrace();
                 }
                 if(nameMittente != "") {
+                    myAppID = receiveCallID;
                     chiamataInArrivo(nameMittente,surnameMittente,nameDestinatario,surnameDestinatario, imageDestinatario, imageMittente);
                 /*    notificationBuilder.setContentText("Stai ricevendo una chiamata da " + nameMittente + " " + surnameMittente);
                     notificationManager.notify(1, notificationBuilder.build());*/

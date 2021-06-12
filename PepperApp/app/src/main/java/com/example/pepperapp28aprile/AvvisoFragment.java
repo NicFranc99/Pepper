@@ -132,6 +132,7 @@ public class AvvisoFragment extends Fragment {
                 ma.startActivity(intent);
                 System.out.println("ACCETTA" );
                 ma.setChiamataGestita();
+                ma.setFragment(new MainMenuFragment());
             }
         });
 
@@ -145,6 +146,7 @@ public class AvvisoFragment extends Fragment {
                 ma.setFragment(new MainMenuFragment());
                 System.out.println("RIFIUTA" );
                 ma.setChiamataGestita();
+                ma.setFragment(new MainMenuFragment());
             }
         });
 

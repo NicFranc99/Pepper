@@ -181,7 +181,7 @@ public class WebActivity extends AppCompatActivity {
         else
             url = "https://bettercallpepper.altervista.org/VideoChat/?room="+receiveCallID + "_" + myAppID +"&mode=j";
 
-        System.out.println(url);
+        System.out.println("url:" + url);
 
         Map<String, String> noCacheHeaders = new HashMap<String, String>(2);
         noCacheHeaders.put("Pragma", "no-cache");
