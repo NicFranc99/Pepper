@@ -31,10 +31,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ParenteApp/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ParenteApp/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ParenteApp/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ParenteApp/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ParenteApp/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainMenuFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/file.top" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/raw/file.top" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/settings_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/settings_activity.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +67,12 @@
       </list>
     </option>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="$USER_HOME$/key apk pepper/mykey.jks" />
+    <option name="KEY_ALIAS" value="bettercallpepper" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -76,8 +83,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ApkExportedModule" value="PepperApp28Aprile.app" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="emulator-5578" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-06-12T09:11:00.471Z" />
+    <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
+    <property name="ExportApk.BuildVariants" value="release" />
+    <property name="ExportApk.SignV2" value="true" />
     <property name="ResourceManagerPrefKey.ResourceType" value="MIPMAP" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -228,10 +239,10 @@
       <screen x="0" y="27" width="1920" height="985" />
     </state>
     <state x="543" y="277" width="824" height="491" key="AndroidCreateResourceFileDialog/0.27.1920.985@0.27.1920.985" timestamp="1619643235534" />
-    <state x="743" y="277" width="424" height="491" key="FileChooserDialogImpl" timestamp="1621441038540">
+    <state x="743" y="277" width="424" height="491" key="FileChooserDialogImpl" timestamp="1624523067253">
       <screen x="0" y="27" width="1920" height="985" />
     </state>
-    <state x="743" y="277" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.985@0.27.1920.985" timestamp="1621441038540" />
+    <state x="743" y="277" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.985@0.27.1920.985" timestamp="1624523067253" />
     <state x="743" y="264" key="FileChooserDialogImpl/1920.0.1920.1040/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1619794516681" />
     <state width="1874" height="156" key="GridCell.Tab.0.bottom" timestamp="1623518904858">
       <screen x="0" y="27" width="1920" height="985" />
