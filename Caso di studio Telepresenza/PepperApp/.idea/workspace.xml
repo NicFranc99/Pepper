@@ -31,11 +31,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ParenteApp/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ParenteApp/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ParenteApp/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ParenteApp/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ParenteApp/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/settings_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/settings_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +70,7 @@
     <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectId" id="1roR8B0G6VkqtCcLWyUnvWSPRYI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
