@@ -1,0 +1,123 @@
+topic: ~button ()
+
+concept:(hello) ^rand[ciao hey salve "hey ciao"]
+
+concept:(greetings) ^rand["ok vado a dopo" "va bene, ciao" "ok, quando vuoi puoi chiamarmi. Ciao"]
+
+concept:(finish) ["puoi andare {grazie}" "ci vediamo dopo" "niente {grazie}" "nient'altro" "stop" "a dopo"]
+
+concept:(okAction) ^rand["ok, lo faccio subito" "certo" "certamente"]
+
+#concept:(askForQuestionario) ["sono qui per il questionario mattutino, va bene?"]
+
+concept:(askForActions) ^rand["Chiedimi qualcosa oppure chiedimi cosa so fare!"]
+
+concept:(whatCanYouDo) ["cosa sai fare?" "cosa puoi fare?" "che sai fare?" "che puoi fare?" "che funzioni hai?"]
+
+concept:(askForOtherActions) ^rand["che altro posso fare per te?" "cos'altro posso fare per te?" "se vuoi puoi chiedermi di fare qualcos'altro"]
+
+concept:(tellAjoke) ["raccontami una barzelletta" "barzelletta" "ridere" "intrattienimi" "intrattenimento"]
+
+concept:(feelAlone) ["mi sento solo {fammi compagnia}" "mi sento sola {fammi compagnia}"]
+
+concept:(feelSick) ["non mi sento {molto} {tanto} bene" "mi sento male" "non sto {molto} {tanto} bene" "sto male" "chiama l'operatore" "fai venire l'operatore" "puoi chiamare l'operatore" "chiamare l'operatore" "mi sento poco bene" "mi gira la testa" "ho mal di *" "operatore"]
+
+concept:(non_capito) ["non ho capito" "puoi ripetere" "ripeti" "non ho sentito" "cosa"]
+
+concept:(ripeto) ^rand[ "ok ..."]
+
+
+#concept:(askForDrugs) ["che medicine devo prendere *?" "quali medicine devo prendere *?" "che medicinale devo prendere *?" "quale medicinale devo prendere *?"]
+
+#concept:(drugs) ^rand["è l'ora della pillola per la pressione" "adesso devi prendere l'anti infiammatorio" "adesso devi prendere la tachipirina"]
+
+#concept:(askForPasto) ["cosa c'è per cena {oggi}?" "che si mangia oggi" "mangiare" "che sta a pranza" "pranzo" "cena" "cosa c'è da mangiare stasera?" "che c'è per cena {oggi}?" "che si mangia stasera?" "che si mangia a cena?"]
+
+#concept:(dinner) ^rand["dopo c'è la pasta al forno" "dopo c'è un bel pollo con le patate" "dopo c'è la cotoletta" "dopo c'è la pasta al sugo"]
+
+concept:(telepresenza) ["Voglio chiamare" "Telefonare" "parente" "chiama un parente" "chiama il dottore" "dottore" "telepresenza"]
+
+concept:(joke) ^rand["Il deserto del Sahara è in Africa. Su questo non ci piove."
+                     "Cosa disse Garibaldi quando unificò l'Italia? Grazie Mille!"
+                     "Ho inventato un cappotto che va bene per tutte le stagioni; quando fa caldo basta toglierlo!"
+                     "Ragazza stufa scappa di casa. Genitori morti dal freddo!"
+                     "Il presidente della Bic ha fatto un incidente... stava per rimetterci le penne!"
+                     "Che verso fa il pulcino dentro un computer? Micro cip!"
+                     "Lo sai qual è il colmo per un Mango? No? Beh, non lo so Mango io!"
+                     "Mamma hai visto il black out? No Pierino, era tutto buio!"]
+
+concept:(positiveFeedback) ^rand["perfetto!""alla grande!""ottimo""buona notizia!""bene!"]
+
+concept:(acceptance) ["si""va bene""ok"]
+
+concept:(si) ["si"]
+
+concept:(no) ["no"]
+
+concept:(idk) ["non so" "non lo so" "non saprei"]
+
+concept:(refused) ["non voglio" "non ne ho voglia" "no" "vattene" "non voglio farlo"]
+
+u:(Pepper) ~hello, ~askForActions ^enableThenGoto(cosa_fare)
+u:(~hello {pepper}) ~hello, ~askForActions ^enableThenGoto(cosa_fare)
+
+proposal: %cosa_fare ^execute(myExecutor,"cosafare")
+
+u:({~hello} {pepper} ~whatCanYouDo)  ^enableThenGoto(abilities1)
+proposal: %abilities1 ^execute(myExecutor,"abilities") ^enableThenGoto(abilities2)
+proposal: %abilities2 "Posso videochiamare un parente o il tuo dottore, far venire l'operatore o intrattenerti con una barzelletta"
+    u1: (~non_capito) ~ripeto ^sameProposal
+
+
+#u:({pepper} ~askForDrugs) ^nextProposal
+
+#proposal: ^execute(myExecutor, "drugs") ^nextProposal
+
+#proposal: ~drugs
+#   u1:(~acceptance) Ok, ~askForOtherActions ^nextProposal
+
+#proposal: ^execute(myExecutor, "whatelse")
+
+#u:({pepper} ~askForPasto) ~dinner, ~askForOtherActions
+
+
+
+u:(~tellAjoke) ^enableThenGoto(joke1)
+proposal: %joke1 ^execute(myExecutor,"joke") ^enableThenGoto(joke2)
+proposal: %joke2 ~joke ^enableThenGoto(joke3)
+proposal: %joke3 ^execute(myExecutor,"whatelse")
+    u1:(_*) mi piace molto raccontare barzellette! ~askForOtherActions
+
+
+u:({pepper} ~feelAlone) ^enableThenGoto(contatto)
+proposal: %contatto "se vuoi puoi chiamare un contatto"
+    u1:(~acceptance) ^execute(myExecutor, "telepresenza") ^endDiscuss(success)
+    u1:(~refused) Ok, ^enableThenGoto(alone1)
+    u1: (~non_capito) ~ripeto ^sameProposal
+proposal: %alone1 ^execute(myExecutor,"whatelse") ^enableThenGoto(alone2)
+proposal: %alone2 ~askForOtherActions
+
+
+
+u:(~telepresenza) ricevuto,  ^execute(myExecutor, "telepresenza") ^endDiscuss(success)
+
+u:({pepper} ~finish) ~greetings ^endDiscuss(success)
+
+
+#u:(~telepresenza) va bene  ^execute(myExecutor, "telepresenza") ^endDiscuss(success)
+#u:({pepper} ~finish) ~greetings ^endDiscuss(success)
+
+
+
+u:({pepper} ~feelSick) "Va bene, chiamo subito un operatore," ^enableThenGoto(op1)
+proposal: %op1 ^execute(myExecutor,"operatore") ^enableThenGoto(op2)
+proposal: %op2 ^execute(myExecutor,"whatelse") ^enableThenGoto(op3)
+proposal: %op3 ~askForOtherActions
+
+
+#u:(e:Dialog/NotUnderstood) Non ho capito, puoi ripetere?
+
+
+
+
+

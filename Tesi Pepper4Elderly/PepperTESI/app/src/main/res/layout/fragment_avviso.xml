@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AvvisoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rel"
+        android:background="#3B4044"
+        android:fontFamily="sans-serif-black" />
+
+    <TextView
+        android:id="@+id/textInArrivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:autoText="false"
+        android:paddingBottom="20dp"
+        android:text="Chiamata in arrivo per"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50sp" />
+
+    <ImageView
+        android:id="@+id/imgMittente"
+        android:layout_width="276dp"
+        android:layout_height="240dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="140dp" />
+
+    <ImageView
+        android:id="@+id/imgDestinatario"
+        android:layout_width="276dp"
+        android:layout_height="240dp"
+        android:layout_marginLeft="550dp"
+        android:layout_marginTop="140dp" />
+
+    <Button
+        android:id="@+id/accetta"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/green_rating_start"
+        android:layout_gravity="bottom"
+        android:layout_alignBottom="@+id/rel"
+        android:layout_centerHorizontal="true"
+        android:text="ACCETTA"
+        app:icon="@android:drawable/sym_call_outgoing" />
+
+    <Button
+        android:id="@+id/rifiuta"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="130dp"
+        android:background="@color/red"
+        android:layout_alignBottom="@+id/rel"
+        android:text="RIFIUTA"
+        android:layout_centerHorizontal="true"
+        app:icon="@android:drawable/sym_call_missed"/>
+
+
+
+
+</RelativeLayout>

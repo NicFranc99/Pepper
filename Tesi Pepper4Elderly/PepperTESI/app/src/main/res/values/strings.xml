@@ -1,0 +1,195 @@
+<resources>
+
+    <!--app name-->
+
+    <string name="close_charging_flat">Chiudere sportellino della ricarica</string>
+    <string name="message_server_unreachable">Server non raggiungibile</string>
+    <string name="message_generic_error">Errore generico</string>
+    <string name="message_404">404</string>
+    <string name="message_500">500</string>
+    <string name="start_localizing">Inizio localizzazione</string>
+    <string name="start_service">INIZIA IL CHECK</string>
+    <string name="starting_phrase">Perfavore portami alla base prima di localizzarmi e far partire il servizio</string>
+
+    <!-- fragment_localize_and_map -->
+    <string name="production_mode_button">TELEPRESENZA</string>
+    <string name="setup_mode_button">CHECK MATTUTINO</string>
+    <!-- fragment_setup -->
+    <string name="setup_mode_fragment">Scegli la modalità!</string>
+    <string name="localize_and_map">LOCALIZE &amp; MAP</string>
+    <string name="localize">LOCALIZZA IL ROBOT</string>
+
+
+    <!--default language is english-->
+    <string name="app_name">Better Call Pepper</string>
+    <string name="tab_text_1" translatable="false">Persone</string>
+    <string name="tab_text_2" translatable="false">Cronologia</string>
+    <string name="title_activity_settings" translatable="false">Impostazioni</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header" translatable="false">Messages</string>
+    <string name="sync_header" translatable="false">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+
+    <!--navigation buttons-->
+    <string name="home">\"Home\"</string>
+    <string name="next">\"Next\"</string>
+    <string name="custom">\"Customize\"</string>
+    <string name="finish">\"Finish\"</string>
+    <string name="skip">\"Skip\"</string>
+    <string name="yes">\"YES\"</string>
+    <string name="no">\"NO\"</string>
+    <string name="desk">DESK</string>
+    <string name="id">\"Click and Collect\"</string>
+    <string name="shop">\"Start shopping\"</string>
+    <string name="retuns">\"Return item\"</string>
+    <string name="back">\"Back\"</string>
+    <string name="promotion">Sneakers man</string>
+    <string name="gender">\"Gender\"</string>
+    <string name="category">\"Category\"</string>
+    <string name="name">\"Name\"</string>
+    <string name="product">\"Product\"</string>
+    <string name="refresh">\"Refresh\"</string>
+    <string name="black">\"Black\"</string>
+    <string name="grey">\"Grey\"</string>
+    <string name="red">\"Red\"</string>
+    <string name="tan">\"Tan\"</string>
+    <string name="buy">\"Buy\"</string>
+    <string name="order">\"Order\"</string>
+    <string name="wrong_size">\"Wrong size\"</string>
+    <string name="size">\"Size\"</string>
+    <string name="wrong_color">\"Wrong color\"</string>
+    <string name="dont_like">\"Don\'t like it\"</string>
+    <string name="dont_fit">\"Did not fit\"</string>
+    <string name="dont_need">\"Don\'t need it\"</string>
+    <string name="flawed">\"Product flawed\"</string>
+    <string name="testicket">\"Demo Ticket\"</string>
+    <string name="submit">submit</string>
+    <string name="reasons">Other reasons</string>
+    <string name="open_locker">Open locker "</string>
+    <string name="clear_pad">Clear</string>
+    <string name="other">\"Products\"</string>
+    <string name="ButtonConfirm">\"Send\"</string>
+    <string name="french">french</string>
+    <string name="spanish">spanish</string>
+    <string name="german">german</string>
+    <string name="ret">return</string>
+    <string name="CHANNEL_DESCRIPTION">Description</string>
+
+
+    <!--switches-->
+    <string name="man">\"Man\"</string>
+    <string name="woman">\"Woman\"</string>
+    <string name="dress">\"Dress\"</string>
+    <string name="sport">\"Sport\"</string>
+
+    <!--other text-->
+    <string name="ContextDescription">AddImage</string>
+    <string name="no_camera_permission">Camera not allowed</string>
+    <string name="confirmReturn">Are you sure that you want to return this Item ?</string>
+    <string name="tell_us_why">Why would you like to return this item ?</string>
+    <string name="camera">Camera</string>
+    <string name="scan">Scan your Ticket here</string>
+    <string name="low_storage_error">QR code detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="textOrder">Enter your order number here</string>
+    <string name="textTicket">Enter your ticket number here</string>
+    <string name="TextValidOrder">Please, enter a valid Order number</string>
+    <string name="TextValidTicket">Please, enter a valid Ticket number</string>
+    <string name="TextEnterMail">Please, enter your email here</string>
+    <string name="TextValidMail">Please, enter a valid email address</string>
+    <string name="select">Select</string>
+    <string name="customize">Customize</string>
+    <string name="promo">Promotion</string>
+    <string name="locate">Locate</string>
+    <string name="ok">OK</string>
+    <string name="hintMail">email</string>
+    <string name="label_email_suffix">\@</string>
+    <string name="label_customer_email">Email</string>
+    <string name="email_subject">Your order at Pepper Store</string>
+    <string name="rate">Could you please rate your experience with me ?</string>
+    <string name="locker_number">Items in Locker #</string>
+    <string name="confim_id">Sign here to confirm your identity</string>
+    <string name="waring_sign">The signature cannot be empty</string>
+    <string name="items">Items</string>
+    <string name="OrderNumber">Order number</string>
+    <string name="outStock">Out of Stock</string>
+    <string name="item_name">item name</string>
+    <string name="loading">Clicca per continuare</string>
+    <string name="close">Do you want to close this app ?</string>
+    <string name="dialogCredentials">Enter email Credentials</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="signin">Sign in</string>
+    <string name="cancel">Cancel</string>
+
+    <!--prices-->
+    <string name="price">00.00€</string>
+    <string name="price_old">EUR 89.99</string>
+    <string name="price_sock">EUR 10.99</string>
+    <string name="price_sock_old">EUR 20.99</string>
+
+    <!--ratings-->
+    <string name="perfect">\"Perfect\"</string>
+    <string name="good">\"Good\"</string>
+    <string name="okay">\"Okay\"</string>
+    <string name="bad">\"Bad\"</string>
+
+
+    <string name="it_dress_man_black">Man dress shoes, black</string>
+    <string name="it_dress_man_grey">Man dress shoes, grey</string>
+    <string name="it_dress_man_red">Man dress shoes, red</string>
+    <string name="it_dress_man_tan">Man dress shoes, tan</string>
+
+    <string name="it_dress_woman_black">Woman dress shoe, black</string>
+    <string name="it_dress_woman_grey">Woman dress shoe, grey</string>
+    <string name="it_dress_woman_red">Woman dress shoe, red</string>
+    <string name="it_dress_woman_tan">Woman dress shoe, tan</string>
+
+    <string name="it_sport_man_black">Man sport sneakers, black</string>
+    <string name="it_sport_man_grey">Man sport sneakers,grey</string>
+    <string name="it_sport_man_red">Man sport sneakers, red</string>
+    <string name="it_sport_man_tan">Man sport sneakers, tan</string>
+
+    <string name="it_sport_woman_black">Woman sport sneakers, black</string>
+    <string name="it_sport_woman_grey">Woman sport sneakers, grey</string>
+    <string name="it_sport_woman_red">Woman sport sneakers, red</string>
+    <string name="it_sport_woman_tan">Woman sport sneakers, tan</string>
+
+    <string name="sc_dress_man">Classic Socks</string>
+    <string name="sc_dress_woman">Classic Socks</string>
+    <string name="sc_sport_man">Cool Socks</string>
+    <string name="sc_sport_woman">Cool Socks</string>
+
+    <!-- Images content descriptions -->
+    <string name="images_content_description" translatable="false">Content description</string>
+
+    <string-array name="array_email_suffix">
+        <item>\@gmail.com</item>
+        <item>\@hotmail.com</item>
+        <item>\@outlook.com</item>
+        <item>\@yahoo.com</item>
+        <item>\@softbankrobotics.com</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_settings2">SettingsActivity2</string>
+    <string name="title_activity_check_mattutino">CheckMattutino</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1071470028739",
+    "project_id": "bettercallpepper",
+    "storage_bucket": "bettercallpepper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071470028739:android:cc1cb32758c2633e18bf76",
+        "android_client_info": {
+          "package_name": "com.example.parenteapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071470028739-7o39belmeorapc6sr308lekj6sckptjo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAd6ZDe7ryQDJJIa2ESIMllppefj5teXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071470028739-7o39belmeorapc6sr308lekj6sckptjo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
