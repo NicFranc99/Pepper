@@ -1,16 +1,10 @@
 package com.example.pepperapp28aprile;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.solver.widgets.ChainHead;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -20,31 +14,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 
-import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
 import com.aldebaran.qi.sdk.builder.AnimationBuilder;
-import com.aldebaran.qi.sdk.builder.LocalizeAndMapBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
-import com.aldebaran.qi.sdk.object.actuation.LocalizeAndMap;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.example.pepperapp28aprile.models.Emergency;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.JsonArray;
+import com.example.pepperapp28aprile.utilities.DataManager;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -53,14 +38,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
-import static com.example.pepperapp28aprile.Globals.myAppID;
 import static com.example.pepperapp28aprile.Globals.receiveCallID;
 import static com.example.pepperapp28aprile.Globals.senderCallID;
 
@@ -71,19 +54,18 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     static NotificationManager notificationManager;
     private static boolean doButtonOperation;
     //private static boolean doButtonOperationImpegnato;
-
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
     public static boolean chiamataGestita;
     public static QiContext qiContext;
-
-    
-
+    public static String stringaDaCancellare;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         QiSDK.register(this, this);
         doButtonOperation = false;
         //doButtonOperationImpegnato = false;
-
 
         Globals.NowIsRunning = Globals.MainActivity;
         System.out.println("settato now is running" + Globals.NowIsRunning);
@@ -102,8 +84,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         chiamataGestita = false;
 
         setFragment(new LoadingFragment());
-        System.out.println("ciao");
-
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "1");
 
         Intent accept = new Intent(this, AcceptActivity.class);
@@ -202,6 +182,26 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         System.out.println("gestita");
     }
 
+   /* public void caricaDati() {
+        new DataManager("pazienti",new DataManager.onDownloadDataListener() {
+            @Override
+            public void onDataSuccess(Cancellami paziente) {
+                // Util.stampaLogDati(paziente);
+                System.out.println(paziente.nome);
+                System.out.println(paziente.cognome);
+            }
+
+            @Override
+            public void onDataFailed() {
+                System.out.println("QUALCOSA E' ANDATO STORTO!!!!!!!");
+            }
+
+            @Override
+            public void notFoundUser() {
+                System.out.println("NON HO TROVATO NESSUNO!!!!!!!");
+            }
+        });
+    }*/
 
     private void chiamataInArrivo(String nameMittente, String surnameMittente, String nameDestinatario, String surnameDestinatario, String imgDest, String imgMit, String id) {
         System.out.println("chiamata in arrivo");
@@ -242,7 +242,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             }
         }
     }
-
 
     public static void deleteNotification()
     {
@@ -299,7 +298,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     }
 
     public void annunciaChiamata(String nomeDest){
-
 
         try{
             Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context.

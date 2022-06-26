@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "63890802519",
+    "firebase_url": "https://bettercallpeppergames-default-rtdb.firebaseio.com",
+    "project_id": "bettercallpeppergames",
+    "storage_bucket": "bettercallpeppergames.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63890802519:android:7abaa42853c5ef0988a012",
+        "android_client_info": {
+          "package_name": "com.example.pepperapp28aprile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63890802519-gsf02bg07sqrk2jmhogo9lt9c7k44rvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbfHya7KLbEZX45zXF9sZ9vh8dwuhVRTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63890802519-gsf02bg07sqrk2jmhogo9lt9c7k44rvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

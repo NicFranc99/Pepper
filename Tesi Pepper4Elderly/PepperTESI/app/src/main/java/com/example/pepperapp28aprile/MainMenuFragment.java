@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ import com.aldebaran.qi.sdk.object.humanawareness.HumanAwareness;
 import com.aldebaran.qi.sdk.object.locale.Language;
 import com.aldebaran.qi.sdk.object.locale.Locale;
 import com.aldebaran.qi.sdk.object.locale.Region;
+import com.example.pepperapp28aprile.utilities.DataManager;
 import com.github.wihoho.Trainer;
 import com.github.wihoho.constant.FeatureType;
 import com.github.wihoho.jama.Matrix;
@@ -104,12 +106,13 @@ public class MainMenuFragment extends Fragment {
                 int id = rootelem.get("id").getAsInt();
                 ArrayList<String> training = null;
                 peopleList.add(new Persona(img, id, name, surname));
+
             }
         } catch (Exception e) {
             System.out.println("Erroreeeee");
             e.printStackTrace();
         }
-
+        mergePeopleListInDatabase(peopleList);
         addestra(peopleList);
 
 
@@ -150,6 +153,29 @@ public class MainMenuFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    private void mergePeopleListInDatabase(ArrayList<Persona> peopleList){
+        for(Persona paziente : peopleList){
+                new DataManager("pazienti",paziente.getId(),new DataManager.onDownloadDataListener() {
+                    @Override
+                    public void onDataSuccess(Persona paziente) {
+                        // Util.stampaLogDati(paziente);
+                        System.out.println(paziente.getName());
+                        System.out.println(paziente.getSurname());
+                    }
+
+                    @Override
+                    public void onDataFailed() {
+                        Toast.makeText(getContext(), "Qualcosa è andato storto, contattare l'amministrazione..", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void notFoundUser() {
+                        Toast.makeText(getContext(), "Non ho trovato il paziente " + paziente.getName() + ", devo aggiungerlo nel Db FIREBASE", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        }
 
 
     private void addestra(ArrayList<Persona> peopleList){
