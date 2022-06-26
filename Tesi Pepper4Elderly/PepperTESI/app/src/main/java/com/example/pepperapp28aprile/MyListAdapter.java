@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.aldebaran.qi.sdk.QiContext;
-import com.aldebaran.qi.sdk.QiSDK;
-import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
-import com.aldebaran.qi.sdk.builder.AnimateBuilder;
-import com.aldebaran.qi.sdk.builder.AnimationBuilder;
-import com.aldebaran.qi.sdk.builder.SayBuilder;
-import com.aldebaran.qi.sdk.design.activity.RobotActivity;
-import com.aldebaran.qi.sdk.object.actuation.Animate;
-import com.aldebaran.qi.sdk.object.actuation.Animation;
-import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.github.wihoho.Trainer;
 
 import java.io.IOException;
@@ -44,7 +33,7 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
     //the list values in the List of type hero
     List<Persona> peopleList;
     public static Trainer trainer;
-
+    private boolean isGameMode = false;
     //activity context 
     Context context;
 
@@ -52,13 +41,14 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
     int resource;
 
     //constructor initializing the values 
-    public MyListAdapter(Context context, int resource, List<Persona> peopleList, Trainer trainer) {
+    public MyListAdapter(Context context, int resource, List<Persona> peopleList, Trainer trainer, boolean isGameMode) {
         //arrayAdapter = new ArrayAdapter<Persona>(context, resource, peopleList);
         super(context, resource, peopleList);
         this.context = context;
         this.resource = resource;
         this.peopleList = peopleList;
         this.trainer = trainer;
+        this.isGameMode = isGameMode;
     }
 
     //this will return the ListView Item as a View
@@ -107,14 +97,23 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
                 //we are passing the position which is to be removed in the method
                 myAppID = p.getId();
                 System.out.println("MYAPP" + myAppID);
-
+                if(!isGameMode)
                 //TODO//startWeb(view,p);
                 startProfile(view,p.getName());
+                else startGameProfile(view,p);
             }
         });
 
         //finally returning the view
         return view;
+    }
+
+    public void startGameProfile(View view,Persona paziente) {
+        Intent intent = new Intent(context, GameProfileActivity.class);
+        System.out.println("start Gameprofile");
+        GameProfileActivity.name = paziente.getName();
+        GameProfileActivity.idPaziente = String.valueOf(paziente.getId());
+        context.startActivity(intent);
     }
 
     //TODO

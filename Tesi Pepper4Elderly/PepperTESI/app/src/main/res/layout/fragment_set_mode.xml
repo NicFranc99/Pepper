@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -18,78 +19,135 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Button
-        android:id="@+id/button_setup_mode"
-        android:layout_width="389dp"
-        android:layout_height="362dp"
-        android:layout_margin="10dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/white"
-        android:drawableTop="@drawable/ic_icn_setupmode"
-        android:text="@string/setup_mode_button"
-        android:textColor="@color/defaultcolor"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        android:fontFamily="@font/verdanab"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/separator"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_text"
-        app:layout_constraintVertical_bias="0.426" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp">
 
-    <Button
-        android:id="@+id/button_production_mode"
-        android:layout_width="389dp"
-        android:layout_height="362dp"
-        android:layout_margin="10dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/white"
-        android:drawableTop="@drawable/ic_icn_productionmode"
-        android:text="@string/production_mode_button"
-        android:textColor="@color/defaultcolor"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        android:fontFamily="@font/verdanab"
-        app:layout_constraintBottom_toBottomOf="@+id/button_setup_mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/separator"
-        app:layout_constraintTop_toTopOf="@+id/button_setup_mode"
-        app:layout_constraintVertical_bias="0.426" />
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="380dp">
 
-    <ImageView
-        android:id="@+id/separator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/ic_separation_menu"
-        android:textAllCaps="false"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/back_button"
-        android:layout_width="56dp"
-        android:layout_height="71dp"
-        android:layout_marginStart="64dp"
-        android:background="@null"
-        android:gravity="fill"
-        android:includeFontPadding="false"
-        android:paddingStart="0dp"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
-        android:visibility="gone"
-        android:textAllCaps="false"
-        android:textSize="60sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/separator2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_separation_menu"
+                    android:textAllCaps="false"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:translationX="858dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/back_button"
+                    android:layout_width="56dp"
+                    android:layout_height="71dp"
+                    android:layout_marginStart="64dp"
+                    android:background="@null"
+                    android:gravity="fill"
+                    android:includeFontPadding="false"
+                    android:paddingStart="0dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:textAllCaps="false"
+                    android:textSize="60sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/separator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_separation_menu"
+                    android:textAllCaps="false"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:translationX="421dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/button_setup_mode"
+                    android:layout_width="389dp"
+                    android:layout_height="362dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/ic_icn_setupmode"
+                    android:fontFamily="@font/verdanab"
+                    android:text="@string/setup_mode_button"
+                    android:textAllCaps="false"
+                    android:textColor="@color/defaultcolor"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/separator"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/main_text"
+                    app:layout_constraintVertical_bias="0.426" />
+
+                <Button
+                    android:id="@+id/button_production_mode"
+                    android:layout_width="389dp"
+                    android:layout_height="362dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/ic_icn_productionmode"
+                    android:fontFamily="@font/verdanab"
+                    android:text="@string/production_mode_button"
+                    android:textAllCaps="false"
+                    android:textColor="#039BE5"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_setup_mode"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/separator"
+                    app:layout_constraintTop_toTopOf="@+id/button_setup_mode"
+                    app:layout_constraintVertical_bias="0.426" />
+
+                <Button
+                    android:id="@+id/game_mode_button"
+                    android:layout_width="389dp"
+                    android:layout_height="362dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/ic_icn_gamemode"
+                    android:fontFamily="@font/verdanab"
+                    android:text="@string/game_mode_button"
+                    android:textAllCaps="false"
+                    android:textColor="#039BE5"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_setup_mode"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/separator"
+                    app:layout_constraintTop_toTopOf="@+id/button_setup_mode"
+                    app:layout_constraintVertical_bias="0.426" />
+            </LinearLayout>
+
+        </HorizontalScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

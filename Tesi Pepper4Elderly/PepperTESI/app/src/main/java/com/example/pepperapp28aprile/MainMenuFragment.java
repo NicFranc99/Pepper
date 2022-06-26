@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
@@ -55,15 +56,23 @@ public class MainMenuFragment extends Fragment {
     private static final String TAG = "MSI_MainMenuFragment";
     private MainActivity ma;
     private Trainer trainer;
-
+    private boolean isGameMode = false;
     private ArrayList<Persona> peopleList;
     public static ListView listView;
+
+    MainMenuFragment(){
+    }
+
+    MainMenuFragment(boolean isGameMode){
+        this.isGameMode = isGameMode;
+    }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
         this.ma = (MainActivity) getActivity();
         //ma.status.reset();
 
+        if(!isGameMode)
         SayBuilder.with(MainActivity.qiContext)
                 .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!")
                 .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
@@ -73,6 +82,15 @@ public class MainMenuFragment extends Fragment {
             return say.async().run();
         });
 
+        else
+            SayBuilder.with(MainActivity.qiContext)
+                    .withText("Da questo menù puoi cliccare sulla tua foto per giocare ai tuoi giochi preferiti!")
+                    .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
+                    .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                    .buildAsync().andThenCompose(say -> {
+                        Log.d(TAG, "Say started : " + "text");
+                        return say.async().run();
+                    });
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -112,14 +130,16 @@ public class MainMenuFragment extends Fragment {
             System.out.println("Erroreeeee");
             e.printStackTrace();
         }
+        if(isGameMode)
         mergePeopleListInDatabase(peopleList);
+        else
         addestra(peopleList);
 
 
         //View customList = inflater.inflate(R.layout.custom_list, container, false);
 
-        GridView gridview = (GridView) fragmentLayout.findViewById(R.id.gridview);
-        gridview.setAdapter(new MyListAdapter(getActivity(),R.layout.custom_list, peopleList,trainer));
+            GridView gridview = (GridView) fragmentLayout.findViewById(R.id.gridview);
+            gridview.setAdapter(new MyListAdapter(getActivity(),R.layout.custom_list, peopleList,trainer,isGameMode));
 
         return fragmentLayout;
     }

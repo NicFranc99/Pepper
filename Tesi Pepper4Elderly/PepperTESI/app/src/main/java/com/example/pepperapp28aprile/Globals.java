@@ -15,4 +15,5 @@ public class Globals {
     public static String WebActivity = "WebActivity";
     public static String CheckMattutino = "CheckMattutino";
     public static String ProfileActivity = "ProfileActivity";
+    public static String GameProfile = "GameProfile";
 }

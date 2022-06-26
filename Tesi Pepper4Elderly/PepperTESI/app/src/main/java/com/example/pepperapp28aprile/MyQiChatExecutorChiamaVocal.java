@@ -23,6 +23,7 @@ class MyQiChatExecutorChiamaVocal extends BaseQiChatExecutor {
         switch (params.get(0)){
             case "chiamata" : {
                 ProfileActivity.startWeb = params.get(1);
+                GameProfileActivity.startWeb = params.get(1);
                 System.out.println("chiamata" + params.get(1));
                 break;
             }

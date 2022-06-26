@@ -8,24 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class SetModeFragment extends Fragment {
@@ -68,6 +55,16 @@ public class SetModeFragment extends Fragment {
             }
         });
 
+
+        Button btn3 = fragmentLayout.findViewById(R.id.game_mode_button);
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startGame();
+            }
+        });
+
         return fragmentLayout;
     }
 
@@ -83,4 +80,5 @@ public class SetModeFragment extends Fragment {
         ma.setFragment(new MainMenuFragment());
     }
 
+    public void startGame(){ma.setFragment(new MainMenuFragment(true));}
 }
