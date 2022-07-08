@@ -180,8 +180,7 @@ public class MainMenuFragment extends Fragment {
                     @Override
                     public void onDataSuccess(Persona paziente) {
                         // Util.stampaLogDati(paziente);
-                        System.out.println(paziente.getName());
-                        System.out.println(paziente.getSurname());
+                        System.out.println("Paziente: " + paziente.getName() + " " + paziente.getSurname() + " trovato");
                     }
 
                     @Override
@@ -191,7 +190,17 @@ public class MainMenuFragment extends Fragment {
 
                     @Override
                     public void notFoundUser() {
-                        Toast.makeText(getContext(), "Non ho trovato il paziente " + paziente.getName() + ", devo aggiungerlo nel Db FIREBASE", Toast.LENGTH_LONG).show();
+                        new DataManager("pazienti", paziente, new DataManager.onSaveDataListener() {
+                            @Override
+                            public void onDataSuccess(Persona p) {
+                                System.out.println(paziente.getName() + " " + paziente.getSurname() + "Aggiunto con successo!!");
+                            }
+
+                            @Override
+                            public void onDataFailed() {
+                                System.out.println("Errore durante il salvataggio di: " + paziente.getName() + " " + paziente.getSurname());
+                            }
+                        });
                     }
                 });
             }

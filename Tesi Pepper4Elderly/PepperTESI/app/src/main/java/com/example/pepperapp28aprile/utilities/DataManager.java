@@ -9,6 +9,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class DataManager {
     public interface onDownloadDataListener {
         /**
@@ -43,36 +47,67 @@ public class DataManager {
         void onDataFailed();
 
     }
+
+    public interface onSaveDataListener {
+        /**
+         * Salvataggio di un paziente riuscito con successo!
+         *
+         * @param p Persona
+         */
+
+        void onDataSuccess(Persona p);
+
+        /**
+         * Salvataggio non riuscito per qualche strano errore
+         */
+        void onDataFailed();
+
+    }
     public onDownloadDataListener downloadDataListener;
     private FirebaseDatabase db;
     private DatabaseReference databaseReference;
     private String path;
     private boolean pazienteTrovato = false;
-
+    private onSaveDataListener onSaveDataListener;
 
     public DataManager(String path,int id,onDownloadDataListener listener){
         db = FirebaseDatabase.getInstance();
         this.path = path;
         this.downloadDataListener = listener;
         databaseReference = db.getReference(path);
-        //getCancellamiById("-MXs9cz_FkJUpa7DbpEv");
-        getCancellamiById(id);
+        getPazienteById(id);
     }
 
-    public void getCancellamiById(int id){
-        databaseReference.addValueEventListener(new ValueEventListener() {
+    public DataManager(String path,Persona p,onSaveDataListener listener){
+        db = FirebaseDatabase.getInstance();
+        this.path = path;
+        this.onSaveDataListener = listener;
+        databaseReference = db.getReference(path);
+        savePaziente(p);
+    }
+
+    public void savePaziente(Persona p){
+                // inside the method of on Data change we are setting
+                // our object class to our database reference.
+                // data base reference will sends data to firebase.
+                databaseReference.child(String.valueOf(p.getId())).setValue(p);
+                // after adding this data we are showing toast message.
+                onSaveDataListener.onDataSuccess(p);
+
+    }
+
+    public void getPazienteById(int id){
+        databaseReference.child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot nodo: dataSnapshot.getChildren()) {
-                    if(nodo.getKey().equals(id)){
-                        pazienteTrovato = true;
-                        String nome = nodo.child("nome").getValue(String.class);
-                        String cognome = nodo.child("cognome").getValue(String.class);
-                        downloadDataListener.onDataSuccess(new Persona(id,nome,cognome));
-                    }
-                    // do what you want with key and value
+                if(dataSnapshot.exists()) {
+                    pazienteTrovato = true;
+                    String nome = dataSnapshot.child("name").getValue(String.class);
+                    String cognome = dataSnapshot.child("surname").getValue(String.class);
+                    String image = dataSnapshot.child("image").getValue(String.class);
+                    downloadDataListener.onDataSuccess(new Persona(image,id,nome,cognome));
                 }
-                if(!pazienteTrovato)
+                else
                     downloadDataListener.notFoundUser();
             }
 
