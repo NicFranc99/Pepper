@@ -27,7 +27,6 @@ import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.example.pepperapp28aprile.models.Emergency;
-import com.example.pepperapp28aprile.utilities.DataManager;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.JsonElement;
@@ -58,7 +57,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private FirebaseDatabase firebaseDatabase;
     public static boolean chiamataGestita;
     public static QiContext qiContext;
-    public static String stringaDaCancellare;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

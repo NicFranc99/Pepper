@@ -122,10 +122,13 @@ public class MainMenuFragment extends Fragment {
                 String img = rootelem.get("propic").getAsString();
                 String name = rootelem.get("name").getAsString();
                 String surname = rootelem.get("surname").getAsString();
+                String cittaNascita = rootelem.get("place").getAsString();
+                String dataNascita = rootelem.get("birth").getAsString();
+                String gender = (rootelem.get("surname").getAsString() == "2") ? "F" : "M";
+                int room = rootelem.get("room").getAsInt();
                 int id = rootelem.get("id").getAsInt();
                 ArrayList<String> training = null;
-                peopleList.add(new Persona(img, id, name, surname));
-
+                peopleList.add(new Persona(img, id, name, surname,cittaNascita,dataNascita,gender,room));
             }
         } catch (Exception e) {
             System.out.println("Erroreeeee");
