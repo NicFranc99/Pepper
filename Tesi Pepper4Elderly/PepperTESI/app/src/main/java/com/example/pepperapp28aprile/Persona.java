@@ -19,6 +19,13 @@ public class Persona {
         this.training = training;
     }
 
+    public Persona(){
+        this.image = new String();
+        this.id = 0;
+        this.name = new String();
+        this.surname = new String();
+    }
+
     public Persona(String image, int id, String name, String status) {
         this.image = image;
         this.id = id;

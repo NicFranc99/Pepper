@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,7 +72,7 @@ public class MainMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         this.ma = (MainActivity) getActivity();
         //ma.status.reset();
-
+        Globals.isGameMode = this.isGameMode;
         if(!isGameMode)
         SayBuilder.with(MainActivity.qiContext)
                 .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!")
@@ -174,6 +175,11 @@ public class MainMenuFragment extends Fragment {
         }
     }
 
+    /**
+     * Prende in ingresso la lista dei pazienti che sono presenti nel Php Database e li mergia nel DB Firebase.
+     * Se sono già presenti non fa nulla, altrimenti li aggiunge.
+     * @param peopleList
+     */
     private void mergePeopleListInDatabase(ArrayList<Persona> peopleList){
         for(Persona paziente : peopleList){
                 new DataManager("pazienti",paziente.getId(),new DataManager.onDownloadDataListener() {

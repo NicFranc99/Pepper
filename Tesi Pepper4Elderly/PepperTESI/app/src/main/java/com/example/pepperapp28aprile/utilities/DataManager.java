@@ -67,7 +67,6 @@ public class DataManager {
     private FirebaseDatabase db;
     private DatabaseReference databaseReference;
     private String path;
-    private boolean pazienteTrovato = false;
     private onSaveDataListener onSaveDataListener;
 
     public DataManager(String path,int id,onDownloadDataListener listener){
@@ -86,29 +85,57 @@ public class DataManager {
         savePaziente(p);
     }
 
+    /**
+     * Salva un oggetto della classe persona nel Database Firebase (lasciando al provider la liberà di definire un id per il nodo aggiunto).
+     * Il nodo lo si recupera tramite attributo "id"
+     * @param p Persona da aggiungere al database Firebase
+     */
     public void savePaziente(Persona p){
                 // inside the method of on Data change we are setting
                 // our object class to our database reference.
                 // data base reference will sends data to firebase.
-                databaseReference.child(String.valueOf(p.getId())).setValue(p);
-                // after adding this data we are showing toast message.
+                databaseReference.push().setValue(p);
+
+                //databaseReference.child(String.valueOf(p.getId())).setValue(p);
+
+        // after adding this data we are showing toast message.
                 onSaveDataListener.onDataSuccess(p);
 
     }
 
+    /***
+     * Questo metodo prende un id e trova il paziente nel Firebase DB.
+     * Se lo trova lo restituisce altrimenti lo aggiunge nel DB.
+     * @param id del paziente da cercare nel Firebase Database.
+     */
     public void getPazienteById(int id){
-        databaseReference.child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
+        /*databaseReference.child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    pazienteTrovato = true;
-                    String nome = dataSnapshot.child("name").getValue(String.class);
-                    String cognome = dataSnapshot.child("surname").getValue(String.class);
-                    String image = dataSnapshot.child("image").getValue(String.class);
-                    downloadDataListener.onDataSuccess(new Persona(image,id,nome,cognome));
-                }
+                if(dataSnapshot.exists())
+                    downloadDataListener.onDataSuccess(dataSnapshot.getValue(Persona.class));
                 else
                     downloadDataListener.notFoundUser();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+
+        databaseReference.orderByChild("id").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot nodo : dataSnapshot.getChildren()){
+                    System.out.println(nodo);
+                    if(nodo.child("id").getValue(Integer.class) != null)
+                        if(nodo.child("id").getValue(Integer.class) == id){
+                            downloadDataListener.onDataSuccess(nodo.getValue(Persona.class));
+                            return;
+                        }
+                }
+                downloadDataListener.notFoundUser();
             }
 
             @Override

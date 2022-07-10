@@ -70,7 +70,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public static String idPaziente;
     public static boolean tornaNav;
     private QiContext qiContext;
-    public static String startWeb;
+    public static String viewGameList;
     //private static boolean doButtonOperationImpegnato;
 
     @Override
@@ -119,12 +119,13 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         // Create a new say action.
 
             Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context
-                    .withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla sua foto del gioco per cominciare!") // Set the text to say.
+                    .withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla foto del gioco per cominciare!") // Set the text to say.
                     .build(); // Build the say action.
         ciaoSonoPepper.run();
 
-        startTopic(R.raw.file, endReason -> {
-            callByVoice(null, startWeb);
+        //Carico il file per ascoltare ciò che dice il paziente con pepper.
+        startTopic(R.raw.gameslistener, endReason -> {
+            viewGameListByVoice(null, viewGameList);
         });
 
         Animation animazioneSaluto = AnimationBuilder.with(qiContext)
@@ -199,7 +200,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         finish();
     }
 
-    public void callByVoice(View view, String pepperString) {
+    public void viewGameListByVoice(View view, String pepperString) {
 
         System.out.println(getPeopleList());
         for(Persona p: getPeopleList())
