@@ -2,14 +2,19 @@ package com.example.pepperapp28aprile.models;
 
 import com.example.pepperapp28aprile.Persona;
 
+import java.util.ArrayList;
+
 public class Categoria {
-    private final int i;
+    private  int i;
+    private String categoryTitle;
+    private int imageDrawable;
+
 
     public Persona.Game getGame() {
         return game;
     }
 
-    private final Persona.Game game;
+    private  Persona.Game game;
 
     public int getPosition() {
         return i;
@@ -18,6 +23,19 @@ public class Categoria {
     public Categoria(Persona.Game game, int position) {
         this.game = game;
         this.i = position;
+    }
+
+    public Categoria(String categoryTitle,int imageDrawable){
+        this.categoryTitle = categoryTitle;
+        this.imageDrawable = imageDrawable;
+    }
+
+    public int getImageDrawable(){
+        return imageDrawable;
+    }
+
+    public String getCategoryTitle(){
+        return categoryTitle;
     }
 
     public String getNomeCategoia() {

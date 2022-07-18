@@ -12,6 +12,15 @@
     <color name="defaultcolor">#30ACEC</color>
     <color name="defaultext">#0D6591</color>
 
+    <color name="category_focused_stroke">#ffffff</color>
+    <color name="category_no_focused">#FFBE88</color>
+    <color name="category_focused">#FF6F00</color>
+    <color name="accent">#25393F</color>
+    <color name="background">#FFF176</color>
+    <color name="categorycolor">#FFBE88</color>
+    <color name="textColor">#25393F</color>
+    <color name="txthint">#B37A8D93</color>
+
     <color name="colorSpeechBar">#00d7ff</color>
     <color name="colorSpeechBarDraker">#00A1EC</color>
 

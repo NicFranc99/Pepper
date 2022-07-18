@@ -135,7 +135,7 @@ public class MainMenuFragment extends Fragment {
             e.printStackTrace();
         }
         if(isGameMode)
-        mergePeopleListInDatabase(peopleList);
+            mergePeopleListInDatabase(peopleList);
         else
         addestra(peopleList);
 
@@ -185,36 +185,33 @@ public class MainMenuFragment extends Fragment {
      */
     private void mergePeopleListInDatabase(ArrayList<Persona> peopleList){
         for(Persona paziente : peopleList){
-                new DataManager("pazienti",paziente.getId(),new DataManager.onDownloadDataListener() {
+                 new DataManager(getContext(),"pazienti",paziente,new DataManager.onSaveDataListener() {
                     @Override
                     public void onDataSuccess(Persona paziente) {
-                        // Util.stampaLogDati(paziente);
-                        System.out.println("Paziente: " + paziente.getName() + " " + paziente.getSurname() + " trovato");
+                        Toast.makeText(getContext(), "Ho aggiunto: " + paziente.getName(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onDataFailed() {
-                        Toast.makeText(getContext(), "Qualcosa è andato storto, contattare l'amministrazione..", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Il paziente è gia presente!", Toast.LENGTH_SHORT).show();
                     }
 
-                    @Override
+                  /*  @Override
                     public void notFoundUser() {
                         new DataManager("pazienti", paziente, new DataManager.onSaveDataListener() {
                             @Override
                             public void onDataSuccess(Persona p) {
-                                System.out.println(paziente.getName() + " " + paziente.getSurname() + "Aggiunto con successo!!");
                             }
 
                             @Override
                             public void onDataFailed() {
-                                System.out.println("Errore durante il salvataggio di: " + paziente.getName() + " " + paziente.getSurname());
+                                Toast.makeText(getContext(), "Qualcosa è andato storto, contattare l'amministrazione..", Toast.LENGTH_SHORT).show();
                             }
                         });
-                    }
+                    }*/
                 });
             }
         }
-
 
     private void addestra(ArrayList<Persona> peopleList){
         try{

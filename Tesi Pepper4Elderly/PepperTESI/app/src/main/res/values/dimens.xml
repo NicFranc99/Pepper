@@ -30,4 +30,16 @@
     <dimen name="text_button_height">64dp</dimen>
     <dimen name="progress_bar_height">32dp</dimen>
     <dimen name="switch_width">48dp</dimen>
+    <dimen name="RADIUS_ANGLE_CATEGORY">20dp</dimen>
+    <dimen name="DIM_TEXT_CAT">30sp</dimen>
+    <dimen name="DIM_TEXT_CAT2">25sp</dimen>
+    <dimen name="DIM_TEXT_CAT3">20sp</dimen>
+    <dimen name="IMAGE_PADDING">20dp</dimen>
+    <dimen name="CARD_WIDTH">200dp</dimen>
+    <dimen name="CARD_HEIGHT">150dp</dimen>
+    <dimen name="marginTop">180dp</dimen>
+    <dimen name="padding_title_old">15dp</dimen>
+    <dimen name="DIM_TEXT_WELCOME">20sp</dimen>
+    <dimen name="DIM_TEXT_PADDING">5dp</dimen>
+    <dimen name="RADIUS_ANGLE_BUTTON">10dp</dimen>
 </resources>

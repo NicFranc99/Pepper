@@ -1,0 +1,61 @@
+<androidx.leanback.widget.TitleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/browse_title_group"
+    style="?attr/browseTitleIconStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.leanback.widget.TitleView
+            android:id="@+id/exit"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/exittitle"
+            android:clickable="true"
+            android:nextFocusRight="@+id/idicon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.leanback.widget.TitleView>
+
+        <LinearLayout
+            android:id="@+id/idicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icontitle"
+            android:focusable="false"
+            android:nextFocusLeft="@+id/exit"
+            android:nextFocusRight="@+id/exit"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_title_old"
+            android:paddingEnd="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/exit"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/txtname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Benvenuto MARIO"
+                android:textSize="@dimen/DIM_TEXT_WELCOME" />
+
+            <androidx.leanback.widget.TitleView
+                android:id="@+id/imgsenior"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/grandfather" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.leanback.widget.TitleView>

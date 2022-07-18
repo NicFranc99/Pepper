@@ -1,0 +1,58 @@
+{
+  "appartenenza" : {
+    "descGioco" : "Salve %nomeutente% \nIn questo esercizio ti mostreremo di volta in volta una parola, dovrai indicare se la parola appartiene o meno alla categoria %categoria%. ",
+    "inputType": "SELEZIONE,VOCALE"
+  },
+  "categorizzazione" : {
+    "descGioco" : "Salve %nomeutente% \nIn questo esercizio ti mostreremo  un nome di una persona o un oggetto, e 4 opzioni che indicano diverse categorie, dovrai indicare a quale categoria appartiene la parola.",
+    "inputType": "SELEZIONE,VOCALE"
+  },
+  "combinazionilettere" : {
+    "descGioco" : "Salve %nomeutente% \nDurante l’esercizio di combinazioni lettere  dovrai cercare di formare il maggior numero di parole con le lettere presentate .",
+    "inputType": "VOCALE"
+  },
+  "esistenzaparole" : {
+    "descGioco" : "Salve %nomeutente% \nDurante questo esercizio ti sará mostrata una parola, dovrai dirci se quella parola ESISTE oppure NON ESISTE.",
+    "inputType": "SELEZIONE,VOCALE"
+  },
+  "finaliparole" : {
+    "descGioco" : "Salve %nomeutente% \nL’esercizio di finali parole consiste nel presentarti l'inizio di una parola, e tu dovrai dirmi come termina ad esempio “diva” sarà l'inizio della parola “divano” oppure “divario”.",
+    "inputType": "VOCALE"
+  },
+  "fluenzefonologiche" : {
+    "descGioco" : "Salve %nomeutente% \nIn questo gioco ti sará mostrata una lettera, tu dovrai indicare quante piú parole che ti vengono in mente che iniziano con quella lettera.",
+    "inputType": "VOCALE"
+  },
+  "fluenzesemantiche" : {
+    "descGioco" : "Salve %nomeutente% \nIn questo gioco ti mostreremo una categoria e dovrai indicare quante piú parole possibili che ti vengono in mente inerente alla categoria mostrata.",
+    "inputType": "VOCALE"
+  },
+  "fluenzeverbali" : {
+    "descGioco" : "Salve %nomeutente% \nIn questo esercizio ti verra mostrata di volta in volta una categoria, dovrai indicare quante piú parole ti vengono in mente inerente a quella categoria.",
+    "inputType": "VOCALE"
+  },
+  "immaginiEparole" : {
+    "descGioco" : "Salve %nomeutente% \nIn questo gioco ti verrano mostrate 4 immagini, e una parola mancante, dovrai indovinare la parola mancante che associa le 4 immagini.",
+    "inputType": "SELEZIONE,VOCALE"
+  },
+  "letteremancanti" : {
+    "descGioco" : "Salve %nomeutente% \nIn questo gioco ti verrano mostrate delle parole con delle lettere mancanti ed una categoria di riferimento, dovrai indicare quali sono le lettere mancanti.",
+    "inputType": "SELEZIONE,VOCALE"
+  },
+  "mesi" : {
+    "descGioco" : "Salve %nomeutente% \nIn questo gioco ci saranno mesi dell'anno disposti casualmente, il tuo compito sará ordinarli in maniera corretta.",
+    "inputType": "SELEZIONE,VOCALE"
+  },
+  "musica" : {
+    "descGioco" : "Salve %nomeutente% \nCon il gioco musica ti faremo ascoltare 30 secondi di una canzone, il tuo compito sará riconoscere chi é l'autore di quella canzone tra le opzioni mostrate.",
+    "inputType": "SELEZIONE,VOCALE"
+  },
+  "racconti" : {
+    "descGioco" : "Salve %nomeutente% \nIn questo esercizio ti racconteremo una breve storia, e una volta terminata ti faremo delle domande inerenti al racconto e dovrai rispondere.",
+    "inputType": "SELEZIONE,VOCALE"
+  },
+  "volti" : {
+    "descGioco" : "Salve %nomeutente% \nTi mostreremo dei volti, il tuo compito sará riconoscere il personaggio e selezionare il nome corretto tra le varie risposte.",
+    "inputType": "SELEZIONE,VOCALE"
+  }
+}

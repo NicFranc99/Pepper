@@ -1,0 +1,150 @@
+package com.example.pepperapp28aprile;
+
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+
+import com.example.pepperapp28aprile.models.Categoria;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+
+//we need to extend the ArrayAdapter class as we are building an adapter
+public class GameListAdapter extends ArrayAdapter<Persona.Game> {
+
+    //the list values in the List of type hero
+    public static boolean tornaNav;
+    private Persona paziente;
+    //activity context
+    Context context;
+
+    //the layout resource file for the list items
+    int resource;
+
+    //constructor initializing the values
+    public GameListAdapter(Context context, int resource,Persona p) {
+        super(context, resource, p.getEsercizi());
+        this.context = context;
+        this.resource = resource;
+        this.paziente = p;
+    }
+
+    //this will return the ListView Item as a View
+    @NonNull
+    @Override
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+        //we need to get the view of the xml for our list item
+        //And for this we need a layoutinflater
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+
+        //getting the view
+        View view = layoutInflater.inflate(resource, null, false);      //era parent, ora null
+
+        //getting the view elements of the list from the view
+       // ImageView imageView = view.findViewById(R.id.imageView);
+        TextView textViewName = view.findViewById(R.id.textViewName);
+        RelativeLayout rl = view.findViewById(R.id.profiloSingolo);
+        //TextView textViewTeam = view.findViewById(R.id.textViewTeam);
+        ImageView callbutton = view.findViewById(R.id.callbutton);
+
+        //getting the hero of the specified position
+        Persona.Game game = paziente.getEsercizi().get(position);
+
+        //adding values to the list item
+       /* Bitmap img;
+        try {
+            //adding values to the list item
+            img = BitmapFactory.decodeStream((InputStream) new URL("data:image/jpeg;base64,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").getContent());
+            callbutton.setImageBitmap(img);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        } */
+
+        callbutton.setImageResource(game.getNameIcon());
+
+
+        textViewName.setText(game.getTitleGame());
+        //textViewTeam.setText(p.getStatus());
+
+        //adding a click listener to the button to remove item from the list
+        callbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //we will call this method to remove the selected value from the list
+                //we are passing the position which is to be removed in the method 
+                getGameClicked(position,view); //PARTE LA CHIAMATA: DA FARE
+            }
+        });
+
+        //finally returning the view
+        return view;
+    }
+
+    //this method will remove the item from the list 
+    private void getGameClicked(final int position,View view) {
+        //Creating an alert dialog to confirm the deletion
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
+        builder.setMessage("sei sicuro di voler giocare a " + '"' + paziente.getEsercizi().get(position).getTitleGame() + '"' + "?");
+        //if the response is positive in the alert
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+        //removing the item
+
+
+                Intent game = new Intent(getContext(), GameActivity.class);
+                startGameActivity(view,paziente.getEsercizi().get(position),position);
+
+        //reloading the list
+        notifyDataSetChanged();
+        }
+        });
+
+       //if response is negative nothing is being done
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        //creating and displaying the alert dialog*/
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public void startGameActivity(View view,Persona.Game game,int position) {
+        WebActivity.tornaNav = tornaNav;
+        Intent gameActivity = new Intent(this.getContext(), GameActivity.class);
+        Categoria category = new Categoria(game,position);
+        gameActivity.putExtra("item", category.getPosition());
+        gameActivity.putExtra("paziente",paziente);
+        /*Bundle b = new Bundle();
+        b.putInt("id", 1); //Your id
+        b.putInt("type", 1); */
+        //intent.putExtras(b);
+        context.startActivity(gameActivity);
+    }
+}

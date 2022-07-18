@@ -4,6 +4,7 @@ package com.example.pepperapp28aprile;
 import android.content.Context;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class Persona {
+public class Persona implements Serializable {
 
     private String image;
     private int id;
@@ -45,6 +46,7 @@ public class Persona {
         provincia = new String();
         sesso = new String();
         paziente = this;
+        esercizi = new ArrayList<Game>();
     }
 
     public Persona(String image, int id, String name, String status, ArrayList<String> training) {
@@ -61,11 +63,19 @@ public class Persona {
         this.name = name;
         surname = status;
         training = new ArrayList<>();
+        esercizi = new ArrayList<Game>();
         this.citta = cittaNascita;
         this.dataNascita = dataNascita;
         this.numeroLetto = room;
         this.sesso = gender;
         this.anni = getAnni(dataNascita);
+    }
+
+    public static Persona getIstance() {
+        if (paziente == null) {
+            paziente = new Persona();
+        }
+        return paziente;
     }
 
     public Persona(String image, int id, String name, String status) {
@@ -156,7 +166,7 @@ public class Persona {
         return complete;
     }
 
-    public abstract static class Game {
+    public abstract static class Game implements Serializable{
 
         public enum TypeInputGame {
             SELEZIONE, SCRITTURA, VOCALE
@@ -181,8 +191,8 @@ public class Persona {
             return descrizioneGioco;
         }
 
-        public void setDescrizioneGioco(String descrizione) {
-            String d = descrizione.replace("%nomeutente%", paziente.name).replace("%categoria%",
+        public void setDescrizioneGioco(String descrizione,Persona paziente) {
+            String d = descrizione.replace("%nomeutente%", paziente.getName()).replace("%categoria%",
                     titleGame.toUpperCase());
             this.descrizioneGioco = d;
         }
@@ -239,7 +249,7 @@ public class Persona {
             this.domande.add(domanda);
         }
 
-        public static class Domanda {
+        public static class Domanda implements Serializable{
             public List<String> getLparole() {
                 return lparole;
             }
@@ -342,7 +352,7 @@ public class Persona {
     /**
      * gioco Appartenenza
      */
-    public static class Appartenenza extends Game {
+    public static class Appartenenza extends Game implements Serializable{
 
         private final String titologioco;
 
@@ -390,7 +400,7 @@ public class Persona {
     /**
      * gioco categorizzazione
      */
-    public static class Categorizzazione extends Game {
+    public static class Categorizzazione extends Game implements Serializable{
         private final String titoloGioco;
         private final HashMap<String, String> domande = new HashMap<>();
 
@@ -440,7 +450,7 @@ public class Persona {
     /**
      * gioco combinazione lettere
      */
-    public static class CombinazioniLettere extends Game {
+    public static class CombinazioniLettere extends Game implements Serializable{
 
         public List<String> getLetter() {
             return letter;
@@ -469,7 +479,7 @@ public class Persona {
             setDomandaGioco(dom);
         }
     }
-    public static class EsistenzaParole extends Game {
+    public static class EsistenzaParole extends Game implements Serializable{
 
         private final List<String> parole = new ArrayList<>();
 
@@ -508,7 +518,7 @@ public class Persona {
         }
     }
 
-    public static class FinaliParole extends Game {
+    public static class FinaliParole extends Game implements Serializable{
 
         private final List<String> parole = new ArrayList<>();
         String titoloGioco;
@@ -531,7 +541,7 @@ public class Persona {
             setDomandaGioco(dom);
         }
     }
-    public static class FluenzeFonologiche extends Game {
+    public static class FluenzeFonologiche extends Game implements Serializable{
 
         private final String titoloGioco;
 
@@ -550,7 +560,7 @@ public class Persona {
         }
     }
 
-    public static class FluenzeSemantiche extends Game {
+    public static class FluenzeSemantiche extends Game implements Serializable{
 
         private final String titoloGioco;
         private String categoria;
@@ -578,7 +588,7 @@ public class Persona {
         }
     }
 
-    public static class FluenzeVerbali extends Game {
+    public static class FluenzeVerbali extends Game implements Serializable{
         private final String titoloGioco;
 
         private final List<String> parole = new ArrayList<>();
@@ -601,7 +611,7 @@ public class Persona {
             return parole;
         }
     }
-    public static class LettereMancanti extends Game {
+    public static class LettereMancanti extends Game implements Serializable{
 
         private final String titologioco;
         private final List<String> parole = new ArrayList<>();
@@ -708,7 +718,7 @@ public class Persona {
         }
     }
 
-    public static class Mesi extends Game {
+    public static class Mesi extends Game implements Serializable{
 
         public static class Domanda {
             private final List<String> risposteSbagliate = new ArrayList<>();
@@ -767,7 +777,7 @@ public class Persona {
 
         }
     }
-    public static class Musica extends Game {
+    public static class Musica extends Game implements Serializable{
         private final List<Musica.Domanda> listaDomande = new ArrayList<>();
 
         public List<Musica.Domanda> getListaDomande() {
@@ -800,7 +810,7 @@ public class Persona {
             super.setNameIcon(R.drawable.musica);
         }
 
-        public static class Domanda {
+        public static class Domanda implements Serializable{
             private final List<String> risposteSbagliate = new ArrayList<>();
             private String testoDomanda = "";
             private String urlMedia = "";
@@ -840,7 +850,7 @@ public class Persona {
 
         }
     }
-    public static class Racconti extends Game {
+    public static class Racconti extends Game implements Serializable{
         public List<Domanda> getListaDomande() {
             return listaDomande;
         }
@@ -892,7 +902,7 @@ public class Persona {
 
         // ++++++++++++++++++++++++++++++++
 
-        public static class Domanda {
+        public static class Domanda implements Serializable{
 
             private String testoDomanda = "";
             private String rispostaCorretta = "";
@@ -924,7 +934,7 @@ public class Persona {
         }
     }
 
-    public static class Volti extends Game {
+    public static class Volti extends Game implements Serializable{
 
         private final List<Volti.Domanda> listaDomande = new ArrayList<>();
         private String media = "";
@@ -968,7 +978,7 @@ public class Persona {
             this.media = media;
         }
 
-        public static class    Domanda {
+        public static class    Domanda implements Serializable{
             private final List<String> risposteSbagliate = new ArrayList<>();
             private String testoDomanda = "";
             private String rispostaCorretta = "";

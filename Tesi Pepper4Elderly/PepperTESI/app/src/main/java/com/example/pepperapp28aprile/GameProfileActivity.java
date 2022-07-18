@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -45,6 +46,7 @@ import com.example.pepperapp28aprile.R;
 import com.example.pepperapp28aprile.SectionsPagerAdapter;
 import com.example.pepperapp28aprile.WebActivity;
 import com.example.pepperapp28aprile.models.Emergency;
+import com.example.pepperapp28aprile.utilities.DataManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -86,7 +88,8 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
 
 
         PeopleListAdapter.tornaNav = tornaNav;
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+
+        SectionsPagerAdapterGames sectionsPagerAdapter = new SectionsPagerAdapterGames(this, getSupportFragmentManager(),idPaziente);
 
 
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -96,7 +99,6 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         tabs.setupWithViewPager(viewPager);
 
     }
-
 
     public void setFragment(Fragment fragment) {
 

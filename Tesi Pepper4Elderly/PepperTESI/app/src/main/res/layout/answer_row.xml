@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="2dp">
+
+
+    <Button
+        android:id="@+id/cardanswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/styleanswer"
+        android:elevation="1dp"
+        android:minHeight="50dp"
+        android:padding="@dimen/IMAGE_PADDING"
+        android:text="Button"
+        android:textSize="@dimen/DIM_TEXT_CAT2" />
+
+</RelativeLayout>

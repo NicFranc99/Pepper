@@ -94,6 +94,10 @@
             android:name=".GameProfileActivity"
             android:label="@string/title_game_activity_profile"
             android:theme="@style/ThemeBlue.NoActionBar" />
+        <activity
+            android:name=".GameActivity"
+            android:label="@string/title_game_activity"
+            android:theme="@style/ThemeBlue.NoActionBar" />
 
     </application>
 

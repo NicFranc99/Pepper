@@ -1,10 +1,70 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Base.Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="IconCardInfoAreaStyle" parent="Widget.Leanback.ImageCardView.InfoAreaStyle">
+        <item name="android:background">@color/categorycolor</item>
+    </style>
+    <style name="CategoryThemeComplete" parent="Theme.Leanback">
+
+        <item name="imageCardViewImageStyle">@style/CatCardImageStyle</item>
+        <item name="imageCardViewTitleStyle">@style/SingleLineCardTitleStyle</item>
+        <item name="imageCardViewInfoAreaStyle">@style/IconCardInfoAreaStyle</item>
+
+        <item name="rowHeaderStyle">@style/CustomRowHeaderStyle</item>
+        <item name="browseTitleViewLayout">@layout/title_view</item>
+
+        <item name="android:windowBackground">@color/background</item>
+        <item name="browseRowsMarginTop">@dimen/marginTop</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:listDivider">@drawable/divider</item>
+
+    </style>
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:background">@drawable/stylebuttonwithstate</item>
+        <item name="colorControlHighlight">@color/accent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:editTextStyle">@style/editTextStyle</item>
+    </style>
+    <style name="editTextStyle" parent="@style/Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:background">@drawable/edtextstate</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="backgroundTint">@color/accent</item>
+        <item name="android:textColorHint">@color/txthint</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+    </style>
+    <style name="CustomRowHeaderStyle" parent="Widget.Leanback.Row.Header">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/DIM_TEXT_CAT</item>
+    </style>
+    <style name="CatCardImageStyle" parent="Widget.Leanback.ImageCardView.ImageStyle">
+        <item name="android:layout_width">@dimen/CARD_WIDTH</item>
+        <item name="android:background">@color/categorycolor</item>
+        <item name="android:padding">@dimen/IMAGE_PADDING</item>
+
+    </style>
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/accent</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="Theme.AppCompat">
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="SingleLineCardTitleStyle" parent="Widget.Leanback.ImageCardView.TitleStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/DIM_TEXT_CAT</item>
     </style>
 
     <style name="ThemeBlue" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -48,5 +108,7 @@
         <item name="android:textSize">@dimen/text_size_hint</item>
     </style>
 
-
+    <style name="CharacterCardStyle" parent="Widget.Leanback.BaseCardViewStyle">
+        <item name="cardBackground">@null</item>
+    </style>
 </resources>
