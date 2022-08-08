@@ -2,9 +2,10 @@ package com.example.pepperapp28aprile.models;
 
 import com.example.pepperapp28aprile.Persona;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Categoria {
+public class Categoria implements Serializable {
     private  int i;
     private String categoryTitle;
     private int imageDrawable;

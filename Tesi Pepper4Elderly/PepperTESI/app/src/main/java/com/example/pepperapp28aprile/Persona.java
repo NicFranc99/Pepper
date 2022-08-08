@@ -4,6 +4,8 @@ package com.example.pepperapp28aprile;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.pepperapp28aprile.utilities.Util;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -330,7 +332,7 @@ public class Persona implements Serializable {
                 return positionRispostaEsatta;
             }
 
-         /*   public void checkDomandaOnline(Context c, String response, Util.RicercaParoleListener l) {
+           public void checkDomandaOnline(Context c, String response, Util.RicercaParoleListener l) {
 
                 Util.esistenzaParola(c, response, l);
 
@@ -338,9 +340,9 @@ public class Persona implements Serializable {
 
             public void checkDomandaSimiliarita(Context c, String category,String word, Util.SimilaritaParoleListener l) {
 
-                Util.similaritaParole(c, category,word, l);
+                Util.similaritaParole(c, category, word, l);
 
-            } */
+            }
 
             public boolean chekResponse(String rispostaData) {
 

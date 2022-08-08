@@ -14,7 +14,7 @@
         android:layout_marginTop="3dp"
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="3dp"
-        android:background="@drawable/styleanswer"
+        android:backgroundTint="@color/black"
         android:elevation="1dp"
         android:minHeight="50dp"
         android:padding="@dimen/IMAGE_PADDING"

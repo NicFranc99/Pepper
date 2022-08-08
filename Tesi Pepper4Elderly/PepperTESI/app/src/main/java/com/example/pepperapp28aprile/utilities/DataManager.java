@@ -1,10 +1,12 @@
 package com.example.pepperapp28aprile.utilities;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.pepperapp28aprile.Globals;
 import com.example.pepperapp28aprile.Persona;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -77,7 +79,7 @@ public class DataManager {
 
 
     public DataManager(Context c, Persona.Game game, RisultatiManager risultatiManager, onUploadDataListener l) {
-        String phat = "pazienti/" + Persona.getIstance().getId() + "/esercizi/"
+        String phat = "pazienti/" + Globals.idPaziente + "/esercizi/"
                 + game.getClass().getSimpleName().toLowerCase() + "/" + game.getSetIndexInCategory() + "/risultati";
 
         DatabaseReference dbUpdate = FirebaseDatabase.getInstance().getReference().child(phat);
@@ -200,6 +202,7 @@ public class DataManager {
                                     nodo.child("dataNascita").getValue(String.class),
                                     nodo.child("sesso").getValue(String.class),
                                     nodo.child("numeroLetto").getValue(Integer.class));
+                            Globals.idPaziente = nodo.getKey();
                             ArrayList<Persona.Game> listaGiochi = paziente.getEsercizi();
                             if (nodo.child("esercizi").getChildrenCount() != 0) {
                                 for (DataSnapshot exercise : nodo.child("esercizi").getChildren()) {

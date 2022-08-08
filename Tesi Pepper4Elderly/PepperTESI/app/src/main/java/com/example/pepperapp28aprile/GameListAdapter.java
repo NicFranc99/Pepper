@@ -141,10 +141,6 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
         Categoria category = new Categoria(game,position);
         gameActivity.putExtra("item", category.getPosition());
         gameActivity.putExtra("paziente",paziente);
-        /*Bundle b = new Bundle();
-        b.putInt("id", 1); //Your id
-        b.putInt("type", 1); */
-        //intent.putExtras(b);
         context.startActivity(gameActivity);
     }
 }

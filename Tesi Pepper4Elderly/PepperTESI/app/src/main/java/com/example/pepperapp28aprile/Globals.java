@@ -8,7 +8,7 @@ public class Globals {
     public static boolean arrivato;
     public static AvvisoFragmentProfile avviso;
     public static boolean isGameMode;
-
+    public static String idPaziente;
     public static String NowIsRunning;
 
     public static String MainActivity = "MainActivity";

@@ -5,43 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/viewanim"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/circlestyle"
-        android:elevation="5dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/idCourseRV"
-        app:layout_constraintStart_toStartOf="@+id/idCourseRV"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/wave"
-            android:layout_width="100dp"
-            android:layout_height="99dp"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/wavee" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/btnvocalinput"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/category_no_focused"
-            android:elevation="5dp"
-            android:padding="2dp"
-            android:visibility="visible"
-            app:contentPadding="20dp"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-            app:srcCompat="@drawable/microphone"
-            app:strokeColor="@color/category_focused_stroke"
-            app:strokeWidth="4dp">
-
-
-        </com.google.android.material.imageview.ShapeableImageView>
-    </RelativeLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -57,13 +20,13 @@
         <TextView
             android:id="@+id/testoDomanda"
             android:layout_width="0dp"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:text="Frutti estivi"
-            android:textColor="@color/black"
             android:textSize="@dimen/DIM_TEXT_CAT2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -95,15 +58,19 @@
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="Albicocca"
-            android:textSize="@dimen/DIM_TEXT_CAT"
             android:textColor="@color/black"
+            android:textSize="@dimen/DIM_TEXT_CAT"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/testoDomanda" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idCourseRV"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
-    <com.airbnb.lottie.LottieAnimationView
+    <!--<com.airbnb.lottie.LottieAnimationView
         android:id="@+id/finishanimations2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.581"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/robot" />
+        app:lottie_rawRes="@raw/robot" /> -->
 
     <Button
         android:id="@+id/btnMenuPrincipale2"
@@ -77,11 +77,13 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="Tempo Medio"
+            android:textColor="@color/black"
             android:textSize="@dimen/DIM_TEXT_CAT2" />
 
         <TextView
             android:id="@+id/txtTempoMedio"
             android:layout_width="match_parent"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:gravity="center"
@@ -108,6 +110,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:padding="8dp"
             android:text="Tempo Totale"
             android:textSize="@dimen/DIM_TEXT_CAT2" />
@@ -116,6 +119,7 @@
             android:id="@+id/txtTempoTotale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_margin="8dp"
             android:gravity="center"
             android:text="30min 5sec"

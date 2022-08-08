@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:background="@drawable/dialog_background"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,36 +20,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-       <!-- <TextView
+        <TextView
             android:id="@+id/txt_spiegazione"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
+            android:textColor="@color/black"
             android:justificationMode="inter_word"
             android:text="Buongiorno NOME\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque scelerisque velit in neque pharetra tincidunt. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices"
             android:textSize="@dimen/DIM_TEXT_CAT2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" /> -->
-
-
-        <TextView
-            android:id="@+id/txt_spiegazione"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="144dp"
-            android:gravity="center|start"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-            android:textColor="@color/black"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toTopOf="@+id/view2"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/view2"
@@ -57,26 +41,13 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_spiegazione" />
 
-        <TextView
-            android:id="@+id/txtmetodoinput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:gravity="center"
-            android:text="Scegli il metodo di Immissione"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.499"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
 
         <Button
             android:id="@+id/start"
@@ -86,50 +57,14 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:text="Premi per iniziare a Giocare"
-            android:textColor="#FFFFFF"
             android:textSize="@dimen/DIM_TEXT_CAT2"
-            android:visibility="visible"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtmetodoinput" />
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-      <!--  <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/input1"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@color/category_no_focused"
-            android:elevation="5dp"
-            android:padding="2dp"
-            app:contentPadding="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/input2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtmetodoinput"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-            app:srcCompat="@drawable/pad"
-            app:strokeColor="@color/category_focused_stroke"
-            app:strokeWidth="4dp" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/input2"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@color/category_no_focused"
-            android:elevation="5dp"
-            android:padding="2dp"
-            app:contentPadding="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/input1"
-            app:layout_constraintTop_toBottomOf="@+id/txtmetodoinput"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-            app:srcCompat="@drawable/microphone"
-            app:strokeColor="@color/category_focused_stroke"
-            app:strokeWidth="4dp" /> -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

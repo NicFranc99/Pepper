@@ -30,7 +30,6 @@ public class AnswerDialogFragment extends Dialog {
         super(context);
         this.c = context;
         this.type = type;
-
     }
 
     public AnswerDialogFragment(@NonNull Context context, typeDialog type, String text) {
@@ -38,7 +37,6 @@ public class AnswerDialogFragment extends Dialog {
         this.c = context;
         this.type = type;
         this.text = text;
-
     }
 
     @Override
@@ -54,13 +52,15 @@ public class AnswerDialogFragment extends Dialog {
 
         switch (type) {
             case CORRECT:
-                animationFiles = R.raw.correnct;
+                //animationFiles = R.raw.correnct;
+                animationFiles = R.raw.countdown;
                 if (text.equals("")) {
                     text = getContext().getString(R.string.text_dialog_correct);
                 }
                 break;
             case WRONG:
-                animationFiles = R.raw.wrong;
+                //animationFiles = R.raw.wrong;
+                animationFiles = R.raw.countdown;
                 if (text.equals("")) {
                     text = getContext().getString(R.string.text_dialog_wrong);
                 }

@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.pepperapp28aprile.models.RecyclerViewAnswersAdapter;
 import com.example.pepperapp28aprile.utilities.RisultatiManager;
+import com.example.pepperapp28aprile.utilities.VoiceManager;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
@@ -35,14 +36,14 @@ public class GameFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<RecyclerAnswers> recyclerAnswersArrayList;
     private List<Persona.Game.Domanda> lisaDomande;
-    //private MediaManagerFragment fragment;
+    private MediaManagerFragment fragment;
     private ViewGroup containerFragment;
     private RisultatiManager risultatiManager;
     private Persona.Game game;
     private int positiongame = 0;
 
     private LottieAnimationView lottieAnimationView;
-    private RelativeLayout containerAnimations;
+    //private RelativeLayout containerAnimations;
     private ShapeableImageView imageMic;
     private SpeechRecognizer speechRecognizer;
     private Intent speechRecognizerIntent;
@@ -53,8 +54,9 @@ public class GameFragment extends Fragment {
         risultatiManager = new RisultatiManager();
     } */
 
-    public GameFragment(Persona.Game game) {
+    public GameFragment(Persona.Game game,int positionGame) {
         this.game = game;
+        this.positiongame = positionGame;
         risultatiManager = new RisultatiManager();
     }
 
@@ -65,8 +67,6 @@ public class GameFragment extends Fragment {
         this.containerFragment = container;
 
         v = inflater.inflate(R.layout.question_game_fragment, container, false);
-
-        //game = Persona.getIstance().getEsercizi().get(positionGame);
 
         lisaDomande = game.getListaDomandeGioco();
         // mischio le domande
@@ -92,13 +92,13 @@ public class GameFragment extends Fragment {
         FrameLayout listaMedia = v.findViewById(R.id.linearimage);
         TextView testoDomanda = v.findViewById(R.id.testoDomanda);
         TextView testoparola = v.findViewById(R.id.testoparola);
-        containerAnimations = v.findViewById(R.id.viewanim);
+        //containerAnimations = v.findViewById(R.id.viewanim);
 
 //================Scelta modalita Input===========================
 
-        //if (choseTypeInputGame == Persona.Game.TypeInputGame.SELEZIONE) {
+        /*if (choseTypeInputGame == Persona.Game.TypeInputGame.SELEZIONE) {
             containerAnimations.setVisibility(View.GONE);
-        /*} else if (choseTypeInputGame == Persona.Game.TypeInputGame.VOCALE) {
+        } else if (choseTypeInputGame == Persona.Game.TypeInputGame.VOCALE) {
 
             lottieAnimationView = containerAnimations.findViewById(R.id.wave);
             imageMic = containerAnimations.findViewById(R.id.btnvocalinput);
@@ -369,8 +369,8 @@ public class GameFragment extends Fragment {
             testoparola.setText(domanda.getTestoParola());
             testoparola.setVisibility(View.VISIBLE);
 
-           // VoiceManager.getIstance(getContext()).play(testoDomanda.getText().toString(), VoiceManager.QUEUE_ADD);
-           // VoiceManager.getIstance(getContext()).play(testoparola.getText().toString(), VoiceManager.QUEUE_ADD);
+           VoiceManager.getIstance(getContext()).play(testoDomanda.getText().toString(), VoiceManager.QUEUE_ADD);
+            VoiceManager.getIstance(getContext()).play(testoparola.getText().toString(), VoiceManager.QUEUE_ADD);
         } else {
             testoparola.setVisibility(View.GONE);
         }
@@ -378,8 +378,8 @@ public class GameFragment extends Fragment {
         if (domanda.getPhatMedia() == null) {
             listaMedia.setVisibility(View.GONE);
         } else {
-            //fragment = new MediaManagerFragment(domanda.getPhatMedia().get(0), domanda.getTypeMedia());
-            //getActivity().getSupportFragmentManager().beginTransaction().add(R.id.linearimage, fragment).commit();
+            fragment = new MediaManagerFragment(domanda.getPhatMedia().get(0), domanda.getTypeMedia());
+            getActivity().getSupportFragmentManager().beginTransaction().add(R.id.linearimage, fragment).commit();
         }
 
         testoparola.setText(domanda.getTestoParola());
@@ -391,12 +391,12 @@ public class GameFragment extends Fragment {
                 && !(game instanceof Persona.FluenzeSemantiche)
                 && !(game instanceof Persona.FluenzeVerbali)
                 && !(game instanceof Persona.FinaliParole)){
-            //VoiceManager.getIstance(getContext()).play("Le varie risposte sono: ", VoiceManager.QUEUE_ADD);
+            VoiceManager.getIstance(getContext()).play("Le varie risposte sono: ", VoiceManager.QUEUE_ADD);
         }
         for (String risposte : domanda.getListaRispose()) {
             recyclerAnswersArrayList.add(new RecyclerAnswers(risposte));
             if (domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO) {
-                //VoiceManager.getIstance(getContext()).play(risposte, VoiceManager.QUEUE_ADD);
+                VoiceManager.getIstance(getContext()).play(risposte, VoiceManager.QUEUE_ADD);
             }
         }
 
@@ -418,9 +418,9 @@ public class GameFragment extends Fragment {
                                 .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
                                 .commit();
                     } else {
-                        /*if (fragment != null) {
+                        if (fragment != null) {
                             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                        }*/
+                        }
                         risultatiManager.stopDomanda();
                         positiongame++;
                         iniziaGioco((positiongame));

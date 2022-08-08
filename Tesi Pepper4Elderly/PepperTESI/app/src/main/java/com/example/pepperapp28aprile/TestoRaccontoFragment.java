@@ -26,11 +26,13 @@ import com.example.pepperapp28aprile.utilities.VoiceManager;
 public class TestoRaccontoFragment extends Fragment {
     private static final String ID_LOG_TESTO_RACCONTO_FRAGMENT = "TESTO_RACCONTO_FRAGMENT";
     private final String testoRacconto, titolo;
+    private final int positionGame;
     private TextView txtTestoRacconto, txttitoloracconto;
     private Persona.Game game;
-    public TestoRaccontoFragment(Persona.Game game) {
+    public TestoRaccontoFragment(Persona.Game game,int positionGame) {
         Persona.Racconti g = (Persona.Racconti) game;
         this.game = game;
+        this.positionGame = positionGame;
         testoRacconto = g.getTestoRacconto();
         titolo = g.getTitleGame();
     }
@@ -55,7 +57,7 @@ public class TestoRaccontoFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().remove(TestoRaccontoFragment.this)
                         .commit();
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(container.getId(), new GameFragment(game)).commit();
+                        .add(container.getId(), new GameFragment(game,positionGame)).commit();
             }
 
             @Override
@@ -96,7 +98,7 @@ public class TestoRaccontoFragment extends Fragment {
             tts.stop();
             getActivity().getSupportFragmentManager().beginTransaction().remove(TestoRaccontoFragment.this).commit();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(container.getId(), new GameFragment(game)).commit();
+                    .add(container.getId(), new GameFragment(game,positionGame)).commit();
 
         });
         return v;

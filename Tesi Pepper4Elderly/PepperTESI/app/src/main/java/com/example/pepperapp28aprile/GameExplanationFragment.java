@@ -86,13 +86,13 @@ public class GameExplanationFragment extends Fragment {
                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameExplanationFragment.this)
                             .commit();
                     getActivity().getSupportFragmentManager().beginTransaction()
-                            .add(container.getId(), new TestoRaccontoFragment(g)).commit();
+                            .add(container.getId(), new TestoRaccontoFragment(g,position)).commit();
 
                 } else {
                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameExplanationFragment.this)
                             .commit();
                     getActivity().getSupportFragmentManager().beginTransaction()
-                            .add(container.getId(), new GameFragment(g)).commit();
+                            .add(container.getId(), new GameFragment(g,position)).commit();
                 }
             });
         });
