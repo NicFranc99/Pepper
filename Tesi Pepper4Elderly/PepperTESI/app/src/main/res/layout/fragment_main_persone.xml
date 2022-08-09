@@ -54,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Benvenuto MARIO"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/DIM_TEXT_WELCOME" />
 
                 <androidx.leanback.widget.TitleView

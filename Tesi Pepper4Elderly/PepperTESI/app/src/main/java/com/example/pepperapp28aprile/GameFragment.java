@@ -434,18 +434,8 @@ public class GameFragment extends Fragment {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
                         v.setVisibility(View.GONE);
-//                        if(!positioslistclic.contains(firstpos+1)){
-//                            positioslistclic.add(firstpos+1);
-//                            recyclerView.getLayoutManager().findViewByPosition(position+1).requestFocus();
-//                        }
-//                       int itemPosition = layoutManager.findFirstVisibleItemPosition();
-//                        recyclerView.getLayoutManager().findViewByPosition(position+1).requestFocus();
-
                     }
                 });
-
-
-
             }
         });
 

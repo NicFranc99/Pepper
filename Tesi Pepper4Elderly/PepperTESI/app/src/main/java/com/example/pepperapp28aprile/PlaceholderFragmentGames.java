@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import androidx.leanback.app.BrowseSupportFragment;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -87,6 +89,7 @@ public class PlaceholderFragmentGames extends Fragment {
                 GameListAdapter adapter = new GameListAdapter(getActivity(), R.layout.custom_list_singoloprofilo, paziente);
 
                 gridView.setAdapter(adapter);
+
                 //System.out.println("settato1");
 
                 //attaching adapter to the listview

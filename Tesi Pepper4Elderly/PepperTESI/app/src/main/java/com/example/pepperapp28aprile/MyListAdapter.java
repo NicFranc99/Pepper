@@ -112,6 +112,7 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
         Intent intent = new Intent(context, GameProfileActivity.class);
         System.out.println("start Gameprofile");
         GameProfileActivity.name = paziente.getName();
+        GameProfileActivity.sesso = paziente.getSesso();
         GameProfileActivity.idPaziente = String.valueOf(paziente.getId());
         context.startActivity(intent);
     }

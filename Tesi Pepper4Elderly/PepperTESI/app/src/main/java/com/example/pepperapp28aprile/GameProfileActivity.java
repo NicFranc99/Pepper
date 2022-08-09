@@ -1,15 +1,19 @@
 package com.example.pepperapp28aprile;
 
 import android.content.Intent;
+import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.leanback.widget.TitleView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.aldebaran.qi.Future;
@@ -47,6 +51,7 @@ import com.example.pepperapp28aprile.SectionsPagerAdapter;
 import com.example.pepperapp28aprile.WebActivity;
 import com.example.pepperapp28aprile.models.Emergency;
 import com.example.pepperapp28aprile.utilities.DataManager;
+import com.example.pepperapp28aprile.utilities.Util;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -60,6 +65,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,9 +74,9 @@ import java.util.Map;
 import static com.example.pepperapp28aprile.Globals.NowIsRunning;
 
 public class GameProfileActivity extends RobotActivity implements RobotLifecycleCallbacks {
-
     public static String name;
     public static String idPaziente;
+    public static String sesso;
     public static boolean tornaNav;
     private QiContext qiContext;
     public static String viewGameList;
@@ -85,8 +92,15 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         System.out.println("GameProfile activity");
 
         setContentView(R.layout.fragment_main_persone);
+        TextView tv1 = (TextView)findViewById(R.id.txtname);
 
+        if(isMorning(Globals.TimeZoneName,Globals.CountryName))
+            tv1.setText("Buongiorno " + name);
+        else
+            tv1.setText("Buonasera " + name);
 
+        TitleView sectionInfoElder = (TitleView)findViewById(R.id.imgsenior);
+        setElderlyImageByGender(sectionInfoElder);
         PeopleListAdapter.tornaNav = tornaNav;
 
         SectionsPagerAdapterGames sectionsPagerAdapter = new SectionsPagerAdapterGames(this, getSupportFragmentManager(),idPaziente);
@@ -98,6 +112,18 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
+    }
+
+    /**
+     * Tale metodo prende un TitleView e gli imposta il drawable con icona da donna se il gender del paziente considerato sia "F" altrimenti gli assegna un drawable
+     * che corrisponde all'icona di un signore.
+     * @param sectionInfoElder TitleView di cui impostare l'icona drawable inbase al gender del paziente considerato.
+     */
+    private void setElderlyImageByGender(TitleView sectionInfoElder){
+        if(sesso.equals("M"))
+            sectionInfoElder.setBackground(ContextCompat.getDrawable(this, R.drawable.grandfather));
+        else
+            sectionInfoElder.setBackground(ContextCompat.getDrawable(this, R.drawable.grandmother));
     }
 
     public void setFragment(Fragment fragment) {
@@ -112,6 +138,17 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Metodo utilizzato per prendere un TimeZoneName, effettuare la chiamata all'api per recuperare la corrispondente ora corrente e stabilire infine se è sera o giorno
+     * @param timeZone Nome del continente da considerare
+     * @param country Nome del TimeZone su cui effettuare la chiamata Api per il recupero dell'ora corrente.
+     * @return Restituisce true se è mattino false altrimenti.
+     */
+    private boolean isMorning(String timeZone,String country){
+        int currentTime = Util.getCurrentHour(timeZone,country);
+       return (currentTime <= 6 || currentTime >= 18) ? false : true;
     }
 
     @Override

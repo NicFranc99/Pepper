@@ -10,7 +10,8 @@ public class Globals {
     public static boolean isGameMode;
     public static String idPaziente;
     public static String NowIsRunning;
-
+    public static String TimeZoneName = "Europe";
+    public static String CountryName = "Rome";
     public static String MainActivity = "MainActivity";
     public static String WebActivity = "WebActivity";
     public static String CheckMattutino = "CheckMattutino";

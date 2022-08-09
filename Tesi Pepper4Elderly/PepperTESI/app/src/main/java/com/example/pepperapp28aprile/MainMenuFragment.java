@@ -73,6 +73,7 @@ public class MainMenuFragment extends Fragment {
         this.ma = (MainActivity) getActivity();
         //ma.status.reset();
         Globals.isGameMode = this.isGameMode;
+
         if(!isGameMode)
         SayBuilder.with(MainActivity.qiContext)
                 .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!")
@@ -124,7 +125,7 @@ public class MainMenuFragment extends Fragment {
                 String surname = rootelem.get("surname").getAsString();
                 String cittaNascita = rootelem.get("place").getAsString();
                 String dataNascita = rootelem.get("birth").getAsString();
-                String gender = (rootelem.get("surname").getAsString() == "2") ? "F" : "M";
+                String gender = (rootelem.get("gender").getAsString().equalsIgnoreCase("2")) ? "F" : "M";
                 int room = rootelem.get("room").getAsInt();
                 int id = rootelem.get("id").getAsInt();
                 ArrayList<String> training = null;

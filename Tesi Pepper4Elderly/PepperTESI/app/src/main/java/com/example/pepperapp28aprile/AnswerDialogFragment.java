@@ -52,15 +52,15 @@ public class AnswerDialogFragment extends Dialog {
 
         switch (type) {
             case CORRECT:
-                //animationFiles = R.raw.correnct;
-                animationFiles = R.raw.countdown;
+                animationFiles = R.raw.correnct;
+                //animationFiles = R.raw.countdown;
                 if (text.equals("")) {
                     text = getContext().getString(R.string.text_dialog_correct);
                 }
                 break;
             case WRONG:
-                //animationFiles = R.raw.wrong;
-                animationFiles = R.raw.countdown;
+                animationFiles = R.raw.wrong;
+                //animationFiles = R.raw.countdown;
                 if (text.equals("")) {
                     text = getContext().getString(R.string.text_dialog_wrong);
                 }

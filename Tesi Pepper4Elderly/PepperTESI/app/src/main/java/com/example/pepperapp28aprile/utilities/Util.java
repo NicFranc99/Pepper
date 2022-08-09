@@ -16,13 +16,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pepperapp28aprile.Globals;
 import com.example.pepperapp28aprile.Persona;
 import com.example.pepperapp28aprile.R;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -351,6 +358,33 @@ public class Util {
         };
         queue.add(stringRequest);
 
+    }
+
+    /**
+     * Chiamata a un api esterna per recuperare l'ora corrente con timeStamp definito dal parametro di ingresso
+     * @param timeZone Contienente di riferimento della country da considerare
+     * @param country TimeStamp del quale si vuole recuperare l'ora corrente
+     * @return L'ora corrente in base al TimeStamp passsato.
+     */
+    public static int getCurrentHour(String timeZone,String country){
+        String sURL = "https://timeapi.io/api/Time/current/zone?timeZone=" + timeZone + "/" + country;
+        // Connect to the URL using java's native library
+        URL url = null;
+        int hour = 0;
+        try {
+            url = new URL(sURL);
+            URLConnection request = url.openConnection();
+            request.connect();
+            // Convert to a JSON object to print data
+            JsonParser jp = new JsonParser(); //from gson
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+            JsonObject jsonObject = root.getAsJsonObject();
+            hour = jsonObject.get("hour").getAsInt();
+        } catch (Exception e) {
+            System.out.println("Erroreeeee");
+            e.printStackTrace();
+        }
+        return hour;
     }
 
 
