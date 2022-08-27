@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.pepperapp28aprile.utilities.Util;
 import com.github.wihoho.Trainer;
 
 import java.io.IOException;
@@ -97,15 +98,30 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
                 //we are passing the position which is to be removed in the method
                 myAppID = p.getId();
                 System.out.println("MYAPP" + myAppID);
+                if(isMorning(Globals.TimeZoneName,Globals.CountryName))
+                    Globals.Greeting = "Buongiorno";
+                else
+                    Globals.Greeting = "Buonasera";
                 if(!isGameMode)
                 //TODO//startWeb(view,p);
-                startProfile(view,p.getName());
+                startProfile(view,p);
                 else startGameProfile(view,p);
             }
         });
 
         //finally returning the view
         return view;
+    }
+
+    /**
+     * Metodo utilizzato per prendere un TimeZoneName, effettuare la chiamata all'api per recuperare la corrispondente ora corrente e stabilire infine se è sera o giorno
+     * @param timeZone Nome del continente da considerare
+     * @param country Nome del TimeZone su cui effettuare la chiamata Api per il recupero dell'ora corrente.
+     * @return Restituisce true se è mattino false altrimenti.
+     */
+    private boolean isMorning(String timeZone,String country){
+        int currentTime = Util.getCurrentHour(timeZone,country);
+        return (currentTime <= 6 || currentTime >= 18) ? false : true;
     }
 
     public void startGameProfile(View view,Persona paziente) {
@@ -118,13 +134,14 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
     }
 
     //TODO
-    public void startProfile(View view,String name) {
+    public void startProfile(View view,Persona paziente) {
         Intent intent = new Intent(context, ProfileActivity.class);
         //EditText editText = (EditText) findViewById(R.id.editText);
         //String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);
         System.out.println("start profile");
-        ProfileActivity.name = name;
+        ProfileActivity.name = paziente.getName();
+        ProfileActivity.sesso = paziente.getSesso();
         context.startActivity(intent);
     }
 

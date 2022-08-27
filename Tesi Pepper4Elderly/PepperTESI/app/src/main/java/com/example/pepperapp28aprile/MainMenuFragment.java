@@ -189,27 +189,13 @@ public class MainMenuFragment extends Fragment {
                  new DataManager(getContext(),"pazienti",paziente,new DataManager.onSaveDataListener() {
                     @Override
                     public void onDataSuccess(Persona paziente) {
-                        Toast.makeText(getContext(), "Ho aggiunto: " + paziente.getName(), Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
                     public void onDataFailed() {
-                        Toast.makeText(getContext(), "Il paziente è gia presente!", Toast.LENGTH_SHORT).show();
+
                     }
-
-                  /*  @Override
-                    public void notFoundUser() {
-                        new DataManager("pazienti", paziente, new DataManager.onSaveDataListener() {
-                            @Override
-                            public void onDataSuccess(Persona p) {
-                            }
-
-                            @Override
-                            public void onDataFailed() {
-                                Toast.makeText(getContext(), "Qualcosa è andato storto, contattare l'amministrazione..", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }*/
                 });
             }
         }

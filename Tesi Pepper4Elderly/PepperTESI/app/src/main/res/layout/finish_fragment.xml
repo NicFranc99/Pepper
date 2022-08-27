@@ -10,6 +10,7 @@
         android:id="@+id/btnMenuPrincipale"
         style="@style/ButtonStyle"
         android:layout_width="0dp"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
@@ -30,12 +31,13 @@
         android:background="@drawable/stylebuttonwithstate"
         android:padding="16dp"
         android:text="STATISTICHE GIOCO"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnMenuPrincipale" />
 
-    <!--com.airbnb.lottie.LottieAnimationView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/finishanimations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,9 +53,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/countdown" /-->
+        app:lottie_rawRes="@raw/finishgame2" />
 
-    <!--com.airbnb.lottie.LottieAnimationView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/coriandoli"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -71,13 +73,13 @@
         app:layout_constraintVertical_bias="1.0"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/coriandoli" /-->
+        app:lottie_rawRes="@raw/coriandoli" />
 
-    <!--TextView
+    <TextView
         android:id="@+id/testofinish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="0dp"
         android:gravity="center_horizontal"
         android:text="COMPLIMENTI !!!👍  \nHai terminato il gioco"
         android:textColor="@color/black"
@@ -86,6 +88,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/finishanimations"
         app:layout_constraintEnd_toEndOf="@+id/finishanimations"
         app:layout_constraintStart_toStartOf="@+id/finishanimations"
-        app:layout_constraintVertical_bias="0.814" />-->
+        app:layout_constraintVertical_bias="0.814" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

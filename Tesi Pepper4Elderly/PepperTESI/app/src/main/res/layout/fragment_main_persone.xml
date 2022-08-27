@@ -11,15 +11,15 @@
         android:layout_height="wrap_content"
         android:theme="@style/Theme.ParenteApp.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#30ACEC"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme">
+       <androidx.appcompat.widget.Toolbar
+           android:id="@+id/toolbar"
+           android:layout_width="match_parent"
+           android:layout_height="83dp"
+           android:background="#30ACEC"
+           android:minHeight="?attr/actionBarSize"
+           android:theme="?attr/actionBarTheme">
 
-            <!--<TextView
+           <!--<TextView
                 android:id="@+id/title"
                 android:layout_width="248dp"
                 android:layout_height="wrap_content"
@@ -30,42 +30,42 @@
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:textColor="@color/defaultext" /> -->
 
-            <LinearLayout
-                android:id="@+id/idicon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/icontitle"
-                android:focusable="false"
-                android:nextFocusLeft="@+id/exit"
-                android:nextFocusRight="@+id/exit"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/padding_title_old"
-                android:paddingEnd="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/exit"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+           <LinearLayout
+               android:id="@+id/idicon"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:background="@drawable/icontitle"
+               android:focusable="false"
+               android:nextFocusLeft="@+id/exit"
+               android:nextFocusRight="@+id/exit"
+               android:orientation="horizontal"
+               android:paddingStart="@dimen/padding_title_old"
+               android:paddingEnd="15dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toStartOf="@+id/exit"
+               app:layout_constraintHorizontal_bias="0.0"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintVertical_bias="0.0">
 
-                <TextView
-                    android:id="@+id/txtname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Benvenuto MARIO"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/DIM_TEXT_WELCOME" />
+               <TextView
+                   android:id="@+id/txtname"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:text="Benvenuto MARIO"
+                   android:textColor="@color/black"
+                   android:textSize="@dimen/DIM_TEXT_WELCOME" />
 
-                <androidx.leanback.widget.TitleView
-                    android:id="@+id/imgsenior"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/grandfather" />
-            </LinearLayout>
+               <androidx.leanback.widget.TitleView
+                   android:id="@+id/imgsenior"
+                   android:layout_width="48dp"
+                   android:layout_height="48dp"
+                   android:layout_margin="8dp"
+                   android:background="@drawable/grandfather" />
+           </LinearLayout>
 
-            <!--<ImageButton
+           <!--<ImageButton
                 android:id="@+id/imageButton"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -75,7 +75,7 @@
                 android:minHeight="?actionBarSize"
                 app:srcCompat="@android:drawable/ic_menu_preferences" />-->
 
-        </androidx.appcompat.widget.Toolbar>
+       </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -89,7 +89,7 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="1156dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <FrameLayout

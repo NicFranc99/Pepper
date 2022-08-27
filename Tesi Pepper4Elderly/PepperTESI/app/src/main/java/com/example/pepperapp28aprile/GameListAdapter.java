@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -60,10 +61,11 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
 
         //getting the view elements of the list from the view
        // ImageView imageView = view.findViewById(R.id.imageView);
-        TextView textViewName = view.findViewById(R.id.textViewName);
-        RelativeLayout rl = view.findViewById(R.id.profiloSingolo);
+        TextView gameTitle = view.findViewById(R.id.txt_game);
+        TextView categoryName = view.findViewById(R.id.txt_category);
+        FrameLayout rl = view.findViewById(R.id.container);
         //TextView textViewTeam = view.findViewById(R.id.textViewTeam);
-        ImageView callbutton = view.findViewById(R.id.callbutton);
+        ImageView gameImage = view.findViewById(R.id.img_category);
 
         //getting the hero of the specified position
         Persona.Game game = paziente.getEsercizi().get(position);
@@ -82,57 +84,27 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
             e.printStackTrace();
         } */
 
-        callbutton.setImageResource(game.getNameIcon());
+        gameImage.setImageResource(game.getNameIcon());
 
 
-        textViewName.setText(game.getTitleGame());
+        gameTitle.setText(game.getTitleGame());
+        categoryName.setText(game.getTitleCategory());
+
         //textViewTeam.setText(p.getStatus());
 
         //adding a click listener to the button to remove item from the list
-        callbutton.setOnClickListener(new View.OnClickListener() {
+        gameImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we will call this method to remove the selected value from the list
-                //we are passing the position which is to be removed in the method 
-                getGameClicked(position,view); //PARTE LA CHIAMATA: DA FARE
+                //we are passing the position which is to be removed in the method
+                Intent game = new Intent(getContext(), GameActivity.class);
+                startGameActivity(view,paziente.getEsercizi().get(position),position);
             }
         });
 
         //finally returning the view
         return view;
-    }
-
-    //this method will remove the item from the list 
-    private void getGameClicked(final int position,View view) {
-        //Creating an alert dialog to confirm the deletion
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
-        builder.setMessage("sei sicuro di voler giocare a " + '"' + paziente.getEsercizi().get(position).getTitleGame() + '"' + "?");
-        //if the response is positive in the alert
-        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-        //removing the item
-
-
-                Intent game = new Intent(getContext(), GameActivity.class);
-                startGameActivity(view,paziente.getEsercizi().get(position),position);
-
-        //reloading the list
-        notifyDataSetChanged();
-        }
-        });
-
-       //if response is negative nothing is being done
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        //creating and displaying the alert dialog*/
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
     }
 
     public void startGameActivity(View view,Persona.Game game,int position) {

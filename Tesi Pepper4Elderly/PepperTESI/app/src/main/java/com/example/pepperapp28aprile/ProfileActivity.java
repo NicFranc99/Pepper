@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.leanback.widget.TitleView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.aldebaran.qi.Future;
@@ -56,6 +59,7 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
     public static String name;
     private static boolean doButtonOperation;
     public static boolean tornaNav;
+    public static String sesso;
     private QiContext qiContext;
     public static String startWeb;
     //private static boolean doButtonOperationImpegnato;
@@ -74,6 +78,11 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
         //doButtonOperationImpegnato = false;
         setContentView(R.layout.fragment_main_persone);
         //setContentView(R.layout.activity_profile);
+        TextView tv1 = (TextView)findViewById(R.id.txtname);
+
+        tv1.setText(Globals.Greeting + " " + name);
+        TitleView sectionInfoElder = (TitleView)findViewById(R.id.imgsenior);
+        setElderlyImageByGender(sectionInfoElder);
         doButtonOp();
 
 
@@ -86,7 +95,8 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
             System.out.println("una volta");
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-
+        if(tabs.getVisibility() == View.GONE)
+            tabs.setVisibility(View.VISIBLE);
         if(Globals.chiamataInArrivo == true){
             annunciaChiamata(name);
             setFragment(Globals.avviso);
@@ -124,6 +134,18 @@ public class ProfileActivity extends RobotActivity implements RobotLifecycleCall
         //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }*/
+
+    /**
+     * Tale metodo prende un TitleView e gli imposta il drawable con icona da donna se il gender del paziente considerato sia "F" altrimenti gli assegna un drawable
+     * che corrisponde all'icona di un signore.
+     * @param sectionInfoElder TitleView di cui impostare l'icona drawable inbase al gender del paziente considerato.
+     */
+    private void setElderlyImageByGender(TitleView sectionInfoElder){
+        if(sesso.equals("M"))
+            sectionInfoElder.setBackground(ContextCompat.getDrawable(this, R.drawable.grandfather));
+        else
+            sectionInfoElder.setBackground(ContextCompat.getDrawable(this, R.drawable.grandmother));
+    }
 
     public void annunciaChiamata(String nomeDest){
 

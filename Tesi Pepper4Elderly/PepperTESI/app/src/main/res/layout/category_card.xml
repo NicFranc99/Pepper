@@ -18,12 +18,12 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/DIM_TEXT_PADDING"
             android:layout_marginTop="@dimen/DIM_TEXT_PADDING"
-            android:text="TESTO DI PROVA"
+            android:text="categorizzazione"
             android:textSize="@dimen/DIM_TEXT_CAT2" />
 
         <ImageView
             android:id="@+id/img_category"
-            android:layout_width="@dimen/CARD_WIDTH"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/CARD_HEIGHT"
             android:padding="@dimen/IMAGE_PADDING"
             android:src="@drawable/categorizzazione" />

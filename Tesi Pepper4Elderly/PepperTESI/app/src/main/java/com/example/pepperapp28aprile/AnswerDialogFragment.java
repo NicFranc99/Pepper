@@ -48,11 +48,11 @@ public class AnswerDialogFragment extends Dialog {
         TextView textView = findViewById(R.id.txtmsgdialog);
 
         @RawRes
-        int animationFiles = R.raw.correnct;
+        int animationFiles = R.raw.correct;
 
         switch (type) {
             case CORRECT:
-                animationFiles = R.raw.correnct;
+                animationFiles = R.raw.correct;
                 //animationFiles = R.raw.countdown;
                 if (text.equals("")) {
                     text = getContext().getString(R.string.text_dialog_correct);

@@ -3,7 +3,9 @@ package com.example.pepperapp28aprile;
 import android.content.Intent;
 import android.icu.text.CaseMap;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,6 +82,8 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public static boolean tornaNav;
     private QiContext qiContext;
     public static String viewGameList;
+
+    private static FragmentManager fragmentManager;
     //private static boolean doButtonOperationImpegnato;
 
     @Override
@@ -88,29 +92,38 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         QiSDK.register(this, this);
 
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
-
+        this.fragmentManager = getSupportFragmentManager();
         System.out.println("GameProfile activity");
 
         setContentView(R.layout.fragment_main_persone);
         TextView tv1 = (TextView)findViewById(R.id.txtname);
 
-        if(isMorning(Globals.TimeZoneName,Globals.CountryName))
-            tv1.setText("Buongiorno " + name);
-        else
-            tv1.setText("Buonasera " + name);
+        tv1.setText(Globals.Greeting + " " + name);
 
         TitleView sectionInfoElder = (TitleView)findViewById(R.id.imgsenior);
         setElderlyImageByGender(sectionInfoElder);
         PeopleListAdapter.tornaNav = tornaNav;
 
-        SectionsPagerAdapterGames sectionsPagerAdapter = new SectionsPagerAdapterGames(this, getSupportFragmentManager(),idPaziente);
+        setFragment(PlaceholderFragmentGames.newInstance(idPaziente));
 
+
+
+        //SCOMMENTARE!!!!!
+        /*SectionsPagerAdapterGames sectionsPagerAdapter = new SectionsPagerAdapterGames(this, getSupportFragmentManager(),idPaziente);
 
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
+
+         */
+
+
+
         System.out.println("una volta");
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+        //TabLayout tabs = findViewById(R.id.tabs);
+        //tabs.setupWithViewPager(viewPager);
+
+        //if(tabs.getVisibility() == View.VISIBLE)
+        //    tabs.setVisibility(View.GONE);
 
     }
 
@@ -127,28 +140,14 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     }
 
     public void setFragment(Fragment fragment) {
-
-        try{
-            System.out.println("starting fragment Transaction for fragment : " + fragment.getClass().getSimpleName());
-            FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
-            transaction.setCustomAnimations(R.anim.enter_fade_in_right, R.anim.exit_fade_out_left, R.anim.enter_fade_in_left, R.anim.exit_fade_out_right);
-            transaction.replace(R.id.profile, fragment, "currentFragment");
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }catch (Exception e){
-            e.printStackTrace();
+        FragmentManager fm = getSupportFragmentManager();
+        fragment = fm.findFragmentByTag(".DEBUG_EXAMPLE_TWO_FRAGMENT_TAG");
+        if (fragment == null) {
+            FragmentTransaction ft = fm.beginTransaction();
+            fragment =PlaceholderFragmentGames.newInstance(idPaziente);
+            ft.add(android.R.id.content,fragment,".DEBUG_EXAMPLE_TWO_FRAGMENT_TAG");
+            ft.commit();
         }
-    }
-
-    /**
-     * Metodo utilizzato per prendere un TimeZoneName, effettuare la chiamata all'api per recuperare la corrispondente ora corrente e stabilire infine se è sera o giorno
-     * @param timeZone Nome del continente da considerare
-     * @param country Nome del TimeZone su cui effettuare la chiamata Api per il recupero dell'ora corrente.
-     * @return Restituisce true se è mattino false altrimenti.
-     */
-    private boolean isMorning(String timeZone,String country){
-        int currentTime = Util.getCurrentHour(timeZone,country);
-       return (currentTime <= 6 || currentTime >= 18) ? false : true;
     }
 
     @Override

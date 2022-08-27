@@ -34,9 +34,9 @@ public class FinishGameFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.finish_fragment, container, false);
-        //LottieAnimationView finish = v.findViewById(R.id.finishanimations);
-        //TextView testo = v.findViewById(R.id.testofinish);
-        //testo.setVisibility(View.INVISIBLE);
+        LottieAnimationView finish = v.findViewById(R.id.finishanimations);
+        TextView testo = v.findViewById(R.id.testofinish);
+        testo.setVisibility(View.INVISIBLE);
 
 //        String s="Inizio Giochi: "+risultatiManager.getStartGameTimeClock()+"\nFine gioco: "+risultatiManager.getStopGameTimeClock();
 //        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
@@ -47,7 +47,7 @@ public class FinishGameFragment extends Fragment {
 
         v.findViewById(R.id.btnMenuPrincipale).setOnClickListener(v -> getActivity().finish());
 
-        /*finish.addAnimatorListener(new Animator.AnimatorListener() {
+        finish.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
@@ -69,7 +69,7 @@ public class FinishGameFragment extends Fragment {
             public void onAnimationRepeat(Animator animation) {
 
             }
-        });*/
+        });
 
         new DataManager(getContext(), game, risultatiManager, new DataManager.onUploadDataListener() {
             @Override
