@@ -53,7 +53,7 @@ public class PlaceholderFragmentGames extends Fragment {
     private GridView gridView;
     private RecyclerView recyclerView;
     public static String id;
-    public static final String FRAGMENT_TAG =  ".DEBUG_EXAMPLE_TWO_FRAGMENT_TAG";
+    public static final String FRAGMENT_TAG =  Globals.PlaceHolderFragmentGamesTag;
 
     public static Fragment newInstance(int index,String idPaziente) {
         id = idPaziente;

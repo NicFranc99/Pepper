@@ -17,10 +17,13 @@ import androidx.annotation.Nullable;
 import com.example.pepperapp28aprile.utilities.Util;
 import com.github.wihoho.Trainer;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.pepperapp28aprile.Globals.myAppID;
@@ -124,6 +127,7 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
         return (currentTime <= 6 || currentTime >= 18) ? false : true;
     }
 
+    //TODO: Creare funzione che vada a scrivere nel file .top il nome dei giochi assegnati al paziente facendo il replace di title_game all'interno del file
     public void startGameProfile(View view,Persona paziente) {
         Intent intent = new Intent(context, GameProfileActivity.class);
         System.out.println("start Gameprofile");
@@ -133,7 +137,6 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
         context.startActivity(intent);
     }
 
-    //TODO
     public void startProfile(View view,Persona paziente) {
         Intent intent = new Intent(context, ProfileActivity.class);
         //EditText editText = (EditText) findViewById(R.id.editText);
@@ -145,7 +148,6 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
         context.startActivity(intent);
     }
 
-    //TODO
     /*private void startWeb(View view, Persona p) {
         Intent intent = new Intent(this.getContext(), WebActivityRecognition.class);
         Bundle b = new Bundle();

@@ -1,46 +1,8 @@
 topic: ~questionario ()
 
-concept:(chiama) [chiama telefona chiamami "mi chiami" ]
+concept:(gioca) ["gioca a" "giochiamo a"]
 
-concept:(hello) [ciao ]
+concept:(stopGame) ["stop" "ferma gioco"]
 
-
-
-concept:(greetings) ^rand["ok vado a dopo" "va bene, ciao" "ok, quando vuoi puoi chiamarmi. Ciao"]
-
-concept:(askForQuestionario) ["sono qui per il questionario mattutino, va bene?"]
-
-#concept:(execute) [telepresenza telefonare chiamare parente]
-#u:(~execute) Ok, chiamiamo un parente ^execute(myExecutor)
-
-concept:(positiveFeedback) ^rand["perfetto!""alla grande!""ottimo""buona notizia!""bene!"]
-
-concept:(acceptance) ["si""va bene""ok"]
-
-concept:(si) ["si"]
-
-concept:(no) ["no"]
-
-concept:(idk) ["non so" "non lo so" "non saprei"]
-
-concept:(refused) ["non voglio" "non ne ho voglia" "no" "vattene" "non voglio farlo"]
-
-concept:(non_capito) ["non ho capito" "puoi ripetere" "ripeti" "non ho sentito"]
-
-#u:(~hello {pepper}) ~hello, ~askForActions
-
-
-u:({pepper} ~chiama _*) ok chiamo $1 ^execute(myExecutor,"chiamata", $1)  ^nextProposal ^endDiscuss(success)
-
-u:({pepper} ~chiama mario) ok chiamo mario ^execute(myExecutor,"chiamata", "mario")  ^nextProposal ^endDiscuss(success)
-
-u:({pepper} ~chiama andrea) ok chiamo maurizio ^execute(myExecutor,"chiamata", "andrea")  ^nextProposal ^endDiscuss(success)ee
-
-u:({pepper} ~chiama nicola) ok chiamo michele ^execute(myExecutor,"chiamata", "nicola")  ^nextProposal ^endDiscuss(success)
-
-u:({pepper} ~chiama beppe) ok chiamo michele ^execute(myExecutor,"chiamata", "beppe")  ^nextProposal ^endDiscuss(success)
-
-u:({pepper} ~chiama antonello) ok chiamo michele ^execute(myExecutor,"chiamata", "antonello")  ^nextProposal ^endDiscuss(success)
-
-
-#u:(e:Dialog/SpeakFailure) Non so rispondere a questo
+u:({pepper} ~gioca _*) ok giochiamo a $1 ^execute(myExecutor,"gioca", "$1")  ^nextProposal ^endDiscuss(success)
+u:(e:Dialog/SpeakFailure) Non so rispondere a questo

@@ -74,25 +74,29 @@ public class MainMenuFragment extends Fragment {
         //ma.status.reset();
         Globals.isGameMode = this.isGameMode;
 
-        if(!isGameMode)
-        SayBuilder.with(MainActivity.qiContext)
-                .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!")
-                .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
-                .withBodyLanguageOption(BodyLanguageOption.DISABLED)
-                .buildAsync().andThenCompose(say -> {
-            Log.d(TAG, "Say started : " + "text");
-            return say.async().run();
-        });
+        try {
+            if (!isGameMode)
+                SayBuilder.with(MainActivity.qiContext)
+                        .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!")
+                        .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
+                        .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                        .buildAsync().andThenCompose(say -> {
+                            Log.d(TAG, "Say started : " + "text");
+                            return say.async().run();
+                        });
 
-        else
-            SayBuilder.with(MainActivity.qiContext)
-                    .withText("Da questo menù puoi cliccare sulla tua foto per giocare ai tuoi giochi preferiti!")
-                    .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
-                    .withBodyLanguageOption(BodyLanguageOption.DISABLED)
-                    .buildAsync().andThenCompose(say -> {
-                        Log.d(TAG, "Say started : " + "text");
-                        return say.async().run();
-                    });
+            else
+                SayBuilder.with(MainActivity.qiContext)
+                        .withText("Da questo menù puoi cliccare sulla tua foto per giocare ai tuoi giochi preferiti!")
+                        .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
+                        .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                        .buildAsync().andThenCompose(say -> {
+                            Log.d(TAG, "Say started : " + "text");
+                            return say.async().run();
+                        });
+        }catch(Exception ex){
+
+        }
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

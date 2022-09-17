@@ -17,5 +17,6 @@ public class Globals {
     public static String CheckMattutino = "CheckMattutino";
     public static String ProfileActivity = "ProfileActivity";
     public static String GameProfile = "GameProfile";
+    public static String PlaceHolderFragmentGamesTag = "PLACE_HOLDER_FRAGMENT_GAMES_TAG";
     public static String Greeting;
 }

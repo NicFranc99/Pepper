@@ -16,8 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.pepperapp28aprile.Globals;
-import com.example.pepperapp28aprile.Persona;
+import com.example.pepperapp28aprile.*;
 import com.example.pepperapp28aprile.R;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -290,7 +289,7 @@ public class Util {
 
         imgvire.setImageDrawable(drawable);
     }
-//
+
 //    public static boolean esistenzaParola(Context c, String parola, RicercaParoleListener listener) {
 //        boolean risultato = false;
 //

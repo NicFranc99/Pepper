@@ -495,6 +495,13 @@ public class Persona implements Serializable {
             return parole;
         }
 
+        /**
+         * Data una parola, questo metodo verifica che esista nel vocabolario italiano oppure no (chiamando un api attraverso il metodo "Util.esistenzaParola").
+         * Tale metodo viene utilizzato quando si recupera il paziente dal DataBase Firebase, poichè vengono analizzate tutte le parole definite all'interno del gioco "Esistenza Parole" e
+         * se esiste la parola definita nel db si segna la posizione della risposta corretta altrimenti si segna la posizione della risposta errata. (in modo tale da sapere quali parole siano corrette oppure no)
+         * @param c
+         * @param parola
+         */
         public void setParole(Context c, String parola) {
 
             parole.add(parola);
@@ -504,7 +511,7 @@ public class Persona implements Serializable {
             listaRispose.add("ESISTE");
             listaRispose.add("NON ESISTE");
 
-          /*  Util.esistenzaParola(c, parola, new Util.RicercaParoleListener() {
+            Util.esistenzaParola(c, parola, new Util.RicercaParoleListener() {
                 @Override
                 public void esiste() {
                     Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRispose, (short) 0);
@@ -516,7 +523,7 @@ public class Persona implements Serializable {
                     Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRispose, (short) 1);
                     setDomandaGioco(dom);
                 }
-            });*/
+            });
         }
     }
 

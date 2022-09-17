@@ -51,6 +51,7 @@ import com.example.pepperapp28aprile.Persona;
 import com.example.pepperapp28aprile.R;
 import com.example.pepperapp28aprile.SectionsPagerAdapter;
 import com.example.pepperapp28aprile.WebActivity;
+import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.models.Emergency;
 import com.example.pepperapp28aprile.utilities.DataManager;
 import com.example.pepperapp28aprile.utilities.Util;
@@ -81,10 +82,8 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public static String sesso;
     public static boolean tornaNav;
     private QiContext qiContext;
-    public static String viewGameList;
-
+    public static String viewGameList; //Nome del gioco detto a pepper dall'utente
     private static FragmentManager fragmentManager;
-    //private static boolean doButtonOperationImpegnato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,26 +103,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         setElderlyImageByGender(sectionInfoElder);
         PeopleListAdapter.tornaNav = tornaNav;
 
-        setFragment(PlaceholderFragmentGames.newInstance(idPaziente));
-
-
-
-        //SCOMMENTARE!!!!!
-        /*SectionsPagerAdapterGames sectionsPagerAdapter = new SectionsPagerAdapterGames(this, getSupportFragmentManager(),idPaziente);
-
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-
-         */
-
-
-
-        System.out.println("una volta");
-        //TabLayout tabs = findViewById(R.id.tabs);
-        //tabs.setupWithViewPager(viewPager);
-
-        //if(tabs.getVisibility() == View.VISIBLE)
-        //    tabs.setVisibility(View.GONE);
+        setFragment(PlaceholderFragmentGames.newInstance(idPaziente),PlaceholderFragmentGames.FRAGMENT_TAG);
 
     }
 
@@ -139,13 +119,13 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
             sectionInfoElder.setBackground(ContextCompat.getDrawable(this, R.drawable.grandmother));
     }
 
-    public void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment,String fragmentTag) {
         FragmentManager fm = getSupportFragmentManager();
-        fragment = fm.findFragmentByTag(".DEBUG_EXAMPLE_TWO_FRAGMENT_TAG");
+        fragment = fm.findFragmentByTag(fragmentTag);
         if (fragment == null) {
             FragmentTransaction ft = fm.beginTransaction();
-            fragment =PlaceholderFragmentGames.newInstance(idPaziente);
-            ft.add(android.R.id.content,fragment,".DEBUG_EXAMPLE_TWO_FRAGMENT_TAG");
+            fragment = PlaceholderFragmentGames.newInstance(idPaziente);
+            ft.add(android.R.id.content,fragment,fragmentTag);
             ft.commit();
         }
     }
@@ -157,7 +137,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         // Create a new say action.
 
             Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context
-                    .withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla foto del gioco per cominciare!") // Set the text to say.
+                    .withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla foto del gioco per cominciare!, oppure dimmelo a voce!") // Set the text to say.
                     .build(); // Build the say action.
         ciaoSonoPepper.run();
 
@@ -177,7 +157,6 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
 
         // Run the second action asynchronously.
         animate.async().run();
-
     }
 
     private void startTopic(Integer topicResource, QiChatbot.OnEndedListener chatEndedListener){
@@ -227,28 +206,47 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     }
 
 
-    public void startWeb(View view, int id) {
+    public void startWeb(View view, int position, Persona paziente) {
         WebActivity.tornaNav = tornaNav;
-        Intent intent = new Intent(this, WebActivity.class);
-        Bundle b = new Bundle();
-        b.putInt("id", id); //Your id
-        b.putInt("type", 1);
-        intent.putExtras(b);
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("item", position);
+        intent.putExtra("paziente",paziente);
         this.startActivity(intent);
         finish();
     }
 
     public void viewGameListByVoice(View view, String pepperString) {
-
-        System.out.println(getPeopleList());
-        for(Persona p: getPeopleList())
-            if(pepperString.toLowerCase().contains(p.getName().toLowerCase()) )
-                startWeb(view, p.getId());
+        getPazienteById(this.idPaziente,pepperString);
     }
 
 
+    private void getPazienteById(String idPaziente,String pepperString){
+        new DataManager(this,"pazienti",idPaziente,new DataManager.onDownloadDataListener() {
+            @Override
+            public void onDataSuccess(Persona paziente) {
+                int count = paziente.getEsercizi().size();
+                if(!paziente.getEsercizi().isEmpty())
+                    for(int i=0;i<paziente.getEsercizi().size();i++){
+                    if(paziente.getEsercizi().get(i).getTitleGame().equalsIgnoreCase(pepperString)){
+                       startWeb(null,i,paziente);
+                       return;
+                    }
+                }
+                else return;
+            }
 
-    public List<Persona> getPeopleList() {
+            @Override
+            public void onDataFailed() {
+            }
+
+            @Override
+            public void notFoundUser() {
+
+            }
+        });
+    }
+
+    /*public List<Persona> getPeopleList() {
         List<Persona> peopleList = new ArrayList<>();
         String sURL = "https://bettercallpepper.altervista.org/api/getParents.php?appid="+ Globals.myAppID;
         // Connect to the URL using java's native library
@@ -274,7 +272,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
             e.printStackTrace();
         }
         return peopleList;
-    }
+    }*/
 
     @Override
     public void onRobotFocusLost() {

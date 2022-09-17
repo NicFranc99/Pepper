@@ -22,16 +22,44 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.pepperapp28aprile.models.RecyclerViewAnswersAdapter;
+import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.QiSDK;
+import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import com.aldebaran.qi.sdk.builder.AnimateBuilder;
+import com.aldebaran.qi.sdk.builder.AnimationBuilder;
+import com.aldebaran.qi.sdk.builder.ChatBuilder;
+import com.aldebaran.qi.sdk.builder.ListenBuilder;
+import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
+import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
+import com.aldebaran.qi.sdk.builder.SayBuilder;
+import com.aldebaran.qi.sdk.builder.TopicBuilder;
+import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
+import com.aldebaran.qi.sdk.object.actuation.Animate;
+import com.aldebaran.qi.sdk.object.actuation.Animation;
+import com.aldebaran.qi.sdk.object.conversation.Chat;
+import com.aldebaran.qi.sdk.object.conversation.Chatbot;
+import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
+import com.aldebaran.qi.sdk.object.conversation.QiChatExecutor;
+import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
+import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.object.conversation.Topic;
+import com.example.pepperapp28aprile.models.*;
 import com.example.pepperapp28aprile.utilities.RisultatiManager;
-import com.example.pepperapp28aprile.utilities.VoiceManager;
+import com.example.pepperapp28aprile.utilities.*;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class GameFragment extends Fragment {
+public class GameFragment extends Fragment{
     private View v;
     private RecyclerView recyclerView;
     private ArrayList<RecyclerAnswers> recyclerAnswersArrayList;
@@ -56,7 +84,7 @@ public class GameFragment extends Fragment {
 
     public GameFragment(Persona.Game game,int positionGame) {
         this.game = game;
-        this.positiongame = positionGame;
+        //this.positiongame = positionGame; Se non serve vedere di togliere positionGame come parametro del construttore
         risultatiManager = new RisultatiManager();
     }
 
@@ -65,7 +93,6 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.containerFragment = container;
-
         v = inflater.inflate(R.layout.question_game_fragment, container, false);
 
         lisaDomande = game.getListaDomandeGioco();
@@ -85,6 +112,10 @@ public class GameFragment extends Fragment {
         speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
     }
 
+    /**
+     * TODO: Attualmente, per i giochi di categoria "CombinazioniLettere" vengono mostrate le domande ma non permettono l'interazione con l'utente. Pepper dovrebbe rimanere in ascolto e aspettarsi delle parole Come ad esempio "STOP,FINEGIOCO,FERMAGIOCO"
+     * @param i
+     */
     private void iniziaGioco(int i) {
         risultatiManager.startDomanda();
 
@@ -94,15 +125,19 @@ public class GameFragment extends Fragment {
         TextView testoparola = v.findViewById(R.id.testoparola);
         //containerAnimations = v.findViewById(R.id.viewanim);
 
+
+
+
 //================Scelta modalita Input===========================
 
-        /*if (choseTypeInputGame == Persona.Game.TypeInputGame.SELEZIONE) {
+      /*  if (choseTypeInputGame == Persona.Game.TypeInputGame.SELEZIONE) {
             containerAnimations.setVisibility(View.GONE);
-        } else if (choseTypeInputGame == Persona.Game.TypeInputGame.VOCALE) {
+        } else if (choseTypeInputGame == Persona.Game.TypeInputGame.VOCALE) */
 
-            lottieAnimationView = containerAnimations.findViewById(R.id.wave);
+        if(game instanceof Persona.FinaliParole || game instanceof Persona.CombinazioniLettere){
+           /* lottieAnimationView = containerAnimations.findViewById(R.id.wave);
             imageMic = containerAnimations.findViewById(R.id.btnvocalinput);
-
+m
             containerAnimations.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {
                     imageMic.setBackgroundColor(getContext().getColor(R.color.category_focused));
@@ -122,9 +157,9 @@ public class GameFragment extends Fragment {
                     imageMic.setVisibility(View.VISIBLE);
                 }
             });
-            containerAnimations.requestFocus();
+            containerAnimations.requestFocus();*/
 
-            lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+          /*  lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
                     speechRecognizer.startListening(speechRecognizerIntent);
@@ -142,7 +177,7 @@ public class GameFragment extends Fragment {
                 @Override
                 public void onAnimationRepeat(Animator animation) {
                 }
-            });
+            }); */
 
             speechRecognizer.setRecognitionListener(new RecognitionListener() {
                 @Override
@@ -183,7 +218,7 @@ public class GameFragment extends Fragment {
                 public void onResults(Bundle results) {
                     ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     Toast.makeText(getContext(), data.toString(), Toast.LENGTH_SHORT).show();
-                    String risposta = data.toString().replace("[", "").replace("]", "").toLowerCase();
+                    String risposta = data.toString().replace("[", "").replace("]", "").toLowerCase(); //TODO:Anzicchè prendere questo devo recuperare la parola detta a pepper
 
                     Log.e("RISPOSTA_VOCALE", "risposta " + risposta);
 
@@ -200,7 +235,7 @@ public class GameFragment extends Fragment {
                                     .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
                                     .commit();
                         }
-                        /*else {
+                        else {
                             if( game instanceof Persona.FluenzeVerbali || game instanceof Persona.FluenzeSemantiche ){
                                 String categoria = "";
 
@@ -259,7 +294,7 @@ public class GameFragment extends Fragment {
                                 domanda.checkDomandaOnline(getContext(), risposta, new Util.RicercaParoleListener() {
                                     @Override
                                     public void esiste() {
-                                        if(game instanceof Paziente.FinaliParole||game instanceof Paziente.FluenzeVerbali){
+                                        if(game instanceof Persona.FinaliParole||game instanceof Persona.FluenzeVerbali){
                                             AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT);
                                             answerDialogFragment.show();
                                             answerDialogFragment.setOnDismissListener(dialog -> {
@@ -303,8 +338,8 @@ public class GameFragment extends Fragment {
                                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "Attenzione! Parola non valida");
                                 answerDialogFragment.show();
                             }
-                        }*/
-                   /* }
+                        }
+                    }
                     else {
 
                         if (domanda.chekResponse(risposta)) {
@@ -320,11 +355,11 @@ public class GameFragment extends Fragment {
                                             .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
                                             .commit();
                                 } else {
-                                    /*if (fragment != null) {
+                                    if (fragment != null) {
                                         getActivity().getSupportFragmentManager().beginTransaction().remove(fragment)
                                                 .commit();
-                                    }*/
-                                    /*risultatiManager.stopDomanda();
+                                    }
+                                    risultatiManager.stopDomanda();
                                     positiongame++;
                                     iniziaGioco((positiongame));
                                 }
@@ -338,16 +373,16 @@ public class GameFragment extends Fragment {
                     }
                 }
 
-                /*private boolean controllaInBaseAlGioco(String risposta, String testoParola) {
-                    if(game instanceof Persona.CombinazioniLettere)
+                private boolean controllaInBaseAlGioco(String risposta, String testoParola) {
+                    /*if(game instanceof Persona.CombinazioniLettere)
                         return StringUtils.containsOnly(risposta,testoParola);
                     if(game instanceof Persona.FluenzeFonologiche||game instanceof Persona.FinaliParole)
                         return StringUtils.startsWith(risposta.toUpperCase(),testoParola.toUpperCase());
-                    else
+                    else*/
                         return true;
-                } */
+                }
 
-             /*   @Override
+                @Override
                 public void onPartialResults(Bundle partialResults) {
                 }
 
@@ -355,7 +390,7 @@ public class GameFragment extends Fragment {
                 public void onEvent(int eventType, Bundle params) {
                 }
             });
-        } */
+        }
 
 
         if (domanda.getListaRispose().size() < 1) {
@@ -369,7 +404,7 @@ public class GameFragment extends Fragment {
             testoparola.setText(domanda.getTestoParola());
             testoparola.setVisibility(View.VISIBLE);
 
-           VoiceManager.getIstance(getContext()).play(testoDomanda.getText().toString(), VoiceManager.QUEUE_ADD);
+            VoiceManager.getIstance(getContext()).play(testoDomanda.getText().toString(), VoiceManager.QUEUE_ADD);
             VoiceManager.getIstance(getContext()).play(testoparola.getText().toString(), VoiceManager.QUEUE_ADD);
         } else {
             testoparola.setVisibility(View.GONE);
@@ -444,5 +479,21 @@ public class GameFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+    }
+    private void stopGameByResponce(String responce) {
+        if (game instanceof Persona.CombinazioniLettere ||
+                game instanceof Persona.FluenzeFonologiche ||
+                game instanceof Persona.FluenzeVerbali ||
+                game instanceof Persona.FluenzeSemantiche ||
+                game instanceof Persona.FinaliParole) {
+
+            if (!(game instanceof Persona.FinaliParole) && !(game instanceof Persona.FluenzeVerbali) && ((responce.equalsIgnoreCase("STOP") || responce.equalsIgnoreCase("FINE GIOCO") || responce.equalsIgnoreCase("FERMA GIOCO")))) {
+                risultatiManager.stopDomanda();
+                risultatiManager.fineGioco();
+                getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
+                        .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                        .commit();
+            }
+        }
     }
 }

@@ -209,298 +209,311 @@ public class DataManager {
                                     // istanzio una classe in base al nome della categoria trovata;
                                     String keycat = exercise.getKey();
 
-                                    if (keycat != null) {
+                                    if (keycat != null ) {
                                         //Se l'esercizio ciclato nel nodo esercizi è di categoria appartenenza :
                                         if (keycat.equalsIgnoreCase(Persona.Appartenenza.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
-                                                Persona.Appartenenza appartenenza = new Persona.Appartenenza(
-                                                        quest.child("titolo").getValue(String.class));
-                                                setValoriFromJSON(appartenenza, keycat,paziente);
-                                                appartenenza.setSetIndexInCategory(indexCount);
-                                                indexCount++;
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                        Persona.Appartenenza appartenenza = new Persona.Appartenenza(
+                                                                quest.child("titolo").getValue(String.class));
+                                                        setValoriFromJSON(appartenenza, keycat, paziente);
+                                                        appartenenza.setSetIndexInCategory(indexCount);
+                                                        indexCount++;
 
-                                                appartenenza.setLivello(quest.child("livello").getValue(Integer.class));
-                                                for (DataSnapshot domande : quest.child("parole").getChildren()) {
-                                                    String categoria = domande.child("categoria").getValue(String.class);
-                                                    String parola = domande.child("parola").getValue(String.class);
-                                                    appartenenza.setDomanda(categoria, parola);
+                                                        appartenenza.setLivello(quest.child("livello").getValue(Integer.class));
+                                                        for (DataSnapshot domande : quest.child("parole").getChildren()) {
+                                                            String categoria = domande.child("categoria").getValue(String.class);
+                                                            String parola = domande.child("parola").getValue(String.class);
+                                                            appartenenza.setDomanda(categoria, parola);
+                                                        }
+                                                        listaGiochi.add(appartenenza);
                                                 }
-                                                listaGiochi.add(appartenenza);
                                             }
-
                                         } else if (keycat
                                                 .equalsIgnoreCase(Persona.Categorizzazione.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.Categorizzazione categorizzazione = new Persona.Categorizzazione(
+                                                            quest.child("titolo").getValue(String.class));
+                                                    categorizzazione.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    setValoriFromJSON(categorizzazione, keycat, paziente);
 
-                                                Persona.Categorizzazione categorizzazione = new Persona.Categorizzazione(
-                                                        quest.child("titolo").getValue(String.class));
-                                                categorizzazione.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                setValoriFromJSON(categorizzazione, keycat,paziente);
+                                                    for (DataSnapshot cate : quest.child("categorie").getChildren()) {
+                                                        categorizzazione.addcatRiferimento(cate.getValue(String.class));
+                                                    }
 
-                                                for (DataSnapshot cate : quest.child("categorie").getChildren()) {
-                                                    categorizzazione.addcatRiferimento(cate.getValue(String.class));
+                                                    categorizzazione.setLivello(quest.child("livello").getValue(Integer.class));
+
+                                                    for (DataSnapshot domande : quest.child("parole").getChildren()) {
+                                                        String rispostaCorretta = domande.child("rispostaCorretta")
+                                                                .getValue(String.class);
+                                                        String parola = domande.child("parola").getValue(String.class);
+                                                        categorizzazione.setDomanda(rispostaCorretta, parola);
+                                                    }
+                                                    listaGiochi.add(categorizzazione);
                                                 }
-
-                                                categorizzazione.setLivello(quest.child("livello").getValue(Integer.class));
-
-                                                for (DataSnapshot domande : quest.child("parole").getChildren()) {
-                                                    String rispostaCorretta = domande.child("rispostaCorretta")
-                                                            .getValue(String.class);
-                                                    String parola = domande.child("parola").getValue(String.class);
-                                                    categorizzazione.setDomanda(rispostaCorretta, parola);
-                                                }
-                                                listaGiochi.add(categorizzazione);
                                             }
                                         } else if (keycat
                                                 .equalsIgnoreCase(Persona.CombinazioniLettere.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                //if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.CombinazioniLettere combinazioniLettere = new Persona.CombinazioniLettere(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.CombinazioniLettere combinazioniLettere = new Persona.CombinazioniLettere(
-                                                        (quest.child("titolo").getValue(String.class)));
-
-                                                combinazioniLettere.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                combinazioniLettere
-                                                        .setLivello(quest.child("livello").getValue(Integer.class));
-                                                setValoriFromJSON(combinazioniLettere, keycat,paziente);
-                                                for (DataSnapshot chara : quest.child("lettere").getChildren()) {
-                                                    combinazioniLettere.setLettera(chara.getValue(String.class));
-                                                }
-                                                combinazioniLettere.setDomandaGioco();
-                                                listaGiochi.add(combinazioniLettere);
+                                                    combinazioniLettere.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    combinazioniLettere
+                                                            .setLivello(quest.child("livello").getValue(Integer.class));
+                                                    setValoriFromJSON(combinazioniLettere, keycat, paziente);
+                                                    for (DataSnapshot chara : quest.child("lettere").getChildren()) {
+                                                        combinazioniLettere.setLettera(chara.getValue(String.class));
+                                                    }
+                                                    combinazioniLettere.setDomandaGioco();
+                                                    listaGiochi.add(combinazioniLettere);
+                                                //}
                                             }
                                         } else if (keycat
                                                 .equalsIgnoreCase(Persona.EsistenzaParole.class.getSimpleName())) {
                                             int indexCount = 0;
 
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.EsistenzaParole esistenzaParole = new Persona.EsistenzaParole(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.EsistenzaParole esistenzaParole = new Persona.EsistenzaParole(
-                                                        (quest.child("titolo").getValue(String.class)));
+                                                    esistenzaParole.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
 
-                                                esistenzaParole.setSetIndexInCategory(indexCount);
-                                                indexCount++;
+                                                    esistenzaParole.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    setValoriFromJSON(esistenzaParole, keycat, paziente);
 
-                                                esistenzaParole.setLivello(quest.child("livello").getValue(Integer.class));
-                                                setValoriFromJSON(esistenzaParole, keycat,paziente);
-
-                                                for (DataSnapshot parole : quest.child("parole").getChildren()) {
-                                                    String p = parole.child("parola").getValue(String.class);
-                                                    esistenzaParole.setParole(c, p);
-                                                    // Log.i("RISPOSTA,PAROLE",p+""+Util.esistenzaParola(c,p)+"");
+                                                    for (DataSnapshot parole : quest.child("parole").getChildren()) {
+                                                        String p = parole.child("parola").getValue(String.class);
+                                                        esistenzaParole.setParole(c, p);
+                                                        // Log.i("RISPOSTA,PAROLE",p+""+Util.esistenzaParola(c,p)+"");
+                                                    }
+                                                    listaGiochi.add(esistenzaParole);
                                                 }
-                                                listaGiochi.add(esistenzaParole);
                                             }
                                         } else if (keycat.equalsIgnoreCase(Persona.FinaliParole.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
-
-                                                Persona.FinaliParole finaliParole = new Persona.FinaliParole(
-                                                        (quest.child("titolo").getValue(String.class)));
-                                                finaliParole.setLivello(quest.child("livello").getValue(Integer.class));
-                                                setValoriFromJSON(finaliParole, keycat,paziente);
-                                                finaliParole.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                for (DataSnapshot parole : quest.child("parole").getChildren()) {
-                                                    finaliParole.setParole(parole.child("parola").getValue(String.class));
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.FinaliParole finaliParole = new Persona.FinaliParole(
+                                                            (quest.child("titolo").getValue(String.class)));
+                                                    finaliParole.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    setValoriFromJSON(finaliParole, keycat, paziente);
+                                                    finaliParole.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    for (DataSnapshot parole : quest.child("parole").getChildren()) {
+                                                        finaliParole.setParole(parole.child("parola").getValue(String.class));
+                                                    }
+                                                    listaGiochi.add(finaliParole);
                                                 }
-                                                listaGiochi.add(finaliParole);
                                             }
                                         } else if (keycat
                                                 .equalsIgnoreCase(Persona.FluenzeFonologiche.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.FluenzeFonologiche fluenzeFonologiche = new Persona.FluenzeFonologiche(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.FluenzeFonologiche fluenzeFonologiche = new Persona.FluenzeFonologiche(
-                                                        (quest.child("titolo").getValue(String.class)));
-
-                                                fluenzeFonologiche.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                fluenzeFonologiche .setLivello(quest.child("livello").getValue(Integer.class));
-                                                setValoriFromJSON(fluenzeFonologiche, keycat,paziente);
-                                                fluenzeFonologiche.setDomandaGioco();
-                                                listaGiochi.add(fluenzeFonologiche);
+                                                    fluenzeFonologiche.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    fluenzeFonologiche.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    setValoriFromJSON(fluenzeFonologiche, keycat, paziente);
+                                                    fluenzeFonologiche.setDomandaGioco();
+                                                    listaGiochi.add(fluenzeFonologiche);
+                                                }
                                             }
                                         } else if (keycat
                                                 .equalsIgnoreCase(Persona.FluenzeSemantiche.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.FluenzeSemantiche fluenzeSemantiche = new Persona.FluenzeSemantiche(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.FluenzeSemantiche fluenzeSemantiche = new Persona.FluenzeSemantiche(
-                                                        (quest.child("titolo").getValue(String.class)));
+                                                    fluenzeSemantiche.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    fluenzeSemantiche.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    fluenzeSemantiche.setCategory(quest.child("categoria").getValue(String.class));
+                                                    setValoriFromJSON(fluenzeSemantiche, keycat, paziente);
 
-                                                fluenzeSemantiche.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                fluenzeSemantiche.setLivello(quest.child("livello").getValue(Integer.class));
-                                                fluenzeSemantiche.setCategory(quest.child("categoria").getValue(String.class));
-                                                setValoriFromJSON(fluenzeSemantiche, keycat,paziente);
-
-                                                listaGiochi.add(fluenzeSemantiche);
-                                                fluenzeSemantiche.setDomandaGioco();
+                                                    listaGiochi.add(fluenzeSemantiche);
+                                                    fluenzeSemantiche.setDomandaGioco();
+                                                }
                                             }
                                         } else if (keycat.equalsIgnoreCase(Persona.FluenzeVerbali.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.FluenzeVerbali fluenzeVerbali = new Persona.FluenzeVerbali(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.FluenzeVerbali fluenzeVerbali = new Persona.FluenzeVerbali(
-                                                        (quest.child("titolo").getValue(String.class)));
+                                                    fluenzeVerbali.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    fluenzeVerbali.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    setValoriFromJSON(fluenzeVerbali, keycat, paziente);
 
-                                                fluenzeVerbali.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                fluenzeVerbali.setLivello(quest.child("livello").getValue(Integer.class));
-                                                setValoriFromJSON(fluenzeVerbali, keycat,paziente);
-
-                                                for (DataSnapshot parole : quest.child("parole").getChildren()) {
-                                                    fluenzeVerbali.setParole(parole.child("parola").getValue(String.class));
+                                                    for (DataSnapshot parole : quest.child("parole").getChildren()) {
+                                                        fluenzeVerbali.setParole(parole.child("parola").getValue(String.class));
 
 
+                                                    }
+                                                    listaGiochi.add(fluenzeVerbali);
                                                 }
-                                                listaGiochi.add(fluenzeVerbali);
                                             }
                                         } else if (keycat
                                                 .equalsIgnoreCase(Persona.LettereMancanti.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.LettereMancanti lettereMancanti = new Persona.LettereMancanti(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.LettereMancanti lettereMancanti = new Persona.LettereMancanti(
-                                                        (quest.child("titolo").getValue(String.class)));
+                                                    lettereMancanti.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    lettereMancanti.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    setValoriFromJSON(lettereMancanti, keycat, paziente);
 
-                                                lettereMancanti.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                lettereMancanti.setLivello(quest.child("livello").getValue(Integer.class));
-                                                setValoriFromJSON(lettereMancanti, keycat,paziente);
+                                                    for (DataSnapshot parole : quest.child("parole").getChildren()) {
+                                                        lettereMancanti.setParole(
+                                                                (parole.child("parola").getValue(String.class)).toUpperCase());
 
-                                                for (DataSnapshot parole : quest.child("parole").getChildren()) {
-                                                    lettereMancanti.setParole(
-                                                            (parole.child("parola").getValue(String.class)).toUpperCase());
-
+                                                    }
+                                                    listaGiochi.add(lettereMancanti);
                                                 }
-                                                listaGiochi.add(lettereMancanti);
                                             }
                                         } else if (keycat.equalsIgnoreCase(Persona.Mesi.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.Mesi mesi = new Persona.Mesi(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.Mesi mesi = new Persona.Mesi(
-                                                        (quest.child("titolo").getValue(String.class)));
+                                                    mesi.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    mesi.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    setValoriFromJSON(mesi, keycat, paziente);
 
-                                                mesi.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                mesi.setLivello(quest.child("livello").getValue(Integer.class));
-                                                setValoriFromJSON(mesi, keycat,paziente);
+                                                    for (DataSnapshot elemento : quest.child("domande").getChildren()) {
+                                                        Persona.Mesi.Domanda domanda = new Persona.Mesi.Domanda();
+                                                        domanda.setTestoDomanda(
+                                                                elemento.child("domanda").getValue(String.class));
+                                                        domanda.setRispostaCorretta(
+                                                                elemento.child("rispostaCorretta").getValue(String.class));
 
-                                                for (DataSnapshot elemento : quest.child("domande").getChildren()) {
-                                                    Persona.Mesi.Domanda domanda = new Persona.Mesi.Domanda();
-                                                    domanda.setTestoDomanda(
-                                                            elemento.child("domanda").getValue(String.class));
-                                                    domanda.setRispostaCorretta(
-                                                            elemento.child("rispostaCorretta").getValue(String.class));
+                                                        for (DataSnapshot rsbagliata : elemento.child("risposteSbagliate")
+                                                                .getChildren()) {
+                                                            String s = rsbagliata.getValue(String.class);
+                                                            domanda.setRispostaSbagliata(s);
+                                                        }
+                                                        mesi.setListaDomande(domanda);
 
-                                                    for (DataSnapshot rsbagliata : elemento.child("risposteSbagliate")
-                                                            .getChildren()) {
-                                                        String s = rsbagliata.getValue(String.class);
-                                                        domanda.setRispostaSbagliata(s);
                                                     }
-                                                    mesi.setListaDomande(domanda);
-
+                                                    listaGiochi.add(mesi);
                                                 }
-                                                listaGiochi.add(mesi);
                                             }
                                         } else if (keycat.equalsIgnoreCase(Persona.Musica.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.Musica musica = new Persona.Musica(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.Musica musica = new Persona.Musica(
-                                                        (quest.child("titolo").getValue(String.class)));
+                                                    musica.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    musica.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    setValoriFromJSON(musica, keycat, paziente);
 
-                                                musica.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                musica.setLivello(quest.child("livello").getValue(Integer.class));
-                                                setValoriFromJSON(musica, keycat,paziente);
+                                                    for (DataSnapshot elemento : quest.child("domande").getChildren()) {
+                                                        Persona.Musica.Domanda domanda = new Persona.Musica.Domanda();
 
-                                                for (DataSnapshot elemento : quest.child("domande").getChildren()) {
-                                                    Persona.Musica.Domanda domanda = new Persona.Musica.Domanda();
+                                                        domanda.setUrlMedia(elemento.child("media").getValue(String.class));
+                                                        domanda.setRispostaCorretta(
+                                                                elemento.child("rispostaCorretta").getValue(String.class));
 
-                                                    domanda.setUrlMedia(elemento.child("media").getValue(String.class));
-                                                    domanda.setRispostaCorretta(
-                                                            elemento.child("rispostaCorretta").getValue(String.class));
+                                                        for (DataSnapshot rsbagliata : elemento.child("risposteSbagliate")
+                                                                .getChildren()) {
+                                                            String s = rsbagliata.getValue(String.class);
+                                                            domanda.setRispostaSbagliata(s);
+                                                        }
+                                                        musica.setListaDomande(domanda);
 
-                                                    for (DataSnapshot rsbagliata : elemento.child("risposteSbagliate")
-                                                            .getChildren()) {
-                                                        String s = rsbagliata.getValue(String.class);
-                                                        domanda.setRispostaSbagliata(s);
                                                     }
-                                                    musica.setListaDomande(domanda);
-
+                                                    listaGiochi.add(musica);
                                                 }
-                                                listaGiochi.add(musica);
                                             }
                                         } else if (keycat.equalsIgnoreCase(Persona.Racconti.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.Racconti racconti = new Persona.Racconti(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.Racconti racconti = new Persona.Racconti(
-                                                        (quest.child("titolo").getValue(String.class)));
+                                                    racconti.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    racconti.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    racconti.setTestoRacconto(quest.child("testo").getValue(String.class));
+                                                    setValoriFromJSON(racconti, keycat, paziente);
 
-                                                racconti.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                racconti.setLivello(quest.child("livello").getValue(Integer.class));
-                                                racconti.setTestoRacconto(quest.child("testo").getValue(String.class));
-                                                setValoriFromJSON(racconti, keycat,paziente);
-
-                                                for (DataSnapshot elemento : quest.child("media").getChildren()) {
-                                                    racconti.setUrlsMedia(elemento.getValue(String.class));
-                                                }
-
-                                                for (DataSnapshot elemento : quest.child("domande").getChildren()) {
-                                                    Persona.Racconti.Domanda domanda = new Persona.Racconti.Domanda();
-
-                                                    domanda.setRispostaCorretta(
-                                                            elemento.child("rispostaCorretta").getValue(String.class));
-                                                    domanda.setTestoDomanda(
-                                                            elemento.child("domanda").getValue(String.class));
-
-                                                    for (DataSnapshot rsbagliata : elemento.child("risposteSbagliate")
-                                                            .getChildren()) {
-                                                        String s = rsbagliata.getValue(String.class);
-                                                        domanda.setRispostaSbagliata(s);
+                                                    for (DataSnapshot elemento : quest.child("media").getChildren()) {
+                                                        racconti.setUrlsMedia(elemento.getValue(String.class));
                                                     }
-                                                    racconti.setListaDomande(domanda);
+
+                                                    for (DataSnapshot elemento : quest.child("domande").getChildren()) {
+                                                        Persona.Racconti.Domanda domanda = new Persona.Racconti.Domanda();
+
+                                                        domanda.setRispostaCorretta(
+                                                                elemento.child("rispostaCorretta").getValue(String.class));
+                                                        domanda.setTestoDomanda(
+                                                                elemento.child("domanda").getValue(String.class));
+
+                                                        for (DataSnapshot rsbagliata : elemento.child("risposteSbagliate")
+                                                                .getChildren()) {
+                                                            String s = rsbagliata.getValue(String.class);
+                                                            domanda.setRispostaSbagliata(s);
+                                                        }
+                                                        racconti.setListaDomande(domanda);
+                                                    }
+                                                    listaGiochi.add(racconti);
                                                 }
-                                                listaGiochi.add(racconti);
                                             }
                                         } else if (keycat.equalsIgnoreCase(Persona.Volti.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
+                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                    Persona.Volti volti = new Persona.Volti(
+                                                            (quest.child("titolo").getValue(String.class)));
 
-                                                Persona.Volti volti = new Persona.Volti(
-                                                        (quest.child("titolo").getValue(String.class)));
+                                                    volti.setSetIndexInCategory(indexCount);
+                                                    indexCount++;
+                                                    volti.setLivello(quest.child("livello").getValue(Integer.class));
+                                                    setValoriFromJSON(volti, keycat, paziente);
+                                                    volti.urlMedia(quest.child("media").getValue(String.class));
 
-                                                volti.setSetIndexInCategory(indexCount);
-                                                indexCount++;
-                                                volti.setLivello(quest.child("livello").getValue(Integer.class));
-                                                setValoriFromJSON(volti, keycat,paziente);
-                                                volti.urlMedia(quest.child("media").getValue(String.class));
+                                                    for (DataSnapshot elemento : quest.child("domande").getChildren()) {
+                                                        Persona.Volti.Domanda domanda = new Persona.Volti.Domanda();
+                                                        domanda.setTestoDomanda(
+                                                                elemento.child("domanda").getValue(String.class));
+                                                        domanda.setRispostaCorretta(
+                                                                elemento.child("rispostaCorretta").getValue(String.class));
 
-                                                for (DataSnapshot elemento : quest.child("domande").getChildren()) {
-                                                    Persona.Volti.Domanda domanda = new Persona.Volti.Domanda();
-                                                    domanda.setTestoDomanda(
-                                                            elemento.child("domanda").getValue(String.class));
-                                                    domanda.setRispostaCorretta(
-                                                            elemento.child("rispostaCorretta").getValue(String.class));
-
-                                                    for (DataSnapshot rsbagliata : elemento.child("risposteSbagliate")
-                                                            .getChildren()) {
-                                                        String s = rsbagliata.getValue(String.class);
-                                                        domanda.setRispostaSbagliata(s);
+                                                        for (DataSnapshot rsbagliata : elemento.child("risposteSbagliate")
+                                                                .getChildren()) {
+                                                            String s = rsbagliata.getValue(String.class);
+                                                            domanda.setRispostaSbagliata(s);
+                                                        }
+                                                        volti.setListaDomande(domanda);
                                                     }
-                                                    volti.setListaDomande(domanda);
+                                                    listaGiochi.add(volti);
                                                 }
-                                                listaGiochi.add(volti);
                                             }
                                         }
                                     }

@@ -53,8 +53,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     static NotificationManager notificationManager;
     private static boolean doButtonOperation;
     //private static boolean doButtonOperationImpegnato;
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase firebaseDatabase;
     public static boolean chiamataGestita;
     public static QiContext qiContext;
     @Override
@@ -183,7 +181,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
    /* public void caricaDati() {
         new DataManager("pazienti",new DataManager.onDownloadDataListener() {
             @Override
-            public void onDataSuccess(Cancellami paziente) {
+            public void onDataSuccess(com.example.pepperapp28aprile.Cancellami paziente) {
                 // Util.stampaLogDati(paziente);
                 System.out.println(paziente.nome);
                 System.out.println(paziente.cognome);
