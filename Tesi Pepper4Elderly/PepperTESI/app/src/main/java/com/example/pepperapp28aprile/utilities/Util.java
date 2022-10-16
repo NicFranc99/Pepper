@@ -1,6 +1,7 @@
 package com.example.pepperapp28aprile.utilities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -92,6 +93,7 @@ public class Util {
             return null;
         }
     }
+
 
     public static void stampaLogDati(Persona paziente) {
         List<Persona.Game> listGame = paziente.getEsercizi();
@@ -317,6 +319,32 @@ public class Util {
 //        return risultato;
 //    }
 //
+
+    /**
+     * Prende in ingresso l'intent corrente (esempio un fragment che passa a una activity dei
+     * parametri con il putExtra() qua bisogna passare l'intent dell'activity chiamando getIntent())
+     * e la key che viene utilizzata per recuperare l'intero (la kay che ha utilizzato il fragment per passare
+     * all'activity il parametro)
+     * @param intent Intent corrente da cui si vuole recuperare il parametro
+     * @param key chiave identificativa che ha utilizzato il fragment per passare il parametro allactivity esempio.
+     * @return Intero trovato nell'intent specificato con la chiave passata come parametro
+     */
+    public static int getIntegerByIntent(Intent intent,String key){
+        return intent.getExtras().getInt(key);
+    }
+
+    /**
+     * Prende in ingresso l'intent corrente (esempio un fragment che passa a una activity dei
+     * parametri con il putExtra() qua bisogna passare l'intent dell'activity chiamando getIntent())
+     * e la key che viene utilizzata per recuperare l'object (la kay che ha utilizzato il fragment per passare
+     * all'activity il parametro)
+     * @param intent Intent corrente da cui si vuole recuperare il parametro
+     * @param key chiave identificativa che ha utilizzato il fragment per passare il parametro allactivity esempio.
+     * @return Object trovato nell'intent specificato con la chiave passata come parametro
+     */
+    public static Object getObjectByItentKey(Intent intent,String key){
+        return  intent.getSerializableExtra(key);
+    }
 
 
     public static void esistenzaParola(Context c, String parola , RicercaParoleListener l){

@@ -1,0 +1,8 @@
+topic: ~questionario ()
+
+concept:(stop) ["stop" "fine gioco" "ferma gioco"]
+
+u:({pepper} ~stop ) termino il gioco ^execute(myExecutor,"termina","stop")  ^nextProposal ^endDiscuss(success)
+u:({pepper} ~stop ) termino il gioco ^execute(myExecutor,"termina","fine gioco")  ^nextProposal ^endDiscuss(success)
+u:({pepper} ~stop ) termino il gioco ^execute(myExecutor,"termina","ferma gioco")  ^nextProposal ^endDiscuss(success)
+u:(e:Dialog/SpeakFailure) Non so rispondere a questo

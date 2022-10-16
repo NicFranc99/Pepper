@@ -3,6 +3,7 @@ package com.example.pepperapp28aprile;
 import android.content.Intent;
 import android.icu.text.CaseMap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridView;
@@ -34,6 +35,7 @@ import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
+import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
 import com.aldebaran.qi.sdk.object.conversation.Chat;
 import com.aldebaran.qi.sdk.object.conversation.Chatbot;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
@@ -43,6 +45,9 @@ import com.aldebaran.qi.sdk.object.conversation.QiChatExecutor;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.aldebaran.qi.sdk.object.conversation.Topic;
+import com.aldebaran.qi.sdk.object.locale.Language;
+import com.aldebaran.qi.sdk.object.locale.Locale;
+import com.aldebaran.qi.sdk.object.locale.Region;
 import com.example.pepperapp28aprile.CheckMattutino;
 import com.example.pepperapp28aprile.Globals;
 import com.example.pepperapp28aprile.MainActivity;
@@ -51,6 +56,8 @@ import com.example.pepperapp28aprile.Persona;
 import com.example.pepperapp28aprile.R;
 import com.example.pepperapp28aprile.SectionsPagerAdapter;
 import com.example.pepperapp28aprile.WebActivity;
+import com.example.pepperapp28aprile.animations.Animations;
+import com.example.pepperapp28aprile.interfacedir.onCLickListener;
 import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.models.Emergency;
 import com.example.pepperapp28aprile.utilities.DataManager;
@@ -81,9 +88,10 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public static String idPaziente;
     public static String sesso;
     public static boolean tornaNav;
-    private QiContext qiContext;
+    public static QiContext qiContext;
     public static String viewGameList; //Nome del gioco detto a pepper dall'utente
     private static FragmentManager fragmentManager;
+    private static final String TAG = "MSI_MainMenuFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,10 +213,11 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
 
     }
 
-
+//TODO: Vedere qua per passare valori a una activity
     public void startWeb(View view, int position, Persona paziente) {
         WebActivity.tornaNav = tornaNav;
         Intent intent = new Intent(this, GameActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.putExtra("item", position);
         intent.putExtra("paziente",paziente);
         this.startActivity(intent);
@@ -296,7 +305,50 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
-
     }
+
+   /* private void setTItleUi() {
+        ImageView iconCategori = findViewById(R.id.img_icon_cat);
+        TextView txtCat = findViewById(R.id.txt_cat);
+        TextView txtTitleGame = findViewById(R.id.txt_title);
+
+        ImageView exit=findViewById(R.id.exit2);
+        Animations.focusView(exit, Animations.SCALING_BUTTON_DIALOG);
+        exit.setVisibility(View.VISIBLE);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                esci();
+            }
+        });
+        int position = getIntent().getExtras().getInt("item");
+        Persona paziente = (Persona)getIntent().getSerializableExtra("paziente");
+
+        Persona.Game g = paziente.getEsercizi().get(position);
+
+        iconCategori.setBackground(getDrawable(g.getNameIcon()));
+        txtCat.setText(g.getTitleCategory());
+        txtTitleGame.setText(g.getTitleGame());
+    }*/
+
+    /*private void esci() {
+        ExitDialogFragment exit = new ExitDialogFragment(GameProfileActivity.this);
+        exit.setText(getResources().getString(R.string.msg_exit_session));
+        exit.setIcon(getDrawable(R.drawable.answer));
+        exit.setListener(new onCLickListener() {
+            @Override
+            public void onClickExit() {
+                exit.dismiss();
+                finish();
+            }
+
+            @Override
+            public void onClickContinue() {
+                exit.dismiss();
+            }
+        });
+        exit.show();
+    }*/
+
 
 }

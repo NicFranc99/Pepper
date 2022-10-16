@@ -71,6 +71,10 @@
             android:label="@string/title_activity_check_mattutino"
             android:theme="@style/ThemeBlue.NoActionBar" />
         <activity
+            android:name=".PepperLissenerActivity"
+            android:label="@string/title_activity_pepper_lissener"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"></activity>
+        <activity
             android:name=".RejectActivity"
             android:theme="@android:style/Theme.NoDisplay" />
         <activity
@@ -78,7 +82,7 @@
             android:theme="@style/ThemeBlue.NoActionBar" />
         <activity
             android:name=".WebActivityRecognition"
-            android:theme="@style/ThemeBlue.NoActionBar"></activity>
+            android:theme="@style/ThemeBlue.NoActionBar" />
         <activity
             android:name=".AcceptActivity"
             android:theme="@android:style/Theme.NoDisplay" />
@@ -96,9 +100,10 @@
             android:theme="@style/ThemeBlue.NoActionBar" />
         <activity
             android:name=".GameActivity"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
             android:label="@string/title_game_activity"
             android:theme="@style/ThemeBlue.NoActionBar" />
-
     </application>
 
 </manifest>

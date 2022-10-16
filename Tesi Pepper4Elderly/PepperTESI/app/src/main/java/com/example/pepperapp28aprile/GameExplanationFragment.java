@@ -1,6 +1,7 @@
 package com.example.pepperapp28aprile;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -77,7 +78,6 @@ public class GameExplanationFragment extends Fragment {
             AnswerDialogFragment start = new AnswerDialogFragment(getContext(), AnswerDialogFragment.typeDialog.START);
             start.show();
             start.setOnDismissListener(dialog -> {
-
                 if (g instanceof Persona.Racconti) {
                     // Paziente.Racconti racconti =(Paziente.Racconti)g;
                     // Toast.makeText(getContext(), racconti.getTestoRacconto() ,
@@ -91,6 +91,16 @@ public class GameExplanationFragment extends Fragment {
                 } else {
                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameExplanationFragment.this)
                             .commit();
+                    //TODO: Se devo giocare a un gioco con il talk to speack, allora devo chiamare l'activity PepperLissenerActivity
+                    if(g instanceof Persona.FinaliParole || g instanceof Persona.CombinazioniLettere){
+                        Intent intent = new Intent(this.getActivity(),PepperLissenerActivity.class);
+                        intent.putExtra("gamePosition", position);
+                        intent.putExtra("game",g);
+                        intent.putExtra("idContainer",container.getId());
+                         //TODO: Vedere perche' ci mette tempo a terminare la gameActivity
+                        this.startActivity(intent);
+                    }
+                    else
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .add(container.getId(), new GameFragment(g,position)).commit();
                 }
@@ -121,9 +131,9 @@ public class GameExplanationFragment extends Fragment {
         start.requestFocus();
     }
 
-    @Override
+  /*  @Override
     public void onPause() {
         super.onPause();
         VoiceManager.getIstance(getContext()).stop();
-    }
+    }*/
 }

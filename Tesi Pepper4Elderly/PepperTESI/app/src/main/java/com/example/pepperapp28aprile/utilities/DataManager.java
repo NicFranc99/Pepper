@@ -453,7 +453,7 @@ public class DataManager {
                                         } else if (keycat.equalsIgnoreCase(Persona.Racconti.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
-                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                if (quest.hasChild("domande") || quest.child("domande").getChildrenCount() != 0) {
                                                     Persona.Racconti racconti = new Persona.Racconti(
                                                             (quest.child("titolo").getValue(String.class)));
 

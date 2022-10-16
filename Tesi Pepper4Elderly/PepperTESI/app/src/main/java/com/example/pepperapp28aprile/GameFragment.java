@@ -1,9 +1,11 @@
 package com.example.pepperapp28aprile;
 
 import android.animation.Animator;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -16,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -38,15 +41,21 @@ import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
+import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
 import com.aldebaran.qi.sdk.object.conversation.Chat;
 import com.aldebaran.qi.sdk.object.conversation.Chatbot;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
 import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.Phrase;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
 import com.aldebaran.qi.sdk.object.conversation.QiChatExecutor;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.aldebaran.qi.sdk.object.conversation.Topic;
+import com.aldebaran.qi.sdk.object.locale.Language;
+import com.aldebaran.qi.sdk.object.locale.Locale;
+import com.aldebaran.qi.sdk.object.locale.Region;
+import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.*;
 import com.example.pepperapp28aprile.utilities.RisultatiManager;
 import com.example.pepperapp28aprile.utilities.*;
@@ -68,13 +77,17 @@ public class GameFragment extends Fragment{
     private ViewGroup containerFragment;
     private RisultatiManager risultatiManager;
     private Persona.Game game;
-    private int positiongame = 0;
+    public static int positiongame = 0;
+    private RobotHelper robotHelper;
+    private QiContext qiContext;
+    public static PepperLissenerActivity lissenerActivity;
 
     private LottieAnimationView lottieAnimationView;
     //private RelativeLayout containerAnimations;
     private ShapeableImageView imageMic;
     private SpeechRecognizer speechRecognizer;
     private Intent speechRecognizerIntent;
+    public static Persona.Game.Domanda domanda;
 
     /*public GameFragment(int positionGame, Persona.Game.TypeInputGame chose) {
         this.positionGame = positionGame;
@@ -94,39 +107,34 @@ public class GameFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.containerFragment = container;
         v = inflater.inflate(R.layout.question_game_fragment, container, false);
-
         lisaDomande = game.getListaDomandeGioco();
         // mischio le domande
         Collections.shuffle(lisaDomande);
 
         recyclerView = v.findViewById(R.id.idCourseRV);
-
-        iniziaGioco(positiongame);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        iniziaGioco();
         return v;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
-        speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        //speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
+        //speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
     }
 
     /**
      * TODO: Attualmente, per i giochi di categoria "CombinazioniLettere" vengono mostrate le domande ma non permettono l'interazione con l'utente. Pepper dovrebbe rimanere in ascolto e aspettarsi delle parole Come ad esempio "STOP,FINEGIOCO,FERMAGIOCO"
-     * @param i
      */
-    private void iniziaGioco(int i) {
+    private void iniziaGioco() {
         risultatiManager.startDomanda();
-
-        Persona.Game.Domanda domanda = lisaDomande.get(i);
+        domanda = lisaDomande.get(positiongame);
         FrameLayout listaMedia = v.findViewById(R.id.linearimage);
         TextView testoDomanda = v.findViewById(R.id.testoDomanda);
         TextView testoparola = v.findViewById(R.id.testoparola);
         //containerAnimations = v.findViewById(R.id.viewanim);
-
-
-
 
 //================Scelta modalita Input===========================
 
@@ -134,8 +142,13 @@ public class GameFragment extends Fragment{
             containerAnimations.setVisibility(View.GONE);
         } else if (choseTypeInputGame == Persona.Game.TypeInputGame.VOCALE) */
 
-        if(game instanceof Persona.FinaliParole || game instanceof Persona.CombinazioniLettere){
-           /* lottieAnimationView = containerAnimations.findViewById(R.id.wave);
+        //if(game instanceof Persona.FinaliParole || game instanceof Persona.CombinazioniLettere){
+            //processaRisposta(PepperLissenerActivity.risposta,domanda,positiongame);
+            //robotHelper = lissenerActivity.getRobotHelper();
+            //qiContext = lissenerActivity.getQiContext();
+
+
+            /* lottieAnimationView = containerAnimations.findViewById(R.id.wave);
             imageMic = containerAnimations.findViewById(R.id.btnvocalinput);
 m
             containerAnimations.setOnFocusChangeListener((v, hasFocus) -> {
@@ -179,7 +192,7 @@ m
                 }
             }); */
 
-            speechRecognizer.setRecognitionListener(new RecognitionListener() {
+          /*   speechRecognizer.setRecognitionListener(new RecognitionListener() {
                 @Override
                 public void onReadyForSpeech(Bundle params) {
                 }
@@ -246,7 +259,7 @@ m
                                         answerDialogFragment.show();
                                         answerDialogFragment.setOnDismissListener(dialog -> {
                                             if(game instanceof Persona.FluenzeVerbali){
-                                                if  (lisaDomande.size() - 1 == i) {
+                                                if  (lisaDomande.size() - 1 == positiongame) {
                                                     risultatiManager.stopDomanda();
 
                                                     risultatiManager.fineGioco();
@@ -260,7 +273,7 @@ m
                                                     risultatiManager.stopDomanda();
 
                                                     positiongame++;
-                                                    iniziaGioco((positiongame));
+                                                    iniziaGioco();
                                                 }
                                             }
                                         });
@@ -298,7 +311,7 @@ m
                                             AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT);
                                             answerDialogFragment.show();
                                             answerDialogFragment.setOnDismissListener(dialog -> {
-                                                if (lisaDomande.size() - 1 == i) {
+                                                if (lisaDomande.size() - 1 == positiongame) {
                                                     risultatiManager.stopDomanda();
 
                                                     risultatiManager.fineGioco();
@@ -312,7 +325,7 @@ m
                                                     risultatiManager.stopDomanda();
 
                                                     positiongame++;
-                                                    iniziaGioco((positiongame));
+                                                    iniziaGioco();
                                                 }
                                             });
                                             risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.ESISTE));
@@ -347,7 +360,7 @@ m
                                     AnswerDialogFragment.typeDialog.CORRECT);
                             answerDialogFragment.show();
                             answerDialogFragment.setOnDismissListener(dialog -> {
-                                if (lisaDomande.size() - 1 == i) {
+                                if (lisaDomande.size() - 1 == positiongame) {
                                     risultatiManager.stopDomanda();
 
                                     risultatiManager.fineGioco();
@@ -361,7 +374,7 @@ m
                                     }
                                     risultatiManager.stopDomanda();
                                     positiongame++;
-                                    iniziaGioco((positiongame));
+                                    iniziaGioco();
                                 }
                             });
                         } else {
@@ -374,11 +387,11 @@ m
                 }
 
                 private boolean controllaInBaseAlGioco(String risposta, String testoParola) {
-                    /*if(game instanceof Persona.CombinazioniLettere)
-                        return StringUtils.containsOnly(risposta,testoParola);
+                    if(game instanceof Persona.CombinazioniLettere)
+                        return risposta.indexOf(testoParola) != -1;
                     if(game instanceof Persona.FluenzeFonologiche||game instanceof Persona.FinaliParole)
-                        return StringUtils.startsWith(risposta.toUpperCase(),testoParola.toUpperCase());
-                    else*/
+                        return risposta.toUpperCase().startsWith(testoParola.toUpperCase());
+                    else
                         return true;
                 }
 
@@ -389,15 +402,15 @@ m
                 @Override
                 public void onEvent(int eventType, Bundle params) {
                 }
-            });
-        }
+            }); */
+                //Fine processo parola gioco lissener
 
 
         if (domanda.getListaRispose().size() < 1) {
             testoDomanda.setText(domanda.getTestoDomanda());
 
         } else {
-            testoDomanda.setText("Domanda " + (i + 1) + " :\n" + domanda.getTestoDomanda());
+            testoDomanda.setText("Domanda " + (positiongame + 1) + " :\n" + domanda.getTestoDomanda());
         }
 
         if (!(domanda.getTestoParola().trim().equalsIgnoreCase("")) || domanda.getTestoParola() != null) {
@@ -446,7 +459,7 @@ m
                 positioslistclic.clear();
 
                 answerDialogFragment.setOnDismissListener(dialog -> {
-                    if (lisaDomande.size() - 1 == i) {
+                    if (lisaDomande.size() - 1 == positiongame) {
                         risultatiManager.stopDomanda();
                         risultatiManager.fineGioco();
                         getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
@@ -458,7 +471,7 @@ m
                         }
                         risultatiManager.stopDomanda();
                         positiongame++;
-                        iniziaGioco((positiongame));
+                        iniziaGioco();
                     }
                 });
             } else {
@@ -480,20 +493,174 @@ m
         recyclerView.setAdapter(adapter);
 
     }
-    private void stopGameByResponce(String responce) {
+
+    private boolean controllaInBaseAlGioco(String risposta, String testoParola) {
+        if(game instanceof Persona.CombinazioniLettere)
+            return risposta.indexOf(testoParola) != -1;
+        if(game instanceof Persona.FluenzeFonologiche||game instanceof Persona.FinaliParole)
+            return risposta.toUpperCase().startsWith(testoParola.toUpperCase());
+        else
+            return true;
+    }
+
+
+ // public void processaRisposta(String responce, Persona.Game.Domanda domanda,int i) {
+  public void processaRisposta(String responce) {
+      this.lissenerActivity = (PepperLissenerActivity) getActivity();
+        lissenerActivity.runOnUiThread(() -> {
+        Toast.makeText(getContext(), responce, Toast.LENGTH_SHORT).show();
+        String risposta = responce;
+
+        Log.e("RISPOSTA_VOCALE", "risposta " + risposta);
+
         if (game instanceof Persona.CombinazioniLettere ||
                 game instanceof Persona.FluenzeFonologiche ||
                 game instanceof Persona.FluenzeVerbali ||
                 game instanceof Persona.FluenzeSemantiche ||
-                game instanceof Persona.FinaliParole) {
+                game instanceof Persona.FinaliParole){
 
-            if (!(game instanceof Persona.FinaliParole) && !(game instanceof Persona.FluenzeVerbali) && ((responce.equalsIgnoreCase("STOP") || responce.equalsIgnoreCase("FINE GIOCO") || responce.equalsIgnoreCase("FERMA GIOCO")))) {
+            if (!(game instanceof  Persona.FinaliParole) &&!(game instanceof  Persona.FluenzeVerbali)&& ((risposta.equalsIgnoreCase("STOP") || risposta.equalsIgnoreCase("FINE GIOCO") || risposta.equalsIgnoreCase("FERMA GIOCO")))) {
                 risultatiManager.stopDomanda();
                 risultatiManager.fineGioco();
                 getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
                         .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
                         .commit();
             }
+            else {
+                if( game instanceof Persona.FluenzeVerbali || game instanceof Persona.FluenzeSemantiche ){
+                    String categoria = "";
+
+                    domanda.checkDomandaSimiliarita(getContext(),domanda.getTestoParola() , risposta, new Util.SimilaritaParoleListener() {
+                        @Override
+                        public void valida(float value) {
+                            AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT,"Ottimo lavoro. Vai avanti così ");
+                            answerDialogFragment.show();
+                            answerDialogFragment.setOnDismissListener(dialog -> {
+                                if(game instanceof Persona.FluenzeVerbali){
+                                    if  (lisaDomande.size() - 1 == positiongame) {
+                                        risultatiManager.stopDomanda();
+
+                                        risultatiManager.fineGioco();
+                                        getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
+                                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                                .commit();
+                                    } else {
+                                        if (fragment != null) {
+                                            getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                                        }
+                                        risultatiManager.stopDomanda();
+
+                                        positiongame++;
+                                        iniziaGioco();
+                                    }
+                                }
+                            });
+                            risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.CORRELATA));
+                        }
+
+                        @Override
+                        public void nonvalida(float value) {
+                            Log.e("RISPOSTA_VOCALE", "NON ESISTE ");
+                            String testoDialog="";
+                            if(game instanceof Persona.FluenzeVerbali){
+                                testoDialog="Pensaci meglio. E dimmi un'altra parola  ";
+                            }
+                            if(game instanceof Persona.FluenzeSemantiche){
+                                testoDialog="Non é molto attinente, pensaci meglio ";
+                            }
+
+                            risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONCORRELATA));
+                            AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, testoDialog);
+                            answerDialogFragment.show();
+                        }
+
+                        @Override
+                        public void errore() {
+                            Toast.makeText(getContext(),"C'é qualcosa che non va, prova ad accendere internet o ad riavviare il gioco ",Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+                else if (controllaInBaseAlGioco(risposta, domanda.getTestoParola().toLowerCase())) {
+                    domanda.checkDomandaOnline(getContext(), risposta, new Util.RicercaParoleListener() {
+                        @Override
+                        public void esiste() {
+                            if(game instanceof Persona.FinaliParole||game instanceof Persona.FluenzeVerbali){
+                                AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT);
+                                answerDialogFragment.show();
+                                answerDialogFragment.setOnDismissListener(dialog -> {
+                                    if (lisaDomande.size() - 1 == positiongame) {
+                                        risultatiManager.stopDomanda();
+
+                                        risultatiManager.fineGioco();
+                                        getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
+                                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                                .commit();
+                                    } else {
+                                        if (fragment != null) {
+                                            getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                                        }
+                                        risultatiManager.stopDomanda();
+
+                                        positiongame++;
+                                        iniziaGioco();
+                                    }
+                                });
+                                risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.ESISTE));
+                            }else {
+                                Log.e("RISPOSTA_VOCALE", "ESISTE");
+                                risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.ESISTE));
+                                AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT, "La parola ESISTE");
+                                answerDialogFragment.show();
+                            }
+                        }
+
+                        @Override
+                        public void nonesiste() {
+                            Log.e("RISPOSTA_VOCALE", "NON ESISTE ");
+                            risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONESISTE));
+                            AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "La parola NON ESISTE");
+                            answerDialogFragment.show();
+                        }
+                    });
+                } else {
+                    Log.e("RISPOSTA_VOCALE", "NON VALIDA ");
+                    risultatiManager.setParoleList( new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONVALIDA));
+                    AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "Attenzione! Parola non valida");
+                    answerDialogFragment.show();
+                }
+            }
         }
+        else {
+
+            if (domanda.chekResponse(risposta)) {
+                AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(),
+                        AnswerDialogFragment.typeDialog.CORRECT);
+                answerDialogFragment.show();
+                answerDialogFragment.setOnDismissListener(dialog -> {
+                    if (lisaDomande.size() - 1 == positiongame) {
+                        risultatiManager.stopDomanda();
+
+                        risultatiManager.fineGioco();
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
+                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                .commit();
+                    } else {
+                        if (fragment != null) {
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(fragment)
+                                    .commit();
+                        }
+                        risultatiManager.stopDomanda();
+                        positiongame++;
+                        iniziaGioco();
+                    }
+                });
+            } else {
+                AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(),
+                        AnswerDialogFragment.typeDialog.WRONG);
+                answerDialogFragment.show();
+                risultatiManager.setError();
+            }
+        }});
     }
 }

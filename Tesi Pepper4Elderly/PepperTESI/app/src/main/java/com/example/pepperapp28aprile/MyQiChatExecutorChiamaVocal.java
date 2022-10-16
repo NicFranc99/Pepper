@@ -30,6 +30,9 @@ class MyQiChatExecutorChiamaVocal extends BaseQiChatExecutor {
                 GameProfileActivity.viewGameList = params.get(1);
                 break;
             }
+            case "termina" :{
+                PepperLissenerActivity.risposta = params.get(1);
+            }
         }
         }
 

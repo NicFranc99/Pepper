@@ -26,6 +26,8 @@ import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayS
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.example.pepperapp28aprile.map.RobotHelper;
+import com.example.pepperapp28aprile.map.SaveFileHelper;
 import com.example.pepperapp28aprile.models.Emergency;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -177,6 +179,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         chiamataGestita = false;
         System.out.println("gestita");
     }
+
 
    /* public void caricaDati() {
         new DataManager("pazienti",new DataManager.onDownloadDataListener() {
@@ -363,6 +366,10 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         // Run the second action asynchronously.
         animate.async().run();
 
+    }
+
+    public QiContext getQiContext() {
+        return qiContext;
     }
 
     @Override

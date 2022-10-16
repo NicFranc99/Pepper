@@ -1,6 +1,9 @@
 <resources>
 
     <!-- Base application theme. -->
+    <style name="Theme.MyApp" parent="Theme.MaterialComponents.Light">
+
+    </style>
     <style name="AppTheme" parent="Base.Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

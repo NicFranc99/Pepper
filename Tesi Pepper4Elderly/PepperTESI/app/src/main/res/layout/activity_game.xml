@@ -60,6 +60,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="categoria"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/txt_title"
             app:layout_constraintStart_toEndOf="@+id/img_icon_cat"
             app:layout_constraintTop_toTopOf="parent" />
@@ -71,6 +72,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
             android:text="Titolo Gioco"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_icon_cat"

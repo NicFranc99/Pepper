@@ -110,6 +110,7 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
     public void startGameActivity(View view,Persona.Game game,int position) {
         WebActivity.tornaNav = tornaNav;
         Intent gameActivity = new Intent(this.getContext(), GameActivity.class);
+        gameActivity.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         Categoria category = new Categoria(game,position);
         gameActivity.putExtra("item", category.getPosition());
         gameActivity.putExtra("paziente",paziente);
