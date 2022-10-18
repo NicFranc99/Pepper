@@ -100,10 +100,11 @@
             android:theme="@style/ThemeBlue.NoActionBar" />
         <activity
             android:name=".GameActivity"
+            android:theme="@style/ThemeBlue.NoActionBar"
             android:excludeFromRecents="true"
             android:noHistory="true"
             android:label="@string/title_game_activity"
-            android:theme="@style/ThemeBlue.NoActionBar" />
+            />
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="2dp">
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cardanswer"
         style="@style/ButtonStyle"
         android:layout_width="match_parent"

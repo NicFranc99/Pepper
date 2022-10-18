@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnMenuPrincipale"
         style="@style/ButtonStyle"
         android:layout_width="0dp"
@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnStatistiche"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnStatistiche"
         style="@style/ButtonStyle"
         android:layout_width="0dp"

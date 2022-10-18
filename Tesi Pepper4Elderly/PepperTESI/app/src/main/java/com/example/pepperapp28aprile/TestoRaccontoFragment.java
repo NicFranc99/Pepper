@@ -1,38 +1,33 @@
 package com.example.pepperapp28aprile;
 
-import android.animation.ObjectAnimator;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.graphics.text.LineBreaker;
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.method.ScrollingMovementMethod;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.example.pepperapp28aprile.utilities.VoiceManager;
+import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.builder.SayBuilder;
+import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
+import com.aldebaran.qi.sdk.object.conversation.Phrase;
+import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.object.conversation.SpeechEngine;
+import com.aldebaran.qi.sdk.object.locale.Locale;
+import com.example.pepperapp28aprile.map.RobotHelper;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -46,17 +41,20 @@ public class TestoRaccontoFragment extends Fragment {
     private TextView txtTestoRacconto, txttitoloracconto;
     private Persona.Game game;
     public  static Button domandaButton;
+    public RobotHelper robotHelper;
+    public QiContext qiContext;
     public Persona.Racconti racconto;
     public  List<String> urlMedia;
     public  VerticalScrollingTextView tvContent;
+    public GameActivity gameActivity;
     public TestoRaccontoFragment(Persona.Game game,int positionGame) {
         Persona.Racconti g = (Persona.Racconti) game;
         this.game = game;
         this.positionGame = positionGame;
         testoRacconto = g.getTestoRacconto();
         titolo = g.getTitleGame();
-        racconto = ( Persona.Racconti )game;
-         urlMedia = racconto.getListUrlsMedia();
+        racconto = (Persona.Racconti)game;
+        urlMedia = racconto.getListUrlsMedia();
     }
 
     @Override
@@ -64,37 +62,43 @@ public class TestoRaccontoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.testo_racconto_view, container, false);
 
+        //Istanzio lo scroll automatico e gli imposto il testo del racconto.
         tvContent = (VerticalScrollingTextView) v.findViewById(R.id.tvContent);
         tvContent.setMovementMethod(new ScrollingMovementMethod());
         tvContent.scroll();
         tvContent.setText(testoRacconto);
+        gameActivity = (GameActivity) getActivity();
+        gameActivity.getRobotHelper().say(testoRacconto);
 
-        VoiceManager tts = VoiceManager.getIstance(getContext());
-        tts.play(testoRacconto, TextToSpeech.QUEUE_FLUSH);
+      //  VoiceManager tts = VoiceManager.getIstance(getContext());
+    //    tts.play(testoRacconto, TextToSpeech.QUEUE_FLUSH);
 
 
-        ImageView imageRacconto = (ImageView) v.findViewById(R.id.img_racconto);
-        final Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
-            int i=1;
-            public void run() {
-                try {
-                    Bitmap img = BitmapFactory.decodeStream((InputStream) new URL(urlMedia.get(i)).getContent());
-                    imageRacconto.setImageBitmap(img);
-                    i++;
-                }catch (Exception e) {
-                    System.out.println("Exc="+e);
+        if(!urlMedia.isEmpty()) { //Il Racconto ha dei media associati da visualizzare durante il racconto
+            ImageView imageRacconto = (ImageView) v.findViewById(R.id.img_racconto);
+
+            final Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                int i = 1;
+
+                public void run() {
+                    try {
+                        Bitmap img = BitmapFactory.decodeStream((InputStream) new URL(urlMedia.get(i)).getContent());
+                        imageRacconto.setImageBitmap(img);
+                        i++;
+                    } catch (Exception e) {
+                        System.out.println("Exc=" + e);
+                    }
+                    if (i > urlMedia.size()) {
+                        i = 0;
+                    }
+                    tvContent.setVisibility(View.VISIBLE); //Lo rendo visible perche' lo renderizza prima di farlo scrollare automaticamente..
+                    handler.postDelayed(this, 7000);  //for interval...
+
                 }
-                if(i>urlMedia.size())
-                {
-                    i=0;
-                }
-                tvContent.setVisibility(View.VISIBLE); //Lor endo visible perche' lo renderizza prima di farlo scrollare automaticamente..
-                handler.postDelayed(this, 7000);  //for interval...
-
-            }
-        };
-        handler.postDelayed(runnable, 0); //for initial delay..
+            };
+            handler.postDelayed(runnable, 0); //for initial delay..
+        }
 
        /* tts.setListener(new VoiceManager.StatusListener() {
             @Override
@@ -142,12 +146,15 @@ public class TestoRaccontoFragment extends Fragment {
         domandaButton = (Button) v.findViewById(R.id.btnvaidomande);
 
         (domandaButton).setOnClickListener(view -> {
-            tts.stop();
+           // tts.stop(); TODO: devo far fermare di parlare pepper quando l'utente clicca sul pulsante per andare alle domande del gioco
             getActivity().getSupportFragmentManager().beginTransaction().remove(TestoRaccontoFragment.this).commit();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .add(container.getId(), new GameFragment(game,positionGame)).commit();
 
         });
+
+
+
         return v;
     }
 

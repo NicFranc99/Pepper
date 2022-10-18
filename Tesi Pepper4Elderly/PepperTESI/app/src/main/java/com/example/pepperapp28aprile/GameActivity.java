@@ -1,11 +1,14 @@
 package com.example.pepperapp28aprile;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -13,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.QiRobot;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
@@ -25,21 +29,28 @@ import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.example.pepperapp28aprile.animations.Animations;
 import com.example.pepperapp28aprile.interfacedir.onCLickListener;
+import com.example.pepperapp28aprile.map.RobotHelper;
+import com.example.pepperapp28aprile.map.SaveFileHelper;
 import com.example.pepperapp28aprile.utilities.DataManager;
 
 import java.util.ArrayList;
 
-public class GameActivity extends FragmentActivity{
+public class GameActivity extends RobotActivity implements RobotLifecycleCallbacks{
 
     private RecyclerView recyclerView;
     private ArrayList<RecyclerAnswers> recyclerAnswersArrayList;
     private TextToSpeech t1;
     private final Bundle extras = new Bundle();
     private static FragmentManager fragmentManager;
+    public QiContext qiContext;
+    private static final int PERMISSION_STORAGE = 1;
+    private RobotHelper robotHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        QiSDK.register(this, this);
+        setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
         this.fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_game);
         setTItleUi();
@@ -49,6 +60,18 @@ public class GameActivity extends FragmentActivity{
             fragment.setArguments(getIntent().getExtras()); // delego al fragment la ricezzione dei dati
             getSupportFragmentManager().beginTransaction().replace(R.id.container_game_com, fragment).commit();
         }
+
+        if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            this.init();
+            System.out.println("on create init?");
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_STORAGE);
+        }
+    }
+
+    private void init() {
+        QiSDK.register(this, this);
+        this.robotHelper = new RobotHelper();
     }
 
     private void setTItleUi() {
@@ -78,6 +101,31 @@ public class GameActivity extends FragmentActivity{
     public void onBackPressed() {
 
         esci();
+    }
+
+    @Override
+    public void onRobotFocusLost() {
+
+    }
+
+    @Override
+    public void onRobotFocusRefused(String reason) {
+
+    }
+
+    @Override
+    public void onRobotFocusGained(QiContext qiContext) {
+        // Create a new say action.
+        this.qiContext = qiContext;
+        this.robotHelper.onRobotFocusGained(qiContext);
+    }
+
+    public QiContext getQiContext() {
+        return qiContext;
+    }
+
+    public RobotHelper getRobotHelper() {
+        return robotHelper;
     }
 
     private void esci() {
