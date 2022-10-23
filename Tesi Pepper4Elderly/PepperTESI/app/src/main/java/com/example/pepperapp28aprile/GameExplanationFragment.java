@@ -26,6 +26,7 @@ public class GameExplanationFragment extends Fragment {
     private Button start;
     //private TextView metodoInput;
     private int position;
+    private GameActivity activity;
     //public Persona.Game.TypeInputGame chose;
 
     @Override
@@ -73,6 +74,7 @@ public class GameExplanationFragment extends Fragment {
             VoiceManager.getIstance(getContext()).play("Premi per iniziare a Giocare", VoiceManager.QUEUE_ADD);
 
         }); */
+        activity = (GameActivity) getActivity();
 
         start.setOnClickListener(v -> {
             AnswerDialogFragment start = new AnswerDialogFragment(getContext(), AnswerDialogFragment.typeDialog.START);
@@ -91,18 +93,18 @@ public class GameExplanationFragment extends Fragment {
                 } else {
                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameExplanationFragment.this)
                             .commit();
-                    //TODO: Se devo giocare a un gioco con il talk to speack, allora devo chiamare l'activity PepperLissenerActivity
-                    if(g instanceof Persona.FinaliParole || g instanceof Persona.CombinazioniLettere){
+                    //TODO: Non devo piu' utilizzare l'activity PepperLissenreactivity (non serve piu') ma posso usare GameActivity visto che l'ho pepperizzata
+                    if(g instanceof Persona.CombinazioniLettere || g instanceof Persona.FinaliParole ){
                         Intent intent = new Intent(this.getActivity(),PepperLissenerActivity.class);
                         intent.putExtra("gamePosition", position);
                         intent.putExtra("game",g);
                         intent.putExtra("idContainer",container.getId());
                          //TODO: Vedere perche' ci mette tempo a terminare la gameActivity
                         this.startActivity(intent);
-                    }
+                   }
                     else
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .add(container.getId(), new GameFragment(g,position)).commit();
+                   getActivity().getSupportFragmentManager().beginTransaction()
+                           .add(container.getId(), new GameFragment(g,position)).commit();
                 }
             });
         });

@@ -2,6 +2,8 @@ package com.example.pepperapp28aprile.utilities;
 
 import android.util.Log;
 
+import com.example.pepperapp28aprile.PepperLissenerActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,7 @@ public class RisultatiManager {
     public void fineGioco() {
         try {
             tempototale = t.stopGame();
+            PepperLissenerActivity.isGameEnd = true;
         } catch (ErrorGameNotStarted errorGameNotStarted) {
             Log.e(LOG_ID, errorGameNotStarted.toString());
         }

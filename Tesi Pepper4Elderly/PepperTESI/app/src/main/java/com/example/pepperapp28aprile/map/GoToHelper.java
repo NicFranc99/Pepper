@@ -4,7 +4,12 @@ import android.util.Log;
 
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.builder.ChatBuilder;
 import com.aldebaran.qi.sdk.builder.GoToBuilder;
+import com.aldebaran.qi.sdk.builder.ListenBuilder;
+import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
+import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
+import com.aldebaran.qi.sdk.builder.TopicBuilder;
 import com.aldebaran.qi.sdk.builder.TransformBuilder;
 import com.aldebaran.qi.sdk.object.actuation.AttachedFrame;
 import com.aldebaran.qi.sdk.object.actuation.Frame;
@@ -13,12 +18,23 @@ import com.aldebaran.qi.sdk.object.actuation.GoTo;
 import com.aldebaran.qi.sdk.object.actuation.Mapping;
 import com.aldebaran.qi.sdk.object.actuation.OrientationPolicy;
 import com.aldebaran.qi.sdk.object.actuation.PathPlanningPolicy;
+import com.aldebaran.qi.sdk.object.conversation.Chat;
+import com.aldebaran.qi.sdk.object.conversation.Chatbot;
+import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
+import com.aldebaran.qi.sdk.object.conversation.QiChatExecutor;
+import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
+import com.aldebaran.qi.sdk.object.conversation.Topic;
 import com.aldebaran.qi.sdk.object.geometry.Transform;
 import com.aldebaran.qi.sdk.object.geometry.Vector3;
 import com.aldebaran.qi.sdk.util.FutureUtils;
+import com.example.pepperapp28aprile.QiExecutor.MyQiChatExcecutorGame;
+import com.example.pepperapp28aprile.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**

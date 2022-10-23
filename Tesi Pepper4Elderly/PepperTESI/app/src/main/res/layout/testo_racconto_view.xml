@@ -41,12 +41,10 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/black">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,34 +70,34 @@
                 android:layout_height="400dp"
                 android:contentDescription="casd"
                 android:scaleType="centerCrop"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/tvContent"
 
                 />
             </LinearLayout>
+
         <com.example.pepperapp28aprile.VerticalScrollingTextView
             android:id="@+id/tvContent"
-            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_racconto"
+            android:layout_alignBottom="@+id/btnvaidomande"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/img_racconto"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:maxLines="10"
-            android:scrollbars="vertical"
-            android:scrollHorizontally="false"
-            android:layout_alignParentLeft="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:paddingLeft="500dp"
-            android:textSize="@dimen/DIM_TEXT_CAT3"
-            android:layout_alignBottom="@+id/btnvaidomande"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/img_racconto"
-            android:layout_toRightOf="@+id/img_racconto"
+            android:scrollbars="vertical"
             android:layout_marginBottom="80dp"
-            android:text="testoracconto"
+            android:scrollHorizontally="false"
+            android:text="sadasd"
             android:textAlignment="inherit"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/btnvaidomande"
-            />
+            android:textSize="@dimen/DIM_TEXT_CAT3"
+            app:layout_constraintTop_toBottomOf="@+id/btnvaidomande" />
     </com.google.android.material.card.MaterialCardView>
 
 

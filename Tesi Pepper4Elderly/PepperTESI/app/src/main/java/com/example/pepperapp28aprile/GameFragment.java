@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.speech.RecognitionListener;
@@ -55,6 +57,7 @@ import com.aldebaran.qi.sdk.object.conversation.Topic;
 import com.aldebaran.qi.sdk.object.locale.Language;
 import com.aldebaran.qi.sdk.object.locale.Locale;
 import com.aldebaran.qi.sdk.object.locale.Region;
+import com.example.pepperapp28aprile.QiExecutor.MyQiChatExcecutorGame;
 import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.*;
 import com.example.pepperapp28aprile.utilities.RisultatiManager;
@@ -81,6 +84,7 @@ public class GameFragment extends Fragment{
     private RobotHelper robotHelper;
     private QiContext qiContext;
     public static PepperLissenerActivity lissenerActivity;
+    public static String rispostaUtente;
 
     private LottieAnimationView lottieAnimationView;
     //private RelativeLayout containerAnimations;
@@ -110,11 +114,11 @@ public class GameFragment extends Fragment{
         lisaDomande = game.getListaDomandeGioco();
         // mischio le domande
         Collections.shuffle(lisaDomande);
-
         recyclerView = v.findViewById(R.id.idCourseRV);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         iniziaGioco();
+        Globals.gameFragmentRun = true;
         return v;
     }
 
@@ -506,9 +510,6 @@ m
 
  // public void processaRisposta(String responce, Persona.Game.Domanda domanda,int i) {
   public void processaRisposta(String responce) {
-      this.lissenerActivity = (PepperLissenerActivity) getActivity();
-        lissenerActivity.runOnUiThread(() -> {
-        Toast.makeText(getContext(), responce, Toast.LENGTH_SHORT).show();
         String risposta = responce;
 
         Log.e("RISPOSTA_VOCALE", "risposta " + risposta);
@@ -661,6 +662,6 @@ m
                 answerDialogFragment.show();
                 risultatiManager.setError();
             }
-        }});
+        }
     }
 }

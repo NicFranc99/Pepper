@@ -6,6 +6,7 @@ public class Globals {
     public static int senderCallID;
     public static boolean chiamataInArrivo;
     public static boolean arrivato;
+    public static boolean gameFragmentRun;
     public static AvvisoFragmentProfile avviso;
     public static boolean isGameMode;
     public static String idPaziente;

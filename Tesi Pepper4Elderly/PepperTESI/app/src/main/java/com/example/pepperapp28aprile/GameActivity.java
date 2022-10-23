@@ -15,25 +15,39 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiRobot;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
 import com.aldebaran.qi.sdk.builder.AnimationBuilder;
+import com.aldebaran.qi.sdk.builder.ChatBuilder;
+import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
+import com.aldebaran.qi.sdk.builder.TopicBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
+import com.aldebaran.qi.sdk.object.conversation.Chat;
+import com.aldebaran.qi.sdk.object.conversation.Chatbot;
+import com.aldebaran.qi.sdk.object.conversation.QiChatExecutor;
+import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.object.conversation.Topic;
+import com.example.pepperapp28aprile.QiExecutor.MyQiChatExcecutorGame;
 import com.example.pepperapp28aprile.animations.Animations;
 import com.example.pepperapp28aprile.interfacedir.onCLickListener;
 import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.map.SaveFileHelper;
 import com.example.pepperapp28aprile.utilities.DataManager;
+import com.example.pepperapp28aprile.utilities.Util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GameActivity extends RobotActivity implements RobotLifecycleCallbacks{
 
@@ -45,6 +59,11 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
     public QiContext qiContext;
     private static final int PERMISSION_STORAGE = 1;
     private RobotHelper robotHelper;
+    private int position;
+    private Persona.Game game;
+    private Persona paziente;
+    public static String rispostaUtente;
+    private String currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +72,11 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
         this.fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_game);
+
+       position = Util.getIntegerByIntent(getIntent(),"item");
+       paziente = (Persona) Util.getObjectByItentKey(getIntent(),"paziente");
+       game = paziente.getEsercizi().get(position);
+
         setTItleUi();
 
         if (savedInstanceState == null) {
@@ -88,13 +112,9 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
                 esci();
             }
         });
-        int position = getIntent().getExtras().getInt("item");
-        Persona paziente = (Persona)getIntent().getSerializableExtra("paziente");
-
-        Persona.Game g = paziente.getEsercizi().get(position);
-        iconCategori.setBackground(getDrawable(g.getNameIcon()));
-        txtCat.setText(g.getTitleCategory());
-        txtTitleGame.setText(g.getTitleGame());
+        iconCategori.setBackground(getDrawable(game.getNameIcon()));
+        txtCat.setText(game.getTitleCategory());
+        txtTitleGame.setText(game.getTitleGame());
     }
 
     @Override
@@ -113,12 +133,14 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
 
     }
 
+
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
         // Create a new say action.
         this.qiContext = qiContext;
         this.robotHelper.onRobotFocusGained(qiContext);
-    }
+
+            }
 
     public QiContext getQiContext() {
         return qiContext;

@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.aldebaran.qi.sdk.object.conversation.SpeechEngine;
 import com.aldebaran.qi.sdk.object.locale.Locale;
 import com.example.pepperapp28aprile.map.RobotHelper;
+import com.google.android.material.card.MaterialCardView;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -76,7 +79,7 @@ public class TestoRaccontoFragment extends Fragment {
 
         if(!urlMedia.isEmpty()) { //Il Racconto ha dei media associati da visualizzare durante il racconto
             ImageView imageRacconto = (ImageView) v.findViewById(R.id.img_racconto);
-
+            imageRacconto.setVisibility(View.VISIBLE);
             final Handler handler = new Handler();
             Runnable runnable = new Runnable() {
                 int i = 1;
@@ -92,12 +95,17 @@ public class TestoRaccontoFragment extends Fragment {
                     if (i > urlMedia.size()) {
                         i = 0;
                     }
-                    tvContent.setVisibility(View.VISIBLE); //Lo rendo visible perche' lo renderizza prima di farlo scrollare automaticamente..
+                    //tvContent.setVisibility(View.VISIBLE); //Lo rendo visible perche' lo renderizza prima di farlo scrollare automaticamente..
                     handler.postDelayed(this, 7000);  //for interval...
 
                 }
             };
             handler.postDelayed(runnable, 0); //for initial delay..
+        }
+        else {
+            tvContent.setHeight(50);
+            tvContent.setPadding(100,0,0,0);
+            MaterialCardView cardView = v.findViewById(R.id.card);
         }
 
        /* tts.setListener(new VoiceManager.StatusListener() {

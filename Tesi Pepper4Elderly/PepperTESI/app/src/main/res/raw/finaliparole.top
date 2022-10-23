@@ -1,8 +1,8 @@
 topic: ~questionario ()
 
-concept:(stop) ["stop" "fine gioco" "ferma gioco"]
 
-u:({pepper} ~stop ) termino il gioco ^execute(myExecutor,"termina","stop")  ^nextProposal ^endDiscuss(success)
-u:({pepper} ~stop ) termino il gioco ^execute(myExecutor,"termina","fine gioco")  ^nextProposal ^endDiscuss(success)
-u:({pepper} ~stop ) termino il gioco ^execute(myExecutor,"termina","ferma gioco")  ^nextProposal ^endDiscuss(success)
+u:({pepper} fine gioco) termino il gioco ^execute(myExecutor,"rispostaGioco","fine gioco")  ^nextProposal ^endDiscuss(success)
+u:({pepper} ferma gioco) termino il gioco ^execute(myExecutor,"rispostaGioco","ferma gioco")  ^nextProposal ^endDiscuss(success)
+u:({pepper} stop) termino il gioco ^execute(myExecutor,"rispostaGioco","stop")  ^nextProposal ^endDiscuss(success)
+u:({pepper} _*) termino il gioco ^execute(myExecutor,"rispostaGioco",$1)  ^nextProposal ^endDiscuss(success)
 u:(e:Dialog/SpeakFailure) Non so rispondere a questo

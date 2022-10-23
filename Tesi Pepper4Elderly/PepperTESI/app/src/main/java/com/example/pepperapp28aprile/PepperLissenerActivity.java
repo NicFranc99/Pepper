@@ -46,6 +46,7 @@ import com.aldebaran.qi.sdk.object.conversation.Topic;
 import com.aldebaran.qi.sdk.object.locale.Language;
 import com.aldebaran.qi.sdk.object.locale.Locale;
 import com.aldebaran.qi.sdk.object.locale.Region;
+import com.example.pepperapp28aprile.QiExecutor.MyQiChatExcecutorGame;
 import com.example.pepperapp28aprile.animations.Animations;
 import com.example.pepperapp28aprile.interfacedir.onCLickListener;
 import com.example.pepperapp28aprile.map.RobotHelper;
@@ -75,6 +76,7 @@ public class PepperLissenerActivity extends RobotActivity implements RobotLifecy
     private int idContainer;
     private SaveFileHelper saveFileHelper;
     private RobotHelper robotHelper;
+    public static boolean isGameEnd = false;
 
     private void init() {
         QiSDK.register(this, this);
@@ -102,7 +104,9 @@ public class PepperLissenerActivity extends RobotActivity implements RobotLifecy
         risultatiManager = new RisultatiManager();
          setContentView(R.layout.activity_game);
         this.fragmentManager = getSupportFragmentManager();
-
+        if(isGameEnd){
+            isGameEnd = false;
+        }
         setGameFragmentVariable();
         setTItleUi();
 
@@ -224,39 +228,73 @@ public class PepperLissenerActivity extends RobotActivity implements RobotLifecy
     public RobotHelper getRobotHelper() {
         return robotHelper;
     }
-
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
         Globals.NowIsRunning = Globals.GameProfile;
-        this.robotHelper.onRobotFocusGained(qiContext);
         this.qiRobotContext = qiContext;
-        // Create a new say action.
-
-        //robotHelper.say("CI SONO RIUSCITOOOO")
+        this.robotHelper.onRobotFocusGained(qiContext);
 
         this.getSupportFragmentManager().beginTransaction()
                 .add(idContainer, new GameFragment(game,position)).commit();
 
-            // Create a phrase set.
-/*            PhraseSet phraseSet = PhraseSetBuilder.with(qiContext)
-                    .withTexts()
-                    .build();
-
-            Listen listen = ListenBuilder.with(qiContext)
-                    .withPhraseSet(phraseSet)
-                    .build();
-
-            ListenResult listenResult = listen.run();
-
-            risposta = listenResult.getHeardPhrase().getText();   // Equals to forwards.
-*/
-
-
-
-        GameFragment fragment  = (GameFragment) getSupportFragmentManager().getFragments().get(0);
-        fragment.processaRisposta(risposta);
+    while (true) {
+        if(isGameEnd)
+            break;
+            startTopic(R.raw.finaliparole, endReason -> {
+                analizzaRisposta(risposta);
+            });
+    }
     }
 
+    private void analizzaRisposta(String risposta){
+            GameFragment fragment = (GameFragment) getSupportFragmentManager().getFragments().get(0);
+            fragment.processaRisposta(risposta);
+    }
+
+    private void startTopic(Integer topicResource, QiChatbot.OnEndedListener chatEndedListener){
+        try{
+            System.out.println("sono nel topic");
+
+            final Topic topic = TopicBuilder.with(qiRobotContext)
+                    .withResource(topicResource).build();
+
+            // Create a qiChatbot
+            QiChatbot qiChatbot = QiChatbotBuilder.with(qiRobotContext).withTopic(topic).build();
+
+            Map<String, QiChatExecutor> executors = new HashMap<>();
+
+            // Map the executor name from the topic to our qiChatExecutor
+            executors.put("myExecutor", new MyQiChatExcecutorGame(qiRobotContext));
+
+            // Set the executors to the qiChatbot
+            qiChatbot.setExecutors(executors);
+            List<Chatbot> chatbots = new ArrayList<>();
+            chatbots.add(qiChatbot);
+
+            // Build chat with the chatbotBuilder
+            Chat chat = ChatBuilder.with(qiRobotContext).withChatbot(qiChatbot).build();
+
+            // Run an action asynchronously.
+//chat.async().run();
+
+            Future<Void> chatFuture = chat.async().run();
+
+            qiChatbot.addOnEndedListener(endReason -> {
+                chatFuture.requestCancellation();
+            });
+            qiChatbot.addOnEndedListener(chatEndedListener);
+
+            chatFuture.thenConsume(value -> {
+                if (value.hasError()) {
+                    System.out.println("Discussion finished with error.");
+                }
+            });
+
+        }catch(Exception e){ System.out.println("eccezione topic");
+            e.printStackTrace();
+        }
+
+    }
     @Override
     public void onRobotFocusLost() {
 
@@ -269,7 +307,7 @@ public class PepperLissenerActivity extends RobotActivity implements RobotLifecy
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         QiSDK.unregister(this, this);
         super.onDestroy();
     }
