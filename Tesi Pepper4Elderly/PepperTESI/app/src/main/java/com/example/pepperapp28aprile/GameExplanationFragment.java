@@ -93,8 +93,12 @@ public class GameExplanationFragment extends Fragment {
                 } else {
                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameExplanationFragment.this)
                             .commit();
-                    //TODO: Non devo piu' utilizzare l'activity PepperLissenreactivity (non serve piu') ma posso usare GameActivity visto che l'ho pepperizzata
-                    if(g instanceof Persona.CombinazioniLettere || g instanceof Persona.FinaliParole ){
+
+                    if(g instanceof Persona.CombinazioniLettere
+                            || g instanceof Persona.FinaliParole
+                            || g instanceof Persona.FluenzeVerbali
+                            || g instanceof Persona.FluenzeFonologiche
+                            || g instanceof Persona.FluenzeSemantiche){
                         Intent intent = new Intent(this.getActivity(),PepperLissenerActivity.class);
                         intent.putExtra("gamePosition", position);
                         intent.putExtra("game",g);

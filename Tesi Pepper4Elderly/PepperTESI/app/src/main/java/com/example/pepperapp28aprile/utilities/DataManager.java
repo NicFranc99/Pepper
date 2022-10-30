@@ -319,7 +319,7 @@ public class DataManager {
                                                 .equalsIgnoreCase(Persona.FluenzeFonologiche.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
-                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                               // if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
                                                     Persona.FluenzeFonologiche fluenzeFonologiche = new Persona.FluenzeFonologiche(
                                                             (quest.child("titolo").getValue(String.class)));
 
@@ -329,13 +329,13 @@ public class DataManager {
                                                     setValoriFromJSON(fluenzeFonologiche, keycat, paziente);
                                                     fluenzeFonologiche.setDomandaGioco();
                                                     listaGiochi.add(fluenzeFonologiche);
-                                                }
+                                            //    }
                                             }
                                         } else if (keycat
                                                 .equalsIgnoreCase(Persona.FluenzeSemantiche.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
-                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                               // if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
                                                     Persona.FluenzeSemantiche fluenzeSemantiche = new Persona.FluenzeSemantiche(
                                                             (quest.child("titolo").getValue(String.class)));
 
@@ -347,7 +347,7 @@ public class DataManager {
 
                                                     listaGiochi.add(fluenzeSemantiche);
                                                     fluenzeSemantiche.setDomandaGioco();
-                                                }
+                                              //  }
                                             }
                                         } else if (keycat.equalsIgnoreCase(Persona.FluenzeVerbali.class.getSimpleName())) {
                                             int indexCount = 0;
@@ -393,7 +393,7 @@ public class DataManager {
                                         } else if (keycat.equalsIgnoreCase(Persona.Mesi.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
-                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                if (quest.hasChild("domande") || quest.child("domande").getChildrenCount() != 0) {
                                                     Persona.Mesi mesi = new Persona.Mesi(
                                                             (quest.child("titolo").getValue(String.class)));
 
@@ -423,7 +423,7 @@ public class DataManager {
                                         } else if (keycat.equalsIgnoreCase(Persona.Musica.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
-                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                if (quest.hasChild("domande") || quest.child("domande").getChildrenCount() != 0) {
                                                     Persona.Musica musica = new Persona.Musica(
                                                             (quest.child("titolo").getValue(String.class)));
 
@@ -488,7 +488,7 @@ public class DataManager {
                                         } else if (keycat.equalsIgnoreCase(Persona.Volti.class.getSimpleName())) {
                                             int indexCount = 0;
                                             for (DataSnapshot quest : exercise.getChildren()) {
-                                                if (quest.hasChild("parole") || quest.child("parole").getChildrenCount() != 0) {
+                                                if (quest.hasChild("domande") || quest.child("domande").getChildrenCount() != 0) {
                                                     Persona.Volti volti = new Persona.Volti(
                                                             (quest.child("titolo").getValue(String.class)));
 

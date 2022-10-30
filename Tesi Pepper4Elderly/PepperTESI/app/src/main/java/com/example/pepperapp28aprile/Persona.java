@@ -729,7 +729,7 @@ public class Persona implements Serializable {
 
     public static class Mesi extends Game implements Serializable{
 
-        public static class Domanda {
+        public static class Domanda implements Serializable{
             private final List<String> risposteSbagliate = new ArrayList<>();
             private String testoDomanda = "";
             private String rispostaCorretta = "";
