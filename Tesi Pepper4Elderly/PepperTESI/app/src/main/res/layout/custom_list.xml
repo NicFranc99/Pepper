@@ -11,27 +11,25 @@
 
     <TextView
         android:id="@+id/textViewName"
-        android:layout_width="143dp"
-        android:layout_height="41dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-146dp"
-        android:layout_marginLeft="-146dp"
-        android:layout_marginTop="158dp"
-        android:layout_toEndOf="@+id/buttonDelete"
-        android:layout_toRightOf="@+id/buttonDelete"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="250dp"
         android:paddingBottom="10dp"
         android:text="Spiderman"
         android:textAlignment="center"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:textStyle="bold"
         android:textColor="@color/black"
+        android:layout_below="@+id/buttonDelete"
 
         />
 
     <ImageView
         android:id="@+id/buttonDelete"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:backgroundTint="#C6C6C6" />
     <!--android:id="@+id/imageView"-->
 
