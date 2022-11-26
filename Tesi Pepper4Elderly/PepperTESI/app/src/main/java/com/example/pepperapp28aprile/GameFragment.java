@@ -85,6 +85,7 @@ public class GameFragment extends Fragment{
     private QiContext qiContext;
     public static PepperLissenerActivity lissenerActivity;
     public static String rispostaUtente;
+    public GameActivity gameActivity;
 
     private LottieAnimationView lottieAnimationView;
     //private RelativeLayout containerAnimations;
@@ -112,6 +113,9 @@ public class GameFragment extends Fragment{
         this.containerFragment = container;
         v = inflater.inflate(R.layout.question_game_fragment, container, false);
         lisaDomande = game.getListaDomandeGioco();
+         gameActivity = (GameActivity) getActivity();
+         qiContext = gameActivity.getQiContext();
+         robotHelper = gameActivity.getRobotHelper();
         // mischio le domande
         Collections.shuffle(lisaDomande);
         recyclerView = v.findViewById(R.id.idCourseRV);
@@ -461,8 +465,8 @@ m
             if (domanda.chekResponse(item)) {
                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT);
                 answerDialogFragment.show();
+                robotHelper.say(getContext().getString(R.string.text_dialog_correct));
                 positioslistclic.clear();
-
                 answerDialogFragment.setOnDismissListener(dialog -> {
                     if (lisaDomande.size() - 1 == positiongame) {
                         risultatiManager.stopDomanda();
@@ -483,6 +487,7 @@ m
                 });
             } else {
                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG);
+                robotHelper.say(getContext().getString(R.string.text_dialog_wrong));
                 answerDialogFragment.show();
                 risultatiManager.setError();
                 answerDialogFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
