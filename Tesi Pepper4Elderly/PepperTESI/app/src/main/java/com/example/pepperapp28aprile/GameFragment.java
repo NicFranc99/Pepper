@@ -117,6 +117,7 @@ public class GameFragment extends Fragment{
         recyclerView = v.findViewById(R.id.idCourseRV);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        positiongame = 0;
         iniziaGioco();
         Globals.gameFragmentRun = true;
         return v;
@@ -467,6 +468,8 @@ m
                         risultatiManager.stopDomanda();
                         risultatiManager.fineGioco();
                         getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
+                                .commit();
+                        getActivity().getSupportFragmentManager().beginTransaction()
                                 .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
                                 .commit();
                     } else {

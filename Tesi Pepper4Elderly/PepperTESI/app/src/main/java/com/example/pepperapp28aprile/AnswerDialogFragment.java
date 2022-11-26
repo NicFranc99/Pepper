@@ -46,7 +46,6 @@ public class AnswerDialogFragment extends Dialog {
         setContentView(R.layout.answer_dialog_fragment);
         LottieAnimationView animationView = findViewById(R.id.anViewDialog);
         TextView textView = findViewById(R.id.txtmsgdialog);
-
         @RawRes
         int animationFiles = R.raw.correct;
 
