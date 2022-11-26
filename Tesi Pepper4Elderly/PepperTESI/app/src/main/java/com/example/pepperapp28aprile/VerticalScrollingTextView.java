@@ -19,7 +19,7 @@ import androidx.annotation.RequiresApi;
 @SuppressLint("AppCompatCustomView")
 public class VerticalScrollingTextView extends TextView {
 
-    private static final float DEFAULT_SPEED = 20.0f;
+    private static final float DEFAULT_SPEED = 25.0f;
     public Scroller scroller;
     public float speed = DEFAULT_SPEED;
     public int time = 0;

@@ -22,6 +22,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.aldebaran.qi.Consumer;
+import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.Qi;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
@@ -71,7 +74,15 @@ public class TestoRaccontoFragment extends Fragment {
         tvContent.scroll();
         tvContent.setText(testoRacconto);
         gameActivity = (GameActivity) getActivity();
-        gameActivity.getRobotHelper().say(testoRacconto);
+        domandaButton = (Button) v.findViewById(R.id.btnvaidomande);
+        Future<Void> futureSpeekPepper = gameActivity.getRobotHelper().say(testoRacconto,true);
+        // Chain a lambda to the future.
+
+        //TODO: Per ogni cosa creare sempre un threadUi parallelo se pepper sta parlando!
+        //Quando pepper termina il racconto viene mostrato il pulsante per accedere alle domande
+        futureSpeekPepper.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
+            domandaButton.setVisibility(View.VISIBLE);
+        }));
 
       //  VoiceManager tts = VoiceManager.getIstance(getContext());
     //    tts.play(testoRacconto, TextToSpeech.QUEUE_FLUSH);
@@ -96,7 +107,7 @@ public class TestoRaccontoFragment extends Fragment {
                         i = 0;
                     }
                     //tvContent.setVisibility(View.VISIBLE); //Lo rendo visible perche' lo renderizza prima di farlo scrollare automaticamente..
-                    handler.postDelayed(this, 7000);  //for interval...
+                    handler.postDelayed(this, 10000);  //for interval...
 
                 }
             };
@@ -151,7 +162,6 @@ public class TestoRaccontoFragment extends Fragment {
             }
         }); */
 
-        domandaButton = (Button) v.findViewById(R.id.btnvaidomande);
 
         (domandaButton).setOnClickListener(view -> {
            // tts.stop(); TODO: devo far fermare di parlare pepper quando l'utente clicca sul pulsante per andare alle domande del gioco
@@ -165,22 +175,4 @@ public class TestoRaccontoFragment extends Fragment {
 
         return v;
     }
-
-    public static void setImageDrawableWithAnimation(ImageView imageView,
-                                                     Drawable drawable,
-                                                     int duration) {
-        Drawable currentDrawable = imageView.getDrawable();
-        if (currentDrawable == null) {
-            imageView.setImageDrawable(drawable);
-            return;
-        }
-
-        TransitionDrawable transitionDrawable = new TransitionDrawable(new Drawable[] {
-                currentDrawable,
-                drawable
-        });
-        imageView.setImageDrawable(transitionDrawable);
-        transitionDrawable.startTransition(duration);
-    }
-
 }

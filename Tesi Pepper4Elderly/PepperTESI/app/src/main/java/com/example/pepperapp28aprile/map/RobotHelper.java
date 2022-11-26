@@ -33,6 +33,7 @@ import com.aldebaran.qi.sdk.object.locale.Region;
 import com.aldebaran.qi.sdk.object.power.FlapSensor;
 import com.aldebaran.qi.sdk.object.power.Power;
 
+import com.example.pepperapp28aprile.Globals;
 import com.example.pepperapp28aprile.R;
 
 public class RobotHelper {
@@ -137,6 +138,38 @@ public class RobotHelper {
      * @return
      */
     public Future<Void> say(final String text) {
+        return SayBuilder.with(qiContext)
+                .withText(text)
+                .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
+                .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                .buildAsync().andThenCompose(say -> {
+                    Log.d(TAG, "Say started : " + text);
+                    return say.async().run();
+                });
+    }
+
+    /**
+     * Questo metodo viene utilizzato quando si vuole che pepper parli con una velocità moderata
+     * (attualmente utilizzato per il gioco di tipo racconto).
+     * Viene utilizzato tale parametro di default, definito nella classe Globals.java (velocità a 80).
+     * @param text Testo da far dire a pepper
+     * @param isCustomSpeed Nel caso sia true, viene utilizzata la velocità di default definita in Globals.java
+     * @return
+     */
+    public Future<Void> say(final String text,boolean isCustomSpeed) {
+
+        if(isCustomSpeed){
+            String textSlowly = Globals.PepperSpeekSpeed + text;
+            return SayBuilder.with(qiContext)
+                    .withText(textSlowly)
+                    .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
+                    .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                    .buildAsync().andThenCompose(say -> {
+                        Log.d(TAG, "Say started : " + textSlowly);
+                        return say.async().run();
+                    });
+        }
+
         return SayBuilder.with(qiContext)
                 .withText(text)
                 .withLocale(new Locale(Language.ITALIAN, Region.ITALY))

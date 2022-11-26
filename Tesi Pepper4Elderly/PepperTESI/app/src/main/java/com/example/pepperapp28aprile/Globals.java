@@ -20,4 +20,5 @@ public class Globals {
     public static String GameProfile = "GameProfile";
     public static String PlaceHolderFragmentGamesTag = "PLACE_HOLDER_FRAGMENT_GAMES_TAG";
     public static String Greeting;
+    public static String PepperSpeekSpeed = "\\rspd=80\\"; //Velocità bassa
 }
