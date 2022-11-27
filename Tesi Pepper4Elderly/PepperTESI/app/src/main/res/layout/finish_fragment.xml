@@ -84,6 +84,7 @@
         android:text="COMPLIMENTI !!!👍  \nHai terminato il gioco"
         android:textColor="@color/black"
         android:textSize="@dimen/DIM_TEXT_CAT2"
+        android:layout_marginBottom="30dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/finishanimations"
         app:layout_constraintEnd_toEndOf="@+id/finishanimations"

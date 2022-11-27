@@ -33,7 +33,7 @@
     <dimen name="RADIUS_ANGLE_CATEGORY">20dp</dimen>
     <dimen name="DIM_TEXT_CAT">30sp</dimen>
     <dimen name="DIM_TEXT_CAT2">25sp</dimen>
-    <dimen name="DIM_TEXT_CAT3">35sp</dimen>
+    <dimen name="DIM_TEXT_CAT3">20sp</dimen>
     <dimen name="IMAGE_PADDING">20dp</dimen>
     <dimen name="CARD_WIDTH">200dp</dimen>
     <dimen name="CARD_HEIGHT">150dp</dimen>
