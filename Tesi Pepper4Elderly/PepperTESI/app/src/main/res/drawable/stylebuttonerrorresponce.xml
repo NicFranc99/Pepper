@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#8a8a8a">
+  <item>
+        <selector>
+
+            <item android:state_focused="true">
+<!--                <color android:color="@color/category_no_focused" />-->
+                <shape>
+                    <solid android:color="@color/grey"/>
+                    <stroke android:width="4dp" android:color="@color/category_focused_stroke"/>
+
+                      <corners android:radius="@dimen/RADIUS_ANGLE_BUTTON"/>
+
+                </shape>
+            </item>
+
+
+            <item>
+                <shape>
+                    <solid android:color="@color/grey"/>
+                    <corners android:radius="@dimen/RADIUS_ANGLE_BUTTON"/>
+                </shape>
+            </item>
+        </selector>
+
+    </item>
+
+
+</ripple>

@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="2dp">
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cardanswer"
         style="@style/ButtonStyle"
@@ -15,10 +16,10 @@
         android:layout_marginBottom="3dp"
         android:background="@drawable/stylebuttonwithstate"
         android:elevation="1dp"
-        android:textColor="@color/white"
         android:minHeight="50dp"
         android:padding="@dimen/IMAGE_PADDING"
         android:text="Button"
+        android:textColor="@color/white"
         android:textSize="@dimen/DIM_TEXT_CAT2" />
 
 </RelativeLayout>

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -493,7 +494,9 @@ m
                 answerDialogFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        v.setVisibility(View.GONE);
+                        Button button = (Button) v;
+                        v.setBackgroundResource(0);
+                        v.setBackgroundResource(R.drawable.stylebuttonerrorresponce);
                     }
                 });
             }

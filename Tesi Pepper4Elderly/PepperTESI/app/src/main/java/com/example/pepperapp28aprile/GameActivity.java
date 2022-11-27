@@ -56,14 +56,15 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
     private TextToSpeech t1;
     private final Bundle extras = new Bundle();
     private static FragmentManager fragmentManager;
-    public QiContext qiContext;
+    public static QiContext qiContext;
     private static final int PERMISSION_STORAGE = 1;
-    private RobotHelper robotHelper;
+    public static RobotHelper robotHelper;
     private int position;
     private Persona.Game game;
     private Persona paziente;
     public static String rispostaUtente;
     private String currentFragment;
+    private Bundle eliminami;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,18 +73,12 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
         this.fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_game);
-
+         eliminami = savedInstanceState;
        position = Util.getIntegerByIntent(getIntent(),"item");
        paziente = (Persona) Util.getObjectByItentKey(getIntent(),"paziente");
        game = paziente.getEsercizi().get(position);
 
         setTItleUi();
-
-        if (savedInstanceState == null) {
-            Fragment fragment = new GameExplanationFragment();
-            fragment.setArguments(getIntent().getExtras()); // delego al fragment la ricezzione dei dati
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_game_com, fragment).commit();
-        }
 
         if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             this.init();
@@ -139,7 +134,11 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
         // Create a new say action.
         this.qiContext = qiContext;
         this.robotHelper.onRobotFocusGained(qiContext);
-
+        if (eliminami == null) { //TODO: Se non dovesse piu' funzionare portare l'instance del GameExploitationFragment nel OnCreate del GameActivity
+            Fragment fragment = new GameExplanationFragment();
+            fragment.setArguments(getIntent().getExtras()); // delego al fragment la ricezzione dei dati
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_game_com, fragment).commit();
+        }
             }
 
     public QiContext getQiContext() {
