@@ -2,16 +2,16 @@
 <ripple
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="#8a8a8a">
-  <item>
+    <item>
         <selector>
 
             <item android:state_focused="true">
-<!--                <color android:color="@color/category_no_focused" />-->
+                <!--                <color android:color="@color/category_no_focused" />-->
                 <shape>
                     <solid android:color="@color/grey"/>
                     <stroke android:width="4dp" android:color="@color/category_focused_stroke"/>
 
-                      <corners android:radius="@dimen/RADIUS_ANGLE_BUTTON"/>
+                    <corners android:radius="@dimen/RADIUS_ANGLE_BUTTON"/>
 
                 </shape>
             </item>
