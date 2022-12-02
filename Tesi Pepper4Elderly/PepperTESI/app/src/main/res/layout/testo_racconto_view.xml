@@ -79,9 +79,9 @@
         <com.example.pepperapp28aprile.VerticalScrollingTextView
             android:id="@+id/tvContent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignTop="@+id/img_racconto"
-            android:layout_alignBottom="@+id/btnvaidomande"
+            android:layout_alignBottom="@+id/img_racconto"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@+id/img_racconto"
@@ -92,11 +92,11 @@
             android:scrollbars="vertical"
             android:layout_marginBottom="80dp"
             android:scrollHorizontally="false"
-            android:text="sadasd"
+            android:text="Testo racconto"
             android:textAlignment="inherit"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@color/black"
-            android:textSize="@dimen/DIM_TEXT_CAT3"
+            android:textSize="40dp"
             app:layout_constraintTop_toBottomOf="@+id/btnvaidomande" />
     </com.google.android.material.card.MaterialCardView>
 
@@ -132,7 +132,7 @@
         android:padding="8dp"
         android:textColor="@color/white"
         android:text="VAI ALLE DOMANDE"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
