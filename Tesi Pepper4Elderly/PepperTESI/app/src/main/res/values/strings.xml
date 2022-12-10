@@ -33,6 +33,7 @@
     <string name="returngame">Continua</string>
     <string name="text_dialog_correct">Risposta Giusta! \nOttimo lavoro</string>
     <string name="text_dialog_wrong">Risposta Sbagliata! \nNon mollare riprova</string>
+    <string name="answers_introduction">Le varie risposte sono</string>
     <string name="msg_exit_session">Vuoi uscire dalla sessione di gioco?</string>
     <string name="exit">Esci</string>
     <!-- Preference Titles -->

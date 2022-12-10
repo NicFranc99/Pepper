@@ -1,15 +1,9 @@
 package com.example.pepperapp28aprile;
 
-import android.animation.Animator;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.speech.RecognitionListener;
-import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,60 +11,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.aldebaran.qi.Consumer;
 import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.Qi;
 import com.aldebaran.qi.sdk.QiContext;
-import com.aldebaran.qi.sdk.QiSDK;
-import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
-import com.aldebaran.qi.sdk.builder.AnimateBuilder;
-import com.aldebaran.qi.sdk.builder.AnimationBuilder;
-import com.aldebaran.qi.sdk.builder.ChatBuilder;
-import com.aldebaran.qi.sdk.builder.ListenBuilder;
-import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
-import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
-import com.aldebaran.qi.sdk.builder.SayBuilder;
-import com.aldebaran.qi.sdk.builder.TopicBuilder;
-import com.aldebaran.qi.sdk.design.activity.RobotActivity;
-import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
-import com.aldebaran.qi.sdk.object.actuation.Animate;
-import com.aldebaran.qi.sdk.object.actuation.Animation;
-import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
-import com.aldebaran.qi.sdk.object.conversation.Chat;
-import com.aldebaran.qi.sdk.object.conversation.Chatbot;
-import com.aldebaran.qi.sdk.object.conversation.Listen;
-import com.aldebaran.qi.sdk.object.conversation.ListenResult;
-import com.aldebaran.qi.sdk.object.conversation.Phrase;
-import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
-import com.aldebaran.qi.sdk.object.conversation.QiChatExecutor;
-import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
-import com.aldebaran.qi.sdk.object.conversation.Say;
-import com.aldebaran.qi.sdk.object.conversation.Topic;
-import com.aldebaran.qi.sdk.object.locale.Language;
-import com.aldebaran.qi.sdk.object.locale.Locale;
-import com.aldebaran.qi.sdk.object.locale.Region;
-import com.example.pepperapp28aprile.QiExecutor.MyQiChatExcecutorGame;
 import com.example.pepperapp28aprile.map.RobotHelper;
-import com.example.pepperapp28aprile.models.*;
+import com.example.pepperapp28aprile.models.RecyclerViewAnswersAdapter;
 import com.example.pepperapp28aprile.utilities.RisultatiManager;
-import com.example.pepperapp28aprile.utilities.*;
+import com.example.pepperapp28aprile.utilities.Util;
+import com.example.pepperapp28aprile.utilities.VoiceManager;
 import com.google.android.material.imageview.ShapeableImageView;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class GameFragment extends Fragment{
     private View v;
@@ -94,6 +57,7 @@ public class GameFragment extends Fragment{
     private SpeechRecognizer speechRecognizer;
     private Intent speechRecognizerIntent;
     public static Persona.Game.Domanda domanda;
+    private Future<Void> requestSay;
 
     /*public GameFragment(int positionGame, Persona.Game.TypeInputGame chose) {
         this.positionGame = positionGame;
@@ -415,20 +379,26 @@ m
             }); */
                 //Fine processo parola gioco lissener
 
-
+        String requestText = new String();
         if (domanda.getListaRispose().size() < 1) {
-            testoDomanda.setText(domanda.getTestoDomanda());
+             requestText = domanda.getTestoDomanda();
+            //testoDomanda.setText(domanda.getTestoDomanda());
 
         } else {
-            testoDomanda.setText("Domanda " + (positiongame + 1) + " :\n" + domanda.getTestoDomanda());
+            requestText = "Domanda " + (positiongame + 1) + " :\n" + domanda.getTestoDomanda();
+            //testoDomanda.setText("Domanda " + (positiongame + 1) + " :\n" + domanda.getTestoDomanda());
         }
+        requestText = requestText + " " + domanda.getTestoParola();
+        testoDomanda.setText(requestText);
+
+         requestSay = robotHelper.say(requestText);
 
         if (!(domanda.getTestoParola().trim().equalsIgnoreCase("")) || domanda.getTestoParola() != null) {
             testoparola.setText(domanda.getTestoParola());
             testoparola.setVisibility(View.VISIBLE);
 
-            VoiceManager.getIstance(getContext()).play(testoDomanda.getText().toString(), VoiceManager.QUEUE_ADD);
-            VoiceManager.getIstance(getContext()).play(testoparola.getText().toString(), VoiceManager.QUEUE_ADD);
+           // VoiceManager.getIstance(getContext()).play(testoDomanda.getText().toString(), VoiceManager.QUEUE_ADD);
+           // VoiceManager.getIstance(getContext()).play(testoparola.getText().toString(), VoiceManager.QUEUE_ADD);
         } else {
             testoparola.setVisibility(View.GONE);
         }
@@ -443,19 +413,27 @@ m
         testoparola.setText(domanda.getTestoParola());
 
         recyclerAnswersArrayList = new ArrayList<>();
-        if (domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO
-                && !(game instanceof Persona.CombinazioniLettere)
+        if (//domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO
+               // &&
+                !(game instanceof Persona.CombinazioniLettere)
                 && !(game instanceof Persona.FluenzeFonologiche)
                 && !(game instanceof Persona.FluenzeSemantiche)
                 && !(game instanceof Persona.FluenzeVerbali)
                 && !(game instanceof Persona.FinaliParole)){
-            VoiceManager.getIstance(getContext()).play("Le varie risposte sono: ", VoiceManager.QUEUE_ADD);
+            //VoiceManager.getIstance(getContext()).play("Le varie risposte sono: ", VoiceManager.QUEUE_ADD);
+            String risposte = Util.toString(domanda.getListaRispose());
+
+            //Quando pepper termina di dire la domanda, gli faccio dire le risposte disponibili
+            requestSay.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
+                robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte);
+            }));
         }
+
         for (String risposte : domanda.getListaRispose()) {
             recyclerAnswersArrayList.add(new RecyclerAnswers(risposte));
-            if (domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO) {
-                VoiceManager.getIstance(getContext()).play(risposte, VoiceManager.QUEUE_ADD);
-            }
+            //if (domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO) {
+                //VoiceManager.getIstance(getContext()).play(risposte, VoiceManager.QUEUE_ADD);
+            //}
         }
 
         RecyclerViewAnswersAdapter adapter = new RecyclerViewAnswersAdapter(recyclerAnswersArrayList, getContext());
@@ -463,6 +441,7 @@ m
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
 
         adapter.setListener((v, item, position) -> {
+            requestSay.cancel(true);
             if (domanda.chekResponse(item)) {
                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT);
                 answerDialogFragment.show();

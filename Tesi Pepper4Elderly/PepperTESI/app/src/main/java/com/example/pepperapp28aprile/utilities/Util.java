@@ -60,6 +60,14 @@ public class Util {
         return matcher.matches();
     }
 
+    public static String toString(List<String> list ){
+        String result = new String();
+        for(String world : list)
+            result = world + "  " + result;
+
+        return result;
+    }
+
     public static void showKyboard(Context context) {
         InputMethodManager inputMethodManager = (InputMethodManager) context
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
