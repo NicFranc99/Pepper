@@ -47,6 +47,10 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.It
 
             holder.txtTitoloSezione2.setText("Risposte Sbagliate");
             holder.txtTestoSezione2.setText(listError.get(position).toString());
+
+            holder.txtTitoloSezione3.setText("Numero tentativi");
+            Integer tentativi = listError.get(position) + 1;
+            holder.txtTestoSezione3.setText(tentativi.toString());
         } else {
             RisultatiManager.Parole p = paroleList.get(position);
 
@@ -71,7 +75,7 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.It
     }
 
     static class ItemHolder extends RecyclerView.ViewHolder {
-        TextView txtDomanda, txtTitoloSezione1, txtTestoSezione1, txtTitoloSezione2, txtTestoSezione2;
+        TextView txtDomanda, txtTitoloSezione1, txtTestoSezione1, txtTitoloSezione2, txtTestoSezione2,txtTitoloSezione3,txtTestoSezione3;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +84,9 @@ public class StatisticsAdapter extends RecyclerView.Adapter<StatisticsAdapter.It
 
             txtTitoloSezione2 = itemView.findViewById(R.id.txtTitoloSezione2);
             txtTestoSezione2 = itemView.findViewById(R.id.txtTestoSezione2);
+
+            txtTitoloSezione3 = itemView.findViewById(R.id.txtTitoloSezione3);
+            txtTestoSezione3 = itemView.findViewById(R.id.txtTestoSezione3);
 
             txtDomanda = itemView.findViewById(R.id.txtTestoDomanda);
 

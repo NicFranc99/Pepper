@@ -49,7 +49,6 @@
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +78,7 @@
             android:padding="8dp"
             android:text="Tempo Medio"
             android:textColor="@color/black"
-            android:textSize="@dimen/DIM_TEXT_CAT2" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/txtTempoMedio"
@@ -89,7 +88,7 @@
             android:layout_margin="8dp"
             android:gravity="center"
             android:text="5 min 4 sec"
-            android:textSize="@dimen/DIM_TEXT_CAT2" />
+            android:textSize="15dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -114,7 +113,7 @@
             android:textColor="@color/black"
             android:padding="8dp"
             android:text="Tempo Totale"
-            android:textSize="@dimen/DIM_TEXT_CAT2" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/txtTempoTotale"
@@ -124,7 +123,7 @@
             android:layout_margin="8dp"
             android:gravity="center"
             android:text="30min 5sec"
-            android:textSize="@dimen/DIM_TEXT_CAT2" />
+            android:textSize="15dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
