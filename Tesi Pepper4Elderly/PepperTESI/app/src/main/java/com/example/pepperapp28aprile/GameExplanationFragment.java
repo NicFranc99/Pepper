@@ -16,7 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.aldebaran.qi.Consumer;
 import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.Qi;
 import com.aldebaran.qi.sdk.QiContext;
 import com.example.pepperapp28aprile.animations.Animations;
 import com.example.pepperapp28aprile.map.RobotHelper;
@@ -61,7 +63,7 @@ public class GameExplanationFragment extends Fragment {
                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameExplanationFragment.this)
                             .commit();
 
-                    if(g instanceof Persona.CombinazioniLettere
+                 /*   if(g instanceof Persona.CombinazioniLettere
                             || g instanceof Persona.FinaliParole
                             || g instanceof Persona.FluenzeVerbali
                             || g instanceof Persona.FluenzeFonologiche
@@ -70,10 +72,11 @@ public class GameExplanationFragment extends Fragment {
                         intent.putExtra("gamePosition", position);
                         intent.putExtra("game",g);
                         intent.putExtra("idContainer",container.getId());
-                         //TODO: Vedere perche' ci mette tempo a terminare la gameActivity
                         this.startActivity(intent);
                    }
                     else
+                    
+                  */
                    getActivity().getSupportFragmentManager().beginTransaction()
                            .add(container.getId(), new GameFragment(g,position)).commit();
                 }

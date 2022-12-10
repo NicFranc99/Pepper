@@ -61,7 +61,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class PepperLissenerActivity extends RobotActivity implements RobotLifecycleCallbacks {
+public class PepperLissenerActivity extends RobotActivity implements RobotLifecycleCallbacks { //TODO: Rimuovere questo activity perche' inutilizzato
 
     public static final String CONSOLE_TAG = "Pepper4RSA";
     private static final int PERMISSION_STORAGE = 1;

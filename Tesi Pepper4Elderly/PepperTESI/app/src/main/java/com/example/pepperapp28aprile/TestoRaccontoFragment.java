@@ -78,8 +78,7 @@ public class TestoRaccontoFragment extends Fragment {
         Future<Void> futureSpeekPepper = gameActivity.getRobotHelper().say(testoRacconto,true);
         // Chain a lambda to the future.
 
-        //TODO: Per ogni cosa creare sempre un threadUi parallelo se pepper sta parlando!
-        //Quando pepper termina il racconto viene mostrato il pulsante per accedere alle domande
+        //TODO: Quando pepper termina il racconto viene mostrato il pulsante per accedere alle domande!
         futureSpeekPepper.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
             domandaButton.setVisibility(View.VISIBLE);
         }));
@@ -164,7 +163,7 @@ public class TestoRaccontoFragment extends Fragment {
 
 
         (domandaButton).setOnClickListener(view -> {
-           // tts.stop(); TODO: devo far fermare di parlare pepper quando l'utente clicca sul pulsante per andare alle domande del gioco
+           // tts.stop();
             getActivity().getSupportFragmentManager().beginTransaction().remove(TestoRaccontoFragment.this).commit();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .add(container.getId(), new GameFragment(game,positionGame)).commit();

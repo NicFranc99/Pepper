@@ -100,7 +100,7 @@ public class GameFragment extends Fragment{
     }
 
     /**
-     * TODO: Attualmente, per i giochi di categoria "CombinazioniLettere" vengono mostrate le domande ma non permettono l'interazione con l'utente. Pepper dovrebbe rimanere in ascolto e aspettarsi delle parole Come ad esempio "STOP,FINEGIOCO,FERMAGIOCO"
+     * Per il momento per i giochi che richiedono l'iterazione con l'utente non ascoltano l'input vocale. Bisogna utilizzare il microfono del tablet di pepper
      */
     private void iniziaGioco() {
         risultatiManager.startDomanda();
