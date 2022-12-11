@@ -21,6 +21,17 @@ public class ExitDialogFragment extends Dialog {
     private onCLickListener l;
     private String textMessage;
     private Drawable image;
+    private String textExitButton;
+    private String textContinueButton;
+
+    public ExitDialogFragment(@NonNull Context context,String textExitButton,String textContinueButton) {
+        super(context);
+        this.c = context;
+        textMessage = context.getString(R.string.msg_exit_game);
+        image = context.getDrawable(R.drawable.exit);
+        this.textContinueButton = textContinueButton;
+        this.textExitButton = textExitButton;
+    }
 
     public ExitDialogFragment(@NonNull Context context) {
         super(context);
@@ -44,7 +55,14 @@ public class ExitDialogFragment extends Dialog {
         txtmsgdialog.setText(textMessage);
 
         Button exit = findViewById(R.id.btn_exit);
+        if(textExitButton != null && !textExitButton.isEmpty())
+            exit.setText(textExitButton);
+
         Button continua = findViewById(R.id.btn_continue);
+
+        if(textContinueButton != null && !textContinueButton.isEmpty())
+            continua.setText(textContinueButton);
+
         Animations.focusView(exit, Animations.SCALING_BUTTON_DIALOG);
         Animations.focusView(continua, Animations.SCALING_BUTTON_DIALOG);
 
