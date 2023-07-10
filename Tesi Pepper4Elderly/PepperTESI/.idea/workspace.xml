@@ -9,6 +9,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
@@ -33,10 +34,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Implementato ascolto del microfono del table di pepper per i giochi che richiedono l'interazione vocale con l'utente.&#10;Modificate le request dell'Api di semantic similarity e di dictionary (Ora puntano a un server dedicato su render per pepper).">
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix loop call api per verificare l'esistenza di una determinata parola all'interno del vocabolario italiano. Definita una coda di richieste per &quot;smistare&quot; il loop delle chiamarte (lista delle parole assegnate al gioco del paziente corrente).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/Persona.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
@@ -45,7 +46,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[emulator-5578]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[172.20.10.6:5555]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -78,6 +79,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1roR8B0G6VkqtCcLWyUnvWSPRYI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -183,7 +187,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Callstack Sample" />
         <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
@@ -228,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688983557316</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fix loop call api per verificare l'esistenza di una determinata parola all'interno del vocabolario italiano. Definita una coda di richieste per &quot;smistare&quot; il loop delle chiamarte (lista delle parole assegnate al gioco del paziente corrente).">
+      <created>1688987165888</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1688987165888</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,15 +257,36 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Implementato ascolto del microfono del table di pepper per i giochi che richiedono l'interazione vocale con l'utente.&#10;Modificate le request dell'Api di semantic similarity e di dictionary (Ora puntano a un server dedicato su render per pepper)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementato ascolto del microfono del table di pepper per i giochi che richiedono l'interazione vocale con l'utente.&#10;Modificate le request dell'Api di semantic similarity e di dictionary (Ora puntano a un server dedicato su render per pepper)." />
+    <MESSAGE value="Fix loop call api per verificare l'esistenza di una determinata parola all'interno del vocabolario italiano. Definita una coda di richieste per &quot;smistare&quot; il loop delle chiamarte (lista delle parole assegnate al gioco del paziente corrente)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix loop call api per verificare l'esistenza di una determinata parola all'interno del vocabolario italiano. Definita una coda di richieste per &quot;smistare&quot; il loop delle chiamarte (lista delle parole assegnate al gioco del paziente corrente)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/Persona.java</url>
-          <line>336</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/FinishGameFragment.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>290</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>294</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>326</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>289</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

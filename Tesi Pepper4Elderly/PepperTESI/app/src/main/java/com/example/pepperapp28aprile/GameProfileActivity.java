@@ -59,6 +59,7 @@ import com.example.pepperapp28aprile.SectionsPagerAdapter;
 import com.example.pepperapp28aprile.WebActivity;
 import com.example.pepperapp28aprile.animations.Animations;
 import com.example.pepperapp28aprile.interfacedir.onCLickListener;
+import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.models.Emergency;
 import com.example.pepperapp28aprile.utilities.DataManager;
@@ -95,6 +96,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public static String sesso;
     public static boolean tornaNav;
     public static QiContext qiContext;
+    private RobotHelper robotHelper;
     private static FragmentManager fragmentManager;
     private static final String TAG = "MSI_MainMenuFragment";
 
@@ -105,6 +107,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
 
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
         this.fragmentManager = getSupportFragmentManager();
+        this.robotHelper = new RobotHelper();
         System.out.println("GameProfile activity");
 
         setContentView(R.layout.fragment_main_persone);
@@ -147,6 +150,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public void onRobotFocusGained(QiContext qiContext) {
         Globals.NowIsRunning = Globals.GameProfile;
         this.qiContext = qiContext;
+        this.robotHelper.onRobotFocusGained(qiContext);
         // Create a new say action.
 
             Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context
@@ -162,6 +166,8 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
 
         String pepperString = listenResult.getHeardPhrase().getText();
         pepperString = pepperString.replace(Constants.PHRASEPEPPERLISSENFROPLAYGAMES,"");
+
+        robotHelper.say(getString(R.string.start_game) + pepperString);
         viewGameListByVoice(null,pepperString);
 
         Animation animazioneSaluto = AnimationBuilder.with(qiContext)

@@ -9,6 +9,7 @@
     <string name="message_404">404</string>
     <string name="message_500">500</string>
     <string name="start_localizing">Inizio localizzazione</string>
+    <string name="start_game">Ok giochiamo a </string>
     <string name="start_service">INIZIA IL CHECK</string>
     <string name="starting_phrase">Perfavore portami alla base prima di localizzarmi e far partire il servizio</string>
 

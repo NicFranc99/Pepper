@@ -425,6 +425,56 @@ public class Util {
         queue.add(stringRequest);
     }
 
+    public static void getSemanticSimilarityByPepperServer(Context c, String categoria, String parola , SimilaritaParoleListener l){
+        String category = categoria.toLowerCase();
+        RequestQueue queue = Volley.newRequestQueue(c);
+        String url = c.getResources().getString(R.string.URLPEPPERSERVERSemanticSimilarity) + "?text=" + parola + "&category=" + category;
+
+        StringRequest stringRequest = (StringRequest) new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.i("RISPOSTA",response);
+                        JsonElement app = new JsonParser().parse(response).getAsJsonObject();
+                        JsonObject rootelem = app.getAsJsonObject().getAsJsonObject();
+                        JsonElement choises = rootelem.get("choices").getAsJsonArray().get(0);
+                        float f = choises.getAsJsonObject().get("text").getAsFloat();
+                        if(f>=WORDS_SIMILARITY_THRESHOLD){
+                            l.valida(f);
+                        }else{
+                            l.nonvalida(f);
+                        }
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("RISPOSTA",error.toString());
+                        l.errore();
+                    }
+                }).setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+        ;
+
+        queue.add(stringRequest);
+    }
+
     public static void esistenzaParola(Context c, String parola , RicercaParoleListener l){
         RequestQueue queue = Volley.newRequestQueue(c);
         String url = c.getResources().getString(R.string.URLWORDNETexist);
@@ -492,7 +542,7 @@ public class Util {
         return hour;
     }
 
-    public static void getSemanticSimilarityByPepperServer(Context c, String categoria, String parola , SimilaritaParoleListener l){
+    /*public static void getSemanticSimilarityByPepperServer(Context c, String categoria, String parola , SimilaritaParoleListener l){
         RequestQueue queue = Volley.newRequestQueue(c);
         String url = c.getResources().getString(R.string.URLPEPPERSERVERSemanticSimilarity);
 
@@ -530,7 +580,7 @@ public class Util {
 
         };
         queue.add(stringRequest);
-    }
+    } */
 
     public static void similaritaParole(Context c, String categoria, String parola , SimilaritaParoleListener l){
         RequestQueue queue = Volley.newRequestQueue(c);
