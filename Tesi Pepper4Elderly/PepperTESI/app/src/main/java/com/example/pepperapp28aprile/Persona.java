@@ -516,8 +516,8 @@ public class Persona implements Serializable {
                 listaRispose.add("ESISTE");
                 listaRispose.add("NON ESISTE");
                 // Util.esistenzaParola(c, parola, new Util.RicercaParoleListener() {
-                //Util.checkIfWordExistByPepperServer(c, parola, new Util.RicercaParoleListener() {
-                Util.checkWordExists(c, parola, new Util.RicercaParoleListener() {
+                Util.checkIfWordExistByPepperServer(c, parola, new Util.RicercaParoleListener() {
+                //Util.checkWordExists(c, parola, new Util.RicercaParoleListener() {
                     @Override
                     public void esiste() {
                         Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRispose, (short) 0);

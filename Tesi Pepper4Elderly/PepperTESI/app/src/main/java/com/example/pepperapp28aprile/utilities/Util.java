@@ -19,6 +19,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -368,32 +369,16 @@ public class Util {
         return  intent.getSerializableExtra(key);
     }
 
-    public static void checkWordExists(Context c, String parola , RicercaParoleListener l){
-                String sURL = "https://pepperserverpy.onrender.com/openAi/wordExists?text=" + parola;
-                // Connect to the URL using java's native library
-                    URL url = null;
-                    try {
-                        url = new URL(sURL);
-                        URLConnection request = url.openConnection();
-                        request.connect();
-                        // Convert to a JSON object to print data
-                        JsonParser jp = new JsonParser(); //from gson
-                        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
-                        JsonObject rootelem = root.getAsJsonObject().getAsJsonObject();
-                        Boolean f = rootelem.get("Result").getAsBoolean();
-                        if(f){
-                            l.esiste();
-                        }else{
-                            l.nonesiste();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
+    /**
+     * Data una parola, effettua una chiamata al server pepper.Py per verificare l'esistenza della stessa. (Passare text come query param)
+     * @see <a href="https://pepperserverpy.onrender.com/openAi/wordExists">wordExists url Api</a>
+     * @param c Context corrente per recuperare nel file l'url dell'api da chiamare
+     * @param parola Parola di cui verificare l'esistenza del vocabolario italiano
+     * @param l Lissener per determinare cosa fare se la parola esiste oppure no
+     */
     public static void checkIfWordExistByPepperServer(Context c, String parola , RicercaParoleListener l){
         RequestQueue queue = Volley.newRequestQueue(c);
-        String url = c.getResources().getString(R.string.URLPEPPERSERVERTextExist);
+        String url = c.getResources().getString(R.string.URLPEPPERSERVERTextExist) + parola;
 
         StringRequest stringRequest = (StringRequest) new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -419,19 +404,27 @@ public class Util {
                         Log.i("RISPOSTA",error.toString());
                        l.nonesiste();
                     }
-                })
-        {
+                }).setRetryPolicy(new RetryPolicy() {
             @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("text", parola);
-                return params;
+            public int getCurrentTimeout() {
+                return 50000;
             }
 
-        };
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+        ;
 
         queue.add(stringRequest);
     }
+
     public static void esistenzaParola(Context c, String parola , RicercaParoleListener l){
         RequestQueue queue = Volley.newRequestQueue(c);
         String url = c.getResources().getString(R.string.URLWORDNETexist);

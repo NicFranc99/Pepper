@@ -294,14 +294,14 @@ public class DataManager {
                                                     setValoriFromJSON(esistenzaParole, keycat, paziente);
 
                                                     for (DataSnapshot parole : quest.child("parole").getChildren()) {
-                                                       timer.schedule(new TimerTask() {
-                                                           @Override
-                                                            public void run() {
+                                                     //  timer.schedule(new TimerTask() {
+                                                     //      @Override
+                                                     //       public void run() {
                                                                 String p = parole.child("parola").getValue(String.class);
                                                                 esistenzaParole.setParole(c,p);
                                                             // Log.i("RISPOSTA,PAROLE",p+""+Util.esistenzaParola(c,p)+"");
-                                                               }
-                                                               }, 1000, 1000);
+                                                       //        }
+                                                     //          }, 1000, 1000);
                                                     }
                                                     listaGiochi.add(esistenzaParole);
                                                 }
