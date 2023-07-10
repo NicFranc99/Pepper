@@ -80,5 +80,7 @@ public class SetModeFragment extends Fragment {
         ma.setFragment(new MainMenuFragment());
     }
 
-    public void startGame(){ma.setFragment(new MainMenuFragment(true));}
+    public void startGame(){
+        ma.setFragment(new MainMenuFragment(true));
+    }
 }

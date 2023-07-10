@@ -26,10 +26,6 @@ class MyQiChatExecutorChiamaVocal extends BaseQiChatExecutor {
                 System.out.println("chiamata" + params.get(1));
                 break;
             }
-            case "gioca" : {
-                GameProfileActivity.viewGameList = params.get(1);
-                break;
-            }
         }
         }
 

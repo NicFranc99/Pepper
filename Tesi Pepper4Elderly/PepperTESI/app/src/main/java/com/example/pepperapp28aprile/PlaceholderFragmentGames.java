@@ -87,6 +87,7 @@ public class PlaceholderFragmentGames extends Fragment {
         new DataManager(this.getContext(),"pazienti",idPaziente,new DataManager.onDownloadDataListener() {
             @Override
             public void onDataSuccess(Persona paziente) {
+                GameProfileActivity.gameArrayList = paziente.getEsercizi();
                 GameListAdapter adapter = new GameListAdapter(getActivity(), R.layout.category_card, paziente);
                 gridView.setAdapter(adapter);
             }

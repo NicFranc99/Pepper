@@ -19,12 +19,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import com.aldebaran.qi.sdk.builder.ListenBuilder;
+import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
+import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
 import com.example.pepperapp28aprile.models.Categoria;
+import com.example.pepperapp28aprile.utilities.Util;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 //we need to extend the ArrayAdapter class as we are building an adapter
@@ -51,7 +60,6 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
         //we need to get the view of the xml for our list item
         //And for this we need a layoutinflater
         LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -91,7 +99,7 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
         categoryName.setText(game.getTitleCategory());
 
         //textViewTeam.setText(p.getStatus());
-
+        
         //adding a click listener to the button to remove item from the list
         gameImage.setOnClickListener(new View.OnClickListener() {
             @Override

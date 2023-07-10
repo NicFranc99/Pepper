@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 public class DataManager {
@@ -76,7 +78,7 @@ public class DataManager {
     private String path;
     private onSaveDataListener onSaveDataListener;
     private Context c;
-
+    private static Timer timer = new Timer();
 
     public DataManager(Context c, Persona.Game game, RisultatiManager risultatiManager, onUploadDataListener l) {
         String phat = "pazienti/" + Globals.idPaziente + "/esercizi/"
@@ -292,9 +294,14 @@ public class DataManager {
                                                     setValoriFromJSON(esistenzaParole, keycat, paziente);
 
                                                     for (DataSnapshot parole : quest.child("parole").getChildren()) {
-                                                        String p = parole.child("parola").getValue(String.class);
-                                                        esistenzaParole.setParole(c, p);
-                                                        // Log.i("RISPOSTA,PAROLE",p+""+Util.esistenzaParola(c,p)+"");
+                                                       timer.schedule(new TimerTask() {
+                                                           @Override
+                                                            public void run() {
+                                                                String p = parole.child("parola").getValue(String.class);
+                                                                esistenzaParole.setParole(c,p);
+                                                            // Log.i("RISPOSTA,PAROLE",p+""+Util.esistenzaParola(c,p)+"");
+                                                               }
+                                                               }, 1000, 1000);
                                                     }
                                                     listaGiochi.add(esistenzaParole);
                                                 }

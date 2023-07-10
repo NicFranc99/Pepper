@@ -7,6 +7,10 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/09ea514f43ecaae38de9efcb35f0d794/jetified-qisdk-model-1.7.5/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/09ea514f43ecaae38de9efcb35f0d794/jetified-qisdk-model-1.7.5/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/09ea514f43ecaae38de9efcb35f0d794/jetified-qisdk-model-1.7.5/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0b361379662bd4c92b07c75a0a7dae8f/jetified-qisdk-model-1.7.5/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fdb7fa7c68dacd7aa3e1ee16d9687e93/jetified-qisdk-model-1.7.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fdb7fa7c68dacd7aa3e1ee16d9687e93/jetified-qisdk-model-1.7.5/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fdb7fa7c68dacd7aa3e1ee16d9687e93/jetified-qisdk-model-1.7.5/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.aldebaran/qisdk-model/1.7.5/79853144114d837045ee4c5ce50d2edb3d43a239/qisdk-model-1.7.5-javadoc.jar!/" />

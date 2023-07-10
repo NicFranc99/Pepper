@@ -8,9 +8,6 @@ import com.example.pepperapp28aprile.utilities.Util;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -19,6 +16,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Persona implements Serializable {
 
@@ -334,14 +333,15 @@ public class Persona implements Serializable {
 
            public void checkDomandaOnline(Context c, String response, Util.RicercaParoleListener l) {
 
-                Util.esistenzaParola(c, response, l);
+                //Util.esistenzaParola(c, response, l);
+                Util.checkIfWordExistByPepperServer(c, response, l); //Uso il server pepper python hostato su render
 
             }
 
             public void checkDomandaSimiliarita(Context c, String category,String word, Util.SimilaritaParoleListener l) {
 
-                Util.similaritaParole(c, category, word, l);
-
+               // Util.similaritaParole(c, category, word, l);
+                Util.getSemanticSimilarityByPepperServer(c, category, word, l); //Uso PepperServer Py hostato su render
             }
 
             public boolean chekResponse(String rispostaData) {
@@ -503,27 +503,34 @@ public class Persona implements Serializable {
          * @param parola
          */
         public void setParole(Context c, String parola) {
+            boolean paroleIsJustProcessed = false;
+            for (String word : parole) { //Mi serve per capire se la parola e' gia' stata processata dall'API. (Questo e' causato dail TimeOut delle chiamate impostato nel loop in DataMangaer).
+                if (word == parola)
+                    paroleIsJustProcessed = true;
+            }
+            if (!paroleIsJustProcessed) {
+                parole.add(parola);
 
-            parole.add(parola);
+                String testoDomanda = "Esiste o Non esiste la parola";
+                List<String> listaRispose = new ArrayList<>();
+                listaRispose.add("ESISTE");
+                listaRispose.add("NON ESISTE");
+                // Util.esistenzaParola(c, parola, new Util.RicercaParoleListener() {
+                //Util.checkIfWordExistByPepperServer(c, parola, new Util.RicercaParoleListener() {
+                Util.checkWordExists(c, parola, new Util.RicercaParoleListener() {
+                    @Override
+                    public void esiste() {
+                        Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRispose, (short) 0);
+                        setDomandaGioco(dom);
+                    }
 
-            String testoDomanda = "Esiste o Non esiste la parola";
-            List<String> listaRispose = new ArrayList<>();
-            listaRispose.add("ESISTE");
-            listaRispose.add("NON ESISTE");
-
-            Util.esistenzaParola(c, parola, new Util.RicercaParoleListener() {
-                @Override
-                public void esiste() {
-                    Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRispose, (short) 0);
-                    setDomandaGioco(dom);
-                }
-
-                @Override
-                public void nonesiste() {
-                    Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRispose, (short) 1);
-                    setDomandaGioco(dom);
-                }
-            });
+                    @Override
+                    public void nonesiste() {
+                        Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRispose, (short) 1);
+                        setDomandaGioco(dom);
+                    }
+                });
+            }
         }
     }
 

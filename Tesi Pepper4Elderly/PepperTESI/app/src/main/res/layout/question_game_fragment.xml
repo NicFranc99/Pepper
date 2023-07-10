@@ -3,13 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+    <!--<ImageView
+        android:src="@drawable/backgroundimage1"
+        android:id="@+id/im1"
+        android:scaleType="fitXY"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        tools:ignore="MissingConstraints" /> -->
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/dialog_background"
+        android:background="@drawable/dialog_background2"
         android:minHeight="200dp"
         app:layout_constraintBottom_toTopOf="@+id/idCourseRV"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,6 +79,42 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <RelativeLayout
+        android:id="@+id/viewanim"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/circlestyle"
+        android:elevation="5dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/idCourseRV"
+        app:layout_constraintStart_toStartOf="@+id/idCourseRV"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/wave"
+            android:layout_width="100dp"
+            android:layout_height="99dp"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/wavee" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/btnvocalinput"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/category_no_focused"
+            android:elevation="5dp"
+            android:padding="2dp"
+            android:visibility="visible"
+            app:contentPadding="20dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+            app:srcCompat="@drawable/microphone"
+            app:strokeColor="@color/category_focused_stroke"
+            app:strokeWidth="4dp">
+
+
+        </com.google.android.material.imageview.ShapeableImageView>
+    </RelativeLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -81,7 +126,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:layout_marginBottom="50dp"
         app:layout_constraintVertical_bias="0.075" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

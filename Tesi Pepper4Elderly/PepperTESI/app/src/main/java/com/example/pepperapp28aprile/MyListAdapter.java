@@ -29,6 +29,10 @@ import java.util.List;
 import static com.example.pepperapp28aprile.Globals.myAppID;
 
 //we need to extend the ArrayAdapter class as we are building an adapter
+
+/**
+ * ListAdapter per la visualizzazione della griglia dei pazienti da selezionare
+ */
 public class MyListAdapter extends ArrayAdapter<Persona>  {
 
     //ArrayAdapter<Persona> arrayAdapter;
@@ -127,7 +131,6 @@ public class MyListAdapter extends ArrayAdapter<Persona>  {
         return (currentTime <= 6 || currentTime >= 18) ? false : true;
     }
 
-    //TODO: Creare funzione che vada a scrivere nel file .top il nome dei giochi assegnati al paziente facendo il replace di title_game all'interno del file
     public void startGameProfile(View view,Persona paziente) {
         Intent intent = new Intent(context, GameProfileActivity.class);
         System.out.println("start Gameprofile");

@@ -40,6 +40,7 @@ import com.aldebaran.qi.sdk.object.conversation.Chat;
 import com.aldebaran.qi.sdk.object.conversation.Chatbot;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
 import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.Phrase;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
 import com.aldebaran.qi.sdk.object.conversation.QiChatExecutor;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
@@ -72,6 +73,7 @@ import com.google.gson.JsonParser;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.CookieStore;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -83,13 +85,16 @@ import java.util.Map;
 
 import static com.example.pepperapp28aprile.Globals.NowIsRunning;
 
+/**
+ * Activity che gestice la schermata di visualizzazione dei giochi
+ */
 public class GameProfileActivity extends RobotActivity implements RobotLifecycleCallbacks {
     public static String name;
     public static String idPaziente;
+    public static ArrayList<Persona.Game> gameArrayList;
     public static String sesso;
     public static boolean tornaNav;
     public static QiContext qiContext;
-    public static String viewGameList; //Nome del gioco detto a pepper dall'utente
     private static FragmentManager fragmentManager;
     private static final String TAG = "MSI_MainMenuFragment";
 
@@ -149,10 +154,15 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
                     .build(); // Build the say action.
         ciaoSonoPepper.run();
 
-        //Carico il file per ascoltare ciò che dice il paziente con pepper.
-        startTopic(R.raw.gameslistener, endReason -> {
-            viewGameListByVoice(null, viewGameList);
-        });
+        ArrayList<String> titleGames = getGameTitleList();
+
+        List<Phrase> phraseList = getPhraseSetListByStringList(titleGames);
+
+        ListenResult listenResult  = setTitleGameToLissen(phraseList);
+
+        String pepperString = listenResult.getHeardPhrase().getText();
+        pepperString = pepperString.replace(Constants.PHRASEPEPPERLISSENFROPLAYGAMES,"");
+        viewGameListByVoice(null,pepperString);
 
         Animation animazioneSaluto = AnimationBuilder.with(qiContext)
                 .withResources(R.raw.salute_left_b001)
@@ -165,52 +175,6 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
 
         // Run the second action asynchronously.
         animate.async().run();
-    }
-
-    private void startTopic(Integer topicResource, QiChatbot.OnEndedListener chatEndedListener){
-        try{
-
-            System.out.println("sono nel topic");
-
-            final Topic topic = TopicBuilder.with(qiContext)
-                    .withResource(topicResource).build();
-
-            // Create a qiChatbot
-            QiChatbot qiChatbot = QiChatbotBuilder.with(qiContext).withTopic(topic).build();
-
-            Map<String, QiChatExecutor> executors = new HashMap<>();
-
-            // Map the executor name from the topic to our qiChatExecutor
-            executors.put("myExecutor", new MyQiChatExecutorChiamaVocal(qiContext));
-
-            // Set the executors to the qiChatbot
-            qiChatbot.setExecutors(executors);
-            List<Chatbot> chatbots = new ArrayList<>();
-            chatbots.add(qiChatbot);
-
-            // Build chat with the chatbotBuilder
-            Chat chat = ChatBuilder.with(qiContext).withChatbot(qiChatbot).build();
-
-            // Run an action asynchronously.
-//chat.async().run();
-
-            Future<Void> chatFuture = chat.async().run();
-
-            qiChatbot.addOnEndedListener(endReason -> {
-                chatFuture.requestCancellation();
-            });
-            qiChatbot.addOnEndedListener(chatEndedListener);
-
-            chatFuture.thenConsume(value -> {
-                if (value.hasError()) {
-                    System.out.println("Discussion finished with error.");
-                }
-            });
-
-        }catch(Exception e){ System.out.println("eccezione topic");
-            e.printStackTrace();
-        }
-
     }
 
 //TODO: Vedere qua per passare valori a una activity
@@ -305,6 +269,45 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
+    }
+
+    /**
+     * Prende la lista dei giochi assegnati al paziente corrente (Passata dakka MyListAdapter) e restituisce
+     * una lista di tutti i titoli dei giochi
+     * @return List dei titoli dei giochi assegnati al paziente
+     */
+    private ArrayList<String> getGameTitleList(){
+        ArrayList<String> result = new ArrayList<>();
+        for(Persona.Game game : gameArrayList){
+            result.add(game.getTitleGame());
+        }
+        return result;
+    }
+
+    private List<Phrase> getPhraseSetListByStringList(ArrayList<String> gameTitleList){
+        List<Phrase> phraseList = new ArrayList<Phrase>();
+        for(String title : gameTitleList){
+            phraseList.add(new Phrase(Constants.PHRASEPEPPERLISSENFROPLAYGAMES + title));
+        }
+
+        return phraseList;
+    }
+
+    /**
+     * Prende una lista di frasi che pepper deve rimanere in ascolto, le imposta,
+     * e restituisce un oggetto dell'Sdk che permette di recuperare il testo ascoltato da pepper.
+     * @param phraseList
+     * @return Restituisce un oggetto che permette di recuperare cio' che pepper ha ascoltato durante l'interazione
+     */
+    private ListenResult setTitleGameToLissen(List<Phrase> phraseList){
+        PhraseSet phraseSet = PhraseSetBuilder.with(qiContext)
+                .withPhrases(phraseList)
+                .build();
+
+        return ListenBuilder.with(qiContext)
+                .withPhraseSet(phraseSet)
+                .build()
+                .run();
     }
 
    /* private void setTItleUi() {

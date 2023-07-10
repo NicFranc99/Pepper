@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.aldebaran:robotservice-client:2.1.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bfa733dc22ca0ceee2809aed6b16679b/jetified-robotservice-client-2.1.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bfa733dc22ca0ceee2809aed6b16679b/jetified-robotservice-client-2.1.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bfa733dc22ca0ceee2809aed6b16679b/jetified-robotservice-client-2.1.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d82612deba842290a67f5835294cfe1a/jetified-robotservice-client-2.1.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d82612deba842290a67f5835294cfe1a/jetified-robotservice-client-2.1.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d82612deba842290a67f5835294cfe1a/jetified-robotservice-client-2.1.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.aldebaran/robotservice-client/2.1.2/10ff69e2fb7bc15b9459eb46b1953c8855746ec7/robotservice-client-2.1.2-javadoc.jar!/" />

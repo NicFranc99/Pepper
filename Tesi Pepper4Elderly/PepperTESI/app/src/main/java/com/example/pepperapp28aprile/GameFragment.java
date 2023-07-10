@@ -1,9 +1,12 @@
 package com.example.pepperapp28aprile;
 
+import android.animation.Animator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +56,7 @@ public class GameFragment extends Fragment{
     public GameActivity gameActivity;
 
     private LottieAnimationView lottieAnimationView;
-    //private RelativeLayout containerAnimations;
+    private RelativeLayout containerAnimations;
     private ShapeableImageView imageMic;
     private SpeechRecognizer speechRecognizer;
     private Intent speechRecognizerIntent;
@@ -95,8 +99,8 @@ public class GameFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
-        //speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
+        speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
     }
 
     /**
@@ -108,7 +112,7 @@ public class GameFragment extends Fragment{
         FrameLayout listaMedia = v.findViewById(R.id.linearimage);
         TextView testoDomanda = v.findViewById(R.id.testoDomanda);
         TextView testoparola = v.findViewById(R.id.testoparola);
-        //containerAnimations = v.findViewById(R.id.viewanim);
+        containerAnimations = v.findViewById(R.id.viewanim);
 
 //================Scelta modalita Input===========================
 
@@ -121,10 +125,14 @@ public class GameFragment extends Fragment{
             //robotHelper = lissenerActivity.getRobotHelper();
             //qiContext = lissenerActivity.getQiContext();
 
+        //Inizio processo parola gioco lissener
 
-            /* lottieAnimationView = containerAnimations.findViewById(R.id.wave);
+        if(game.getInputType().get(0) == Persona.Game.TypeInputGame.VOCALE)
+        {
+            containerAnimations.setVisibility(View.VISIBLE);
+            lottieAnimationView = containerAnimations.findViewById(R.id.wave);
             imageMic = containerAnimations.findViewById(R.id.btnvocalinput);
-m
+
             containerAnimations.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {
                     imageMic.setBackgroundColor(getContext().getColor(R.color.category_focused));
@@ -144,9 +152,9 @@ m
                     imageMic.setVisibility(View.VISIBLE);
                 }
             });
-            containerAnimations.requestFocus();*/
+            containerAnimations.requestFocus();
 
-          /*  lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+           lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
                     speechRecognizer.startListening(speechRecognizerIntent);
@@ -164,9 +172,9 @@ m
                 @Override
                 public void onAnimationRepeat(Animator animation) {
                 }
-            }); */
+            });
 
-          /*   speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            speechRecognizer.setRecognitionListener(new RecognitionListener() {
                 @Override
                 public void onReadyForSpeech(Bundle params) {
                 }
@@ -197,7 +205,7 @@ m
                     if (SpeechRecognizer.ERROR_AUDIO == error || SpeechRecognizer.ERROR_CLIENT == error
                             || SpeechRecognizer.ERROR_NO_MATCH == error
                             || SpeechRecognizer.ERROR_SPEECH_TIMEOUT == error) {
-                       // VoiceManager.getIstance(getContext()).play("Non ho capito. Ripeti ", VoiceManager.QUEUE_ADD);
+                       VoiceManager.getIstance(getContext()).play("Non ho capito. Ripeti ", VoiceManager.QUEUE_ADD);
                     }
                 }
 
@@ -224,7 +232,7 @@ m
                         }
                         else {
                             if( game instanceof Persona.FluenzeVerbali || game instanceof Persona.FluenzeSemantiche ){
-                                String categoria = "";
+
 
                                 domanda.checkDomandaSimiliarita(getContext(),domanda.getTestoParola() , risposta, new Util.SimilaritaParoleListener() {
                                     @Override
@@ -376,7 +384,9 @@ m
                 @Override
                 public void onEvent(int eventType, Bundle params) {
                 }
-            }); */
+            });
+
+            }
                 //Fine processo parola gioco lissener
 
         String requestText = new String();
@@ -424,9 +434,11 @@ m
             String risposte = Util.toString(domanda.getListaRispose());
 
             //Quando pepper termina di dire la domanda, gli faccio dire le risposte disponibili
-            requestSay.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
-                robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte);
-            }));
+            if (domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO) {
+                requestSay.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
+                    robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte);
+                }));
+            }
         }
 
         for (String risposte : domanda.getListaRispose()) {

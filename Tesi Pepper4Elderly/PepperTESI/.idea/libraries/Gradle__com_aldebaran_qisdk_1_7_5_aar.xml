@@ -7,6 +7,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f3d26d193bc3183bd59d09e386039cac/jetified-qisdk-1.7.5/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f3d26d193bc3183bd59d09e386039cac/jetified-qisdk-1.7.5/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f3d26d193bc3183bd59d09e386039cac/jetified-qisdk-1.7.5/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/956565738c28365828857c4d6c5c6e56/jetified-qisdk-1.7.5/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/956565738c28365828857c4d6c5c6e56/jetified-qisdk-1.7.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/956565738c28365828857c4d6c5c6e56/jetified-qisdk-1.7.5/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.aldebaran/qisdk/1.7.5/9acebfb753fe4c2e646ba9c9efe810be89f94dec/qisdk-1.7.5-javadoc.jar!/" />

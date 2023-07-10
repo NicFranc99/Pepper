@@ -4,13 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
+import java.io.IOException;
+import androidx.annotation.RequiresApi;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,23 +29,32 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+
+import org.apache.commons.text.similarity.JaccardSimilarity;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Util {
 
     private static final float WORDS_SIMILARITY_THRESHOLD = .5F;
-
+    private static Timer timer = new Timer();
     public interface RicercaParoleListener {
         void esiste();
 
@@ -354,7 +368,70 @@ public class Util {
         return  intent.getSerializableExtra(key);
     }
 
+    public static void checkWordExists(Context c, String parola , RicercaParoleListener l){
+                String sURL = "https://pepperserverpy.onrender.com/openAi/wordExists?text=" + parola;
+                // Connect to the URL using java's native library
+                    URL url = null;
+                    try {
+                        url = new URL(sURL);
+                        URLConnection request = url.openConnection();
+                        request.connect();
+                        // Convert to a JSON object to print data
+                        JsonParser jp = new JsonParser(); //from gson
+                        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+                        JsonObject rootelem = root.getAsJsonObject().getAsJsonObject();
+                        Boolean f = rootelem.get("Result").getAsBoolean();
+                        if(f){
+                            l.esiste();
+                        }else{
+                            l.nonesiste();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
 
+    public static void checkIfWordExistByPepperServer(Context c, String parola , RicercaParoleListener l){
+        RequestQueue queue = Volley.newRequestQueue(c);
+        String url = c.getResources().getString(R.string.URLPEPPERSERVERTextExist);
+
+        StringRequest stringRequest = (StringRequest) new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.i("RISPOSTA",response);
+                        JsonElement app = new JsonParser().parse(response).getAsJsonObject();
+                        JsonObject rootelem = app.getAsJsonObject().getAsJsonObject();
+                        Boolean f = rootelem.get("Result").getAsBoolean();
+
+                        if(f){
+                            l.esiste();
+                        }else{
+                            l.nonesiste();
+                        }
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("RISPOSTA",error.toString());
+                       l.nonesiste();
+                    }
+                })
+        {
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("text", parola);
+                return params;
+            }
+
+        };
+
+        queue.add(stringRequest);
+    }
     public static void esistenzaParola(Context c, String parola , RicercaParoleListener l){
         RequestQueue queue = Volley.newRequestQueue(c);
         String url = c.getResources().getString(R.string.URLWORDNETexist);
@@ -422,7 +499,45 @@ public class Util {
         return hour;
     }
 
+    public static void getSemanticSimilarityByPepperServer(Context c, String categoria, String parola , SimilaritaParoleListener l){
+        RequestQueue queue = Volley.newRequestQueue(c);
+        String url = c.getResources().getString(R.string.URLPEPPERSERVERSemanticSimilarity);
 
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("RISPOSTA",response);
+                        JsonElement app = new JsonParser().parse(response).getAsJsonObject().get("text");
+                        Float f= Float.parseFloat(app.getAsString());
+
+                        if(f>WORDS_SIMILARITY_THRESHOLD){
+                            l.valida(f);
+                        }else{
+                            l.nonvalida(f);
+                        }
+
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("RISPOSTA",error.toString());
+                       // l.errore();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("category", categoria);
+                params.put("text", parola);
+                return params;
+            }
+
+        };
+        queue.add(stringRequest);
+    }
 
     public static void similaritaParole(Context c, String categoria, String parola , SimilaritaParoleListener l){
         RequestQueue queue = Volley.newRequestQueue(c);

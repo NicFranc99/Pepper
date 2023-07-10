@@ -1,8 +1,8 @@
 topic: ~questionario ()
 
 concept:(gioca) ["gioca a" "giochiamo a"]
-
+concept:(nomeGioco) []
 concept:(stopGame) ["stop" "ferma gioco"]
 
-u:({pepper} ~gioca _*) ok giochiamo a $1 ^execute(myExecutor,"gioca", "$1")  ^nextProposal ^endDiscuss(success)
+u:(_~gioca _~nomeGioco) ok giochiamo a $2 ^execute(myExecutor,"gioca", "$2")  ^nextProposal ^endDiscuss(success)
 u:(e:Dialog/SpeakFailure) Non so rispondere a questo

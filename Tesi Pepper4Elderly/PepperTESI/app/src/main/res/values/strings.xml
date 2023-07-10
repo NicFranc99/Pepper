@@ -202,6 +202,8 @@
     <string name="previous">Previous</string>
     <string name="URLWORDNET">https://www.intintlab.uniba.it/wordSimilarity</string>
     <string name="URLWORDNETexist">https://www.intintlab.uniba.it/wordExistence</string>
+    <string name="URLPEPPERSERVERTextExist">https://pepperserverpy.onrender.com/openAi/wordExists</string>
+    <string name="URLPEPPERSERVERSemanticSimilarity">https://pepperserverpy.onrender.com/openAi/textSimilarity</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_settings2">SettingsActivity2</string>

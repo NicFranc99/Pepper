@@ -1,4 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../../layout/custom_preview.xml" value="0.1640625" />
+        <entry key="app/src/main/res/drawable/backgroundgame1.xml" value="0.3045" />
+        <entry key="app/src/main/res/drawable/bho.xml" value="0.179" />
+        <entry key="app/src/main/res/drawable/btn_say_validation.xml" value="0.3045" />
+        <entry key="app/src/main/res/drawable/cancellami.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/category_focused.xml" value="0.1075" />
+        <entry key="app/src/main/res/drawable/category_not_focused.xml" value="0.191" />
+        <entry key="app/src/main/res/drawable/circlestyle.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/color_cursor.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/dialog_background.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/dialog_background2.xml" value="0.3045" />
+        <entry key="app/src/main/res/drawable/dialog_background_explanationGame.xml" value="0.2175" />
+        <entry key="app/src/main/res/drawable/divider.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/edtextstate.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/exittitle.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_icn_gamemode.xml" value="0.3045" />
+        <entry key="app/src/main/res/drawable/ic_icn_localize_robot_burgermenu_notavailable.xml" value="0.1745" />
+        <entry key="app/src/main/res/drawable/ic_icn_productionmode.xml" value="0.1745" />
+        <entry key="app/src/main/res/drawable/ic_icn_setupmode.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/ic_loop.xml" value="0.2895" />
+        <entry key="app/src/main/res/drawable/ic_pause.xml" value="0.2895" />
+        <entry key="app/src/main/res/drawable/ic_play.xml" value="0.2895" />
+        <entry key="app/src/main/res/drawable/ic_replay.xml" value="0.2895" />
+        <entry key="app/src/main/res/drawable/icontitle.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/styleanswer.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/stylebuttonerrorresponce.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/stylebuttonwithstate.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/stylebuttonwithstateError.xml" value="0.212" />
+        <entry key="app/src/main/res/drawable/ui_circle_grad_blue.xml" value="0.164" />
+        <entry key="app/src/main/res/layout/activity_check_mattutino.xml" value="0.14621633176571183" />
+        <entry key="app/src/main/res/layout/activity_game.xml" value="0.12" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.17161458333333332" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.28957365977205574" />
+        <entry key="app/src/main/res/layout/activity_pepper_lissener.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_profile_grid.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_web.xml" value="0.28957365977205574" />
+        <entry key="app/src/main/res/layout/answer_dialog_fragment.xml" value="0.2111650485436893" />
+        <entry key="app/src/main/res/layout/answer_row.xml" value="0.2111650485436893" />
+        <entry key="app/src/main/res/layout/buttontonav.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/category_card.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/command_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/content_check_mattutino.xml" value="0.28957365977205574" />
+        <entry key="app/src/main/res/layout/cronologia.xml" value="0.28957365977205574" />
+        <entry key="app/src/main/res/layout/custom_list.xml" value="0.28957365977205574" />
+        <entry key="app/src/main/res/layout/custom_list_singoloprofilo.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/exit_dialog_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/finish_fragment.xml" value="0.2111650485436893" />
+        <entry key="app/src/main/res/layout/fragment_avviso.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_check_decision.xml" value="0.14621633176571183" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.2171875" />
+        <entry key="app/src/main/res/layout/fragment_game_paziente_selection_menu.xml" value="0.2932877297990594" />
+        <entry key="app/src/main/res/layout/fragment_loading.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.2932877297990594" />
+        <entry key="app/src/main/res/layout/fragment_main_menu.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_main_persone.xml" value="0.18854166666666666" />
+        <entry key="app/src/main/res/layout/fragment_navigation.xml" value="0.2932877297990594" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2932877297990594" />
+        <entry key="app/src/main/res/layout/fragment_set_mode.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/game_list_grid.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/image_view_fragment.xml" value="0.2817443351859769" />
+        <entry key="app/src/main/res/layout/image_viewbig_fragment.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/itemstat.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/music_view_fragment.xml" value="0.2817443351859769" />
+        <entry key="app/src/main/res/layout/question_game_fragment.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/settings_activity.xml" value="0.14365113296280463" />
+        <entry key="app/src/main/res/layout/statistiche_fragment.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/testo_racconto_view.xml" value="0.14" />
+        <entry key="app/src/main/res/layout/title_view.xml" value="0.3574074074074074" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.22" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

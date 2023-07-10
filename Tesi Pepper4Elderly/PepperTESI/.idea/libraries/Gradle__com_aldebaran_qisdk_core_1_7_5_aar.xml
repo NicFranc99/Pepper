@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.aldebaran:qisdk-core:1.7.5@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/16b5da7d706af4a408883cf95768105d/jetified-qisdk-core-1.7.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/16b5da7d706af4a408883cf95768105d/jetified-qisdk-core-1.7.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/16b5da7d706af4a408883cf95768105d/jetified-qisdk-core-1.7.5/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c352fdee3c20ea57ea9c9a7906840473/jetified-qisdk-core-1.7.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c352fdee3c20ea57ea9c9a7906840473/jetified-qisdk-core-1.7.5/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c352fdee3c20ea57ea9c9a7906840473/jetified-qisdk-core-1.7.5/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.aldebaran/qisdk-core/1.7.5/441333bafe5d177d9d8d841adbcfdc8b8f9c5fed/qisdk-core-1.7.5-javadoc.jar!/" />
