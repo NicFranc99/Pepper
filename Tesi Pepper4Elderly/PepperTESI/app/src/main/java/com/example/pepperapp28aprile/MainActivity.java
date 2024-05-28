@@ -29,6 +29,7 @@ import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.map.SaveFileHelper;
 import com.example.pepperapp28aprile.models.Emergency;
+import com.example.pepperapp28aprile.utilities.SSLHelper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.JsonElement;
@@ -48,6 +49,9 @@ import static android.app.Notification.DEFAULT_VIBRATE;
 import static com.example.pepperapp28aprile.Globals.receiveCallID;
 import static com.example.pepperapp28aprile.Globals.senderCallID;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+
 public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
     private String currentFragment;
@@ -59,7 +63,8 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     public static QiContext qiContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        SSLContext sslContext = SSLHelper.getSSLContext();
+        HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
         super.onCreate(savedInstanceState);
         QiSDK.register(this, this);
         doButtonOperation = false;

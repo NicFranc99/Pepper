@@ -206,7 +206,7 @@ public class GameFragment extends Fragment{
                             || SpeechRecognizer.ERROR_NO_MATCH == error
                             || SpeechRecognizer.ERROR_SPEECH_TIMEOUT == error) {
                       // VoiceManager.getIstance(getContext()).play("Non ho capito. Ripeti ", VoiceManager.QUEUE_ADD);
-                        robotHelper.say("Non ho capito. Ripeti ");
+                        requestSay = robotHelper.say("Non ho capito. Ripeti ");
                     }
                 }
 
@@ -237,7 +237,7 @@ public class GameFragment extends Fragment{
                                     @Override
                                     public void valida(float value) {
                                         AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT,"Ottimo lavoro. Vai avanti così ");
-                                        robotHelper.say("Ottimo lavoro. Vai avanti così ");
+                                        requestSay = robotHelper.say("Ottimo lavoro. Vai avanti così ");
                                         answerDialogFragment.show();
                                         answerDialogFragment.setOnDismissListener(dialog -> {
                                             if(game instanceof Persona.FluenzeVerbali){
@@ -267,12 +267,13 @@ public class GameFragment extends Fragment{
                                         Log.e("RISPOSTA_VOCALE", "NON ESISTE ");
                                         String testoDialog="";
                                         if(game instanceof Persona.FluenzeVerbali){
-                                            testoDialog="Pensaci meglio. E dimmi un'altra parola";
-                                            robotHelper.say("Pensaci meglio. E dimmi un'altra parola");
+                                            //testoDialog="Pensaci meglio. E dimmi un'altra parola";
+                                            //requestSay = robotHelper.say("Pensaci meglio. E dimmi un'altra parola");
+                                            requestSay = robotHelper.say(domanda.getTestoDomanda());
                                         }
                                         if(game instanceof Persona.FluenzeSemantiche){
                                             testoDialog="Non é molto attinente, pensaci meglio ";
-                                            robotHelper.say("Non é molto attinente, pensaci meglio");
+                                            requestSay = robotHelper.say("Non é molto attinente, pensaci meglio");
                                         }
 
                                         risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONCORRELATA));
@@ -327,6 +328,7 @@ public class GameFragment extends Fragment{
                                         risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONESISTE));
                                         AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "La parola NON ESISTE");
                                         answerDialogFragment.show();
+                                        requestSay = robotHelper.say(domanda.getTestoDomanda());
                                     }
                                 });
                             } else {
@@ -334,6 +336,7 @@ public class GameFragment extends Fragment{
                                 risultatiManager.setParoleList( new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONVALIDA));
                                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "Attenzione! Parola non valida");
                                 answerDialogFragment.show();
+                                requestSay = robotHelper.say(domanda.getTestoDomanda());
                             }
                         }
                     }
@@ -366,6 +369,7 @@ public class GameFragment extends Fragment{
                                     AnswerDialogFragment.typeDialog.WRONG);
                             answerDialogFragment.show();
                             risultatiManager.setError();
+                            requestSay = robotHelper.say(domanda.getTestoDomanda());
                         }
                     }
                 }
@@ -402,7 +406,8 @@ public class GameFragment extends Fragment{
             requestText = "Domanda " + (positiongame + 1) + " :\n" + domanda.getTestoDomanda();
             //testoDomanda.setText("Domanda " + (positiongame + 1) + " :\n" + domanda.getTestoDomanda());
         }
-        requestText = requestText + " " + domanda.getTestoParola();
+        //TODO:RIMETTERE SE SI VUOLE RIPETERE LA PAROLA DELLA DOMANDA
+      //  requestText = requestText + " " + domanda.getTestoParola();
         testoDomanda.setText(requestText);
 
          requestSay = robotHelper.say(requestText);
@@ -440,7 +445,7 @@ public class GameFragment extends Fragment{
             //Quando pepper termina di dire la domanda, gli faccio dire le risposte disponibili
             if (domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO) {
                 requestSay.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
-                    robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte);
+                    requestSay = robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte);
                 }));
             }
         }
@@ -461,7 +466,7 @@ public class GameFragment extends Fragment{
             if (domanda.chekResponse(item)) {
                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT);
                 answerDialogFragment.show();
-                robotHelper.say(getContext().getString(R.string.text_dialog_correct));
+                requestSay = robotHelper.say(getContext().getString(R.string.text_dialog_correct));
                 positioslistclic.clear();
                 answerDialogFragment.setOnDismissListener(dialog -> {
                     if (lisaDomande.size() - 1 == positiongame) {
@@ -483,7 +488,8 @@ public class GameFragment extends Fragment{
                 });
             } else {
                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG);
-                robotHelper.say(getContext().getString(R.string.text_dialog_wrong));
+                requestSay = robotHelper.say(getContext().getString(R.string.text_dialog_wrong));
+                requestSay = robotHelper.say(domanda.getTestoDomanda());
                 answerDialogFragment.show();
                 risultatiManager.setError();
                 answerDialogFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -541,7 +547,7 @@ public class GameFragment extends Fragment{
                         @Override
                         public void valida(float value) {
                             AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT,"Ottimo lavoro. Vai avanti così ");
-                            robotHelper.say("Ottimo lavoro. Vai avanti così");
+                            requestSay = robotHelper.say("Ottimo lavoro. Vai avanti così");
                             answerDialogFragment.show();
                             answerDialogFragment.setOnDismissListener(dialog -> {
                                 if(game instanceof Persona.FluenzeVerbali){
@@ -572,16 +578,19 @@ public class GameFragment extends Fragment{
                             String testoDialog="";
                             if(game instanceof Persona.FluenzeVerbali){
                                 testoDialog="Pensaci meglio. E dimmi un'altra parola  ";
-                                robotHelper.say("Pensaci meglio. E dimmi un'altra parola");
+                                requestSay = robotHelper.say("Pensaci meglio. E dimmi un'altra parola");
+                                requestSay = robotHelper.say(domanda.getTestoDomanda());
                             }
                             if(game instanceof Persona.FluenzeSemantiche){
                                 testoDialog="Non é molto attinente, pensaci meglio ";
-                                robotHelper.say("Non é molto attinente, pensaci meglio");
+                                requestSay = robotHelper.say("Non é molto attinente, pensaci meglio");
+                                requestSay = robotHelper.say(domanda.getTestoDomanda());
                             }
 
                             risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONCORRELATA));
                             AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, testoDialog);
-                            robotHelper.say(getContext().getString(R.string.text_dialog_wrong));
+                            requestSay = robotHelper.say(getContext().getString(R.string.text_dialog_wrong));
+                            requestSay = robotHelper.say(domanda.getTestoDomanda());
                             answerDialogFragment.show();
                         }
 
@@ -598,7 +607,7 @@ public class GameFragment extends Fragment{
                         public void esiste() {
                             if(game instanceof Persona.FinaliParole||game instanceof Persona.FluenzeVerbali){
                                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT);
-                                robotHelper.say(getContext().getString(R.string.text_dialog_correct));
+                                requestSay = robotHelper.say(getContext().getString(R.string.text_dialog_correct));
                                 answerDialogFragment.show();
                                 answerDialogFragment.setOnDismissListener(dialog -> {
                                     if (lisaDomande.size() - 1 == positiongame) {
@@ -622,7 +631,7 @@ public class GameFragment extends Fragment{
                             }else {
                                 Log.e("RISPOSTA_VOCALE", "ESISTE");
                                 risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.ESISTE));
-                                robotHelper.say(getContext().getString(R.string.text_dialog_correct));
+                                requestSay = robotHelper.say(getContext().getString(R.string.text_dialog_correct));
                                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT, "La parola ESISTE");
                                 answerDialogFragment.show();
                             }
@@ -634,7 +643,8 @@ public class GameFragment extends Fragment{
                             risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONESISTE));
                             AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "La parola NON ESISTE");
                             answerDialogFragment.show();
-                            robotHelper.say("La parola NON ESISTE");
+                            requestSay = robotHelper.say("La parola NON ESISTE");
+                            requestSay = robotHelper.say(domanda.getTestoDomanda());
                         }
                     });
                 } else {
@@ -642,7 +652,8 @@ public class GameFragment extends Fragment{
                     risultatiManager.setParoleList( new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONVALIDA));
                     AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "Attenzione! Parola non valida");
                     answerDialogFragment.show();
-                    robotHelper.say("Attenzione! Parola non valida");
+                    requestSay = robotHelper.say("Attenzione! Parola non valida");
+                    requestSay = robotHelper.say(domanda.getTestoDomanda());
                 }
             }
         }

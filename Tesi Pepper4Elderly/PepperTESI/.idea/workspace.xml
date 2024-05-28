@@ -34,19 +34,28 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix loop call api per verificare l'esistenza di una determinata parola all'interno del vocabolario italiano. Definita una coda di richieste per &quot;smistare&quot; il loop delle chiamarte (lista delle parole assegnate al gioco del paziente corrente).">
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix certificate Http">
+      <change afterPath="$PROJECT_DIR$/../../.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_analytics_9_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_analytics_impl_9_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_core_9_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_9_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_lang3_3_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_text_1_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/SSLHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/gameexplanationbackground.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[172.20.10.6:5555]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -67,6 +76,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="resourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -104,6 +114,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-view/home/ubuntu/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-view/home/ubuntu/Android/Sdk/sources/android-30/android/widget/TextView.java_SELECTED" value="TextView" />
@@ -115,6 +126,7 @@
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="http.certificates" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -242,6 +254,9 @@
     <option name="localTasksCounter" value="3" />
     <servers />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.pem" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -258,7 +273,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Implementato ascolto del microfono del table di pepper per i giochi che richiedono l'interazione vocale con l'utente.&#10;Modificate le request dell'Api di semantic similarity e di dictionary (Ora puntano a un server dedicato su render per pepper)." />
     <MESSAGE value="Fix loop call api per verificare l'esistenza di una determinata parola all'interno del vocabolario italiano. Definita una coda di richieste per &quot;smistare&quot; il loop delle chiamarte (lista delle parole assegnate al gioco del paziente corrente)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix loop call api per verificare l'esistenza di una determinata parola all'interno del vocabolario italiano. Definita una coda di richieste per &quot;smistare&quot; il loop delle chiamarte (lista delle parole assegnate al gioco del paziente corrente)." />
+    <MESSAGE value="Fix certificate Http" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix certificate Http" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

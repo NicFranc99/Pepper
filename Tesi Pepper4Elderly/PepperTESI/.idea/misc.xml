@@ -54,7 +54,7 @@
         <entry key="app/src/main/res/layout/finish_fragment.xml" value="0.2111650485436893" />
         <entry key="app/src/main/res/layout/fragment_avviso.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_check_decision.xml" value="0.14621633176571183" />
-        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.2171875" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_game_paziente_selection_menu.xml" value="0.2932877297990594" />
         <entry key="app/src/main/res/layout/fragment_loading.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.2932877297990594" />
@@ -70,10 +70,11 @@
         <entry key="app/src/main/res/layout/music_view_fragment.xml" value="0.2817443351859769" />
         <entry key="app/src/main/res/layout/question_game_fragment.xml" value="0.75" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.14365113296280463" />
-        <entry key="app/src/main/res/layout/statistiche_fragment.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/statistiche_fragment.xml" value="0.40414507772020725" />
         <entry key="app/src/main/res/layout/testo_racconto_view.xml" value="0.14" />
         <entry key="app/src/main/res/layout/title_view.xml" value="0.3574074074074074" />
-        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.22" />
+        <entry key="app/src/main/res/xml/network_security_config.xml" value="0.31484375" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.67" />
       </map>
     </option>
   </component>
