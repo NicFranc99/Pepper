@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.builder.AnimateBuilder;
+import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.DiscussBuilder;
 import com.aldebaran.qi.sdk.builder.HolderBuilder;
 import com.aldebaran.qi.sdk.builder.ListenBuilder;
@@ -13,6 +15,8 @@ import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.builder.TopicBuilder;
 import com.aldebaran.qi.sdk.object.actuation.Actuation;
+import com.aldebaran.qi.sdk.object.actuation.Animate;
+import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.actuation.AttachedFrame;
 import com.aldebaran.qi.sdk.object.actuation.Frame;
 import com.aldebaran.qi.sdk.object.actuation.Mapping;
@@ -35,6 +39,10 @@ import com.aldebaran.qi.sdk.object.power.Power;
 
 import com.example.pepperapp28aprile.Globals;
 import com.example.pepperapp28aprile.R;
+import com.example.pepperapp28aprile.utilities.Phrases;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class RobotHelper {
     private static final String TAG = "MSI_RobotHelper";
@@ -146,6 +154,32 @@ public class RobotHelper {
                     Log.d(TAG, "Say started : " + text);
                     return say.async().run();
                 });
+    }
+
+    /***
+     * Utile per animare con un movimento pepper prendendo in input il raw id della animazione
+     * @param rawAnimation
+     * @return
+     */
+    public Future<Void> animation(final int rawAnimation) {
+        return AnimationBuilder.with(qiContext)
+                .withResources(rawAnimation)
+                .buildAsync()
+                .andThenCompose(animation ->
+                        AnimateBuilder.with(qiContext)
+                                .withAnimation(animation)
+                                .buildAsync()
+                )
+                .andThenCompose(animate -> animate.async().run());
+    }
+
+    /***
+     * Permette a pepper di dire una frase muovendosi
+     * @return
+     */
+    public Future<Void> sayAndMove(final int pepperMotionAnimation, final String pepperPhrase){
+        return say(pepperPhrase)
+                .andThenCompose(result -> animation(pepperMotionAnimation));
     }
 
     /**

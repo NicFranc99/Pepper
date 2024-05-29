@@ -2,10 +2,8 @@ package com.example.pepperapp28aprile;
 
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.StrictMode;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,25 +11,17 @@ import android.view.ViewGroup;
 
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.aldebaran.qi.Future;
-import com.aldebaran.qi.sdk.QiContext;
-import com.aldebaran.qi.sdk.builder.AnimateBuilder;
-import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
-import com.aldebaran.qi.sdk.object.actuation.Animate;
-import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
-import com.aldebaran.qi.sdk.object.humanawareness.HumanAwareness;
 import com.aldebaran.qi.sdk.object.locale.Language;
 import com.aldebaran.qi.sdk.object.locale.Locale;
 import com.aldebaran.qi.sdk.object.locale.Region;
 import com.example.pepperapp28aprile.utilities.DataManager;
+import com.example.pepperapp28aprile.utilities.Phrases;
 import com.github.wihoho.Trainer;
 import com.github.wihoho.constant.FeatureType;
 import com.github.wihoho.jama.Matrix;
@@ -50,8 +40,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-
-import static com.example.pepperapp28aprile.Globals.myAppID;
 
 public class MainMenuFragment extends Fragment {
 
@@ -78,7 +66,7 @@ public class MainMenuFragment extends Fragment {
         try {
             if (!isGameMode)
                 SayBuilder.with(MainActivity.qiContext)
-                        .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!")
+                        .withText(Phrases.beforeMenuParent)
                         .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
                         .withBodyLanguageOption(BodyLanguageOption.DISABLED)
                         .buildAsync().andThenCompose(say -> {
@@ -88,7 +76,7 @@ public class MainMenuFragment extends Fragment {
 
             else
                 SayBuilder.with(MainActivity.qiContext)
-                        .withText("Da questo menù puoi cliccare sulla tua foto per giocare ai tuoi giochi preferiti!")
+                        .withText(Phrases.beforeMenuGame)
                         .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
                         .withBodyLanguageOption(BodyLanguageOption.DISABLED)
                         .buildAsync().andThenCompose(say -> {

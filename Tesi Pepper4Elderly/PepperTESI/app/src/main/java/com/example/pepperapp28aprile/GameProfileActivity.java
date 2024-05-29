@@ -63,6 +63,7 @@ import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.models.Emergency;
 import com.example.pepperapp28aprile.utilities.DataManager;
+import com.example.pepperapp28aprile.utilities.Phrases;
 import com.example.pepperapp28aprile.utilities.Util;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -154,7 +155,8 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         // Create a new say action.
 
             Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context
-                    .withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla foto del gioco per cominciare!, oppure dimmelo a voce!") // Set the text to say.
+                    //.withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla foto del gioco per cominciare!, oppure dimmelo a voce!") // Set the text to say.
+                    .withText(Phrases.menuGame)
                     .build(); // Build the say action.
         ciaoSonoPepper.run();
 
@@ -165,7 +167,6 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         ListenResult listenResult  = setTitleGameToLissen(phraseList);
 
         String pepperString = listenResult.getHeardPhrase().getText();
-        pepperString = pepperString.replace(Constants.PHRASEPEPPERLISSENFROPLAYGAMES,"");
 
         robotHelper.say(getString(R.string.start_game) + pepperString);
         viewGameListByVoice(null,pepperString);
@@ -293,7 +294,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     private List<Phrase> getPhraseSetListByStringList(ArrayList<String> gameTitleList){
         List<Phrase> phraseList = new ArrayList<Phrase>();
         for(String title : gameTitleList){
-            phraseList.add(new Phrase(Constants.PHRASEPEPPERLISSENFROPLAYGAMES + title));
+            phraseList.add(new Phrase(title));
         }
 
         return phraseList;
