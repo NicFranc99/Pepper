@@ -642,4 +642,8 @@ public class Util {
         return timerString;
     }
 
+    public static boolean isParolaPhraseToStopGame(String parola){
+        return Phrases.phraseStopGame.contains(parola);
+    }
+
 }

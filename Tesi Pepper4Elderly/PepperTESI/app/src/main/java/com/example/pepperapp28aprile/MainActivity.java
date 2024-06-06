@@ -350,7 +350,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
     }
 
-    public void menu(){
+    /*public void menu(){
         // Create a new say action.
         Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context.
                 .withText("Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!") // Set the text to say.
@@ -371,7 +371,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         // Run the second action asynchronously.
         animate.async().run();
 
-    }
+    }*/
 
     public QiContext getQiContext() {
         return qiContext;
@@ -396,7 +396,8 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             salutoIniziale();
         }
         if(getFragment() instanceof MainMenuFragment){
-            menu();
+            MainMenuFragment mainMenuFragment = (MainMenuFragment) getFragment();
+            mainMenuFragment.pepperSpeackOnMenuGameOrCall();
         }
 
     }

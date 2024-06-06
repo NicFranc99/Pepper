@@ -30,7 +30,7 @@ public class MediaManagerFragment extends Fragment {
     private final Persona.Game.Domanda.typeMedia typeMedia;
     private MediaPlayer mediaPlayer;
     private SeekBar seekBar;
-
+    private ShapeableImageView play;
     private Handler handler = new Handler();
     private TextView start, finish;
 
@@ -81,7 +81,7 @@ public class MediaManagerFragment extends Fragment {
     private View setUiAudio(LayoutInflater inflater, ViewGroup container) {
 
         View view = inflater.inflate(R.layout.music_view_fragment, container, false);
-        ShapeableImageView play = view.findViewById(R.id.play);
+         play = view.findViewById(R.id.play);
         Animations.focusViewBackGround(getContext(), play, Animations.SCALING_BUTTON);
 
         seekBar = view.findViewById(R.id.seek);
@@ -172,4 +172,10 @@ public class MediaManagerFragment extends Fragment {
             start.setText(Util.milliSecondsToTimer(currentDuration));
         }
     };
+
+    public void start(){
+        mediaPlayer.start();
+        updateSeekBar();
+        play.setImageDrawable(getContext().getDrawable(R.drawable.ic_pause));
+    }
 }

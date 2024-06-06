@@ -129,7 +129,7 @@ public class GameFragment extends Fragment{
             //qiContext = lissenerActivity.getQiContext();
 
         //Inizio processo parola gioco lissener
-
+        requestTextForPepper = domanda.getTestoDomanda()+ " " + domanda.getTestoParola();
         if(game.getInputType().get(0) == Persona.Game.TypeInputGame.VOCALE)
         {
             containerAnimations.setVisibility(View.VISIBLE);
@@ -146,6 +146,7 @@ public class GameFragment extends Fragment{
             containerAnimations.setOnClickListener(v -> {
                // VoiceManager.getIstance(getContext()).stop();
                 if (imageMic.getVisibility() == View.VISIBLE) {
+                    requestSay.cancel(true);
                     lottieAnimationView.setVisibility(View.VISIBLE);
                     lottieAnimationView.playAnimation();
                     imageMic.setVisibility(View.INVISIBLE);
@@ -213,11 +214,12 @@ public class GameFragment extends Fragment{
                     }
                 }
 
+                //Recupero parola vocale dal microfono
                 @Override
                 public void onResults(Bundle results) {
                     ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     Toast.makeText(getContext(), data.toString(), Toast.LENGTH_SHORT).show();
-                    String risposta = data.toString().replace("[", "").replace("]", "").toLowerCase(); //TODO:Anzicchè prendere questo devo recuperare la parola detta a pepper
+                    String risposta = data.toString().replace("[", "").replace("]", "").toLowerCase();
 
                     Log.e("RISPOSTA_VOCALE", "risposta " + risposta);
 
@@ -227,7 +229,7 @@ public class GameFragment extends Fragment{
                         game instanceof Persona.FluenzeSemantiche ||
                         game instanceof Persona.FinaliParole){
 
-                        if (!(game instanceof  Persona.FinaliParole) &&!(game instanceof  Persona.FluenzeVerbali)&& ((risposta.equalsIgnoreCase("STOP") || risposta.equalsIgnoreCase("FINE GIOCO") || risposta.equalsIgnoreCase("FERMA GIOCO")))) {
+                        if (!(game instanceof  Persona.FinaliParole) &&!(game instanceof  Persona.FluenzeVerbali) && Util.isParolaPhraseToStopGame(risposta)) {
                             risultatiManager.stopDomanda();
                             risultatiManager.fineGioco();
                             getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
@@ -270,14 +272,12 @@ public class GameFragment extends Fragment{
                                         Log.e("RISPOSTA_VOCALE", "NON ESISTE ");
                                         String testoDialog="";
                                         if(game instanceof Persona.FluenzeVerbali){
-                                            //testoDialog="Pensaci meglio. E dimmi un'altra parola";
-                                            //requestSay = robotHelper.say("Pensaci meglio. E dimmi un'altra parola");
-                                            requestSay = robotHelper.say(domanda.getTestoDomanda())
-                                            ;
+                                            testoDialog="Pensaci meglio. E dimmi un'altra parola";
+                                            wrongAnswer().andThenCompose(action -> robotHelper.say(requestTextForPepper));
                                         }
                                         if(game instanceof Persona.FluenzeSemantiche){
                                             testoDialog="Non é molto attinente, pensaci meglio ";
-                                            requestSay = robotHelper.say("Non é molto attinente, pensaci meglio");
+                                            wrongAnswer().andThenCompose(action -> robotHelper.say(requestTextForPepper));
                                         }
 
                                         risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONCORRELATA));
@@ -292,7 +292,7 @@ public class GameFragment extends Fragment{
                                 });
 
                             }
-                            else if (controllaInBaseAlGioco(risposta, domanda.getTestoParola().toLowerCase())) {
+                            else if (controllaInBaseAlGioco(risposta.trim().replaceAll("\\s+",""), domanda.getTestoParola().toLowerCase())) { //Fluenze fonologiche
                                 domanda.checkDomandaOnline(getContext(), risposta, new Util.RicercaParoleListener() {
                                     @Override
                                     public void esiste() {
@@ -311,6 +311,7 @@ public class GameFragment extends Fragment{
                                                     if (fragment != null) {
                                                         getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                                                     }
+                                                    requestSay = correctAnswer();
                                                     risultatiManager.stopDomanda();
 
                                                     positiongame++;
@@ -322,17 +323,19 @@ public class GameFragment extends Fragment{
                                             Log.e("RISPOSTA_VOCALE", "ESISTE");
                                             risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.ESISTE));
                                             AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT, "La parola ESISTE");
+                                            requestSay = correctAnswer();
                                             answerDialogFragment.show();
                                         }
                                     }
 
                                     @Override
-                                    public void nonesiste() {
+                                    public void nonesiste() { //Fluenze fonologiche se la parola non esiste
                                         Log.e("RISPOSTA_VOCALE", "NON ESISTE ");
                                         risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONESISTE));
                                         AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "La parola NON ESISTE");
+                                        requestSay = wrongAnswer()
+                                                .andThenCompose(response -> robotHelper.say(requestTextForPepper));
                                         answerDialogFragment.show();
-                                        requestSay = robotHelper.say(domanda.getTestoDomanda());
                                     }
                                 });
                             } else {
@@ -340,7 +343,8 @@ public class GameFragment extends Fragment{
                                 risultatiManager.setParoleList( new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONVALIDA));
                                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "Attenzione! Parola non valida");
                                 answerDialogFragment.show();
-                                requestSay = robotHelper.say(domanda.getTestoDomanda());
+                                requestSay = wrongAnswer()
+                                        .andThenCompose(response -> robotHelper.say(requestTextForPepper));
                             }
                         }
                     }
@@ -373,7 +377,7 @@ public class GameFragment extends Fragment{
                                     AnswerDialogFragment.typeDialog.WRONG);
                             answerDialogFragment.show();
                             risultatiManager.setError();
-                            requestSay = robotHelper.say(domanda.getTestoDomanda());
+                            requestSay = robotHelper.say(requestTextForPepper);
                         }
                     }
                 }
@@ -411,12 +415,11 @@ public class GameFragment extends Fragment{
             //testoDomanda.setText("Domanda " + (positiongame + 1) + " :\n" + domanda.getTestoDomanda());
         }
 
-        requestTextForPepper = domanda.getTestoDomanda();
         //TODO:RIMETTERE SE SI VUOLE RIPETERE LA PAROLA DELLA DOMANDA
       //  requestText = requestText + " " + domanda.getTestoParola();
         testoDomanda.setText(requestText);
 
-        requestSay = robotHelper.say(requestTextForPepper + " " + domanda.getTestoParola());
+        requestSay = robotHelper.say(requestTextForPepper);
 
         if (!(domanda.getTestoParola().trim().equalsIgnoreCase("")) || domanda.getTestoParola() != null) {
             testoparola.setText(domanda.getTestoParola());
@@ -448,9 +451,13 @@ public class GameFragment extends Fragment{
             String risposte = Util.toString(domanda.getListaRispose());
 
             //Quando pepper termina di dire la domanda, gli faccio dire le risposte disponibili
-            if (domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO) {
+            if (!(game instanceof Persona.FluenzeVerbali || game instanceof Persona.FluenzeSemantiche || game instanceof Persona.FluenzeFonologiche)) {
                 requestSay.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
-                    requestSay = robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte);
+                    requestSay = robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte).andThenConsume(action -> {
+                        if(game instanceof  Persona.Musica){ // Se sta runnando il gioco musicale dopo che spiega le risposte disponibili faccio partire il player
+                            fragment.start();
+                        }
+                    });
                 }));
             }
         }
@@ -494,7 +501,7 @@ public class GameFragment extends Fragment{
                     }
                 });
             } else {
-                requestSay = robotHelper.say(getContext().getString(R.string.text_dialog_wrong))
+                requestSay = wrongAnswer()
                         .andThenCompose(response -> robotHelper.say(requestTextForPepper));
                 AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG);
 
@@ -540,7 +547,7 @@ public class GameFragment extends Fragment{
                 game instanceof Persona.FluenzeSemantiche ||
                 game instanceof Persona.FinaliParole){
 
-            if (!(game instanceof  Persona.FinaliParole) &&!(game instanceof  Persona.FluenzeVerbali)&& ((risposta.equalsIgnoreCase("STOP") || risposta.equalsIgnoreCase("FINE GIOCO") || risposta.equalsIgnoreCase("FERMA GIOCO")))) {
+            if (!(game instanceof  Persona.FinaliParole) &&!(game instanceof  Persona.FluenzeVerbali)&& Util.isParolaPhraseToStopGame(risposta)) {
                 risultatiManager.stopDomanda();
                 risultatiManager.fineGioco();
                 getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
@@ -589,18 +596,18 @@ public class GameFragment extends Fragment{
                             String testoDialog="";
                             if(game instanceof Persona.FluenzeVerbali){
                                 testoDialog="Pensaci meglio. E dimmi un'altra parola  ";
-                                requestSay = robotHelper.say("Pensaci meglio. E dimmi un'altra parola")
+                                requestSay = wrongAnswer()
                                         .andThenCompose(response -> robotHelper.say(requestTextForPepper));
                             }
                             if(game instanceof Persona.FluenzeSemantiche){
                                 testoDialog="Non é molto attinente, pensaci meglio ";
-                                requestSay = robotHelper.say("Non é molto attinente, pensaci meglio")
+                                requestSay = wrongAnswer()
                                         .andThenCompose(response -> robotHelper.say(requestTextForPepper));
                             }
 
                             risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONCORRELATA));
                             AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, testoDialog);
-                            requestSay = robotHelper.say(getContext().getString(R.string.text_dialog_wrong))
+                            requestSay = wrongAnswer()
                                     .andThenCompose(response -> robotHelper.say(requestTextForPepper));
 
                             answerDialogFragment.show();
@@ -714,5 +721,12 @@ public class GameFragment extends Fragment{
         int randomNumberForText = new Random().nextInt(Phrases.phrasePepperCorrectAnwswer.length);
 
         return robotHelper.sayAndMove(animationsArray[randomNumberForAnimation],Phrases.phrasePepperCorrectAnwswer[randomNumberForText]);
+    }
+
+    private Future<Void> wrongAnswer(){
+
+        int randomNumberForText = new Random().nextInt(Phrases.phrasePepperWrongAnwswer.length);
+
+        return robotHelper.say(Phrases.phrasePepperWrongAnwswer[randomNumberForText]);
     }
 }

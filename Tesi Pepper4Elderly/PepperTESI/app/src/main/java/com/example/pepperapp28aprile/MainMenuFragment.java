@@ -15,7 +15,11 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.aldebaran.qi.sdk.builder.AnimateBuilder;
+import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
+import com.aldebaran.qi.sdk.object.actuation.Animate;
+import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
 import com.aldebaran.qi.sdk.object.locale.Language;
 import com.aldebaran.qi.sdk.object.locale.Locale;
@@ -64,25 +68,7 @@ public class MainMenuFragment extends Fragment {
         Globals.isGameMode = this.isGameMode;
 
         try {
-            if (!isGameMode)
-                SayBuilder.with(MainActivity.qiContext)
-                        .withText(Phrases.beforeMenuParent)
-                        .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
-                        .withBodyLanguageOption(BodyLanguageOption.DISABLED)
-                        .buildAsync().andThenCompose(say -> {
-                            Log.d(TAG, "Say started : " + "text");
-                            return say.async().run();
-                        });
-
-            else
-                SayBuilder.with(MainActivity.qiContext)
-                        .withText(Phrases.beforeMenuGame)
-                        .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
-                        .withBodyLanguageOption(BodyLanguageOption.DISABLED)
-                        .buildAsync().andThenCompose(say -> {
-                            Log.d(TAG, "Say started : " + "text");
-                            return say.async().run();
-                        });
+            pepperSpeackOnMenuGameOrCall();
         }catch(Exception ex){
 
         }
@@ -283,6 +269,31 @@ public class MainMenuFragment extends Fragment {
             e.printStackTrace();
 
         }
+    }
+
+    public void pepperSpeackOnMenuGameOrCall(){
+        if (!isGameMode){
+            SayBuilder.with(MainActivity.qiContext)
+                    .withText(Phrases.beforeMenuParent)
+                    .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
+                    .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                    .buildAsync().andThenCompose(say -> {
+                        Log.d(TAG, "Say started : " + "text");
+                        return say.async().run();
+                    });
+        }
+
+        else{
+            SayBuilder.with(MainActivity.qiContext)
+                    .withText(Phrases.beforeMenuGame)
+                    .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
+                    .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                    .buildAsync().andThenCompose(say -> {
+                        Log.d(TAG, "Say started : " + "text");
+                        return say.async().run();
+                    });
+        }
+
     }
 
 }
