@@ -18,6 +18,8 @@ public class Phrases {
             "Bravissimo!"
     };
 
+    public static final String fluenzeFonologicheWhenWordIsAlreadyPresent = "Hai già detto questa parola!, riproviamo!";
+
     public static final String[] phrasePepperWrongAnwswer = {
             "Non ci siamo, riprova!",
             "Pensaci meglio e riprova!",

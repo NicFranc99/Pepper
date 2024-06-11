@@ -57,7 +57,7 @@ public class GameFragment extends Fragment{
     public GameActivity gameActivity;
     private  String requestText = new String();
     private String requestTextForPepper = new String();
-
+    private ArrayList<String> fluenzeFonologicheWord;
     private LottieAnimationView lottieAnimationView;
     private RelativeLayout containerAnimations;
     private ShapeableImageView imageMic;
@@ -110,6 +110,7 @@ public class GameFragment extends Fragment{
      * Per il momento per i giochi che richiedono l'iterazione con l'utente non ascoltano l'input vocale. Bisogna utilizzare il microfono del tablet di pepper
      */
     private void iniziaGioco() {
+        fluenzeFonologicheWord = new ArrayList<String>();
         risultatiManager.startDomanda();
         domanda = lisaDomande.get(positiongame);
         FrameLayout listaMedia = v.findViewById(R.id.linearimage);
@@ -339,12 +340,19 @@ public class GameFragment extends Fragment{
                                     }
                                 });
                             } else {
-                                Log.e("RISPOSTA_VOCALE", "NON VALIDA ");
-                                risultatiManager.setParoleList( new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONVALIDA));
-                                AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "Attenzione! Parola non valida");
-                                answerDialogFragment.show();
-                                requestSay = wrongAnswer()
-                                        .andThenCompose(response -> robotHelper.say(requestTextForPepper));
+                                if(checkIfWordIsAlreadyPresent(risposta) && game instanceof Persona.FluenzeFonologiche){
+                                    Log.e("RISPOSTA_VOCALE", String.format("%s: è già stata detta!", risposta));
+                                    requestSay = robotHelper.say(Phrases.fluenzeFonologicheWhenWordIsAlreadyPresent);
+                                }else {
+                                    Log.e("RISPOSTA_VOCALE", "NON VALIDA ");
+                                    risultatiManager.setParoleList(new RisultatiManager.Parole(risposta, RisultatiManager.Risposta.NONVALIDA));
+                                    AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG, "Attenzione! Parola non valida");
+                                    answerDialogFragment.show();
+
+                                    requestSay = wrongAnswer()
+                                            .andThenCompose(response -> robotHelper.say(requestTextForPepper));
+                                }
+
                             }
                         }
                     }
@@ -387,8 +395,16 @@ public class GameFragment extends Fragment{
                     if(game instanceof Persona.CombinazioniLettere)
                         //return risposta.indexOf(testoParola) != -1;
                         return risposta.contains(parola);
-                    if(game instanceof Persona.FluenzeFonologiche||game instanceof Persona.FinaliParole)
+                    if(game instanceof Persona.FluenzeFonologiche||game instanceof Persona.FinaliParole){
+                        if(game instanceof Persona.FluenzeFonologiche){
+                            if(fluenzeFonologicheWord.contains(risposta)){
+                                return false;
+                            }
+                            fluenzeFonologicheWord.add(risposta);
+                        }
                         return risposta.toUpperCase().startsWith(testoParola.toUpperCase());
+                    }
+
                     else
                         return true;
                 }
@@ -619,8 +635,9 @@ public class GameFragment extends Fragment{
                         }
                     });
 
-                }
+                } //Fluenze fonologiche
                 else if (controllaInBaseAlGioco(risposta, domanda.getTestoParola().toLowerCase())) {
+
                     domanda.checkDomandaOnline(getContext(), risposta, new Util.RicercaParoleListener() {
                         @Override
                         public void esiste() {
@@ -728,5 +745,15 @@ public class GameFragment extends Fragment{
         int randomNumberForText = new Random().nextInt(Phrases.phrasePepperWrongAnwswer.length);
 
         return robotHelper.say(Phrases.phrasePepperWrongAnwswer[randomNumberForText]);
+    }
+
+    private boolean checkIfWordIsAlreadyPresent(String inputWord){
+        int count = 1;
+        for (String s : fluenzeFonologicheWord) {
+            if (s == inputWord) {
+                count++;
+            }
+        }
+        return count != 1;
     }
 }
