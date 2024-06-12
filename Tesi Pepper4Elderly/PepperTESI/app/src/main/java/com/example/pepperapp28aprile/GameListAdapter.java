@@ -49,9 +49,15 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
     //the list values in the List of type hero
     public static boolean tornaNav;
     private Persona paziente;
+    private RobotHelper robotHelper;
+    private Future<Void> requestSay;
+    private boolean allItemsDisplayed = false;
+    private QiContext qiContext;
+    private ArrayList<String> gameTitleGameList;
     //activity context
     Context context;
     private Future<String> listenFuture;
+    private GameProfileActivity activity;
     //the layout resource file for the list items
     int resource;
 
@@ -61,6 +67,10 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
         this.context = context;
         this.resource = resource;
         this.paziente = p;
+        robotHelper = activity.getRobotHelper();
+        this.activity = activity;
+        this.qiContext = activity.qiContext;
+        this.gameTitleGameList = new ArrayList<>();
     }
 
     //this will return the ListView Item as a View
@@ -84,6 +94,7 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
 
         //getting the hero of the specified position
         Persona.Game game = paziente.getEsercizi().get(position);
+        gameTitleGameList.add(game.getTitleGame());
 
 
         //adding values to the list item
@@ -115,6 +126,7 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
             @Override
             public void onClick(View view) {
                 //we will call this method to remove the selected value from the list
+                //we are passing the position which is to be removed in the method
                 Intent game = new Intent(getContext(), GameActivity.class);
                 startGameActivity(view,paziente.getEsercizi().get(position),position);
             }

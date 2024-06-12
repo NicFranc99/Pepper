@@ -99,9 +99,11 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public static QiContext qiContext;
     private RobotHelper robotHelper;
     private static FragmentManager fragmentManager;
-    public Future<Void>requestSay;
+    public Future<Void> requestSay;
+    public Future<String> listenFuture;
     private static final String TAG = "MSI_MainMenuFragment";
-
+    private boolean createSelectedFragment = false;
+    private Intent intentFromGameActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,39 +115,56 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         System.out.println("GameProfile activity");
 
         setContentView(R.layout.fragment_main_persone);
-        TextView tv1 = (TextView)findViewById(R.id.txtname);
+        TextView tv1 = (TextView) findViewById(R.id.txtname);
 
         tv1.setText(Globals.Greeting + " " + name);
 
-        TitleView sectionInfoElder = (TitleView)findViewById(R.id.imgsenior);
+        TitleView sectionInfoElder = (TitleView) findViewById(R.id.imgsenior);
         setElderlyImageByGender(sectionInfoElder);
         PeopleListAdapter.tornaNav = tornaNav;
 
-       // setFragment(PlaceholderFragmentGames.newInstance(idPaziente),PlaceholderFragmentGames.FRAGMENT_TAG);
-       setFragment(SelectionGameModeFragment.newInstance(idPaziente),SelectionGameModeFragment.FRAGMENT_TAG);
+        intentFromGameActivity = getIntent();
+        createSelectedFragment = intentFromGameActivity.getBooleanExtra("load_fragment", false);
 
+        if(!createSelectedFragment)
+        setSelectedGameModeFragment(SelectionGameModeFragment.newInstance(idPaziente), SelectionGameModeFragment.FRAGMENT_TAG);
     }
 
     /**
      * Tale metodo prende un TitleView e gli imposta il drawable con icona da donna se il gender del paziente considerato sia "F" altrimenti gli assegna un drawable
      * che corrisponde all'icona di un signore.
+     *
      * @param sectionInfoElder TitleView di cui impostare l'icona drawable inbase al gender del paziente considerato.
      */
-    private void setElderlyImageByGender(TitleView sectionInfoElder){
-        if(sesso.equals("M"))
+    private void setElderlyImageByGender(TitleView sectionInfoElder) {
+        if (sesso.equals("M"))
             sectionInfoElder.setBackground(ContextCompat.getDrawable(this, R.drawable.grandfather));
         else
             sectionInfoElder.setBackground(ContextCompat.getDrawable(this, R.drawable.grandmother));
     }
 
 
-    public void setFragment(Fragment fragment,String fragmentTag) {
+    public void setPlaceHolderFragment(Fragment fragment, String fragmentTag) {
+            FragmentManager fm = getSupportFragmentManager();
+            fragment = fm.findFragmentByTag(fragmentTag);
+            if (fragment == null) {
+                FragmentTransaction ft = fm.beginTransaction();
+                fragment = PlaceholderFragmentGames.newInstance(idPaziente);
+
+
+                ft.add(android.R.id.content, fragment, fragmentTag);
+                ft.commit();
+            }
+    }
+
+    public void setSelectedGameModeFragment(Fragment fragment, String fragmentTag) {
         FragmentManager fm = getSupportFragmentManager();
         fragment = fm.findFragmentByTag(fragmentTag);
         if (fragment == null) {
             FragmentTransaction ft = fm.beginTransaction();
-            fragment = SelectionGameModeFragment.newInstance(idPaziente);
-            ft.add(android.R.id.content,fragment,fragmentTag);
+          fragment = SelectionGameModeFragment.newInstance(idPaziente);
+
+            ft.add(android.R.id.content, fragment, fragmentTag);
             ft.commit();
         }
     }
@@ -155,52 +174,60 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         Globals.NowIsRunning = Globals.GameProfile;
         this.qiContext = qiContext;
         this.robotHelper.onRobotFocusGained(qiContext);
+        
+        String idPaziente = intentFromGameActivity.getStringExtra("idPaziente");
+
+        if(createSelectedFragment){
+            setPlaceHolderFragment(PlaceholderFragmentGames.newInstance(idPaziente),PlaceholderFragmentGames.FRAGMENT_TAG);
+        }
+
+
         // Create a new say action.
 
-       //     Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context
-                    //.withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla foto del gioco per cominciare!, oppure dimmelo a voce!") // Set the text to say.
-     //               .withText("Ciao " + name + " " + Phrases.selectGameMode)
-     //               .build(); // Build the say action.
-    //    ciaoSonoPepper.run();
+        //     Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context
+        //.withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla foto del gioco per cominciare!, oppure dimmelo a voce!") // Set the text to say.
+        //               .withText("Ciao " + name + " " + Phrases.selectGameMode)
+        //               .build(); // Build the say action.
+        //    ciaoSonoPepper.run();
 
 
-     //   ArrayList<String> titleGames = getGameTitleList();
+        //   ArrayList<String> titleGames = getGameTitleList();
 
-      //  List<Phrase> phraseList = getPhraseSetListByStringList(titleGames);
+        //  List<Phrase> phraseList = getPhraseSetListByStringList(titleGames);
 
-      //  ListenResult listenResult  = setTitleGameToLissen(phraseList);
+        //  ListenResult listenResult  = setTitleGameToLissen(phraseList);
 
-      //  String pepperString = listenResult.getHeardPhrase().getText();
+        //  String pepperString = listenResult.getHeardPhrase().getText();
 
-       // robotHelper.say(getString(R.string.start_game) + pepperString);
-       // viewGameListByVoice(null,pepperString);
+        // robotHelper.say(getString(R.string.start_game) + pepperString);
+        // viewGameListByVoice(null,pepperString);
 
-      //  Animation animazioneSaluto = AnimationBuilder.with(qiContext)
-     //           .withResources(R.raw.salute_left_b001)
-     //           .build();
+        //  Animation animazioneSaluto = AnimationBuilder.with(qiContext)
+        //           .withResources(R.raw.salute_left_b001)
+        //           .build();
 
         // Create the second action.
-      //  Animate animate = AnimateBuilder.with(qiContext)
-      //          .withAnimation(animazioneSaluto)
-      //          .build();
+        //  Animate animate = AnimateBuilder.with(qiContext)
+        //          .withAnimation(animazioneSaluto)
+        //          .build();
 
         // Run the second action asynchronously.
-     //   animate.async().run();
+        //   animate.async().run();
     }
 
-//TODO: Vedere qua per passare valori a una activity
+    //TODO: Vedere qua per passare valori a una activity
     public void startWeb(View view, int position, Persona paziente) {
         WebActivity.tornaNav = tornaNav;
         Intent intent = new Intent(this, GameActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.putExtra("item", position);
-        intent.putExtra("paziente",paziente);
+        intent.putExtra("paziente", paziente);
         this.startActivity(intent);
         finish();
     }
 
     public void viewGameListByVoice(View view, String pepperString) {
-        getPazienteById(this.idPaziente,pepperString);
+        getPazienteById(this.idPaziente, pepperString);
     }
 
     public RobotHelper getRobotHelper() {
@@ -208,18 +235,18 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     }
 
 
-    private void getPazienteById(String idPaziente,String pepperString){
-        new DataManager(this,"pazienti",idPaziente,new DataManager.onDownloadDataListener() {
+    private void getPazienteById(String idPaziente, String pepperString) {
+        new DataManager(this, "pazienti", idPaziente, new DataManager.onDownloadDataListener() {
             @Override
             public void onDataSuccess(Persona paziente) {
                 int count = paziente.getEsercizi().size();
-                if(!paziente.getEsercizi().isEmpty())
-                    for(int i=0;i<paziente.getEsercizi().size();i++){
-                    if(paziente.getEsercizi().get(i).getTitleGame().equalsIgnoreCase(pepperString)){
-                       startWeb(null,i,paziente);
-                       return;
+                if (!paziente.getEsercizi().isEmpty())
+                    for (int i = 0; i < paziente.getEsercizi().size(); i++) {
+                        if (paziente.getEsercizi().get(i).getTitleGame().equalsIgnoreCase(pepperString)) {
+                            startWeb(null, i, paziente);
+                            return;
+                        }
                     }
-                }
                 else return;
             }
 
@@ -281,27 +308,28 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
 
     @Override
     public void onBackPressed() {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-           finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**
      * Prende la lista dei giochi assegnati al paziente corrente (Passata dakka MyListAdapter) e restituisce
      * una lista di tutti i titoli dei giochi
+     *
      * @return List dei titoli dei giochi assegnati al paziente
      */
-    public ArrayList<String> getGameTitleList(){
+    public ArrayList<String> getGameTitleList() {
         ArrayList<String> result = new ArrayList<>();
-        for(Persona.Game game : gameArrayList){
+        for (Persona.Game game : gameArrayList) {
             result.add(game.getTitleGame());
         }
         return result;
     }
 
-    private List<Phrase> getPhraseSetListByStringList(ArrayList<String> gameTitleList){
+    private List<Phrase> getPhraseSetListByStringList(ArrayList<String> gameTitleList) {
         List<Phrase> phraseList = new ArrayList<Phrase>();
-        for(String title : gameTitleList){
+        for (String title : gameTitleList) {
             phraseList.add(new Phrase(title));
         }
 
@@ -311,10 +339,11 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     /**
      * Prende una lista di frasi che pepper deve rimanere in ascolto, le imposta,
      * e restituisce un oggetto dell'Sdk che permette di recuperare il testo ascoltato da pepper.
+     *
      * @param phraseList
      * @return Restituisce un oggetto che permette di recuperare cio' che pepper ha ascoltato durante l'interazione
      */
-    private ListenResult setTitleGameToLissen(List<Phrase> phraseList){
+    private ListenResult setTitleGameToLissen(List<Phrase> phraseList) {
         PhraseSet phraseSet = PhraseSetBuilder.with(qiContext)
                 .withPhrases(phraseList)
                 .build();
@@ -367,6 +396,4 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         });
         exit.show();
     }*/
-
-
 }

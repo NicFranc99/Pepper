@@ -1,6 +1,7 @@
 package com.example.pepperapp28aprile;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -170,8 +171,15 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
         exit.setListener(new onCLickListener() {
             @Override
             public void onClickExit() {
+                Intent intent = new Intent(GameActivity.this, GameProfileActivity.class);
+                intent.putExtra("load_fragment", true);
+                intent.putExtra("idPaziente", String.valueOf(paziente.getId()));
+                startActivity(intent);
+
                 exit.dismiss();
                 finish();
+             //   loadExampleFragment();
+
             }
 
             @Override
@@ -187,6 +195,23 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
     public void onPause() {
         super.onPause();
         finish();
+    }
+
+    public void loadExampleFragment() {
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        Fragment currentFragment = fragmentManager.findFragmentByTag(SelectionGameModeFragment.FRAGMENT_TAG);
+
+// Nascondi il fragment corrente se è presente
+        if (currentFragment != null) {
+            fragmentTransaction.hide(currentFragment);
+        }
+
+        fragmentTransaction.replace(R.id.container_game_com,  PlaceholderFragmentGames.newInstance(String.valueOf(paziente.getId())), PlaceholderFragmentGames.FRAGMENT_TAG);
+
+        fragmentTransaction.addToBackStack(PlaceholderFragmentGames.FRAGMENT_TAG);
+        fragmentTransaction.commit();
     }
 
     @Override

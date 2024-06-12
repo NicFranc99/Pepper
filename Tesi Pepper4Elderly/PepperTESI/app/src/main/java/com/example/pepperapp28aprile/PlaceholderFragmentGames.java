@@ -1,6 +1,7 @@
 package com.example.pepperapp28aprile;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.leanback.app.BrowseSupportFragment;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,7 +36,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aldebaran.qi.Future;
+import com.aldebaran.qi.QiException;
 import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.QiSDK;
 import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.presenter.CardPresenter;
@@ -74,6 +79,10 @@ public class PlaceholderFragmentGames extends Fragment {
         return fragment;
     }
 
+    public PlaceholderFragmentGames(){
+
+    }
+
     public static Fragment newInstance(String idPaziente) {
         id = idPaziente;
         PlaceholderFragmentGames fragment = new PlaceholderFragmentGames();
@@ -83,7 +92,6 @@ public class PlaceholderFragmentGames extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
@@ -131,6 +139,7 @@ public class PlaceholderFragmentGames extends Fragment {
         return fragmentLayout;
     }
 
+
     //TODO: Vedere qua, questo viene eseguito quando fragmentLayout e' bello pronto e visualizzato
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -142,7 +151,6 @@ public class PlaceholderFragmentGames extends Fragment {
 
         // Operazione da eseguire dopo che il layout del fragment è stato restituito
         // Puoi inserire qui il tuo codice per l'operazione desiderata
-
             // E se lo siamo, verifico se tutte le componenti sono state visualizzate
             requestSay = robotHelper.say(Phrases.menuGame).andThenCompose(result -> {
                 listenFuture = robotHelper.setListener(((GameProfileActivity)getActivity()).getGameTitleList(), qiContext);
@@ -154,10 +162,51 @@ public class PlaceholderFragmentGames extends Fragment {
 
                     // Ritorna un Future completato per continuare la catena
                     listenFuture.cancel(true);
+                    listenFuture.requestCancellation();
                     return Future.of(null);
+                }).thenConsume(future -> { //Verifico se c'e' un problema con l'esecuzione del future per l'ascolto
+                    if (future.hasError()) {
+                        Log.e("Pepper4RSA", "Error while speaking or listening: ", future.getError());
+                    }
                 });
             });
     }
+/*
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestSay.cancel(true);
+        requestSay.requestCancellation();
+        requestSay = robotHelper.say(Phrases.menuGame,getActivity()).thenConsume(future -> { //Verifico se c'e' un problema con l'esecuzione del future per l'ascolto
+            if (future.hasError()) {
+                Log.e("Pepper4RSA", "Error while speaking or listening: ", future.getError());
+            }
+        });
+        // Verifica se il fragment è visibile e se è il fragment attuale
+        if (isVisible() && getActivity() instanceof GameProfileActivity) {
+
+
+                // Codice per far parlare Pepper
+                Future<Void> requestSay = robotHelper.say(Phrases.menuGame).andThenCompose(result -> {
+                    Future<String> listenFuture = robotHelper.setListener(((GameProfileActivity) getActivity()).getGameTitleList(), qiContext);
+                    return listenFuture.andThenCompose(heardPhrase -> {
+                        // Usa la frase ascoltata come necessario
+                        Log.d("Pepper4RSA", "Pepper heard: " + heardPhrase);
+
+                        ((GameProfileActivity) getActivity()).viewGameListByVoice(null, heardPhrase);
+
+                        // Ritorna un Future completato per continuare la catena
+                        listenFuture.cancel(true);
+                        listenFuture.requestCancellation();
+                        return Future.of(null);
+                    });
+                }).thenConsume(future -> { //Verifico se c'e' un problema con l'esecuzione del future per l'ascolto
+                    if (future.hasError()) {
+                        Log.e("Pepper4RSA", "Error while speaking or listening: ", future.getError());
+                    }
+                });
+        }
+    }*/
 
 }
 
