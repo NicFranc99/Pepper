@@ -7,7 +7,10 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -25,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pepperapp28aprile.*;
 import com.example.pepperapp28aprile.R;
+import com.example.pepperapp28aprile.models.RecyclerViewAnswersAdapter;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -68,6 +72,8 @@ public class Util {
         void errore();
 
     }
+
+
     public static boolean isCodiceFiscale(final String input) {
         final Pattern pattern = Pattern.compile("[a-zA-Z]+[0-9]+[a-zA-Z][0-9]+[a-zA-Z][0-9]+[a-zA-Z]",
                 Pattern.CASE_INSENSITIVE);

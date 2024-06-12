@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
 import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.ChatBuilder;
+import com.aldebaran.qi.sdk.builder.ListenBuilder;
+import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
 import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.builder.TopicBuilder;
@@ -32,6 +35,10 @@ import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
 import com.aldebaran.qi.sdk.object.conversation.Chat;
 import com.aldebaran.qi.sdk.object.conversation.Chatbot;
+import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.Phrase;
+import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
 import com.aldebaran.qi.sdk.object.conversation.QiChatExecutor;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Say;
@@ -48,6 +55,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 public class GameActivity extends RobotActivity implements RobotLifecycleCallbacks{
 
@@ -65,7 +76,8 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
     public static String rispostaUtente;
     private String currentFragment;
     private Bundle eliminami;
-
+    public Persona.Game.Domanda domanda;
+    private Future<Void> say;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +99,8 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_STORAGE);
         }
     }
+
+
 
     private void init() {
         QiSDK.register(this, this);
@@ -128,7 +142,6 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
 
     }
 
-
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
         // Create a new say action.
@@ -139,7 +152,7 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
             fragment.setArguments(getIntent().getExtras()); // delego al fragment la ricezzione dei dati
             getSupportFragmentManager().beginTransaction().replace(R.id.container_game_com, fragment).commit();
         }
-            }
+    }
 
     public QiContext getQiContext() {
         return qiContext;
@@ -153,6 +166,7 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
         ExitDialogFragment exit = new ExitDialogFragment(GameActivity.this);
         exit.setText(getResources().getString(R.string.msg_exit_session));
         exit.setIcon(getDrawable(R.drawable.answer));
+        say = robotHelper.say(getResources().getString(R.string.msg_exit_session) );
         exit.setListener(new onCLickListener() {
             @Override
             public void onClickExit() {
@@ -162,6 +176,8 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
 
             @Override
             public void onClickContinue() {
+                say.cancel(true);
+                say = robotHelper.say("Continuamo a giocare!");
                 exit.dismiss();
             }
         });
@@ -177,4 +193,5 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }

@@ -16,7 +16,7 @@ import com.example.pepperapp28aprile.RecyclerAnswers;
 import java.util.ArrayList;
 
 public class RecyclerViewAnswersAdapter extends RecyclerView.Adapter<RecyclerViewAnswersAdapter.RecyclerViewHolder> {
-    private OnItemClickListener listener;
+    public OnItemClickListener listener;
     private Persona.Game.TypeInputGame chose;
 
     public void setMode(Persona.Game.TypeInputGame chose) {
@@ -26,6 +26,22 @@ public class RecyclerViewAnswersAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public interface OnItemClickListener {
         void onItemClick(View v, String item,int position);
+    }
+
+    public int getPositionByItem(RecyclerAnswers answes){
+        return courseDataArrayList.indexOf(answes);
+    }
+
+    public RecyclerAnswers getItemByText(String text){
+        for (RecyclerAnswers answes:
+            courseDataArrayList ) {
+            String title = answes.getTitle();
+            if(title.trim().equalsIgnoreCase(text.trim())){
+                return answes;
+            }
+
+        }
+        return null;
     }
 
     private final ArrayList<RecyclerAnswers> courseDataArrayList;
@@ -72,10 +88,11 @@ public class RecyclerViewAnswersAdapter extends RecyclerView.Adapter<RecyclerVie
         this.listener = listener;
     }
 
+
     // View Holder Class to handle Recycler View.
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private final Button card;
+        public final Button card;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,4 +101,5 @@ public class RecyclerViewAnswersAdapter extends RecyclerView.Adapter<RecyclerVie
 
         }
     }
+
 }

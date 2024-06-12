@@ -156,7 +156,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
 
             Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context
                     //.withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla foto del gioco per cominciare!, oppure dimmelo a voce!") // Set the text to say.
-                    .withText(Phrases.menuGame)
+                    .withText("Ciao " + name + " " + Phrases.menuGame)
                     .build(); // Build the say action.
         ciaoSonoPepper.run();
 

@@ -19,14 +19,20 @@
         <entry key="app/src/main/res/drawable/edtextstate.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/exittitle.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_icn_gamemode.xml" value="0.3045" />
+        <entry key="app/src/main/res/drawable/ic_icn_goto_frame.xml" value="0.1885" />
+        <entry key="app/src/main/res/drawable/ic_icn_goto_frame_notavailable.xml" value="0.1885" />
         <entry key="app/src/main/res/drawable/ic_icn_localize_robot_burgermenu_notavailable.xml" value="0.1745" />
+        <entry key="app/src/main/res/drawable/ic_icn_localize_robot_burgermenu_oklocation.xml" value="0.1885" />
         <entry key="app/src/main/res/drawable/ic_icn_productionmode.xml" value="0.1745" />
         <entry key="app/src/main/res/drawable/ic_icn_setupmode.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1885" />
         <entry key="app/src/main/res/drawable/ic_loop.xml" value="0.2895" />
         <entry key="app/src/main/res/drawable/ic_pause.xml" value="0.2895" />
         <entry key="app/src/main/res/drawable/ic_play.xml" value="0.2895" />
         <entry key="app/src/main/res/drawable/ic_replay.xml" value="0.2895" />
+        <entry key="app/src/main/res/drawable/ic_resizable_videocall.xml" value="0.1885" />
+        <entry key="app/src/main/res/drawable/ic_separation_menu.xml" value="0.1885" />
         <entry key="app/src/main/res/drawable/icontitle.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/styleanswer.xml" value="0.183" />
         <entry key="app/src/main/res/drawable/stylebuttonerrorresponce.xml" value="0.1" />
@@ -42,7 +48,7 @@
         <entry key="app/src/main/res/layout/activity_profile_grid.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_web.xml" value="0.28957365977205574" />
         <entry key="app/src/main/res/layout/answer_dialog_fragment.xml" value="0.2111650485436893" />
-        <entry key="app/src/main/res/layout/answer_row.xml" value="0.2111650485436893" />
+        <entry key="app/src/main/res/layout/answer_row.xml" value="0.2718631178707224" />
         <entry key="app/src/main/res/layout/buttontonav.xml" value="0.1" />
         <entry key="app/src/main/res/layout/category_card.xml" value="0.33" />
         <entry key="app/src/main/res/layout/command_view.xml" value="0.1" />

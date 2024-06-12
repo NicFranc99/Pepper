@@ -2,6 +2,9 @@ package com.example.pepperapp28aprile.map;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
@@ -22,8 +25,11 @@ import com.aldebaran.qi.sdk.object.actuation.Frame;
 import com.aldebaran.qi.sdk.object.actuation.Mapping;
 import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
 import com.aldebaran.qi.sdk.object.conversation.Chatbot;
+import com.aldebaran.qi.sdk.object.conversation.Conversation;
 import com.aldebaran.qi.sdk.object.conversation.Discuss;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.Phrase;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
 import com.aldebaran.qi.sdk.object.conversation.QiChatbot;
 import com.aldebaran.qi.sdk.object.conversation.Say;
@@ -38,11 +44,15 @@ import com.aldebaran.qi.sdk.object.power.FlapSensor;
 import com.aldebaran.qi.sdk.object.power.Power;
 
 import com.example.pepperapp28aprile.Globals;
+import com.example.pepperapp28aprile.Persona;
 import com.example.pepperapp28aprile.R;
 import com.example.pepperapp28aprile.utilities.Phrases;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class RobotHelper {
     private static final String TAG = "MSI_RobotHelper";
@@ -145,6 +155,19 @@ public class RobotHelper {
      * @param text to be said by Pepper
      * @return
      */
+    public Future<Void> say(final String text, FragmentActivity activity) {
+        return SayBuilder.with(qiContext)
+                .withText(text)
+                .withLocale(new Locale(Language.ITALIAN, Region.ITALY))
+                .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                .buildAsync().andThenCompose(say -> {
+                    activity.runOnUiThread(() -> {
+                        Log.d(TAG, "Say started : " + text);
+                    });
+                    return say.async().run();
+                });
+    }
+
     public Future<Void> say(final String text) {
         return SayBuilder.with(qiContext)
                 .withText(text)
@@ -155,6 +178,74 @@ public class RobotHelper {
                     return say.async().run();
                 });
     }
+
+    private List<Phrase> setPhraseToLissen(List<String> gameAnsware){
+        List<Phrase> phraseList = new ArrayList<Phrase>();
+        for(String answare : gameAnsware){
+            phraseList.add(new Phrase(answare));
+        }
+        return phraseList;
+    }
+
+
+    public Future<String> setListener(List<String> phraseToListen, QiContext qiContext) {
+        List<Phrase> phraseList = new ArrayList<>();
+        for (String phrase : phraseToListen) {
+            phraseList.add(new Phrase(phrase));
+        }
+
+        PhraseSet phraseSet = PhraseSetBuilder.with(qiContext)
+                .withPhrases(phraseList)
+                .build();
+
+        Listen listen = ListenBuilder.with(qiContext)
+                .withPhraseSet(phraseSet)
+                .build();
+
+        return listen.async().run().andThenApply(heardPhrase -> heardPhrase.getHeardPhrase().getText());
+    }
+
+    public void setAnswareGameToLissen(Persona.Game.Domanda answare) {
+        // Usa un ExecutorService per eseguire il codice su un thread separato
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            try {
+                List<Phrase> phraseList = setPhraseToLissen(answare.getListaRispose());
+
+                PhraseSet phraseSet = PhraseSetBuilder.with(qiContext)
+                        .withPhrases(phraseList)
+                        .build();
+
+                // Crea e avvia l'azione di ascolto
+                Future<ListenResult> listen = ListenBuilder.with(qiContext)
+                        .withPhraseSet(phraseSet)
+                        .buildAsync().andThenCompose(say -> {
+                            return say.async().run();
+                        });
+
+                // Gestisci il risultato dell'azione di ascolto quando è pronto
+                listen.andThenCompose(listenResult -> {
+                    // Qui puoi gestire il risultato dell'azione di ascolto
+                    if (listenResult != null) {
+                        // Recupera la frase ascoltata
+                        String heardPhrase = listenResult.getHeardPhrase().getText();
+                        // Usa la frase ascoltata come necessario
+                    } else {
+                        // Gestisci il caso in cui l'azione di ascolto non abbia avuto successo
+                    }
+
+                    return null;
+                });
+                listen.get()
+                        .getHeardPhrase().getText();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
+
 
     /***
      * Utile per animare con un movimento pepper prendendo in input il raw id della animazione
@@ -177,8 +268,8 @@ public class RobotHelper {
      * Permette a pepper di dire una frase muovendosi
      * @return
      */
-    public Future<Void> sayAndMove(final int pepperMotionAnimation, final String pepperPhrase){
-        return say(pepperPhrase)
+    public Future<Void> sayAndMove(final int pepperMotionAnimation, final String pepperPhrase, FragmentActivity activity){
+        return say(pepperPhrase,activity)
                 .andThenCompose(result -> animation(pepperMotionAnimation));
     }
 

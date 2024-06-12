@@ -34,20 +34,25 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix fatte:&#10;- cliccando il pulsante del microfono il robot smette di spiegare la domanda.&#10;- Creato array random per risposte alla wrong answare dell'utente.&#10;- Gioco Fluenze fonologiche il robot risponde quando la risposta è corretta o sbagliata.&#10;- Fluenze verbali il robot risponde quando la risposta è sbagliata.">
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix Fluenze fonologiche:&#10;- Quando l'utente fornisce la parola viene salvata in un array in modo da verificare se l'utente ha già fornito quella determinata parola (giusta o sbagliata che sia) fornendogli un feedback">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/AnswerDialogFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/AnswerDialogFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/map/RobotHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/map/RobotHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/models/RecyclerViewAnswersAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/models/RecyclerViewAnswersAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Phrases.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Phrases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/correct_answer_animation.qianim" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/raw/correct_answer_animation.qianim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/raw/correct_answer_animation2.qianim" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/raw/correct_answer_animation2.qianim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[emulator-5578]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -116,7 +121,11 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
+    <property name="android-custom-view/home/nicola/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
+    <property name="android-custom-view/home/nicola/.gradle/caches/modules-2/files-2.1/com.airbnb.android/lottie/3.5.0/6191c0e16c340fd5a397864bcc903ee9852f64a8/lottie-3.5.0-sources.jar!/com/airbnb/lottie/LottieAnimationView.java_SELECTED" value="LottieAnimationView" />
     <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
+    <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/widget/Button.java_SELECTED" value="Button" />
+    <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/widget/TextView.java_SELECTED" value="TextView" />
     <property name="android-custom-view/home/ubuntu/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-view/home/ubuntu/Android/Sdk/sources/android-30/android/widget/TextView.java_SELECTED" value="TextView" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
@@ -137,14 +146,14 @@
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/app/src/main/res" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
+    </key>
     <key name="android.template.-1902301851">
       <recent name="com.example.pepperapp28aprile" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.pepperapp28aprile" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
     </key>
   </component>
   <component name="RunManager">
@@ -273,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1717693251451</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix Fluenze fonologiche:&#10;- Quando l'utente fornisce la parola viene salvata in un array in modo da verificare se l'utente ha già fornito quella determinata parola (giusta o sbagliata che sia) fornendogli un feedback">
+      <created>1718101182754</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1718101182754</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -298,65 +314,31 @@
     <MESSAGE value="Fix certificate Http" />
     <MESSAGE value="Aggiunto ballo robot in caso di risposta corretta. Fixato problema della ripetizione della domanda in caso di risposta errata da parte dell'utente" />
     <MESSAGE value="Fix fatte:&#10;- cliccando il pulsante del microfono il robot smette di spiegare la domanda.&#10;- Creato array random per risposte alla wrong answare dell'utente.&#10;- Gioco Fluenze fonologiche il robot risponde quando la risposta è corretta o sbagliata.&#10;- Fluenze verbali il robot risponde quando la risposta è sbagliata." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix fatte:&#10;- cliccando il pulsante del microfono il robot smette di spiegare la domanda.&#10;- Creato array random per risposte alla wrong answare dell'utente.&#10;- Gioco Fluenze fonologiche il robot risponde quando la risposta è corretta o sbagliata.&#10;- Fluenze verbali il robot risponde quando la risposta è sbagliata." />
+    <MESSAGE value="Fix Fluenze fonologiche:&#10;- Quando l'utente fornisce la parola viene salvata in un array in modo da verificare se l'utente ha già fornito quella determinata parola (giusta o sbagliata che sia) fornendogli un feedback" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Fluenze fonologiche:&#10;- Quando l'utente fornisce la parola viene salvata in un array in modo da verificare se l'utente ha già fornito quella determinata parola (giusta o sbagliata che sia) fornendogli un feedback" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>210</line>
+          <line>228</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>680</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java</url>
-          <line>140</line>
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java</url>
-          <line>143</line>
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>387</line>
+          <line>405</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java</url>
-          <line>177</line>
-          <option name="timeStamp" value="71" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>655</line>
+          <option name="timeStamp" value="273" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>566</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>756</line>
-          <option name="timeStamp" value="110" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>753</line>
-          <option name="timeStamp" value="111" />
+          <line>539</line>
+          <option name="timeStamp" value="293" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -21,7 +21,7 @@ public class AnswerDialogFragment extends Dialog {
     private static final long DURATION_START = 4500;
     private final typeDialog type;
     private String text = "";
-
+    public LottieAnimationView animationView;
     public enum typeDialog {
         CORRECT, WRONG, START,
     }
@@ -46,7 +46,7 @@ public class AnswerDialogFragment extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.answer_dialog_fragment);
-        LottieAnimationView animationView = findViewById(R.id.anViewDialog);
+        animationView = findViewById(R.id.anViewDialog);
         TextView textView = findViewById(R.id.txtmsgdialog);
         @RawRes
         int animationFiles = R.raw.correct;

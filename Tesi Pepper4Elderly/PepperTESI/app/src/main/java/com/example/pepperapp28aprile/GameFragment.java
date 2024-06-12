@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -28,6 +29,13 @@ import com.aldebaran.qi.Consumer;
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.Qi;
 import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.builder.ListenBuilder;
+import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
+import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.Phrase;
+import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
 import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.RecyclerViewAnswersAdapter;
 import com.example.pepperapp28aprile.utilities.Phrases;
@@ -36,9 +44,13 @@ import com.example.pepperapp28aprile.utilities.Util;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GameFragment extends Fragment{
     private View v;
@@ -65,7 +77,9 @@ public class GameFragment extends Fragment{
     private Intent speechRecognizerIntent;
     public static Persona.Game.Domanda domanda;
     private Future<Void> requestSay;
-
+    private Future<String> listenFuture;
+    private String parolaDettaApepper;
+    private RecyclerViewAnswersAdapter adapter;
     /*public GameFragment(int positionGame, Persona.Game.TypeInputGame chose) {
         this.positionGame = positionGame;
         this.choseTypeInputGame = chose;
@@ -76,6 +90,7 @@ public class GameFragment extends Fragment{
         this.game = game;
         //this.positiongame = positionGame; Se non serve vedere di togliere positionGame come parametro del construttore
         risultatiManager = new RisultatiManager();
+        parolaDettaApepper = null;
     }
 
     private List<Integer> positioslistclic= new ArrayList<>();
@@ -117,6 +132,9 @@ public class GameFragment extends Fragment{
         TextView testoDomanda = v.findViewById(R.id.testoDomanda);
         TextView testoparola = v.findViewById(R.id.testoparola);
         containerAnimations = v.findViewById(R.id.viewanim);
+
+
+
 
 //================Scelta modalita Input===========================
 
@@ -456,6 +474,18 @@ public class GameFragment extends Fragment{
         testoparola.setText(domanda.getTestoParola());
 
         recyclerAnswersArrayList = new ArrayList<>();
+
+        for (String risposte : domanda.getListaRispose()) {
+            recyclerAnswersArrayList.add(new RecyclerAnswers(risposte));
+            //if (domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO) {
+            //VoiceManager.getIstance(getContext()).play(risposte, VoiceManager.QUEUE_ADD);
+            //}
+        }
+
+        adapter = new RecyclerViewAnswersAdapter(recyclerAnswersArrayList, getContext());
+        adapter.setMode(Persona.Game.TypeInputGame.SELEZIONE);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+
         if (//domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO
                // &&
                 !(game instanceof Persona.CombinazioniLettere)
@@ -466,34 +496,78 @@ public class GameFragment extends Fragment{
             //VoiceManager.getIstance(getContext()).play("Le varie risposte sono: ", VoiceManager.QUEUE_ADD);
             String risposte = Util.toString(domanda.getListaRispose());
 
+
             //Quando pepper termina di dire la domanda, gli faccio dire le risposte disponibili
             if (!(game instanceof Persona.FluenzeVerbali || game instanceof Persona.FluenzeSemantiche || game instanceof Persona.FluenzeFonologiche)) {
+
                 requestSay.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
-                    requestSay = robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte).andThenConsume(action -> {
-                        if(game instanceof  Persona.Musica){ // Se sta runnando il gioco musicale dopo che spiega le risposte disponibili faccio partire il player
-                            fragment.start();
-                        }
-                    });
+                    // Pepper inizia a parlare
+                    requestSay = robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte)
+                            .andThenCompose(action -> {
+                                // Se è un gioco musicale, avvia il player
+                                if (game instanceof Persona.Musica) {
+                                    fragment.start();
+                                }
+                                return Future.of(null);
+                            }).andThenCompose(result -> {
+                                 listenFuture = robotHelper.setListener(domanda.getListaRispose(), qiContext);
+                                return listenFuture.andThenCompose(heardPhrase -> {
+                                    // Usa la frase ascoltata come necessario
+                                    Log.d("Pepper4RSA", "Pepper heard: " + heardPhrase);
+                                    // Ritorna un Future completato per continuare la catena
+
+
+
+// Ottieni l'item alla posizione specificata
+                                    RecyclerAnswers item = adapter.getItemByText(heardPhrase);
+
+                                    int positionToClick = adapter.getPositionByItem(item);
+// Trova la view alla posizione specificata
+                                    RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(positionToClick);
+
+                                    if (viewHolder != null && adapter.listener != null) {
+                                        View itemView = viewHolder.itemView;
+
+                                        adapter.listener.onItemClick(itemView, heardPhrase, positionToClick);
+                                    }
+
+                                    // Ritorna un Future completato per continuare la catena
+                                    listenFuture.cancel(true);
+                                    return Future.of(null);
+                                });
+                            }).thenConsume(future -> { //Verifico se c'e' un problema con l'esecuzione del future per l'ascolto
+                                if (future.hasError()) {
+                                    Log.e("Pepper4RSA", "Error while speaking or listening: ", future.getError());
+                                }
+                            });
                 }));
+
+
             }
         }
 
-        for (String risposte : domanda.getListaRispose()) {
-            recyclerAnswersArrayList.add(new RecyclerAnswers(risposte));
-            //if (domanda.getTypeMedia() != Persona.Game.Domanda.typeMedia.AUDIO) {
-                //VoiceManager.getIstance(getContext()).play(risposte, VoiceManager.QUEUE_ADD);
-            //}
-        }
-
-        RecyclerViewAnswersAdapter adapter = new RecyclerViewAnswersAdapter(recyclerAnswersArrayList, getContext());
-        adapter.setMode(Persona.Game.TypeInputGame.SELEZIONE);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-
         adapter.setListener((v, item, position) -> {
-            requestSay.cancel(true);
-            if (domanda.chekResponse(item)) {
-                AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT);
-                answerDialogFragment.show();
+
+            getActivity().runOnUiThread(() -> {
+                        //Quando si clicca il bottone faccio terminare pepper di parlare oppure di ascoltare
+                        requestSay.requestCancellation();
+
+                        displayResponseResult(v, item);
+                    });
+        });
+
+
+        positioslistclic.add(0);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    private void displayResponseResult(View view, String risposta){
+        if (domanda.chekResponse(risposta)) {
+            AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.CORRECT);
+            answerDialogFragment.show();
 
                 requestSay = correctAnswer();
 
@@ -515,31 +589,127 @@ public class GameFragment extends Fragment{
                         positiongame++;
                         iniziaGioco();
                     }
-                });
-            } else {
-                requestSay = wrongAnswer()
-                        .andThenCompose(response -> robotHelper.say(requestTextForPepper));
-                AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG);
 
-                answerDialogFragment.show();
-                risultatiManager.setError();
+                });
+        } else {
+            AnswerDialogFragment answerDialogFragment = new AnswerDialogFragment(getActivity(), AnswerDialogFragment.typeDialog.WRONG);
+
+            answerDialogFragment.show();
+            risultatiManager.setError();
+            requestSay = wrongAnswer();
+            answerDialogFragment.animationView.addAnimatorListener(animatorListenerWrongAnswer);
+
+
                 answerDialogFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        Button button = (Button) v;
-                        v.setBackgroundResource(0);
-                        v.setBackgroundResource(R.drawable.stylebuttonerrorresponce);
+
+                        Button myButton = view.findViewById(R.id.cardanswer);
+                        myButton.setBackgroundResource(R.drawable.stylebuttonerrorresponce);
                     }
                 });
-            }
-        });
 
-        positioslistclic.add(0);
 
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-
+        }
     }
+
+    //Lissener per l'animazioni lottifie
+    Animator.AnimatorListener animatorListenerWrongAnswer = new Animator.AnimatorListener() {
+        @Override
+        public void onAnimationStart(Animator animation) {
+            // Azioni da eseguire quando l'animazione inizia
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            requestSay.requestCancellation();
+            requestSay = requestSay
+                    .andThenCompose(response -> robotHelper.say(requestTextForPepper,getActivity())).andThenCompose(result -> {
+                         listenFuture = robotHelper.setListener(domanda.getListaRispose(), qiContext);
+                        return listenFuture.andThenCompose(heardPhrase -> {
+                            // Usa la frase ascoltata come necessario
+                            Log.d("Pepper4RSA", "Pepper heard: " + heardPhrase);
+                            // Ritorna un Future completato per continuare la catena
+
+
+                            //TODO: Recuperare la view del button con text = heardPhrase
+
+// Ottieni l'item alla posizione specificata
+                            RecyclerAnswers item = adapter.getItemByText(heardPhrase);
+
+                            int positionToClick = adapter.getPositionByItem(item);
+// Trova la view alla posizione specificata
+                            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(positionToClick);
+
+                            if (viewHolder != null && adapter.listener != null) {
+                                View itemView = viewHolder.itemView;
+
+                                adapter.listener.onItemClick(itemView, heardPhrase, positionToClick);
+                            }
+
+                            //displayResponseResult(v,item);
+
+                            //displayResponseResult(heardPhrase);
+                            // Ritorna un Future completato per continuare la catena
+                            listenFuture.cancel(true);
+                            return Future.of(null);
+                        });
+                    }).thenConsume(future -> { //Verifico se c'e' un problema con l'esecuzione del future per l'ascolto
+                        if (future.hasError()) {
+                            Log.e("Pepper4RSA", "Error while speaking or listening: ", future.getError());
+                        }
+                    });
+            // Azioni da eseguire quando l'animazione è completata
+            // Puoi fare ciò che desideri quando l'animazione di LottieAnimationView è completata
+        }
+
+        @Override
+        public void onAnimationCancel(Animator animation) {
+            requestSay = requestSay.andThenCompose(response -> robotHelper.say(requestTextForPepper,getActivity())).andThenCompose(result -> {
+                listenFuture = robotHelper.setListener(domanda.getListaRispose(), qiContext);
+                        return listenFuture.andThenCompose(heardPhrase -> {
+                            // Usa la frase ascoltata come necessario
+                            Log.d("Pepper4RSA", "Pepper heard: " + heardPhrase);
+                            // Ritorna un Future completato per continuare la catena
+
+
+                            //TODO: Recuperare la view del button con text = heardPhrase
+
+
+// Ottieni l'item alla posizione specificata
+                            RecyclerAnswers item = adapter.getItemByText(heardPhrase);
+
+                            int positionToClick = adapter.getPositionByItem(item);
+// Trova la view alla posizione specificata
+                            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(positionToClick);
+
+                            if (viewHolder != null && adapter.listener != null) {
+                                View itemView = viewHolder.itemView;
+
+                                adapter.listener.onItemClick(itemView, heardPhrase, positionToClick);
+                            }
+
+                            //displayResponseResult(v,item);
+
+                            //displayResponseResult(heardPhrase);
+                            // Ritorna un Future completato per continuare la catena
+                            listenFuture.cancel(true);
+                            return Future.of(null);
+                        });
+                    }).thenConsume(future -> { //Verifico se c'e' un problema con l'esecuzione del future per l'ascolto
+                        if (future.hasError()) {
+                            Log.e("Pepper4RSA", "Error while speaking or listening: ", future.getError());
+                        }
+                    });
+            // Azioni da eseguire quando l'animazione viene annullata
+        }
+
+        @Override
+        public void onAnimationRepeat(Animator animation) {
+            // Azioni da eseguire quando l'animazione viene ripetuta
+        }
+    };
+
 
     private boolean controllaInBaseAlGioco(String risposta, String testoParola) {
         if(game instanceof Persona.CombinazioniLettere)
@@ -737,15 +907,16 @@ public class GameFragment extends Fragment{
         int randomNumberForAnimation = new Random().nextInt(animationsArray.length);
         int randomNumberForText = new Random().nextInt(Phrases.phrasePepperCorrectAnwswer.length);
 
-        return robotHelper.sayAndMove(animationsArray[randomNumberForAnimation],Phrases.phrasePepperCorrectAnwswer[randomNumberForText]);
+        return robotHelper.sayAndMove(animationsArray[randomNumberForAnimation],Phrases.phrasePepperCorrectAnwswer[randomNumberForText],getActivity());
     }
 
     private Future<Void> wrongAnswer(){
 
         int randomNumberForText = new Random().nextInt(Phrases.phrasePepperWrongAnwswer.length);
 
-        return robotHelper.say(Phrases.phrasePepperWrongAnwswer[randomNumberForText]);
+        return robotHelper.say(Phrases.phrasePepperWrongAnwswer[randomNumberForText],getActivity());
     }
+
 
     private boolean checkIfWordIsAlreadyPresent(String inputWord){
         int count = 1;
@@ -756,4 +927,10 @@ public class GameFragment extends Fragment{
         }
         return count != 1;
     }
+
+    public void setQiContext(QiContext qiContext) {
+        this.qiContext = qiContext;
+    }
+
+
 }

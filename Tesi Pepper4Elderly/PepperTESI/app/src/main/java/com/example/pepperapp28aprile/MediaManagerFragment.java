@@ -139,7 +139,7 @@ public class MediaManagerFragment extends Fragment {
         play.setOnClickListener(v -> {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.pause();
-                play.setImageDrawable(getContext().getDrawable(R.drawable.ic_play));
+                play.setImageDrawable(getContext().getDrawable(R.drawable.answer));
             } else {
                 mediaPlayer.start();
                 play.setImageDrawable(getContext().getDrawable(R.drawable.ic_pause));
@@ -174,8 +174,16 @@ public class MediaManagerFragment extends Fragment {
     };
 
     public void start(){
-        mediaPlayer.start();
-        updateSeekBar();
-        play.setImageDrawable(getContext().getDrawable(R.drawable.ic_pause));
+        requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Operazioni dell'interfaccia utente
+                mediaPlayer.start();
+                updateSeekBar();
+                play.setImageDrawable(getContext().getDrawable(R.drawable.ic_pause));
+            }
+        });
+
+
     }
 }
