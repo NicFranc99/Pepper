@@ -99,6 +99,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public static QiContext qiContext;
     private RobotHelper robotHelper;
     private static FragmentManager fragmentManager;
+    public Future<Void>requestSay;
     private static final String TAG = "MSI_MainMenuFragment";
 
     @Override
@@ -120,7 +121,8 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         setElderlyImageByGender(sectionInfoElder);
         PeopleListAdapter.tornaNav = tornaNav;
 
-        setFragment(PlaceholderFragmentGames.newInstance(idPaziente),PlaceholderFragmentGames.FRAGMENT_TAG);
+       // setFragment(PlaceholderFragmentGames.newInstance(idPaziente),PlaceholderFragmentGames.FRAGMENT_TAG);
+       setFragment(SelectionGameModeFragment.newInstance(idPaziente),SelectionGameModeFragment.FRAGMENT_TAG);
 
     }
 
@@ -136,12 +138,13 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
             sectionInfoElder.setBackground(ContextCompat.getDrawable(this, R.drawable.grandmother));
     }
 
+
     public void setFragment(Fragment fragment,String fragmentTag) {
         FragmentManager fm = getSupportFragmentManager();
         fragment = fm.findFragmentByTag(fragmentTag);
         if (fragment == null) {
             FragmentTransaction ft = fm.beginTransaction();
-            fragment = PlaceholderFragmentGames.newInstance(idPaziente);
+            fragment = SelectionGameModeFragment.newInstance(idPaziente);
             ft.add(android.R.id.content,fragment,fragmentTag);
             ft.commit();
         }
@@ -154,34 +157,35 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         this.robotHelper.onRobotFocusGained(qiContext);
         // Create a new say action.
 
-            Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context
+       //     Say ciaoSonoPepper = SayBuilder.with(qiContext) // Create the builder with the context
                     //.withText("Hey "+ name + ", vuoi giocare con me? Clicca sulla foto del gioco per cominciare!, oppure dimmelo a voce!") // Set the text to say.
-                    .withText("Ciao " + name + " " + Phrases.menuGame)
-                    .build(); // Build the say action.
-        ciaoSonoPepper.run();
+     //               .withText("Ciao " + name + " " + Phrases.selectGameMode)
+     //               .build(); // Build the say action.
+    //    ciaoSonoPepper.run();
 
-        ArrayList<String> titleGames = getGameTitleList();
 
-        List<Phrase> phraseList = getPhraseSetListByStringList(titleGames);
+     //   ArrayList<String> titleGames = getGameTitleList();
 
-        ListenResult listenResult  = setTitleGameToLissen(phraseList);
+      //  List<Phrase> phraseList = getPhraseSetListByStringList(titleGames);
 
-        String pepperString = listenResult.getHeardPhrase().getText();
+      //  ListenResult listenResult  = setTitleGameToLissen(phraseList);
 
-        robotHelper.say(getString(R.string.start_game) + pepperString);
-        viewGameListByVoice(null,pepperString);
+      //  String pepperString = listenResult.getHeardPhrase().getText();
 
-        Animation animazioneSaluto = AnimationBuilder.with(qiContext)
-                .withResources(R.raw.salute_left_b001)
-                .build();
+       // robotHelper.say(getString(R.string.start_game) + pepperString);
+       // viewGameListByVoice(null,pepperString);
+
+      //  Animation animazioneSaluto = AnimationBuilder.with(qiContext)
+     //           .withResources(R.raw.salute_left_b001)
+     //           .build();
 
         // Create the second action.
-        Animate animate = AnimateBuilder.with(qiContext)
-                .withAnimation(animazioneSaluto)
-                .build();
+      //  Animate animate = AnimateBuilder.with(qiContext)
+      //          .withAnimation(animazioneSaluto)
+      //          .build();
 
         // Run the second action asynchronously.
-        animate.async().run();
+     //   animate.async().run();
     }
 
 //TODO: Vedere qua per passare valori a una activity
@@ -197,6 +201,10 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
 
     public void viewGameListByVoice(View view, String pepperString) {
         getPazienteById(this.idPaziente,pepperString);
+    }
+
+    public RobotHelper getRobotHelper() {
+        return robotHelper;
     }
 
 
@@ -275,7 +283,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public void onBackPressed() {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-            finish();
+           finish();
     }
 
     /**
@@ -283,7 +291,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
      * una lista di tutti i titoli dei giochi
      * @return List dei titoli dei giochi assegnati al paziente
      */
-    private ArrayList<String> getGameTitleList(){
+    public ArrayList<String> getGameTitleList(){
         ArrayList<String> result = new ArrayList<>();
         for(Persona.Game game : gameArrayList){
             result.add(game.getTitleGame());

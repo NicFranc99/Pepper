@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 public class Phrases {
     public static final String beforeMenuParent = "Da questo menù puoi cliccare sulla tua foto per chiamare i tuoi parenti!";
+    public static final String selectGameMode= "Seleziona la prima immagine per scegliere i giochi a cui giocare, altrimenti seleziona la seconda immagine per iniziare a giocare ai giochi assegnati dal tuo operatore!";
     public static final String menuGame = "vuoi giocare con me? Clicca sulla foto del gioco per cominciare!, oppure dimmelo a voce!";
     public static final String beforeMenuGame = "Da questo menù puoi cliccare sulla tua foto per giocare ai tuoi giochi preferiti!";
     public static final String phrasePepperLissenForPlay = "giochiamo a ";

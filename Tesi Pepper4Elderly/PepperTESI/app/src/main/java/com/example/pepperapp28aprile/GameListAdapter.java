@@ -6,25 +6,32 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.builder.ListenBuilder;
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
 import com.aldebaran.qi.sdk.object.conversation.ListenResult;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
+import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.Categoria;
+import com.example.pepperapp28aprile.utilities.Phrases;
 import com.example.pepperapp28aprile.utilities.Util;
 
 import java.io.File;
@@ -44,12 +51,12 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
     private Persona paziente;
     //activity context
     Context context;
-
+    private Future<String> listenFuture;
     //the layout resource file for the list items
     int resource;
 
     //constructor initializing the values
-    public GameListAdapter(Context context, int resource,Persona p) {
+    public GameListAdapter(Context context, int resource,Persona p, GameProfileActivity activity) {
         super(context, resource, p.getEsercizi());
         this.context = context;
         this.resource = resource;
@@ -78,6 +85,7 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
         //getting the hero of the specified position
         Persona.Game game = paziente.getEsercizi().get(position);
 
+
         //adding values to the list item
        /* Bitmap img;
         try {
@@ -99,19 +107,19 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
         categoryName.setText(game.getTitleCategory());
 
         //textViewTeam.setText(p.getStatus());
+
+
         
         //adding a click listener to the button to remove item from the list
         gameImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we will call this method to remove the selected value from the list
-                //we are passing the position which is to be removed in the method
                 Intent game = new Intent(getContext(), GameActivity.class);
                 startGameActivity(view,paziente.getEsercizi().get(position),position);
             }
         });
 
-        //finally returning the view
         return view;
     }
 
@@ -124,4 +132,9 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
         gameActivity.putExtra("paziente",paziente);
         context.startActivity(gameActivity);
     }
+
+
+
+
+
 }

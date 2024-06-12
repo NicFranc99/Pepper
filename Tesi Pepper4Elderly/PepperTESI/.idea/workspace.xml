@@ -5,6 +5,7 @@
       <config>
         <device id="Pepper 1.9" />
         <device id="Nexus 7" />
+        <option name="nonWearDeviceLastStateName" value="Landscape" />
       </config>
     </shared>
   </component>
@@ -34,18 +35,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix Fluenze fonologiche:&#10;- Quando l'utente fornisce la parola viene salvata in un array in modo da verificare se l'utente ha già fornito quella determinata parola (giusta o sbagliata che sia) fornendogli un feedback">
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Integrato speech per fornire la risposta a pepper (solo giochi che prevedono anche i pulsanti per selezionare la risposta)">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/SelectionGameModeFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_selection_game_mode.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/AnswerDialogFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/AnswerDialogFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameListAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/map/RobotHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/map/RobotHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/models/RecyclerViewAnswersAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/models/RecyclerViewAnswersAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PlaceholderFragmentGames.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PlaceholderFragmentGames.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Phrases.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Phrases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,6 +121,7 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="android-custom-view/home/nicola/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
     <property name="android-custom-view/home/nicola/.gradle/caches/modules-2/files-2.1/com.airbnb.android/lottie/3.5.0/6191c0e16c340fd5a397864bcc903ee9852f64a8/lottie-3.5.0-sources.jar!/com/airbnb/lottie/LottieAnimationView.java_SELECTED" value="LottieAnimationView" />
+    <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-23/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/widget/Button.java_SELECTED" value="Button" />
     <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/widget/TextView.java_SELECTED" value="TextView" />
@@ -289,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718101182754</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Integrato speech per fornire la risposta a pepper (solo giochi che prevedono anche i pulsanti per selezionare la risposta)">
+      <created>1718191173972</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1718191173972</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -315,7 +321,8 @@
     <MESSAGE value="Aggiunto ballo robot in caso di risposta corretta. Fixato problema della ripetizione della domanda in caso di risposta errata da parte dell'utente" />
     <MESSAGE value="Fix fatte:&#10;- cliccando il pulsante del microfono il robot smette di spiegare la domanda.&#10;- Creato array random per risposte alla wrong answare dell'utente.&#10;- Gioco Fluenze fonologiche il robot risponde quando la risposta è corretta o sbagliata.&#10;- Fluenze verbali il robot risponde quando la risposta è sbagliata." />
     <MESSAGE value="Fix Fluenze fonologiche:&#10;- Quando l'utente fornisce la parola viene salvata in un array in modo da verificare se l'utente ha già fornito quella determinata parola (giusta o sbagliata che sia) fornendogli un feedback" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Fluenze fonologiche:&#10;- Quando l'utente fornisce la parola viene salvata in un array in modo da verificare se l'utente ha già fornito quella determinata parola (giusta o sbagliata che sia) fornendogli un feedback" />
+    <MESSAGE value="Integrato speech per fornire la risposta a pepper (solo giochi che prevedono anche i pulsanti per selezionare la risposta)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrato speech per fornire la risposta a pepper (solo giochi che prevedono anche i pulsanti per selezionare la risposta)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -334,11 +341,6 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
           <line>655</line>
           <option name="timeStamp" value="273" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>539</line>
-          <option name="timeStamp" value="293" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

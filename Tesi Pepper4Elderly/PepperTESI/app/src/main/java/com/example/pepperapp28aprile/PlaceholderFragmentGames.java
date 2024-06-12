@@ -3,6 +3,7 @@ package com.example.pepperapp28aprile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.leanback.app.BrowseSupportFragment;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,9 +32,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.QiContext;
+import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.presenter.CardPresenter;
 import com.example.pepperapp28aprile.utilities.DataManager;
+import com.example.pepperapp28aprile.utilities.Phrases;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -54,7 +61,10 @@ public class PlaceholderFragmentGames extends Fragment {
     private RecyclerView recyclerView;
     public static String id;
     public static final String FRAGMENT_TAG =  Globals.PlaceHolderFragmentGamesTag;
-
+    private static RobotHelper robotHelper;
+    private static QiContext  qiContext;
+    private Future<Void> requestSay;
+    private Future<String> listenFuture;
     public static Fragment newInstance(int index,String idPaziente) {
         id = idPaziente;
         PlaceholderFragmentGames fragment = new PlaceholderFragmentGames();
@@ -88,7 +98,7 @@ public class PlaceholderFragmentGames extends Fragment {
             @Override
             public void onDataSuccess(Persona paziente) {
                 GameProfileActivity.gameArrayList = paziente.getEsercizi();
-                GameListAdapter adapter = new GameListAdapter(getActivity(), R.layout.category_card, paziente);
+                GameListAdapter adapter = new GameListAdapter(getActivity(), R.layout.category_card, paziente,(GameProfileActivity) getActivity());
                 gridView.setAdapter(adapter);
             }
 
@@ -119,6 +129,34 @@ public class PlaceholderFragmentGames extends Fragment {
 
 
         return fragmentLayout;
+    }
+
+    //TODO: Vedere qua, questo viene eseguito quando fragmentLayout e' bello pronto e visualizzato
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+
+        robotHelper = ((GameProfileActivity)getActivity()).getRobotHelper();
+        qiContext = ((GameProfileActivity)getActivity()).qiContext;
+
+        // Operazione da eseguire dopo che il layout del fragment è stato restituito
+        // Puoi inserire qui il tuo codice per l'operazione desiderata
+
+            // E se lo siamo, verifico se tutte le componenti sono state visualizzate
+            requestSay = robotHelper.say(Phrases.menuGame).andThenCompose(result -> {
+                listenFuture = robotHelper.setListener(((GameProfileActivity)getActivity()).getGameTitleList(), qiContext);
+                return listenFuture.andThenCompose(heardPhrase -> {
+                    // Usa la frase ascoltata come necessario
+                    Log.d("Pepper4RSA", "Pepper heard: " + heardPhrase);
+
+                    ((GameProfileActivity)getActivity()).viewGameListByVoice(null,heardPhrase);
+
+                    // Ritorna un Future completato per continuare la catena
+                    listenFuture.cancel(true);
+                    return Future.of(null);
+                });
+            });
     }
 
 }
