@@ -1,0 +1,2097 @@
+{
+  "esercizi": {
+    "appartenenza": [
+      {
+        "categoria": "Frutti estivi",
+        "livello": 1,
+        "parole": [
+          {
+            "categoria": "Frutti estivi",
+            "parola": "albicocche"
+          },
+          {
+            "categoria": "Frutti autunnali",
+            "parola": "alchechengi"
+          },
+          {
+            "categoria": "Frutti estivi",
+            "parola": "ciliegie"
+          },
+          {
+            "categoria": "Frutti invernali",
+            "parola": "Ananas"
+          },
+          {
+            "categoria": "Frutti estivi",
+            "parola": "pesche"
+          },
+          {
+            "categoria": "boh ",
+            "parola": "hello"
+          }
+        ],
+        "titolo": "frutti estivi"
+      },
+      {
+        "categoria": "Italia",
+        "livello": 2,
+        "titolo": "Italia"
+      },
+      {
+        "livello": 1,
+        "parole": [
+          {
+            "categoria": "frutti autunnali",
+            "parola": "Pere"
+          },
+          {
+            "categoria": "frutti estivi",
+            "parola": "More"
+          },
+          {
+            "categoria": "frutti estivi",
+            "parola": "gelsi"
+          },
+          {
+            "categoria": "frutti invernali",
+            "parola": "mandarino"
+          }
+        ],
+        "titolo": "frutti autunnali"
+      }
+    ],
+    "categorizzazione": [
+      {
+        "categorie": [
+          "Cantanti",
+          "Frutta",
+          "Verdura",
+          " Mestieri"
+        ],
+        "livello": 2,
+        "parole": [
+          {
+            "parola": "Adriano Celentano",
+            "rispostaCorretta": "Cantanti"
+          },
+          {
+            "parola": "Mandarino",
+            "rispostaCorretta": "Frutta"
+          },
+          {
+            "parola": "Bietole",
+            "rispostaCorretta": "Verdura"
+          },
+          {
+            "parola": "Carrozziere",
+            "rispostaCorretta": "Mestieri"
+          },
+          {
+            "parola": "Cavolfiore",
+            "rispostaCorretta": "Verdura"
+          }
+        ],
+        "titolo": "Cantanti, Frutta, Verdure, Mestieri"
+      }
+    ],
+    "combinazionilettere": [
+      {
+        "lettere": [
+          "m",
+          "e",
+          "o",
+          "s",
+          "z",
+          "o",
+          "i",
+          "n",
+          "l",
+          "a",
+          "t",
+          "q"
+        ],
+        "livello": 1,
+        "titolo": "Gioca con le lettere 1"
+      }
+    ],
+    "esistenzaparole": [
+      {
+        "livello": 1,
+        "parole": [
+          {
+            "parola": "vaso"
+          },
+          {
+            "parola": "cane"
+          },
+          {
+            "parola": "casco"
+          },
+          {
+            "parola": "castaro"
+          },
+          {
+            "parola": "cesto"
+          },
+          {
+            "parola": "carcaro"
+          }
+        ],
+        "titolo": "Contenitori"
+      }
+    ],
+    "finaliparole": [
+      {
+        "livello": 1,
+        "parole": [
+          {
+            "parola": "diva"
+          },
+          {
+            "parola": "acqua"
+          },
+          {
+            "parola": "ali"
+          },
+          {
+            "parola": "con"
+          },
+          {
+            "parola": "dolo"
+          }
+        ],
+        "titolo": "Completa la parola 1"
+      },
+      {
+        "livello": 1,
+        "parole": [
+          {
+            "parola": "rob"
+          },
+          {
+            "parola": "ant"
+          },
+          {
+            "parola": "bar"
+          }
+        ],
+        "titolo": "Completa la parola 2"
+      }
+    ],
+    "fluenzefonologiche": [
+      {
+        "livello": 1,
+        "titolo": "E"
+      },
+      {
+        "livello": 1,
+        "titolo": "A"
+      }
+    ],
+    "fluenzesemantiche": [
+      {
+        "categoria": "Verdura estiva",
+        "livello": 1,
+        "titolo": "Verdura estiva"
+      },
+      {
+        "categoria": "vestiti",
+        "livello": 3,
+        "titolo": "vestiti"
+      },
+      {
+        "categoria": "IN CUCINA",
+        "livello": 2,
+        "titolo": "IN CUCINA"
+      }
+    ],
+    "fluenzeverbali": [
+      {
+        "livello": 1,
+        "parole": [
+          {
+            "parola": "sole"
+          },
+          {
+            "parola": "albero"
+          },
+          {
+            "parola": "cucina"
+          },
+          {
+            "parola": "cinema"
+          }
+        ],
+        "titolo": "Associa le parole 1"
+      },
+      {
+        "livello": 1,
+        "parole": [
+          {
+            "parola": " pianeti"
+          },
+          {
+            "parola": "scuola"
+          },
+          {
+            "parola": "sport"
+          },
+          {
+            "parola": "cibo"
+          }
+        ],
+        "titolo": "Associa le parole 2"
+      }
+    ],
+    "immaginiEparole": [
+      {
+        "livello": 1,
+        "media": [
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesAndWordsQuiz%2Fbarba%2Fsanta-parade-3-1360205-639x423.jpg?alt=media&token=f7efcabd-4fd0-44cc-a54d-95eed6779ee8",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesAndWordsQuiz%2Fbarba%2Fmystical-old-man-1420822-640x480.jpg?alt=media&token=4be9dea3-db3c-42f8-8edb-720801f8842c",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesAndWordsQuiz%2Fbarba%2Fcold-1403512-640x960.jpg?alt=media&token=b539298e-091d-46e3-8430-128929ef2fa8",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesAndWordsQuiz%2Fbarba%2Fgillete-shaver-turbo-1-1311891-640x480.jpg?alt=media&token=eeb6b23a-64cf-4359-a508-e82382ab03a7"
+        ],
+        "parola": "barba",
+        "titolo": "Indovina la Parola 1"
+      },
+      {
+        "livello": 2,
+        "media": [
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesAndWordsQuiz%2Fleggere%2Fgirls-read-book-1431218-638x515.jpg?alt=media&token=db89f4e3-7dbd-419a-a6f5-82100c038804",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesAndWordsQuiz%2Fleggere%2Fread-read-1533863-640x480.jpg?alt=media&token=515e19f8-0c8f-49d9-a449-23a848db4033",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesAndWordsQuiz%2Fleggere%2Fdaddy-reading-1432159-639x424.jpg?alt=media&token=45a77dd4-440c-4d95-b59b-c5bded0bb48b",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesAndWordsQuiz%2Fleggere%2Fbook-eyes-1251357-639x408.jpg?alt=media&token=90d303af-1a4f-4964-9f9f-f0c513459c36"
+        ],
+        "parola": "leggere",
+        "titolo": "Indovina la Parola 2"
+      }
+    ],
+    "letteremancanti": [
+      {
+        "livello": 1,
+        "parole": [
+          {
+            "parola": "VI_ILIA"
+          },
+          {
+            "parola": "VIS__IO"
+          },
+          {
+            "parola": "_ATAL_"
+          },
+          {
+            "parola": "AS_N_LL_"
+          },
+          {
+            "parola": "P_NDO_O"
+          },
+          {
+            "parola": "CAVA_APPI"
+          }
+        ],
+        "titolo": "Lettere Mancanti: Natale"
+      },
+      {
+        "livello": 1,
+        "parole": [
+          {
+            "parola": " Banana,fragola,limone,arancia"
+          }
+        ],
+        "titolo": "Lettere"
+      }
+    ],
+    "mesi": [
+      {
+        "domande": [
+          {
+            "domanda": "Quando inizia la primavera?",
+            "rispostaCorretta": "Marzo",
+            "risposteSbagliate": [
+              "Aprile",
+              "Giugno"
+            ]
+          },
+          {
+            "domanda": "Quando inizia l'inverno?",
+            "rispostaCorretta": "Dicembre",
+            "risposteSbagliate": [
+              "Novembre",
+              "Gennaio"
+            ]
+          },
+          {
+            "domanda": "Quando inizia l'estate?",
+            "rispostaCorretta": "Giugno",
+            "risposteSbagliate": [
+              "Luglio",
+              "Maggio"
+            ]
+          },
+          {
+            "domanda": "Quando inizia l'autunno?",
+            "rispostaCorretta": "Settembre",
+            "risposteSbagliate": [
+              "Ottobre",
+              "Agosto"
+            ]
+          }
+        ],
+        "livello": 1,
+        "titolo": "Stagioni"
+      },
+      {
+        "domande": [
+          {
+            "domanda": "Quale mese precede febbraio?",
+            "rispostaCorretta": "Gennaio",
+            "risposteSbagliate": [
+              "marzo",
+              "aprile"
+            ]
+          }
+        ],
+        "livello": 3,
+        "titolo": "Mesi inversi"
+      }
+    ],
+    "musica": [
+      {
+        "domande": [
+          {
+            "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2Frose%20rosse%20-%20massimo%20ranieri.mp3?alt=media&token=07b71179-c357-4192-b12f-2ccdbb4c7fc3",
+            "rispostaCorretta": "Massimo Ranieri",
+            "risposteSbagliate": [
+              "Fausto Leali",
+              "Adriano Celentano"
+            ]
+          },
+          {
+            "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FDatemi%20un%20martello.mp3?alt=media&token=dd9d7735-2dd9-4b14-af48-274c864977e9",
+            "rispostaCorretta": "Rita Pavone",
+            "risposteSbagliate": [
+              "Mina",
+              "Anna Oxa"
+            ]
+          },
+          {
+            "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2F24%20mila%20baci%20(Remastered).mp3?alt=media&token=f89a53f4-81a5-42ca-891f-409768c11d9e",
+            "rispostaCorretta": "Adriano Celentano",
+            "risposteSbagliate": [
+              "Franco Califano",
+              "Albano Carrisi"
+            ]
+          },
+          {
+            "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FAbbronzatissima.mp3?alt=media&token=6640bd72-7c27-4994-a059-df6036c9a069",
+            "rispostaCorretta": "Edoardo Vianello",
+            "risposteSbagliate": [
+              "Massimo Ranieri",
+              "Claudio Baglioni"
+            ]
+          },
+          {
+            "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FMINA%20-%20Stessa%20spiaggia%20stesso%20mare.mp3?alt=media&token=f47d04cb-ebea-4a7e-b967-724e63934729",
+            "rispostaCorretta": "Mina",
+            "risposteSbagliate": [
+              "Max Pezzali",
+              "Renato Zero"
+            ]
+          }
+        ],
+        "livello": 1,
+        "titolo": "Indovina i cantanti"
+      }
+    ],
+    "racconti": [
+      {
+        "domande": [
+          {
+            "domanda": "Quanti erano i fratelli?",
+            "rispostaCorretta": "Tre",
+            "risposteSbagliate": [
+              "Uno",
+              "Cinque"
+            ]
+          },
+          {
+            "domanda": "Cosa capitò a Lorenzo?",
+            "rispostaCorretta": "fu ucciso dai fratelli",
+            "risposteSbagliate": [
+              "si sposò con Elisabetta",
+              "partì con Elisabetta"
+            ]
+          },
+          {
+            "domanda": "Cosa fa Elisabetta alla fine della storia?",
+            "rispostaCorretta": "Muore",
+            "risposteSbagliate": [
+              "uccide i fratelli",
+              "scappa a Napoli"
+            ]
+          },
+          {
+            "domanda": "Come si chiama la sorella minore?",
+            "rispostaCorretta": "Elisabetta",
+            "risposteSbagliate": [
+              "Maria",
+              "Pina"
+            ]
+          }
+        ],
+        "livello": 1,
+        "media": [
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta0.jpg?alt=media&token=c80cc643-9a09-499b-996b-fcc2186c5091",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta1.jpg?alt=media&token=85c7b808-bf57-4e0f-bf13-236d35727732",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta2.png?alt=media&token=e5c7a954-0d4d-4a5c-b351-ef5ecb10f936",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta3.jpg?alt=media&token=726820f7-5c42-4ed2-8a0e-a654ae47e049",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta4.jpg?alt=media&token=53bb036e-cc24-4e20-b841-4eab0639fa5d",
+          "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta5.jpg?alt=media&token=2db1dd5e-086e-40b3-8ce9-bcb0c9275772"
+        ],
+        "testo": "Nella città di Messina vi abitavano tre fratelli, ricchi mercanti, con la sorella minore Elisabetta, fanciulla molto bella non ancora maritata. Questa si innamorò di un giovane di nome Lorenzo che lavorava presso il fondaco dei tre fratelli. Anche Lorenzo si innamorò di Elisabetta e i due incominciarono a frequentarsi segretamente. Il fratello maggiore accortosi della relazione né parlò agli altri due fratelli e tutti e tre, dopo aver portato Lorenzo in luogo solitario lo uccisero e lo seppellirono. Una notte comparve in sogno a Elisabetta Lorenzo che le dice di essere stato ucciso dai suoi fratelli e le rivelò dove era seppellito. La fanciulla vi si recò, scavò e tagliò la testa dal corpo che dopo averla fasciata mise in un vaso e ricoprì di terra e vi piantò delle piante. Spesso la fanciulla riversava lacrime sul vaso e i fratelli avvertiti dai vicini, le tolsero il vaso e scoperta la testa la sotterrarono. Dopo i tre fratelli partirono per Napoli affinché non si sapesse la storia e la sorella continuando a versare lacrime morì.  ",
+        "titolo": "Elisabetta"
+      }
+    ],
+    "volti": [
+      {
+        "domande": [
+          {
+            "domanda": "Qual è il suo nome?",
+            "rispostaCorretta": "Memes",
+            "risposteSbagliate": [
+              "Carlo",
+              "Francesco"
+            ]
+          },
+          {
+            "domanda": "Chi é per me qusto signore",
+            "rispostaCorretta": "Fratello",
+            "risposteSbagliate": [
+              "Zio",
+              "Nonno"
+            ]
+          },
+          {
+            "domanda": "Qual è il suo lavoro?",
+            "rispostaCorretta": "Meccanico",
+            "risposteSbagliate": [
+              "Muratore",
+              "Elettricista"
+            ]
+          }
+        ],
+        "livello": 3,
+        "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesQuiz%2FvoltiImage1.jpg?alt=media&token=7e2f23bb-7013-4217-bef3-303095179cec",
+        "titolo": "Indovina il personaggio"
+      }
+    ]
+  },
+  "pazienti": {
+    "-MpHV7IWyU-fEa-VyZwu": {
+      "codiceFiscale": "COGNOM12A34B456X",
+      "cognome": "Rossi",
+      "dataNascita": "1986-02-13T00:00:00.000Z",
+      "esercizi": {
+        "appartenenza": [
+          {
+            "categoria": "Frutti estivi",
+            "livello": 1,
+            "parole": [
+              {
+                "categoria": "Frutti estivi",
+                "parola": "albicocche"
+              },
+              {
+                "categoria": "Frutti autunnali",
+                "parola": "alchechengi"
+              },
+              {
+                "categoria": "Frutti estivi",
+                "parola": "ciliegie"
+              },
+              {
+                "categoria": "Frutti invernali",
+                "parola": "Ananas"
+              },
+              {
+                "categoria": "Frutti estivi",
+                "parola": "pesche"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "7 min 26 sec ",
+              "tempoFine": "2021-12-23T20:49:48Z",
+              "tempoInizio": "2021-12-23T20:42:22Z"
+            },
+            "titolo": "Frutti estivi"
+          },
+          {
+            "categoria": "Italia",
+            "livello": 2,
+            "parole": [
+              {
+                "categoria": "italia",
+                "parola": "spaghetti"
+              },
+              {
+                "categoria": "italia",
+                "parola": "cannoli"
+              },
+              {
+                "categoria": "francia",
+                "parola": "baguetta"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "0 min 31 sec ",
+              "tempoFine": "2022-01-26T20:45:37Z",
+              "tempoInizio": "2022-01-26T20:45:06Z"
+            },
+            "titolo": "Italia"
+          },
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "categoria": "frutti autunnali",
+                "parola": "Pere"
+              },
+              {
+                "categoria": "frutti estivi",
+                "parola": "More"
+              },
+              {
+                "categoria": "frutti estivi",
+                "parola": "gelsi"
+              },
+              {
+                "categoria": "frutti invernali",
+                "parola": "mandarino"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "1 min 37 sec ",
+              "tempoFine": "2022-01-26T20:47:46Z",
+              "tempoInizio": "2022-01-26T20:46:09Z"
+            },
+            "titolo": "frutti autunnali"
+          }
+        ],
+        "categorizzazione": [
+          {
+            "categorie": [
+              "Cantanti",
+              "Frutta",
+              "Verdura",
+              " Mestieri"
+            ],
+            "livello": 2,
+            "parole": [
+              {
+                "parola": "Adriano Celentano",
+                "rispostaCorretta": "Cantanti"
+              },
+              {
+                "parola": "Mandarino",
+                "rispostaCorretta": "Frutta"
+              },
+              {
+                "parola": "Bietole",
+                "rispostaCorretta": "Verdura"
+              },
+              {
+                "parola": "Carrozziere",
+                "rispostaCorretta": "Mestieri"
+              },
+              {
+                "parola": "Cavolfiore",
+                "rispostaCorretta": "Verdura"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "1 min 34 sec ",
+              "tempoFine": "2022-01-26T20:49:33Z",
+              "tempoInizio": "2022-01-26T20:47:59Z"
+            },
+            "titolo": "Cantanti, Frutta, Verdure, Mestieri"
+          }
+        ],
+        "combinazionilettere": [
+          {
+            "lettere": [
+              "m",
+              "e",
+              "o",
+              "s",
+              "z",
+              "o",
+              "i",
+              "n",
+              "l",
+              "a",
+              "t",
+              "q"
+            ],
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "2 min 42 sec ",
+              "singoleRisposte": {
+                "-MuMw_bp8LYPNBd0P5cr": {
+                  "lato": "ESISTE",
+                  "lonzi": "NONESISTE",
+                  "meno": "ESISTE",
+                  "meso": "ESISTE",
+                  "quadro": "NONVALIDA",
+                  "sola": "ESISTE",
+                  "sto": "ESISTE",
+                  "zie": "ESISTE",
+                  "zio": "ESISTE",
+                  "zona": "ESISTE"
+                }
+              },
+              "tempoFine": "2022-01-26T20:52:29Z",
+              "tempoInizio": "2022-01-26T20:49:47Z"
+            },
+            "titolo": "Gioca con le lettere 1"
+          }
+        ],
+        "esistenzaparole": [
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "vaso"
+              },
+              {
+                "parola": "cane"
+              },
+              {
+                "parola": "casco"
+              },
+              {
+                "parola": "castaro"
+              },
+              {
+                "parola": "nettare"
+              },
+              {
+                "parola": "minto"
+              },
+              {
+                "parola": "lonfo"
+              },
+              {
+                "parola": "bambino"
+              },
+              {
+                "parola": "gluisce"
+              },
+              {
+                "parola": "gisbuto"
+              },
+              {
+                "parola": "trono"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "3 min 18 sec ",
+              "tempoFine": "2022-01-26T20:58:54Z",
+              "tempoInizio": "2022-01-26T20:55:36Z"
+            },
+            "titolo": "Parole"
+          }
+        ],
+        "finaliparole": [
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "diva"
+              },
+              {
+                "parola": "acqua"
+              },
+              {
+                "parola": "ali"
+              },
+              {
+                "parola": "con"
+              },
+              {
+                "parola": "dolo"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "1 min 31 sec ",
+              "singoleRisposte": {
+                "-MwVxPqPNWv1i34ioMO9": {
+                  "acquapark": "ESISTE",
+                  "alito": "ESISTE",
+                  "con 6 ciclo": "NONESISTE",
+                  "continuare": "ESISTE",
+                  "divano": "ESISTE",
+                  "dolore": "ESISTE",
+                  "konichiwa": "NONVALIDA"
+                }
+              },
+              "tempoFine": "2022-02-22T11:24:06Z",
+              "tempoInizio": "2022-02-22T11:22:35Z"
+            },
+            "titolo": "Completa la parola 1"
+          },
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "rob"
+              },
+              {
+                "parola": "ant"
+              },
+              {
+                "parola": "bar"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "1 min  9 sec ",
+              "singoleRisposte": {
+                "-MsAFk-6xk1ePQS28Aau": {
+                  "BARISTA": "ESISTE",
+                  "GIOCO": "NONVALIDA",
+                  "ROBERTO": "NONESISTE",
+                  "ROBOT": "ESISTE"
+                }
+              },
+              "tempoFine": "2021-12-30T13:14:07Z",
+              "tempoInizio": "2021-12-30T13:12:58Z"
+            },
+            "titolo": "Completa la parola 2"
+          }
+        ],
+        "fluenzefonologiche": [
+          {
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "2 min 26 sec ",
+              "singoleRisposte": {
+                "-MuMzBxtqJDYnK1DDy2-": {
+                  "albero": "NONVALIDA",
+                  "dito": "NONVALIDA",
+                  "ebreo": "ESISTE",
+                  "enoteca": "ESISTE",
+                  "erba": "ESISTE",
+                  "eta-ro": "NONESISTE",
+                  "ha": "NONVALIDA"
+                }
+              },
+              "tempoFine": "2022-01-26T21:03:54Z",
+              "tempoInizio": "2022-01-26T21:01:28Z"
+            },
+            "titolo": "E"
+          },
+          {
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "0 min 39 sec ",
+              "singoleRisposte": {
+                "-MuMzQKtS_35aogbnJoO": {
+                  "alfabeto": "ESISTE",
+                  "amore": "ESISTE",
+                  "ancora": "ESISTE",
+                  "armeno": "ESISTE"
+                }
+              },
+              "tempoFine": "2022-01-26T21:04:53Z",
+              "tempoInizio": "2022-01-26T21:04:14Z"
+            },
+            "titolo": "A"
+          }
+        ],
+        "fluenzesemantiche": [
+          {
+            "categoria": "Verdura",
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "2 min 15 sec ",
+              "singoleRisposte": {
+                "-MuN1J0NYcxSTT-ZcORu": {
+                  "carote": "CORRELATA",
+                  "duco": "NONCORRELATA",
+                  "gioco": "CORRELATA",
+                  "ma gioco": "NONCORRELATA",
+                  "pane": "CORRELATA",
+                  "pomodori": "CORRELATA",
+                  "sto": "NONCORRELATA"
+                }
+              },
+              "tempoFine": "2022-01-26T21:17:30Z",
+              "tempoInizio": "2022-01-26T21:15:15Z"
+            },
+            "titolo": "Verdura"
+          },
+          {
+            "categoria": "vestiti",
+            "livello": 3,
+            "titolo": "vestiti"
+          },
+          {
+            "categoria": "frutta",
+            "livello": 2,
+            "risultati": {
+              "durataQuiz": "0 min 34 sec ",
+              "tempoFine": "2022-01-25T11:30:14Z",
+              "tempoInizio": "2022-01-25T11:29:40Z"
+            },
+            "titolo": "frutta"
+          }
+        ],
+        "fluenzeverbali": [
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "sole"
+              },
+              {
+                "parola": "albero"
+              },
+              {
+                "parola": "cucina"
+              },
+              {
+                "parola": "cinema"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "4 min 32 sec ",
+              "singoleRisposte": {
+                "-MwW0WH3W_pb1UMCMZk7": {
+                  "albero": "CORRELATA",
+                  "caldo": "NONCORRELATA",
+                  "cinema": "CORRELATA",
+                  "cucina": "CORRELATA",
+                  "primavera": "NONCORRELATA",
+                  "sole": "CORRELATA",
+                  "termosifone": "NONCORRELATA",
+                  "tronco": "NONCORRELATA"
+                }
+              },
+              "tempoFine": "2022-02-22T11:42:01Z",
+              "tempoInizio": "2022-02-22T11:37:29Z"
+            },
+            "titolo": "Associa le parole 1"
+          },
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": " pianeti"
+              },
+              {
+                "parola": "scuola"
+              },
+              {
+                "parola": "sport"
+              },
+              {
+                "parola": "cibo"
+              }
+            ],
+            "titolo": "Associa le parole 2"
+          }
+        ],
+        "letteremancanti": [
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "VIGILIA"
+              },
+              {
+                "parola": "VASSOIO"
+              },
+              {
+                "parola": "NATALE"
+              },
+              {
+                "parola": "ASINELLO"
+              },
+              {
+                "parola": "PANDORO"
+              },
+              {
+                "parola": "CAVATAPPI"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "6 min 28 sec ",
+              "tempoFine": "2022-02-22T11:49:05Z",
+              "tempoInizio": "2022-02-22T11:42:37Z"
+            },
+            "titolo": "Natale"
+          },
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "Banana"
+              },
+              {
+                "parola": "fragola"
+              },
+              {
+                "parola": "limone"
+              },
+              {
+                "parola": "arancia"
+              }
+            ],
+            "titolo": "Frutta"
+          }
+        ],
+        "mesi": [
+          {
+            "domande": [
+              {
+                "domanda": "Quando inizia la primavera?",
+                "rispostaCorretta": "Marzo",
+                "risposteSbagliate": [
+                  "Aprile",
+                  "Giugno",
+                  "Ottobre"
+                ]
+              },
+              {
+                "domanda": "Quando inizia l'inverno?",
+                "rispostaCorretta": "Dicembre",
+                "risposteSbagliate": [
+                  "Novembre",
+                  "Gennaio",
+                  "Giugno"
+                ]
+              },
+              {
+                "domanda": "Quando inizia l'estate?",
+                "rispostaCorretta": "Giugno",
+                "risposteSbagliate": [
+                  "Luglio",
+                  "Maggio",
+                  "Dicembre"
+                ]
+              },
+              {
+                "domanda": "Quando inizia l'autunno?",
+                "rispostaCorretta": "Settembre",
+                "risposteSbagliate": [
+                  "Ottobre",
+                  "Agosto",
+                  "Aprile"
+                ]
+              }
+            ],
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "0 min 58 sec ",
+              "nRisposteSbagliate": 1,
+              "tempoFine": "2021-12-24T21:52:09Z",
+              "tempoInizio": "2021-12-24T21:51:11Z"
+            },
+            "titolo": "Stagioni"
+          },
+          {
+            "domande": [
+              {
+                "domanda": "Quale mese precede febbraio?",
+                "rispostaCorretta": "Gennaio",
+                "risposteSbagliate": [
+                  "marzo",
+                  "aprile",
+                  "Giugno"
+                ]
+              }
+            ],
+            "livello": 3,
+            "risultati": {
+              "durataQuiz": "0 min 11 sec ",
+              "nRisposteSbagliate": 0,
+              "tempoFine": "2021-12-29T13:03:14Z",
+              "tempoInizio": "2021-12-29T13:03:03Z"
+            },
+            "titolo": "Mesi inversi"
+          }
+        ],
+        "musica": [
+          {
+            "domande": [
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2Frose%20rosse%20-%20massimo%20ranieri.mp3?alt=media&token=07b71179-c357-4192-b12f-2ccdbb4c7fc3",
+                "rispostaCorretta": "Massimo Ranieri",
+                "risposteSbagliate": [
+                  "Fausto Leali",
+                  "Adriano Celentano",
+                  "Gigi D'Alessio"
+                ]
+              },
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FDatemi%20un%20martello.mp3?alt=media&token=dd9d7735-2dd9-4b14-af48-274c864977e9",
+                "rispostaCorretta": "Rita Pavone",
+                "risposteSbagliate": [
+                  "Mina",
+                  "Anna Oxa",
+                  "Giorgia"
+                ]
+              },
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2F24%20mila%20baci%20(Remastered).mp3?alt=media&token=f89a53f4-81a5-42ca-891f-409768c11d9e",
+                "rispostaCorretta": "Adriano Celentano",
+                "risposteSbagliate": [
+                  "Franco Califano",
+                  "Albano Carrisi",
+                  "Caruso"
+                ]
+              },
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FAbbronzatissima.mp3?alt=media&token=6640bd72-7c27-4994-a059-df6036c9a069",
+                "rispostaCorretta": "Edoardo Vianello",
+                "risposteSbagliate": [
+                  "Massimo Ranieri",
+                  "Claudio Baglioni",
+                  "Orietta Berti"
+                ]
+              },
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FMINA%20-%20Stessa%20spiaggia%20stesso%20mare.mp3?alt=media&token=f47d04cb-ebea-4a7e-b967-724e63934729",
+                "rispostaCorretta": "Mina",
+                "risposteSbagliate": [
+                  "Max Pezzali",
+                  "Renato Zero",
+                  "Anna Oxa"
+                ]
+              }
+            ],
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "1 min 51 sec ",
+              "tempoFine": "2021-12-31T20:08:31Z",
+              "tempoInizio": "2021-12-31T20:06:40Z"
+            },
+            "titolo": "Indovina i cantanti"
+          }
+        ],
+        "racconti": [
+          {
+            "domande": [
+              {
+                "domanda": "Quanti erano i fratelli?",
+                "rispostaCorretta": "3",
+                "risposteSbagliate": [
+                  "1",
+                  "5"
+                ]
+              },
+              {
+                "domanda": "Cosa capitò a Lorenzo?",
+                "rispostaCorretta": "fu ucciso dai fratelli",
+                "risposteSbagliate": [
+                  "si sposò con Elisabetta",
+                  "partì con Elisabetta"
+                ]
+              },
+              {
+                "domanda": "Cosa fa Elisabetta alla fine della storia?",
+                "rispostaCorretta": "Muore",
+                "risposteSbagliate": [
+                  "uccide i fratelli",
+                  "scappa a Napoli"
+                ]
+              },
+              {
+                "domanda": "Come si chiama la sorella minore?",
+                "rispostaCorretta": "Elisabetta",
+                "risposteSbagliate": [
+                  "Maria",
+                  "Pina"
+                ]
+              }
+            ],
+            "livello": 1,
+            "media": [
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta0.jpg?alt=media&token=c80cc643-9a09-499b-996b-fcc2186c5091",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta1.jpg?alt=media&token=85c7b808-bf57-4e0f-bf13-236d35727732",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta2.png?alt=media&token=e5c7a954-0d4d-4a5c-b351-ef5ecb10f936",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta3.jpg?alt=media&token=726820f7-5c42-4ed2-8a0e-a654ae47e049",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta4.jpg?alt=media&token=53bb036e-cc24-4e20-b841-4eab0639fa5d",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta5.jpg?alt=media&token=2db1dd5e-086e-40b3-8ce9-bcb0c9275772"
+            ],
+            "risultati": {
+              "durataQuiz": "0 min 59 sec ",
+              "tempoFine": "2022-01-20T19:57:19Z",
+              "tempoInizio": "2022-01-20T19:56:20Z"
+            },
+            "testo": "Nella città di Messina vi abitavano tre fratelli, ricchi mercanti, con la sorella minore Elisabetta, fanciulla molto bella non ancora maritata. Questa si innamorò di un giovane di nome Lorenzo che lavorava presso il fondaco dei tre fratelli. Anche Lorenzo si innamorò di Elisabetta e i due incominciarono a frequentarsi segretamente. Il fratello maggiore accortosi della relazione né parlò agli altri due fratelli e tutti e tre, dopo aver portato Lorenzo in luogo solitario lo uccisero e lo seppellirono. Una notte comparve in sogno a Elisabetta Lorenzo che le dice di essere stato ucciso dai suoi fratelli e le rivelò dove era seppellito. La fanciulla vi si recò, scavò e tagliò la testa dal corpo che dopo averla fasciata mise in un vaso e ricoprì di terra e vi piantò delle piante. Spesso la fanciulla riversava lacrime sul vaso e i fratelli avvertiti dai vicini, le tolsero il vaso e scoperta la testa la sotterrarono. Dopo i tre fratelli partirono per Napoli affinché non si sapesse la storia e la sorella continuando a versare lacrime morì.  ",
+            "titolo": "Elisabetta"
+          }
+        ],
+        "volti": [
+          {
+            "domande": [
+              {
+                "domanda": "Qual è il suo nome?",
+                "rispostaCorretta": "Massimo Ranieri",
+                "risposteSbagliate": [
+                  "Edoardo Bennato",
+                  "Francesco De Gregori"
+                ]
+              },
+              {
+                "domanda": "Qual è il suo lavoro?",
+                "rispostaCorretta": "Cantante",
+                "risposteSbagliate": [
+                  "Muratore",
+                  "Elettricista"
+                ]
+              }
+            ],
+            "livello": 1,
+            "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesQuiz%2Fmassimo%20ranieri.jpg?alt=media&token=b80277ed-970d-410e-9bc0-1c0b6dcfb402",
+            "risultati": {
+              "durataQuiz": "0 min 56 sec ",
+              "nRisposteSbagliate": 1,
+              "tempoFine": "2021-12-24T21:53:54Z",
+              "tempoInizio": "2021-12-24T21:52:58Z"
+            },
+            "titolo": "Indovina il personaggio"
+          },
+          {
+            "domande": [
+              {
+                "domanda": "Chi é per me questa signora?",
+                "rispostaCorretta": "Moglie",
+                "risposteSbagliate": [
+                  "Sorella",
+                  "Vicina"
+                ]
+              },
+              {
+                "domanda": "Qual è il suo nome?",
+                "rispostaCorretta": "Beppina",
+                "risposteSbagliate": [
+                  "Viera",
+                  "Zoia"
+                ]
+              },
+              {
+                "domanda": "Da quanti anni siete sposati?",
+                "rispostaCorretta": "50",
+                "risposteSbagliate": [
+                  "60",
+                  "Non siamo sposati"
+                ]
+              },
+              {
+                "domanda": "Quali sono i suoi fiori preferiti?",
+                "rispostaCorretta": "Rose",
+                "risposteSbagliate": [
+                  "Calle",
+                  "Tulipani"
+                ]
+              },
+              {
+                "domanda": "Qual è la sua cittá preferita?",
+                "rispostaCorretta": "Parigi",
+                "risposteSbagliate": [
+                  "Venezia",
+                  "Madrid"
+                ]
+              },
+              {
+                "domanda": "Quanti sono i suoi nipoti?",
+                "rispostaCorretta": "8",
+                "risposteSbagliate": [
+                  "5",
+                  "2"
+                ]
+              },
+              {
+                "domanda": "Quanti figli hai con questa signora",
+                "rispostaCorretta": "4",
+                "risposteSbagliate": [
+                  "3",
+                  "5"
+                ]
+              }
+            ],
+            "livello": 1,
+            "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesQuiz%2Fninninacool.jpg?alt=media&token=1b2cb877-afcc-4ca5-9270-840f02b7ab5e",
+            "risultati": {
+              "durataQuiz": "1 min 38 sec ",
+              "tempoFine": "2022-02-23T13:54:29Z",
+              "tempoInizio": "2022-02-23T13:52:51Z"
+            },
+            "titolo": "Riconosci il famigliare"
+          }
+        ]
+      },
+      "eta": 85,
+      "luogoResidenza": {
+        "city": "Bari"
+      },
+      "nome": "Mario"
+    },
+    "-N6e6uS_JabUR05s19Ss": {
+      "anni": 62,
+      "citta": "Molfetta",
+      "dataNascita": "25/04/1960",
+      "esercizi": {
+        "appartenenza": [
+          {
+            "categoria": "Frutti estivi",
+            "livello": 1,
+            "parole": [
+              {
+                "categoria": "Frutti estivi",
+                "parola": "albicocche"
+              },
+              {
+                "categoria": "Frutti autunnali",
+                "parola": "alchechengi"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "0 min  9 sec ",
+              "tempoFine": "2024-06-13T16:10:57Z",
+              "tempoInizio": "2024-06-13T16:10:48Z"
+            },
+            "titolo": "frutti estivi"
+          }
+        ],
+        "categorizzazione": [
+          {
+            "categorie": [
+              "Cantanti",
+              "Frutta",
+              "Verdura",
+              " Mestieri"
+            ],
+            "livello": 2,
+            "parole": [
+              {
+                "parola": "Adriano Celentano",
+                "rispostaCorretta": "Cantanti"
+              },
+              {
+                "parola": "Mandarino",
+                "rispostaCorretta": "Frutta"
+              },
+              {
+                "parola": "Bietole",
+                "rispostaCorretta": "Verdura"
+              },
+              {
+                "parola": "Carrozziere",
+                "rispostaCorretta": "Mestieri"
+              },
+              {
+                "parola": "Cavolfiore",
+                "rispostaCorretta": "Verdura"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "1 min  1 sec ",
+              "tempoFine": "2024-06-12T20:32:23Z",
+              "tempoInizio": "2024-06-12T20:31:23Z"
+            },
+            "titolo": "Esempio"
+          }
+        ],
+        "combinazionilettere": [
+          {
+            "lettere": [
+              "m",
+              "e"
+            ],
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "1 min 17 sec ",
+              "singoleRisposte": {
+                "-N_mq5F78K0PtxKuhhUs": {
+                  "medro": "NONESISTE",
+                  "medusa": "ESISTE",
+                  "memoria": "ESISTE"
+                }
+              },
+              "tempoFine": "2023-07-20T12:28:51Z",
+              "tempoInizio": "2023-07-20T12:27:34Z"
+            },
+            "titolo": "Gioca con le lettere 1"
+          }
+        ],
+        "esistenzaparole": [
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "vaso"
+              },
+              {
+                "parola": "cane"
+              },
+              {
+                "parola": "casco"
+              },
+              {
+                "parola": "castaro"
+              },
+              {
+                "parola": "nettare"
+              },
+              {
+                "parola": "minto"
+              },
+              {
+                "parola": "lonfo"
+              },
+              {
+                "parola": "bambino"
+              },
+              {
+                "parola": "gluisce"
+              },
+              {
+                "parola": "gisbuto"
+              },
+              {
+                "parola": "trono"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "0 min 26 sec ",
+              "tempoFine": "2023-07-20T12:25:16Z",
+              "tempoInizio": "2023-07-20T12:24:50Z"
+            },
+            "titolo": "Parole"
+          }
+        ],
+        "finaliparole": [
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "diva"
+              },
+              {
+                "parola": "acqua"
+              },
+              {
+                "parola": "ali"
+              },
+              {
+                "parola": "con"
+              },
+              {
+                "parola": "dolo"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "1 min 39 sec ",
+              "singoleRisposte": {
+                "-N_-TUTmE8L-C00_JPz1": {
+                  "acquario": "ESISTE",
+                  "alidendo": "NONESISTE",
+                  "alieno": "ESISTE",
+                  "alì babà": "NONVALIDA",
+                  "continua": "ESISTE",
+                  "divano": "ESISTE",
+                  "dolomiti": "NONESISTE",
+                  "dolore": "ESISTE"
+                }
+              },
+              "tempoFine": "2023-07-10T17:44:38Z",
+              "tempoInizio": "2023-07-10T17:42:59Z"
+            },
+            "titolo": "Completa la parola 1"
+          },
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "rob"
+              },
+              {
+                "parola": "ant"
+              },
+              {
+                "parola": "bar"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "0 min 29 sec ",
+              "singoleRisposte": {
+                "-NF5hgAy4M7Xe1LM1Mwz": {
+                  "antenna": "ESISTE",
+                  "barattolo": "ESISTE",
+                  "robot": "ESISTE"
+                }
+              },
+              "tempoFine": "2022-10-23T23:19:11Z",
+              "tempoInizio": "2022-10-23T23:18:42Z"
+            },
+            "titolo": "Completa la parola 2"
+          }
+        ],
+        "fluenzefonologiche": [
+          {
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "1 min 32 sec ",
+              "singoleRisposte": {
+                "-Nzi0Wpd2ccdba4Z8F9y": {
+                  "elefante": "ESISTE",
+                  "elicottero": "ESISTE"
+                }
+              },
+              "tempoFine": "2024-06-06T16:48:49Z",
+              "tempoInizio": "2024-06-06T16:47:17Z"
+            },
+            "titolo": "E"
+          },
+          {
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "0 min 49 sec ",
+              "singoleRisposte": {
+                "-N_mr1Ew-rEm7ZJRKxFd": {
+                  "albero": "ESISTE",
+                  "alueck": "NONESISTE"
+                }
+              },
+              "tempoFine": "2023-07-20T12:32:56Z",
+              "tempoInizio": "2023-07-20T12:32:07Z"
+            },
+            "titolo": "A"
+          }
+        ],
+        "fluenzesemantiche": [
+          {
+            "categoria": "Verdura estiva",
+            "livello": 1,
+            "titolo": "Verdura estiva"
+          },
+          {
+            "categoria": "vestiti",
+            "livello": 3,
+            "risultati": {
+              "durataQuiz": "0 min 34 sec ",
+              "singoleRisposte": {
+                "-Nzi13zuBF3ZmDeBNQOL": {
+                  "elicottero": "NONCORRELATA",
+                  "maglietta": "CORRELATA"
+                }
+              },
+              "tempoFine": "2024-06-06T16:51:13Z",
+              "tempoInizio": "2024-06-06T16:50:39Z"
+            },
+            "titolo": "vestiti"
+          },
+          {
+            "categoria": "IN CUCINA",
+            "livello": 2,
+            "titolo": "IN CUCINA"
+          }
+        ],
+        "fluenzeverbali": [
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "sole"
+              },
+              {
+                "parola": "albero"
+              },
+              {
+                "parola": "cucina"
+              },
+              {
+                "parola": "cinema"
+              }
+            ],
+            "titolo": "Associa le parole 1"
+          },
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": " pianeti"
+              },
+              {
+                "parola": "scuola"
+              },
+              {
+                "parola": "sport"
+              },
+              {
+                "parola": "cibo"
+              }
+            ],
+            "titolo": "Associa le parole 2"
+          }
+        ],
+        "letteremancanti": [
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": "VIGILIA"
+              },
+              {
+                "parola": "VISCHIO"
+              },
+              {
+                "parola": "NATALE"
+              },
+              {
+                "parola": "ASINELLO"
+              },
+              {
+                "parola": "PENDOLO"
+              },
+              {
+                "parola": "CAVATAPPI"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "0 min 44 sec ",
+              "tempoFine": "2023-07-20T12:24:19Z",
+              "tempoInizio": "2023-07-20T12:23:34Z"
+            },
+            "titolo": "Lettere Mancanti: Natale"
+          },
+          {
+            "livello": 1,
+            "parole": [
+              {
+                "parola": " Banana,fragola,limone,arancia"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "0 min 23 sec ",
+              "tempoFine": "2022-12-11T12:18:13Z",
+              "tempoInizio": "2022-12-11T12:17:50Z"
+            },
+            "titolo": "Lettere"
+          }
+        ],
+        "mesi": [
+          {
+            "domande": [
+              {
+                "domanda": "Quando inizia la primavera?",
+                "rispostaCorretta": "Marzo",
+                "risposteSbagliate": [
+                  "Aprile",
+                  "Giugno"
+                ]
+              },
+              {
+                "domanda": "Quando inizia l'inverno?",
+                "rispostaCorretta": "Dicembre",
+                "risposteSbagliate": [
+                  "Novembre",
+                  "Gennaio"
+                ]
+              },
+              {
+                "domanda": "Quando inizia l'estate?",
+                "rispostaCorretta": "Giugno",
+                "risposteSbagliate": [
+                  "Luglio",
+                  "Maggio"
+                ]
+              },
+              {
+                "domanda": "Quando inizia l'autunno?",
+                "rispostaCorretta": "Settembre",
+                "risposteSbagliate": [
+                  "Ottobre",
+                  "Agosto"
+                ]
+              }
+            ],
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "0 min 54 sec ",
+              "tempoFine": "2023-07-10T17:46:15Z",
+              "tempoInizio": "2023-07-10T17:45:21Z"
+            },
+            "titolo": "Stagioni"
+          },
+          {
+            "domande": [
+              {
+                "domanda": "Quale mese precede febbraio?",
+                "rispostaCorretta": "Gennaio",
+                "risposteSbagliate": [
+                  "marzo",
+                  "aprile"
+                ]
+              }
+            ],
+            "livello": 3,
+            "risultati": {
+              "durataQuiz": "0 min  4 sec ",
+              "tempoFine": "2023-07-20T12:34:09Z",
+              "tempoInizio": "2023-07-20T12:34:05Z"
+            },
+            "titolo": "Mesi inversi"
+          }
+        ],
+        "musica": [
+          {
+            "domande": [
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2Frose%20rosse%20-%20massimo%20ranieri.mp3?alt=media&token=07b71179-c357-4192-b12f-2ccdbb4c7fc3",
+                "rispostaCorretta": "Massimo Ranieri",
+                "risposteSbagliate": [
+                  "Fausto Leali",
+                  "Adriano Celentano"
+                ]
+              },
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FDatemi%20un%20martello.mp3?alt=media&token=dd9d7735-2dd9-4b14-af48-274c864977e9",
+                "rispostaCorretta": "Rita Pavone",
+                "risposteSbagliate": [
+                  "Mina",
+                  "Anna Oxa"
+                ]
+              },
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2F24%20mila%20baci%20(Remastered).mp3?alt=media&token=f89a53f4-81a5-42ca-891f-409768c11d9e",
+                "rispostaCorretta": "Adriano Celentano",
+                "risposteSbagliate": [
+                  "Franco Califano",
+                  "Albano Carrisi"
+                ]
+              },
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FAbbronzatissima.mp3?alt=media&token=6640bd72-7c27-4994-a059-df6036c9a069",
+                "rispostaCorretta": "Edoardo Vianello",
+                "risposteSbagliate": [
+                  "Massimo Ranieri",
+                  "Claudio Baglioni"
+                ]
+              },
+              {
+                "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FMINA%20-%20Stessa%20spiaggia%20stesso%20mare.mp3?alt=media&token=f47d04cb-ebea-4a7e-b967-724e63934729",
+                "rispostaCorretta": "Mina",
+                "risposteSbagliate": [
+                  "Max Pezzali",
+                  "Renato Zero"
+                ]
+              }
+            ],
+            "livello": 1,
+            "risultati": {
+              "durataQuiz": "2 min 43 sec ",
+              "tempoFine": "2024-06-10T12:55:15Z",
+              "tempoInizio": "2024-06-10T12:52:32Z"
+            },
+            "titolo": "Indovina i cantanti"
+          }
+        ],
+        "racconti": [
+          {
+            "domande": [
+              {
+                "domanda": "Quanti erano i fratelli?",
+                "rispostaCorretta": "Tre",
+                "risposteSbagliate": [
+                  "Uno",
+                  "Cinque"
+                ]
+              },
+              {
+                "domanda": "Cosa capitò a Lorenzo?",
+                "rispostaCorretta": "fu ucciso dai fratelli",
+                "risposteSbagliate": [
+                  "si sposò con Elisabetta",
+                  "partì con Elisabetta"
+                ]
+              },
+              {
+                "domanda": "Cosa fa Elisabetta alla fine della storia?",
+                "rispostaCorretta": "Muore",
+                "risposteSbagliate": [
+                  "uccide i fratelli",
+                  "scappa a Napoli"
+                ]
+              },
+              {
+                "domanda": "Come si chiama la sorella minore?",
+                "rispostaCorretta": "Elisabetta",
+                "risposteSbagliate": [
+                  "Maria",
+                  "Pina"
+                ]
+              }
+            ],
+            "livello": 1,
+            "media": [
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta0.jpg?alt=media&token=c80cc643-9a09-499b-996b-fcc2186c5091",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta1.jpg?alt=media&token=85c7b808-bf57-4e0f-bf13-236d35727732",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta2.png?alt=media&token=e5c7a954-0d4d-4a5c-b351-ef5ecb10f936",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta3.jpg?alt=media&token=726820f7-5c42-4ed2-8a0e-a654ae47e049",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta4.jpg?alt=media&token=53bb036e-cc24-4e20-b841-4eab0639fa5d",
+              "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta5.jpg?alt=media&token=2db1dd5e-086e-40b3-8ce9-bcb0c9275772"
+            ],
+            "risultati": {
+              "durataQuiz": "0 min 43 sec ",
+              "tempoFine": "2023-07-20T13:27:01Z",
+              "tempoInizio": "2023-07-20T13:26:18Z"
+            },
+            "testo": "Nella città di Messina vi abitavano tre fratelli, ricchi mercanti, con la sorella minore Elisabetta, fanciulla molto bella non ancora maritata. Questa si innamorò di un giovane di nome Lorenzo che lavorava presso il fondaco dei tre fratelli. Anche Lorenzo si innamorò di Elisabetta e i due incominciarono a frequentarsi segretamente. Il fratello maggiore accortosi della relazione né parlò agli altri due fratelli e tutti e tre, dopo aver portato Lorenzo in luogo solitario lo uccisero e lo seppellirono. Una notte comparve in sogno a Elisabetta Lorenzo che le dice di essere stato ucciso dai suoi fratelli e le rivelò dove era seppellito. La fanciulla vi si recò, scavò e tagliò la testa dal corpo che dopo averla fasciata mise in un vaso e ricoprì di terra e vi piantò delle piante. Spesso la fanciulla riversava lacrime sul vaso e i fratelli avvertiti dai vicini, le tolsero il vaso e scoperta la testa la sotterrarono. Dopo i tre fratelli partirono per Napoli affinché non si sapesse la storia e la sorella continuando a versare lacrime morì.  ",
+            "titolo": "Elisabetta"
+          },
+          {
+            "domande": [
+              {
+                "domanda": "Quanti erano i fratelli?",
+                "rispostaCorretta": "Tre",
+                "risposteSbagliate": [
+                  "Uno",
+                  "Cinque"
+                ]
+              },
+              {
+                "domanda": "Cosa capitò a Lorenzo?",
+                "rispostaCorretta": "fu ucciso dai fratelli",
+                "risposteSbagliate": [
+                  "si sposò con Elisabetta",
+                  "partì con Elisabetta"
+                ]
+              },
+              {
+                "domanda": "Cosa fa Elisabetta alla fine della storia?",
+                "rispostaCorretta": "Muore",
+                "risposteSbagliate": [
+                  "uccide i fratelli",
+                  "scappa a Napoli"
+                ]
+              },
+              {
+                "domanda": "Come si chiama la sorella minore?",
+                "rispostaCorretta": "Elisabetta",
+                "risposteSbagliate": [
+                  "Maria",
+                  "Pina"
+                ]
+              }
+            ],
+            "livello": 1,
+            "testo": "Nella città di Messina vi abitavano tre fratelli, ricchi mercanti, con la sorella minore Elisabetta, fanciulla molto bella non ancora maritata. Questa si innamorò di un giovane di nome Lorenzo che lavorava presso il fondaco dei tre fratelli. Anche Lorenzo si innamorò di Elisabetta e i due incominciarono a frequentarsi segretamente. Il fratello maggiore accortosi della relazione né parlò agli altri due fratelli e tutti e tre, dopo aver portato Lorenzo in luogo solitario lo uccisero e lo seppellirono. Una notte comparve in sogno a Elisabetta Lorenzo che le dice di essere stato ucciso dai suoi fratelli e le rivelò dove era seppellito. La fanciulla vi si recò, scavò e tagliò la testa dal corpo che dopo averla fasciata mise in un vaso e ricoprì di terra e vi piantò delle piante. Spesso la fanciulla riversava lacrime sul vaso e i fratelli avvertiti dai vicini, le tolsero il vaso e scoperta la testa la sotterrarono. Dopo i tre fratelli partirono per Napoli affinché non si sapesse la storia e la sorella continuando a versare lacrime morì.  ",
+            "titolo": "Elisabetta"
+          }
+        ],
+        "volti": [
+          {
+            "domande": [
+              {
+                "domanda": "Qual è il suo nome?",
+                "rispostaCorretta": "Memes",
+                "risposteSbagliate": [
+                  "Carlo",
+                  "Francesco"
+                ]
+              },
+              {
+                "domanda": "Chi é per me qusto signore",
+                "rispostaCorretta": "Fratello",
+                "risposteSbagliate": [
+                  "Zio",
+                  "Nonno"
+                ]
+              },
+              {
+                "domanda": "Qual è il suo lavoro?",
+                "rispostaCorretta": "Meccanico",
+                "risposteSbagliate": [
+                  "Muratore",
+                  "Elettricista"
+                ]
+              }
+            ],
+            "livello": 3,
+            "media": "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesQuiz%2FvoltiImage1.jpg?alt=media&token=7e2f23bb-7013-4217-bef3-303095179cec",
+            "risultati": {
+              "durataQuiz": "0 min 27 sec ",
+              "tempoFine": "2024-06-13T15:23:58Z",
+              "tempoInizio": "2024-06-13T15:23:30Z"
+            },
+            "titolo": "Indovina il personaggio"
+          }
+        ]
+      },
+      "id": 1,
+      "image": "https://bettercallpepper.altervista.org/img/elderlies/tina_degennaro.png",
+      "name": "Tina",
+      "numeroLetto": 1,
+      "sesso": "F",
+      "surname": "De Gennaro"
+    },
+    "-N6xIt_j_trBYjULgJYi": {
+      "anni": 50,
+      "citta": "Napoli",
+      "dataNascita": "22/05/1972",
+      "id": 3,
+      "image": "https://bettercallpepper.altervista.org/img/elderlies/maurizio_de_biase.png",
+      "name": "Maurizio",
+      "numeroLetto": 3,
+      "sesso": "M",
+      "surname": "De Biase",
+      "esercizi": {
+        "appartenenza": [
+          {
+            "categoria": "Frutti estivi",
+            "livello": 1,
+            "parole": [
+              {
+                "categoria": "Frutti estivi",
+                "parola": "albicocche"
+              },
+              {
+                "categoria": "Frutti autunnali",
+                "parola": "alchechengi"
+              }
+            ],
+            "risultati": {
+              "durataQuiz": "0 min  9 sec ",
+              "tempoFine": "2024-06-13T16:10:57Z",
+              "tempoInizio": "2024-06-13T16:10:48Z"
+            },
+            "titolo": "frutti estivi"
+          }
+        ]
+      }
+    },
+    "-N6xItaOs6iGNaZ-o3fi": {
+      "anni": 61,
+      "citta": "Giovinazzo",
+      "dataNascita": "11/01/1961",
+      "id": 2,
+      "image": "https://bettercallpepper.altervista.org/img/elderlies/michele_annese.png",
+      "name": "Michele",
+      "numeroLetto": 2,
+      "sesso": "M",
+      "surname": "Annese"
+    },
+    "esercizi": {
+      "racconti": [
+        {
+          "domande": [
+            {
+              "domanda": "Quanti erano i fratelli?",
+              "rispostaCorretta": "Tre",
+              "risposteSbagliate": [
+                "Uno",
+                "Cinque"
+              ]
+            },
+            {
+              "domanda": "Cosa capitò a Lorenzo?",
+              "rispostaCorretta": "fu ucciso dai fratelli",
+              "risposteSbagliate": [
+                "si sposò con Elisabetta",
+                "partì con Elisabetta"
+              ]
+            },
+            {
+              "domanda": "Cosa fa Elisabetta alla fine della storia?",
+              "rispostaCorretta": "Muore",
+              "risposteSbagliate": [
+                "uccide i fratelli",
+                "scappa a Napoli"
+              ]
+            },
+            {
+              "domanda": "Come si chiama la sorella minore?",
+              "rispostaCorretta": "Elisabetta",
+              "risposteSbagliate": [
+                "Maria",
+                "Pina"
+              ]
+            }
+          ],
+          "livello": 1,
+          "media": [
+            "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta0.jpg?alt=media&token=c80cc643-9a09-499b-996b-fcc2186c5091",
+            "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta1.jpg?alt=media&token=85c7b808-bf57-4e0f-bf13-236d35727732",
+            "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta2.png?alt=media&token=e5c7a954-0d4d-4a5c-b351-ef5ecb10f936",
+            "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta3.jpg?alt=media&token=726820f7-5c42-4ed2-8a0e-a654ae47e049",
+            "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta4.jpg?alt=media&token=53bb036e-cc24-4e20-b841-4eab0639fa5d",
+            "https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta5.jpg?alt=media&token=2db1dd5e-086e-40b3-8ce9-bcb0c9275772"
+          ],
+          "testo": "Nella città di Messina vi abitavano tre fratelli, ricchi mercanti, con la sorella minore Elisabetta, fanciulla molto bella non ancora maritata. Questa si innamorò di un giovane di nome Lorenzo che lavorava presso il fondaco dei tre fratelli. Anche Lorenzo si innamorò di Elisabetta e i due incominciarono a frequentarsi segretamente. Il fratello maggiore accortosi della relazione né parlò agli altri due fratelli e tutti e tre, dopo aver portato Lorenzo in luogo solitario lo uccisero e lo seppellirono. Una notte comparve in sogno a Elisabetta Lorenzo che le dice di essere stato ucciso dai suoi fratelli e le rivelò dove era seppellito. La fanciulla vi si recò, scavò e tagliò la testa dal corpo che dopo averla fasciata mise in un vaso e ricoprì di terra e vi piantò delle piante. Spesso la fanciulla riversava lacrime sul vaso e i fratelli avvertiti dai vicini, le tolsero il vaso e scoperta la testa la sotterrarono. Dopo i tre fratelli partirono per Napoli affinché non si sapesse la storia e la sorella continuando a versare lacrime morì.  ",
+          "titolo": "Elisabetta"
+        }
+      ],
+      "volto": [
+        {
+          "domande": [
+            {
+              "domanda": "Qual è il suo nome?",
+              "rispostaCorretta": "Gianluigi",
+              "risposteSbagliate": [
+                "Carlo",
+                "Francesco"
+              ]
+            },
+            {
+              "domanda": "Qual è il suo cognome?",
+              "rispostaCorretta": "Buffon",
+              "risposteSbagliate": [
+                "Tricarico",
+                "Basile"
+              ]
+            },
+            {
+              "domanda": "Qual è il suo lavoro?",
+              "rispostaCorretta": "Calciatore",
+              "risposteSbagliate": [
+                "Presentatore",
+                "Cantante"
+              ]
+            }
+          ],
+          "livello": 1,
+          "media": "https://amica-backend.herokuapp.com/uploads/img/volti/5b0be78c85600a35f8718d791632908741029.jpg",
+          "titolo": "Indovina il personaggio"
+        }
+      ]
+    }
+  },
+  "terapisti": {
+    "0aNRf2JS4fTlD2wnG2ku2XZKwAh2": {
+      "numeroPazienti": 2,
+      "pazientiassociati": [
+        {
+          "codiceFiscale": "LOL"
+        },
+        {
+          "codiceFiscale": "RGGNNL"
+        }
+      ],
+      "uid": "0aNRf2JS4fTlD2wnG2ku2XZKwAh2"
+    },
+    "3kgAkiZ0FTShEMJcCobBOFkiVwB2": {
+      "numeroPazienti": 1,
+      "pazientiassociati": [
+        {
+          "codiceFiscale": "RGGNNL"
+        }
+      ],
+      "uid": "3kgAkiZ0FTShEMJcCobBOFkiVwB2"
+    },
+    "CcQ2HFNmsaX99pXMRRZT8agUvzL2": {
+      "numeroPazienti": 13,
+      "pazientiassociati": [
+        {
+          "codiceFiscale": "LALA"
+        },
+        {
+          "codiceFiscale": "GRP"
+        },
+        {
+          "codiceFiscale": "Test 1"
+        },
+        null,
+        {
+          "codiceFiscale": "Test 3"
+        },
+        {
+          "codiceFiscale": "Test 2"
+        },
+        {
+          "codiceFiscale": "Test 4"
+        },
+        {
+          "codiceFiscale": "Test 6"
+        },
+        {
+          "codiceFiscale": "Test 7"
+        },
+        {
+          "codiceFiscale": "Test 8"
+        },
+        {
+          "codiceFiscale": "Test 9"
+        },
+        {
+          "codiceFiscale": "Test 10"
+        },
+        {
+          "codiceFiscale": "Test 11"
+        }
+      ],
+      "uid": "CcQ2HFNmsaX99pXMRRZT8agUvzL2"
+    },
+    "R8aimPQX9KXiX0x2WzvxYG7kfTy1": {
+      "numeroPazienti": 4,
+      "pazientiassociati": [
+        {
+          "codiceFiscale": "MRCCRS98h07c514v"
+        },
+        {
+          "codiceFiscale": "COGNOM12A34B456x"
+        },
+        {
+          "codiceFiscale": "COGNOM12A34B456X"
+        },
+        {
+          "codiceFiscale": "COGNOM12A34B456S"
+        }
+      ],
+      "uid": "R8aimPQX9KXiX0x2WzvxYG7kfTy1"
+    },
+    "dTE6fRJ2LXPMaeN8kRGMqAkD2SZ2": {
+      "numeroPazienti": 1,
+      "pazientiassociati": [
+        {
+          "codiceFiscale": "RGGNNL"
+        }
+      ],
+      "uid": "dTE6fRJ2LXPMaeN8kRGMqAkD2SZ2"
+    },
+    "m5CbaFaQhtaqX9LUVkONbPVE60B3": {
+      "numeroPazienti": 0,
+      "uid": "m5CbaFaQhtaqX9LUVkONbPVE60B3"
+    },
+    "oZXw7cKXQYSaXCs5sNRoDzOFl2k1": {
+      "numeroPazienti": 4,
+      "pazientiassociati": [
+        {
+          "codiceFiscale": "RGGNNL"
+        },
+        {
+          "codiceFiscale": "LOL"
+        },
+        {
+          "codiceFiscale": "LALA"
+        },
+        {
+          "codiceFiscale": "PROVA"
+        }
+      ],
+      "uid": "oZXw7cKXQYSaXCs5sNRoDzOFl2k1"
+    },
+    "whZ28OwruCUDzjRY5SwD5Ol6lvA3": {
+      "numeroPazienti": 1,
+      "pazientiassociati": [
+        {
+          "codiceFiscale": "RGGNNL"
+        }
+      ],
+      "uid": "whZ28OwruCUDzjRY5SwD5Ol6lvA3"
+    }
+  }
+}
