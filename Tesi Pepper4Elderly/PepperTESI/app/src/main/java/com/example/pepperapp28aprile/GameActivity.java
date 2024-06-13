@@ -79,6 +79,7 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
     private Bundle eliminami;
     public Persona.Game.Domanda domanda;
     private Future<Void> say;
+    public  Future<Void> sayDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,10 +168,18 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
         ExitDialogFragment exit = new ExitDialogFragment(GameActivity.this);
         exit.setText(getResources().getString(R.string.msg_exit_session));
         exit.setIcon(getDrawable(R.drawable.answer));
-        say = robotHelper.say(getResources().getString(R.string.msg_exit_session) );
+        if(sayDescription != null){
+            sayDescription.cancel(true);
+        }
+        say = robotHelper.say(getResources().getString(R.string.msg_exit_session) ).thenConsume(future -> { //Verifico se c'e' un problema con l'esecuzione del future per l'ascolto
+            if (future.hasError()) {
+                Log.e("Pepper4RSA", "Error while speaking or listening: ", future.getError());
+            }
+        });
         exit.setListener(new onCLickListener() {
             @Override
             public void onClickExit() {
+                say.cancel(true);
                 Intent intent = new Intent(GameActivity.this, GameProfileActivity.class);
                 intent.putExtra("load_fragment", true);
                 intent.putExtra("idPaziente", String.valueOf(paziente.getId()));
@@ -178,8 +187,6 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
 
                 exit.dismiss();
                 finish();
-             //   loadExampleFragment();
-
             }
 
             @Override

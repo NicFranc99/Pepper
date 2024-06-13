@@ -174,7 +174,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         Globals.NowIsRunning = Globals.GameProfile;
         this.qiContext = qiContext;
         this.robotHelper.onRobotFocusGained(qiContext);
-        
+
         String idPaziente = intentFromGameActivity.getStringExtra("idPaziente");
 
         if(createSelectedFragment){

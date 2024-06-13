@@ -40,7 +40,7 @@ public class GameExplanationFragment extends Fragment {
         Persona.Game g = paziente.getEsercizi().get(position);
         TextView txtSpiegazione = v.findViewById(R.id.txt_spiegazione);
         txtSpiegazione.setText(g.getDescrizioneGioco());
-        Future<Void> sayDescription = gameActivity.getRobotHelper().say(g.getDescrizioneGioco());
+        gameActivity.sayDescription = gameActivity.getRobotHelper().say(g.getDescrizioneGioco());
         if (getContext().checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[] { Manifest.permission.RECORD_AUDIO }, 1);
         }
@@ -48,7 +48,7 @@ public class GameExplanationFragment extends Fragment {
         start = v.findViewById(R.id.start);
         start.requestFocus();
         start.setOnClickListener(v -> {
-            sayDescription.cancel(true); //TODO: Bisogna stoppare il say di pepper per andare avanti col tread!
+            gameActivity.sayDescription.cancel(true); //TODO: Bisogna stoppare il say di pepper per andare avanti col tread!
             AnswerDialogFragment start = new AnswerDialogFragment(getContext(), AnswerDialogFragment.typeDialog.START);
             start.show();
             start.setOnDismissListener(dialog -> {
