@@ -1,29 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_selection_game_mode_container"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:layout_marginTop="160dp">
+
 
     <Button
         android:id="@+id/game_mode_button_single"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Single Mode" />
+        android:layout_width="0dp"
+        android:layout_height="362dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/white"
+        android:drawableTop="@drawable/ic_icn_setupmode"
+        android:fontFamily="@font/verdanab"
+        android:text="@string/setup_mode_button"
+        android:textAllCaps="false"
+        android:textColor="@color/defaultcolor"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/game_mode_button_multy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.426" />
 
     <Button
         android:id="@+id/game_mode_button_multy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Multiplayer Mode" />
+        android:layout_width="0dp"
+        android:layout_height="362dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/white"
+        android:drawableTop="@drawable/ic_icn_setupmode"
+        android:fontFamily="@font/verdanab"
+        android:text="@string/setup_mode_button"
+        android:textAllCaps="false"
+        android:textColor="@color/defaultcolor"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/game_mode_button_single"
+        app:layout_constraintVertical_bias="0.426" />
 
-    <GridView
-        android:id="@+id/grid"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:numColumns="2"
-        android:visibility="gone" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

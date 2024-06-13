@@ -35,11 +35,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Integrato speech per fornire la risposta a pepper (solo giochi che prevedono anche i pulsanti per selezionare la risposta)">
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix quando si clicca il pulsante di exit dal gioco il robot ora chiede &quot;sei sicuro di voler uscire?&quot;.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/SelectionGameModeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/SelectionGameModeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_selection_game_mode.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_selection_game_mode.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718191173972</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fix quando si clicca il pulsante di exit dal gioco il robot ora chiede &quot;sei sicuro di voler uscire?&quot;.">
+      <created>1718270246578</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1718270246578</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -318,7 +327,8 @@
     <MESSAGE value="Fix fatte:&#10;- cliccando il pulsante del microfono il robot smette di spiegare la domanda.&#10;- Creato array random per risposte alla wrong answare dell'utente.&#10;- Gioco Fluenze fonologiche il robot risponde quando la risposta è corretta o sbagliata.&#10;- Fluenze verbali il robot risponde quando la risposta è sbagliata." />
     <MESSAGE value="Fix Fluenze fonologiche:&#10;- Quando l'utente fornisce la parola viene salvata in un array in modo da verificare se l'utente ha già fornito quella determinata parola (giusta o sbagliata che sia) fornendogli un feedback" />
     <MESSAGE value="Integrato speech per fornire la risposta a pepper (solo giochi che prevedono anche i pulsanti per selezionare la risposta)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Integrato speech per fornire la risposta a pepper (solo giochi che prevedono anche i pulsanti per selezionare la risposta)" />
+    <MESSAGE value="Fix quando si clicca il pulsante di exit dal gioco il robot ora chiede &quot;sei sicuro di voler uscire?&quot;." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix quando si clicca il pulsante di exit dal gioco il robot ora chiede &quot;sei sicuro di voler uscire?&quot;." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -347,6 +357,21 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PlaceholderFragmentGames.java</url>
           <line>168</line>
           <option name="timeStamp" value="408" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/SelectionGameModeFragment.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="421" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/SelectionGameModeFragment.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="423" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameActivity.java</url>
+          <line>149</line>
+          <option name="timeStamp" value="424" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

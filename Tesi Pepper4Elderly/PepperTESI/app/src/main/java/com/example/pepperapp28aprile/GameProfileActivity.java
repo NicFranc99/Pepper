@@ -122,12 +122,6 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         TitleView sectionInfoElder = (TitleView) findViewById(R.id.imgsenior);
         setElderlyImageByGender(sectionInfoElder);
         PeopleListAdapter.tornaNav = tornaNav;
-
-        intentFromGameActivity = getIntent();
-        createSelectedFragment = intentFromGameActivity.getBooleanExtra("load_fragment", false);
-
-        if(!createSelectedFragment)
-        setSelectedGameModeFragment(SelectionGameModeFragment.newInstance(idPaziente), SelectionGameModeFragment.FRAGMENT_TAG);
     }
 
     /**
@@ -143,7 +137,9 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
             sectionInfoElder.setBackground(ContextCompat.getDrawable(this, R.drawable.grandmother));
     }
 
-
+public QiContext getQiContext(){
+        return qiContext;
+}
     public void setPlaceHolderFragment(Fragment fragment, String fragmentTag) {
             FragmentManager fm = getSupportFragmentManager();
             fragment = fm.findFragmentByTag(fragmentTag);
@@ -175,11 +171,15 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         this.qiContext = qiContext;
         this.robotHelper.onRobotFocusGained(qiContext);
 
+        intentFromGameActivity = getIntent();
+        createSelectedFragment = intentFromGameActivity.getBooleanExtra("load_fragment", false);
         String idPaziente = intentFromGameActivity.getStringExtra("idPaziente");
 
-        if(createSelectedFragment){
+        if(!createSelectedFragment)
+            setSelectedGameModeFragment(SelectionGameModeFragment.newInstance(idPaziente), SelectionGameModeFragment.FRAGMENT_TAG);
+        else
             setPlaceHolderFragment(PlaceholderFragmentGames.newInstance(idPaziente),PlaceholderFragmentGames.FRAGMENT_TAG);
-        }
+
 
 
         // Create a new say action.

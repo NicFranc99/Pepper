@@ -68,7 +68,7 @@
         <entry key="app/src/main/res/layout/fragment_main_persone.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_navigation.xml" value="0.2932877297990594" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2932877297990594" />
-        <entry key="app/src/main/res/layout/fragment_selection_game_mode.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_selection_game_mode.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_set_mode.xml" value="0.4718969555035129" />
         <entry key="app/src/main/res/layout/game_list_grid.xml" value="0.22" />
         <entry key="app/src/main/res/layout/image_view_fragment.xml" value="0.2817443351859769" />

@@ -16,12 +16,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.example.pepperapp28aprile.map.RobotHelper;
+import com.example.pepperapp28aprile.utilities.Phrases;
+
 public class SelectionGameModeFragment extends Fragment {
 
     private static String idPaziente;
     private GridView gridView;
     public static String FRAGMENT_TAG = "SELECTION_GAME_MODE_FRAGMENT";
-
+    private QiContext qiContext;
+    private RobotHelper robotHelper;
     public SelectionGameModeFragment() {
         // Required empty public constructor
     }
@@ -51,6 +58,12 @@ public class SelectionGameModeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        GameProfileActivity activity = (GameProfileActivity)getActivity();
+
+        robotHelper = activity.getRobotHelper();
+        qiContext = activity.getQiContext();
+
         // Gonfia il layout principale
         View fragmentLayout = inflater.inflate(R.layout.fragment_selection_game_mode, container, false);
 
@@ -61,11 +74,13 @@ public class SelectionGameModeFragment extends Fragment {
         Button gameMode1Button = fragmentLayout.findViewById(R.id.game_mode_button_single);
         Button gameMode2Button = fragmentLayout.findViewById(R.id.game_mode_button_multy);
 
+        Future<Void> sayFuture = robotHelper.say(Phrases.selectGameMode);
+
         // Imposta il listener per il click del bottone per il Single Mode
         gameMode1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Single Mode Button Clicked", Toast.LENGTH_SHORT).show();
+                sayFuture.cancel(true);
                 GameProfileActivity gameProfileActivity = (GameProfileActivity)getActivity();
                 FragmentManager fragmentManager = gameProfileActivity.getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -88,8 +103,8 @@ public class SelectionGameModeFragment extends Fragment {
         gameMode2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sayFuture.cancel(true);
                 Toast.makeText(getActivity(), "Multiplayer Mode Button Clicked", Toast.LENGTH_SHORT).show();
-                gameMode1Button.setBackgroundColor(getResources().getColor(R.color.red));
             }
         });
 
