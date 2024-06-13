@@ -1,8 +1,11 @@
 package com.example.pepperapp28aprile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.icu.text.CaseMap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -102,7 +105,7 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
     public Future<Void> requestSay;
     public Future<String> listenFuture;
     private static final String TAG = "MSI_MainMenuFragment";
-    private boolean createSelectedFragment = false;
+    private boolean createSelectedFragment = true;
     private Intent intentFromGameActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,10 +175,10 @@ public QiContext getQiContext(){
         this.robotHelper.onRobotFocusGained(qiContext);
 
         intentFromGameActivity = getIntent();
-        createSelectedFragment = intentFromGameActivity.getBooleanExtra("load_fragment", false);
+        createSelectedFragment = intentFromGameActivity.getBooleanExtra("load_fragment", true);
         String idPaziente = intentFromGameActivity.getStringExtra("idPaziente");
 
-        if(!createSelectedFragment)
+        if(createSelectedFragment)
             setSelectedGameModeFragment(SelectionGameModeFragment.newInstance(idPaziente), SelectionGameModeFragment.FRAGMENT_TAG);
         else
             setPlaceHolderFragment(PlaceholderFragmentGames.newInstance(idPaziente),PlaceholderFragmentGames.FRAGMENT_TAG);

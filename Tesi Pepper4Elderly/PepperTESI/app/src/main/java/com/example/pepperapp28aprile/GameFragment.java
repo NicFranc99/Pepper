@@ -80,11 +80,20 @@ public class GameFragment extends Fragment{
     private Future<String> listenFuture;
     private String parolaDettaApepper;
     private RecyclerViewAnswersAdapter adapter;
+    private Persona paziente;
     /*public GameFragment(int positionGame, Persona.Game.TypeInputGame chose) {
         this.positionGame = positionGame;
         this.choseTypeInputGame = chose;
         risultatiManager = new RisultatiManager();
     } */
+
+    public GameFragment(Persona.Game game,Persona paziente) {
+        this.game = game;
+        //this.positiongame = positionGame; Se non serve vedere di togliere positionGame come parametro del construttore
+        risultatiManager = new RisultatiManager();
+        parolaDettaApepper = null;
+        this.paziente = paziente;
+    }
 
     public GameFragment(Persona.Game game,int positionGame) {
         this.game = game;
@@ -574,13 +583,18 @@ public class GameFragment extends Fragment{
                 positioslistclic.clear();
                 answerDialogFragment.setOnDismissListener(dialog -> {
                     if (lisaDomande.size() - 1 == positiongame) {
-                        risultatiManager.stopDomanda();
-                        risultatiManager.fineGioco();
-                        getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
-                                .commit();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
-                                .commit();
+                        if(!gameActivity.isMultyExecution) {
+                            risultatiManager.stopDomanda();
+                            risultatiManager.fineGioco();
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
+                                    .commit();
+                            getActivity().getSupportFragmentManager().beginTransaction()
+                                    .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                    .commit();
+                        }else{
+                            GameActivity gameActivity = new GameActivity();
+                            gameActivity.startGameActivity(paziente,paziente.getEsercizi().indexOf(game) + 1,getContext(),true);
+                        }
                     } else {
                         if (fragment != null) {
                             getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();

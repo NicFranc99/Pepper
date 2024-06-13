@@ -1,9 +1,12 @@
 package com.example.pepperapp28aprile;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +52,7 @@ import com.example.pepperapp28aprile.animations.Animations;
 import com.example.pepperapp28aprile.interfacedir.onCLickListener;
 import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.map.SaveFileHelper;
+import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.utilities.DataManager;
 import com.example.pepperapp28aprile.utilities.Util;
 
@@ -80,6 +84,7 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
     public Persona.Game.Domanda domanda;
     private Future<Void> say;
     public  Future<Void> sayDescription;
+    public boolean isMultyExecution;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +95,7 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
          eliminami = savedInstanceState;
        position = Util.getIntegerByIntent(getIntent(),"item");
        paziente = (Persona) Util.getObjectByItentKey(getIntent(),"paziente");
+        isMultyExecution = (boolean) Util.getObjectByItentKey(getIntent(),"isMultyExecution");
        game = paziente.getEsercizi().get(position);
 
         setTItleUi();
@@ -144,6 +150,18 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
 
     }
 
+    //Metodo da utilizizzare fuori per creare questa activity (viene usato dalla listAdapter)
+    public void startGameActivity(Persona paziente,int position, Context context, boolean isMultyExecution) {
+        Persona.Game game = paziente.getEsercizi().get(position);
+        Intent gameActivity = new Intent(context, GameActivity.class);
+        gameActivity.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        Categoria category = new Categoria(game,position);
+        gameActivity.putExtra("item", category.getPosition());
+        gameActivity.putExtra("paziente",paziente);
+        gameActivity.putExtra("isMultyExecution",isMultyExecution);
+        context.startActivity(gameActivity);
+    }
+
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
         // Create a new say action.
@@ -180,10 +198,10 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
             @Override
             public void onClickExit() {
                 say.cancel(true);
-                Intent intent = new Intent(GameActivity.this, GameProfileActivity.class);
-                intent.putExtra("load_fragment", true);
-                intent.putExtra("idPaziente", String.valueOf(paziente.getId()));
-                startActivity(intent);
+                    Intent intent = new Intent(GameActivity.this, GameProfileActivity.class);
+                    intent.putExtra("load_fragment", isMultyExecution);
+                    intent.putExtra("idPaziente", String.valueOf(paziente.getId()));
+                    startActivity(intent);
 
                 exit.dismiss();
                 finish();
@@ -202,23 +220,6 @@ public class GameActivity extends RobotActivity implements RobotLifecycleCallbac
     public void onPause() {
         super.onPause();
         finish();
-    }
-
-    public void loadExampleFragment() {
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        Fragment currentFragment = fragmentManager.findFragmentByTag(SelectionGameModeFragment.FRAGMENT_TAG);
-
-// Nascondi il fragment corrente se è presente
-        if (currentFragment != null) {
-            fragmentTransaction.hide(currentFragment);
-        }
-
-        fragmentTransaction.replace(R.id.container_game_com,  PlaceholderFragmentGames.newInstance(String.valueOf(paziente.getId())), PlaceholderFragmentGames.FRAGMENT_TAG);
-
-        fragmentTransaction.addToBackStack(PlaceholderFragmentGames.FRAGMENT_TAG);
-        fragmentTransaction.commit();
     }
 
     @Override

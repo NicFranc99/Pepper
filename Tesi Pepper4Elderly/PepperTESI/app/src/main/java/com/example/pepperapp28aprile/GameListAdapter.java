@@ -128,25 +128,11 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
                 //we will call this method to remove the selected value from the list
                 //we are passing the position which is to be removed in the method
                 Intent game = new Intent(getContext(), GameActivity.class);
-                startGameActivity(view,paziente.getEsercizi().get(position),position);
+                GameActivity gameActivity = new GameActivity();
+                gameActivity.startGameActivity(paziente,position,getContext(),false);
             }
         });
 
         return view;
     }
-
-    public void startGameActivity(View view,Persona.Game game,int position) {
-        WebActivity.tornaNav = tornaNav;
-        Intent gameActivity = new Intent(this.getContext(), GameActivity.class);
-        gameActivity.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        Categoria category = new Categoria(game,position);
-        gameActivity.putExtra("item", category.getPosition());
-        gameActivity.putExtra("paziente",paziente);
-        context.startActivity(gameActivity);
-    }
-
-
-
-
-
 }

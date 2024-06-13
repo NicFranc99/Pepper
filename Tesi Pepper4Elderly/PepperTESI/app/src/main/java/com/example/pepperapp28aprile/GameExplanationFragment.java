@@ -78,7 +78,7 @@ public class GameExplanationFragment extends Fragment {
                     
                   */
                    getActivity().getSupportFragmentManager().beginTransaction()
-                           .add(container.getId(), new GameFragment(g,position)).commit();
+                           .add(container.getId(), new GameFragment(g,paziente)).commit();
                 }
             });
         });

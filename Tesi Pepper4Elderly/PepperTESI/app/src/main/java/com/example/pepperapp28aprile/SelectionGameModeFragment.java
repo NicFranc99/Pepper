@@ -20,6 +20,8 @@ import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.example.pepperapp28aprile.map.RobotHelper;
+import com.example.pepperapp28aprile.models.Categoria;
+import com.example.pepperapp28aprile.utilities.DataManager;
 import com.example.pepperapp28aprile.utilities.Phrases;
 
 public class SelectionGameModeFragment extends Fragment {
@@ -105,11 +107,32 @@ public class SelectionGameModeFragment extends Fragment {
             public void onClick(View view) {
                 sayFuture.cancel(true);
                 Toast.makeText(getActivity(), "Multiplayer Mode Button Clicked", Toast.LENGTH_SHORT).show();
+                getPazienteById(idPaziente);
             }
         });
 
         // Restituisci il layout principale
         return fragmentLayout;
+    }
+
+    private void getPazienteById(String idPaziente){
+        new DataManager(this.getContext(),"pazienti",idPaziente,new DataManager.onDownloadDataListener() {
+            @Override
+            public void onDataSuccess(Persona paziente) {
+                Intent game = new Intent(getContext(), GameActivity.class);
+                GameActivity gameActivity = new GameActivity();
+                gameActivity.startGameActivity(paziente,0,getContext(),true);
+            }
+
+            @Override
+            public void onDataFailed() {
+            }
+
+            @Override
+            public void notFoundUser() {
+
+            }
+        });
     }
 
 
