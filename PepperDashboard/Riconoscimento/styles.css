@@ -1,0 +1,130 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("../img/background/background_web-site.jpg");
+    min-height:100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+}
+
+.maintitle{
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    display: block;
+    position: absolute;
+    background-color: #30ACEC;
+    color: #1577A8;
+   margin: 0;
+   padding: 5px;
+}
+
+img {
+	z-index: 1;
+}
+
+.downtitle{
+    bottom: 0;
+    width: 60%;
+	height: 50px;
+	font-size: 20px;
+    left: 20%;
+    right: 20%;
+    z-index: 2;
+    display: block;
+    position: absolute;
+    background-color: #30ACEC;
+    color: #1577A8;
+   margin: 0;
+   padding: 5px;
+}
+
+.downtitle2{
+    bottom: 70;
+    width: 60%;
+	height: 50px;
+	font-size: 20px;
+    left: 20%;
+    right: 20%;
+    z-index: 2;
+    display: block;
+    position: absolute;
+    background-color: #30ACEC;
+    color: #1577A8;
+   margin: 0;
+   padding: 5px;
+
+}
+
+
+.entry-modal{
+    border: 1px solid #30ACEC;
+    width: 300px;
+    margin: auto;
+    z-index: 9999;
+    position: absolute;
+    left: 50%;
+    top: 70;
+    margin-left: -150px;
+    padding: 5px;
+    color: #1577A8;
+    background-color: #30ACEC;
+    text-align: center;
+}
+
+#notification{
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    top: 0;
+    font-size: 18pt;
+    width: 100%;
+    background-color: orange;
+}
+
+
+.room-input{
+  border: none;
+  padding:5px;
+}
+
+button{
+    margin: 3px;
+    padding: 5px;
+}
+
+.rect {
+position: absolute;
+bottom: 20px;
+width: 180px;
+height: 320px;
+border: 4px solid red;
+z-index: 1;
+box-sizing: border-box;
+}
+
+.meet-area {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: calc(calc(100% - 480px)/2);
+	left: calc(calc(100% - 640px)/2);
+}
+
+p {
+	position: absolute;
+	top: calc(calc(100% - 480px)/2 - 55px);
+	left: calc(calc(100% - 640px)/2);
+	padding: 5px;
+	border: 2px solid red;
+}
+
+video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}

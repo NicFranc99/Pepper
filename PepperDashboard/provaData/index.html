@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Include the P2P library -->
+    <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+
+    <style>
+    html, body {
+        padding: 30px;
+        margin: 0px;
+        font-size: 1.2em;
+    }
+    </style>
+</head>
+<body>
+    <h1>P2P Connection Establishment Example</h1>
+    <p>Open the web inspector, and click the Console tab to see results.</p>
+
+    <!-- Use PeerJS API -->
+    <script>
+
+var oReq = new XMLHttpRequest();
+oReq.open("GET", "/myfile.webm", true);
+oReq.responseType = "blob";
+
+oReq.onload = function(oEvent) {
+  var blob = oReq.response;
+  // ...
+};
+
+oReq.send();
+
+    </script>
+</body>
+</html>

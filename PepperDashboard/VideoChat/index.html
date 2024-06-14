@@ -1,0 +1,127 @@
+<html>
+
+    <head>
+        <title>Better Call Pepper</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>	
+		<h1 class="maintitle" id="maintitle">Better Call Pepper</h1>
+		<button class="downtitle" onClick="document.location.href='http://exitme';".>Chiudi</button>
+		
+    <body>		
+        <p id="notification" hidden></p>
+        <div class="meet-area">
+            <!-- Remote Video Element-->
+            <video id="remote-video"></video>
+			
+			
+            <!-- Local Video Element-->
+            <video id="local-video"></video>
+			<audio id="audio-video"></audio>
+        </div>
+    </body>
+	
+    
+	<script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+	<script type="text/javascript">
+	
+	//document.getElementById("maintitle").innerHTML = "Better Call Pepper - " + window.location.href;
+	
+	if(getq("mode") == "j")
+        joinRoom();
+    else
+       	if(getq("mode") == "c")
+          	createRoom();
+    	else
+           	document.write('Error');
+			
+	var room_id;
+	var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+	var local_stream;
+	
+	function getq(name) {
+		let params = new URLSearchParams(window.location.search);
+		return params.get(name);
+	}
+	
+	function createRoom(){
+		console.log("Creating Room");
+		let room = getq("room");
+		//document.getElementById("maintitle").innerHTML = "Better Call Pepper  " //+ "room: " + room//;
+		if(room == " " || room == "")   {
+			alert("Please enter room number")
+			return;
+		}
+		room_id = room;
+		let peer = new Peer(room_id)
+		peer.on('open', (id)=>{
+			console.log("Peer Connected with ID: ", id)
+			getUserMedia({video: true, audio: true}, (stream)=>{
+				local_stream = stream;
+				setLocalStream(local_stream)
+			},(err)=>{
+				console.log(err)
+			})
+			//notify("Waiting for peer to join.")
+		})
+		peer.on('call',(call)=>{
+			call.answer(local_stream);
+			call.on('stream',(stream)=>{
+				setRemoteStream(stream)
+			})
+		})
+	}
+    
+
+	function setLocalStream(stream){
+		
+		let video = document.getElementById("local-video");
+		video.srcObject = stream;
+		video.muted = true;
+		video.play();
+	}
+	function setRemoteStream(stream){
+	   
+		let video = document.getElementById("remote-video");
+		video.srcObject = stream;
+		video.play();
+	}
+    
+/*
+	function notify(msg){
+		let notification = document.getElementById("notification")
+		notification.innerHTML = msg
+		notification.hidden = false
+		setTimeout(()=>{
+			notification.hidden = true;
+		}, 3000)
+	}
+*/
+	function joinRoom(){
+		console.log("Joining Room")
+		let room = getq("room")
+		if(room == " " || room == "")   {
+			alert("Please enter room number")
+			return;
+		}
+		room_id = room;
+		document.getElementById("maintitle").innerHTML = "Better Call Pepper - " + room;
+		let peer = new Peer()
+		peer.on('open', (id)=>{
+			console.log("Connected with Id: "+id)
+			getUserMedia({video: true, audio: true}, (stream)=>{
+				local_stream = stream;
+				setLocalStream(local_stream)
+				//notify("Joining peer")
+				let call = peer.call(room_id, stream)
+				call.on('stream', (stream)=>{
+					setRemoteStream(stream);
+				})
+			}, (err)=>{
+				console.log(err)
+			})
+
+		})
+	}
+   	</script>
+
+</html>

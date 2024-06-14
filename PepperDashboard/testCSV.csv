@@ -1,0 +1,12 @@
+INDIRIZZO;;test
+test_puntoevirgola;;"ciao;sds"
+test_doppioapice;;"""ciao""ciao"""
+test_singoloapice;;ciao'ciao'
+test_spazio;;ciao ciao
+test_number;;3456
+test_date;;23/02/2000
+test_dollaro;;ciao$
+test_copyright;;©
+test_text;;ciao
+test_excpoint;;ciao!
+test_intpoint;;ciao?

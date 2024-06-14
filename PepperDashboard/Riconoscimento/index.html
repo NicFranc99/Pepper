@@ -1,0 +1,57 @@
+<html>
+
+    <head>
+        <title>Better Call Pepper</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <!--<h1 class="maintitle" id="maintitle">Better Call Pepper</h1>-->
+		<button class="downtitle" onClick="document.location.href='http://exit2me';">Chiudi</button>
+		<button class="downtitle2" onClick="screenshot();">Ok</button>
+		
+		
+        <p id="notification" hidden></p>
+		<canvas id="canvas" width="640" height="480"></canvas>
+        <div class="meet-area">
+			<div class="rect"></div>
+            <!-- Local Video Element-->
+            <video id="local-video"></video>
+        </div>
+		<p>Inserire il volto nel rettangolo rosso!</p>
+		
+    </body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.3.2/peerjs.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+	var video = document.getElementById("local-video");
+	
+	getUserMedia({video: true}, (stream)=>{
+				video.srcObject = stream;
+				video.muted = true;
+				video.play();
+			},(err)=>{
+				console.log(err)
+				})
+	
+	function screenshot()
+	{
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+		var dataURI = canvas.toDataURL('image/png');
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		var http = new XMLHttpRequest();
+		var url = 'savetoserver.php';
+		var params = 'img=' + dataURI;
+		http.open('POST', url, true);
+		http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		http.send(params);
+		document.location.href='http://exitme';
+	}
+	
+	
+   	</script>
+
+</html>
