@@ -6,9 +6,6 @@ error_reporting(E_ALL);
 include 'functions.php';
 session_start();
 
-if (!extension_loaded('mysqli')) {
-    die('Estensione mysqli non caricata. Verifica la configurazione PHP.');
-}
 if(isset($_POST['username']))
 {
 	$conn = db_connect();
