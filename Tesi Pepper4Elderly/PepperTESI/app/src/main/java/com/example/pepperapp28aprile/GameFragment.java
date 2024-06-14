@@ -592,8 +592,17 @@ public class GameFragment extends Fragment{
                                     .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
                                     .commit();
                         }else{
-                            GameActivity gameActivity = new GameActivity();
-                            gameActivity.startGameActivity(paziente,paziente.getEsercizi().indexOf(game) + 1,getContext(),true);
+                            //Se ci sono ancora giochi a cui giocare e da iterare gioca
+                            if(positiongame != paziente.getEsercizi().size()){
+                                GameActivity gameActivity = new GameActivity();
+                                gameActivity.startGameActivity(paziente,paziente.getEsercizi().indexOf(game) + 1,getContext(),true);
+                            }else{ //altrimenti si ritorno nella scermata di selezione del game mode //TODO: lavorare in questo else se si vuole visualizzare i risultati di tutti i giochi alla fine di tutta l'iterazione
+
+                                Intent intent = new Intent(getContext(), GameProfileActivity.class);
+                                intent.putExtra("load_fragment", true);
+                                intent.putExtra("idPaziente", String.valueOf(paziente.getId()));
+                                startActivity(intent);
+                            }
                         }
                     } else {
                         if (fragment != null) {

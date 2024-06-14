@@ -35,16 +35,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Aggiunto frase per che il robot dice all'utente nella schermata di selezione della modalita' di gioco">
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix fine iterazione della modalita' multipla di gioco, una volta terminati tutti i giochi assegnati dall'operatore si ritorna alla schermata di selezione della modalita' di gioco">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/SelectionGameModeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/SelectionGameModeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718273025637</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="WIP: Implementata selezione doppia di gioco.&#10;Definita logica per giocare ai giochi definiti dall'operore in maniera iterata fino alla fine.">
+      <created>1718291705905</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718291705905</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -339,7 +339,9 @@
     <MESSAGE value="Integrato speech per fornire la risposta a pepper (solo giochi che prevedono anche i pulsanti per selezionare la risposta)" />
     <MESSAGE value="Fix quando si clicca il pulsante di exit dal gioco il robot ora chiede &quot;sei sicuro di voler uscire?&quot;." />
     <MESSAGE value="Aggiunto frase per che il robot dice all'utente nella schermata di selezione della modalita' di gioco" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunto frase per che il robot dice all'utente nella schermata di selezione della modalita' di gioco" />
+    <MESSAGE value="WIP: Implementata selezione doppia di gioco.&#10;Definita logica per giocare ai giochi definiti dall'operore in maniera iterata fino alla fine." />
+    <MESSAGE value="Fix fine iterazione della modalita' multipla di gioco, una volta terminati tutti i giochi assegnati dall'operatore si ritorna alla schermata di selezione della modalita' di gioco" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix fine iterazione della modalita' multipla di gioco, una volta terminati tutti i giochi assegnati dall'operatore si ritorna alla schermata di selezione della modalita' di gioco" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -356,7 +358,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>669</line>
+          <line>678</line>
           <option name="timeStamp" value="273" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
@@ -371,7 +373,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>889</line>
+          <line>898</line>
           <option name="timeStamp" value="432" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
@@ -385,14 +387,24 @@
           <option name="timeStamp" value="434" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>595</line>
-          <option name="timeStamp" value="435" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/SelectionGameModeFragment.java</url>
+          <line>123</line>
+          <option name="timeStamp" value="443" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/SelectionGameModeFragment.java</url>
-          <line>118</line>
-          <option name="timeStamp" value="441" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>600</line>
+          <option name="timeStamp" value="444" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameProfileActivity.java</url>
+          <line>172</line>
+          <option name="timeStamp" value="446" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>595</line>
+          <option name="timeStamp" value="447" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
