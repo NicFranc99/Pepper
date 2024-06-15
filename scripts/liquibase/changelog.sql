@@ -270,6 +270,7 @@ INSERT INTO `my_bettercallpepper`.`Calls` (`id`, `parID`, `eldID`, `type`, `isAc
 CREATE TABLE `my_bettercallpepper`.`Categories` (
   `id_category` int(11) NOT NULL,
   `name_category` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `description_explaitation_category` text NOT NULL,
   PRIMARY KEY (`id_category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -277,21 +278,21 @@ CREATE TABLE `my_bettercallpepper`.`Categories` (
 -- Dump dei dati per la tabella `Categories`
 --
 
-INSERT INTO `my_bettercallpepper`.`Categories` (`id_category`, `name_category`) VALUES
-(1, 'appartenenza'),
-(2, 'categorizzazione'),
-(3, 'combinazionilettere'),
-(4, 'esistenzaparole'),
-(5, 'finaliparole'),
-(6, 'fluenzefonologiche'),
-(7, 'fluenzesemantiche'),
-(8, 'fluenzeverbali'),
-(9, 'immaginiEparole'),
-(10, 'letteremancanti'),
-(11, 'mesi'),
-(12, 'musica'),
-(13, 'racconti'),
-(14, 'volti');
+INSERT INTO `my_bettercallpepper`.`Categories` (`id_category`, `name_category`,`description_explaitation_category`) VALUES
+(1, 'appartenenza', 'In questo esercizio ti mostreremo di volta in volta una parola, dovrai indicare se la parola appartiene o meno alla categoria appartenenza.'),
+(2, 'categorizzazione', 'In questo esercizio ti mostreremo  un nome di una persona o un oggetto, e 4 opzioni che indicano diverse categorie, dovrai indicare a quale categoria appartiene la parola.'),
+(3, 'combinazionilettere', "Durante l'esercizio di combinazioni lettere  dovrai cercare di formare il maggior numero di parole con le lettere presentate."),
+(4, 'esistenzaparole', "Durante questo esercizio ti sará mostrata una parola, dovrai dirci se quella parola ESISTE oppure NON ESISTE."),
+(5, 'finaliparole', "L' esercizio di finali parole consiste nel presentarti l'inizio di una parola, e tu dovrai dirmi come termina ad esempio “diva” sarà l'inizio della parola “divano” oppure “divario”."),
+(6, 'fluenzefonologiche', "In questo gioco ti sará mostrata una lettera, tu dovrai indicare quante piú parole che ti vengono in mente che iniziano con quella lettera."),
+(7, 'fluenzesemantiche', "In questo gioco ti mostreremo una categoria e dovrai indicare quante piú parole possibili che ti vengono in mente inerente alla categoria mostrata."),
+(8, 'fluenzeverbali', "In questo esercizio ti verra mostrata di volta in volta una categoria, dovrai indicare quante piú parole ti vengono in mente inerente a quella categoria."),
+(9, 'immaginiEparole', "In questo gioco ti verrano mostrate 4 immagini, e una parola mancante, dovrai indovinare la parola mancante che associa le 4 immagini."),
+(10, 'letteremancanti', "In questo gioco ti verrano mostrate delle parole con delle lettere mancanti ed una categoria di riferimento, dovrai indicare quali sono le lettere mancanti."),
+(11, 'mesi', "In questo gioco ci saranno mesi dell'anno disposti casualmente, il tuo compito sará ordinarli in maniera corretta."),
+(12, 'musica', "Con il gioco musica ti faremo ascoltare 30 secondi di una canzone, il tuo compito sará riconoscere chi é l'autore di quella canzone tra le opzioni mostrate."),
+(13, 'racconti', "In questo esercizio ti racconteremo una breve storia, e una volta terminata ti faremo delle domande inerenti al racconto e dovrai rispondere."),
+(14, 'volti', "Ti mostreremo dei volti, il tuo compito sará riconoscere il personaggio e selezionare il nome corretto tra le varie risposte.");
 
 -- --------------------------------------------------------
 
@@ -369,7 +370,7 @@ CREATE TABLE `my_bettercallpepper`.`Games` (
   `name_game` varchar(32) NOT NULL,
   `risposte` json DEFAULT NULL COMMENT 'struttura {["pippo","pluto"]}. Json che rappresenta array di tutte le risposte possibili del gioco',
   `risposta_corretta` varchar(100) DEFAULT NULL COMMENT 'risposta corretta del gioco. Puo'' essere campo opzionale nel caso in cui trattiamo un gioco in cui l''input dell''utente e'' vocale e possiamo accettare piu'' di una parola corretta.',
-  `description_game` text NOT NULL COMMENT 'Campo utilizzato per rappresentare una descrizione da mostrare al paziente.',
+  `domanda` text NOT NULL COMMENT 'Domanda del gioco',
   PRIMARY KEY (`id_game`),
    FOREIGN KEY (`id_category`) REFERENCES Categories(`id_category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
