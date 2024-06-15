@@ -1,4 +1,4 @@
---liquibase formatted sql
+-- liquibase formatted sql
 
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
@@ -9,46 +9,36 @@
 -- Versione del server: 8.0.26
 -- Versione PHP: 8.0.22
 
---changeset n.francavilla:start_up
+-- changeset n.francavilla:start_up
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `my_bettercallpepper`
 --
 CREATE DATABASE IF NOT EXISTS `my_bettercallpepper`;
-USE `my_bettercallpepper`;
-
 -- --------------------------------------------------------
 
 --
 -- Struttura della tabella `Calls`
 --
 
-CREATE TABLE `Calls` (
-  `id` int NOT NULL,
-  `parID` int NOT NULL,
-  `eldID` int NOT NULL,
+CREATE TABLE `my_bettercallpepper`.`Calls` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parID` int(11) NOT NULL,
+  `eldID` int(11) NOT NULL,
   `type` char(1) NOT NULL,
   `isActive` char(1) NOT NULL,
-  `created_at` timestamp NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ended_at` timestamp NULL DEFAULT NULL,
-  `isApproved` char(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `isApproved` char(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=354 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Calls`
 --
 
-INSERT INTO `Calls` (`id`, `parID`, `eldID`, `type`, `isActive`, `created_at`, `ended_at`, `isApproved`) VALUES
+INSERT INTO `my_bettercallpepper`.`Calls` (`id`, `parID`, `eldID`, `type`, `isActive`, `created_at`, `ended_at`, `isApproved`) VALUES
 (160, 1, 1, '0', '0', '2021-05-13 13:07:10', '2021-05-13 13:07:57', '1'),
 (159, 1, 1, '0', '0', '2021-05-13 13:01:02', '2021-05-13 13:02:21', '1'),
 (158, 1, 1, '0', '0', '2021-05-13 13:00:11', '2021-05-13 13:00:39', '1'),
@@ -277,16 +267,17 @@ INSERT INTO `Calls` (`id`, `parID`, `eldID`, `type`, `isActive`, `created_at`, `
 -- Struttura della tabella `Categories`
 --
 
-CREATE TABLE `Categories` (
-  `id_category` int NOT NULL,
-  `name_category` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+CREATE TABLE `my_bettercallpepper`.`Categories` (
+  `id_category` int(11) NOT NULL,
+  `name_category` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`id_category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Categories`
 --
 
-INSERT INTO `Categories` (`id_category`, `name_category`) VALUES
+INSERT INTO `my_bettercallpepper`.`Categories` (`id_category`, `name_category`) VALUES
 (1, 'appartenenza'),
 (2, 'categorizzazione'),
 (3, 'combinazionilettere'),
@@ -308,20 +299,21 @@ INSERT INTO `Categories` (`id_category`, `name_category`) VALUES
 -- Struttura della tabella `Contacts`
 --
 
-CREATE TABLE `Contacts` (
-  `id` int NOT NULL,
+CREATE TABLE `my_bettercallpepper`.`Contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `surname` varchar(25) NOT NULL,
   `propic` varchar(100) NOT NULL,
   `gender` char(1) NOT NULL,
-  `elderID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `elderID` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Contacts`
 --
 
-INSERT INTO `Contacts` (`id`, `name`, `surname`, `propic`, `gender`, `elderID`) VALUES
+INSERT INTO `my_bettercallpepper`.`Contacts` (`id`, `name`, `surname`, `propic`, `gender`, `elderID`) VALUES
 (1, 'Mario', 'Balotelli', 'mario_balotelli.jpeg', '1', 1),
 (2, 'Nicola', 'Di Liddo', 'nicola_diliddo.png', '1', 2),
 (3, 'Nicola', 'Di Liddo', 'nicola_diliddo.png', '1', 1),
@@ -338,28 +330,29 @@ INSERT INTO `Contacts` (`id`, `name`, `surname`, `propic`, `gender`, `elderID`) 
 -- Struttura della tabella `Elderlies`
 --
 
-CREATE TABLE `Elderlies` (
-  `id` int NOT NULL,
+CREATE TABLE `my_bettercallpepper`.`Elderlies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `surname` varchar(25) NOT NULL,
   `birth` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `place` varchar(30) NOT NULL,
   `prov` varchar(5) NOT NULL,
-  `status` int NOT NULL DEFAULT '1',
+  `status` int(11) NOT NULL DEFAULT '1',
   `propic` varchar(100) NOT NULL,
   `gender` char(1) NOT NULL,
-  `room` int NOT NULL,
+  `room` int(11) NOT NULL,
   `pulsante` char(1) NOT NULL DEFAULT '0',
-  `pepper_impegnato` int NOT NULL DEFAULT '0',
-  `pepper_go` int NOT NULL DEFAULT '0',
-  `richiesta_operatore` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `pepper_impegnato` int(11) NOT NULL DEFAULT '0',
+  `pepper_go` int(11) NOT NULL DEFAULT '0',
+  `richiesta_operatore` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Elderlies`
 --
 
-INSERT INTO `Elderlies` (`id`, `name`, `surname`, `birth`, `place`, `prov`, `status`, `propic`, `gender`, `room`, `pulsante`, `pepper_impegnato`, `pepper_go`, `richiesta_operatore`) VALUES
+INSERT INTO `my_bettercallpepper`.`Elderlies` (`id`, `name`, `surname`, `birth`, `place`, `prov`, `status`, `propic`, `gender`, `room`, `pulsante`, `pepper_impegnato`, `pepper_go`, `richiesta_operatore`) VALUES
 (1, 'Tina', 'De Gennaro', '1960-04-25 00:00:00', 'Molfetta', 'BA', 1, 'tina_degennaro.png', '2', 1, '0', 0, 0, NULL),
 (2, 'Michele', 'Annese', '1961-01-11 00:00:00', 'Giovinazzo', 'BA', 1, 'michele_annese.png', '1', 2, '0', 0, 0, NULL),
 (3, 'Maurizio', 'De Biase', '1972-05-22 00:00:00', 'Napoli', 'NA', 1, 'maurizio_de_biase.png', '1', 3, '0', 0, 0, NULL);
@@ -367,27 +360,38 @@ INSERT INTO `Elderlies` (`id`, `name`, `surname`, `birth`, `place`, `prov`, `sta
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `GameResults`
+-- Struttura della tabella `Games`
 --
 
-CREATE TABLE `GameResults` (
-  `id_elderly` int NOT NULL,
-  `id_game` int NOT NULL,
-  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `score` int NOT NULL
+CREATE TABLE `my_bettercallpepper`.`Games` (
+  `id_game` int(11) NOT NULL,
+  `id_category` int(11) NOT NULL,
+  `name_game` varchar(32) NOT NULL,
+  `risposte` json DEFAULT NULL COMMENT 'struttura {["pippo","pluto"]}. Json che rappresenta array di tutte le risposte possibili del gioco',
+  `risposta_corretta` varchar(100) DEFAULT NULL COMMENT 'risposta corretta del gioco. Puo'' essere campo opzionale nel caso in cui trattiamo un gioco in cui l''input dell''utente e'' vocale e possiamo accettare piu'' di una parola corretta.',
+  `description_game` text NOT NULL COMMENT 'Campo utilizzato per rappresentare una descrizione da mostrare al paziente.',
+  PRIMARY KEY (`id_game`),
+   FOREIGN KEY (`id_category`) REFERENCES Categories(`id_category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
+
 --
--- Struttura della tabella `Games`
+-- Struttura della tabella `GameResults`
 --
 
-CREATE TABLE `Games` (
-  `id_game` int NOT NULL,
-  `id_category` int NOT NULL,
-  `name_game` varchar(32) NOT NULL
+CREATE TABLE `my_bettercallpepper`.`GameResults` (
+  `id_result` int(11) NOT NULL,
+  `id_elderly` int(11) NOT NULL,
+  `id_game` int(11) NOT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `score` int(11) NOT NULL,
+   PRIMARY KEY (`id_result`),
+   FOREIGN KEY (`id_elderly`) REFERENCES Elderlies(`id`),
+   FOREIGN KEY (`id_game`) REFERENCES Games(`id_game`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- --------------------------------------------------------
 
@@ -395,21 +399,22 @@ CREATE TABLE `Games` (
 -- Struttura della tabella `Pepper_call`
 --
 
-CREATE TABLE `Pepper_call` (
-  `id` int NOT NULL,
+CREATE TABLE `my_bettercallpepper`.`Pepper_call` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `surname` varchar(25) NOT NULL,
   `filename` varchar(100) NOT NULL,
-  `room` int NOT NULL,
-  `type` int NOT NULL,
-  `created_at` timestamp NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `room` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Pepper_call`
 --
 
-INSERT INTO `Pepper_call` (`id`, `name`, `surname`, `filename`, `room`, `type`, `created_at`) VALUES
+INSERT INTO `my_bettercallpepper`.`Pepper_call` (`id`, `name`, `surname`, `filename`, `room`, `type`, `created_at`) VALUES
 (47, 'Tina', 'De Gennaro', 'tina_degennaro.png', 1, 0, '2021-06-17 14:18:27'),
 (46, 'Tina', 'De Gennaro', 'tina_degennaro.png', 1, 0, '2021-06-17 14:18:00');
 
@@ -419,9 +424,9 @@ INSERT INTO `Pepper_call` (`id`, `name`, `surname`, `filename`, `room`, `type`, 
 -- Struttura della tabella `Questionario`
 --
 
-CREATE TABLE `Questionario` (
-  `eroom` int NOT NULL,
-  `effettuato` int NOT NULL DEFAULT '1',
+CREATE TABLE `my_bettercallpepper`.`Questionario` (
+  `eroom` int(11) NOT NULL,
+  `effettuato` int(11) NOT NULL DEFAULT '1',
   `ename` varchar(25) NOT NULL,
   `esurname` varchar(25) NOT NULL,
   `domanda1` varchar(30) NOT NULL,
@@ -433,14 +438,15 @@ CREATE TABLE `Questionario` (
   `domanda7` varchar(30) NOT NULL,
   `domanda8` varchar(30) NOT NULL,
   `domanda9` varchar(30) NOT NULL,
-  `domanda10` varchar(30) NOT NULL
+  `domanda10` varchar(30) NOT NULL,
+  PRIMARY KEY (`eroom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Questionario`
 --
 
-INSERT INTO `Questionario` (`eroom`, `effettuato`, `ename`, `esurname`, `domanda1`, `domanda2`, `domanda3`, `domanda4`, `domanda5`, `domanda6`, `domanda7`, `domanda8`, `domanda9`, `domanda10`) VALUES
+INSERT INTO `my_bettercallpepper`.`Questionario` (`eroom`, `effettuato`, `ename`, `esurname`, `domanda1`, `domanda2`, `domanda3`, `domanda4`, `domanda5`, `domanda6`, `domanda7`, `domanda8`, `domanda9`, `domanda10`) VALUES
 (1, 0, 'Tina', 'De_Gennaro', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'),
 (3, 0, 'Maurizio', 'De_Biase', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'),
 (2, 0, 'Michele', 'Annese', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_');
@@ -451,22 +457,23 @@ INSERT INTO `Questionario` (`eroom`, `effettuato`, `ename`, `esurname`, `domanda
 -- Struttura della tabella `Users`
 --
 
-CREATE TABLE `Users` (
+CREATE TABLE `my_bettercallpepper`.`Users` (
   `mail` varchar(50) NOT NULL,
   `fullname` varchar(20) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `propic` varchar(50) NOT NULL,
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `isAdmin` char(1) NOT NULL,
-  `actualid` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `actualid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Users`
 --
 
-INSERT INTO `Users` (`mail`, `fullname`, `username`, `password`, `propic`, `id`, `isAdmin`, `actualid`) VALUES
+INSERT INTO `my_bettercallpepper`.`Users` (`mail`, `fullname`, `username`, `password`, `propic`, `id`, `isAdmin`, `actualid`) VALUES
 ('adminmail@mail.com', 'System Administrator', 'admin', 'adminadmin', 'admin.jpg', 1, '1', 0),
 ('mario@balo.it', 'Mario Balotelli', 'mario', 'mario', 'mario_balotelli.png', 2, '0', 1),
 ('andreadegennaro@gmail.com', 'Andrea De Gennaro', 'Andrea', 'ciaomondo', 'andrea_de gennaro.png', 3, '0', 4),
@@ -481,92 +488,36 @@ INSERT INTO `Users` (`mail`, `fullname`, `username`, `password`, `propic`, `id`,
 ('ciao@mondo.it', 'Ciao Mondo', 'Ciao', 'adasfas', 'ciao_mondo.jpg', 19, '0', 18);
 
 --
--- Indici per le tabelle scaricate
---
-
---
--- Indici per le tabelle `Calls`
---
-ALTER TABLE `Calls`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `Categories`
---
-ALTER TABLE `Categories`
-  ADD PRIMARY KEY (`id_category`);
-
---
--- Indici per le tabelle `Contacts`
---
-ALTER TABLE `Contacts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `Elderlies`
---
-ALTER TABLE `Elderlies`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `Games`
---
-ALTER TABLE `Games`
-  ADD PRIMARY KEY (`id_game`);
-
---
--- Indici per le tabelle `Pepper_call`
---
-ALTER TABLE `Pepper_call`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `Questionario`
---
-ALTER TABLE `Questionario`
-  ADD PRIMARY KEY (`eroom`);
-
---
--- Indici per le tabelle `Users`
---
-ALTER TABLE `Users`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
 -- AUTO_INCREMENT per la tabella `Calls`
 --
-ALTER TABLE `Calls`
+ALTER TABLE `my_bettercallpepper`.`Calls`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=354;
 
 --
 -- AUTO_INCREMENT per la tabella `Contacts`
 --
-ALTER TABLE `Contacts`
+ALTER TABLE `my_bettercallpepper`.`Contacts`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT per la tabella `Elderlies`
 --
-ALTER TABLE `Elderlies`
+ALTER TABLE `my_bettercallpepper`.`Elderlies`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT per la tabella `Pepper_call`
 --
-ALTER TABLE `Pepper_call`
+ALTER TABLE `my_bettercallpepper`.`Pepper_call`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT per la tabella `Users`
 --
-ALTER TABLE `Users`
+ALTER TABLE `my_bettercallpepper`.`Users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
