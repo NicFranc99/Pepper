@@ -369,8 +369,7 @@ CREATE TABLE `my_bettercallpepper`.`Games` (
   `id_category` int(11) NOT NULL,
   `name_game` varchar(32) NOT NULL,
   `risposte` json DEFAULT NULL COMMENT 'struttura {["pippo","pluto"]}. Json che rappresenta array di tutte le risposte possibili del gioco',
-  `risposta_corretta` varchar(100) DEFAULT NULL COMMENT 'risposta corretta del gioco. Puo'' essere campo opzionale nel caso in cui trattiamo un gioco in cui l''input dell''utente e'' vocale e possiamo accettare piu'' di una parola corretta.',
-  `domanda` text NOT NULL COMMENT 'Domanda del gioco',
+  `domanda` json NOT NULL COMMENT "Json array cosi' composto [{parola: null, rispostaCorretta: '', domanda:null}] ",
   PRIMARY KEY (`id_game`),
    FOREIGN KEY (`id_category`) REFERENCES Categories(`id_category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
