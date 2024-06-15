@@ -1,0 +1,30 @@
+version: "0.1"
+name: pepper-games
+services: 
+  percona: 
+    container_name: percona-db
+    image: percona:latest
+    environment: 
+      MYSQL_ROOT_PASSWORD: "peppergames"
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    expose: 
+      - "3306"
+      - "33060"
+    healthcheck:
+      test: "mysql -uroot -ppeppergames -e 'show variables';"
+      interval: 5s
+      timeout: 20s
+      retries: 30
+
+  liquibase:
+    container_name: liquibase
+    image: liquibase/liquibase
+    depends_on:
+      percona:
+        condition: service_healthy
+    volumes:
+      - ./scripts/liquibase:/liquibase/changelog
+    command: --defaults-file=/liquibase/changelog/liquibase.local.properties update
+
