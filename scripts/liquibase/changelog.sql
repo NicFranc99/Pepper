@@ -271,28 +271,29 @@ CREATE TABLE `my_bettercallpepper`.`Categories` (
   `id_category` int(11) NOT NULL,
   `name_category` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `description_explaitation_category` text NOT NULL,
-  PRIMARY KEY (`id_category`)
+  `has_vocal_input` TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_category`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Categories`
 --
 
-INSERT INTO `my_bettercallpepper`.`Categories` (`id_category`, `name_category`,`description_explaitation_category`) VALUES
-(1, 'appartenenza', 'In questo esercizio ti mostreremo di volta in volta una parola, dovrai indicare se la parola appartiene o meno alla categoria appartenenza.'),
-(2, 'categorizzazione', 'In questo esercizio ti mostreremo  un nome di una persona o un oggetto, e 4 opzioni che indicano diverse categorie, dovrai indicare a quale categoria appartiene la parola.'),
-(3, 'combinazionilettere', "Durante l'esercizio di combinazioni lettere  dovrai cercare di formare il maggior numero di parole con le lettere presentate."),
-(4, 'esistenzaparole', "Durante questo esercizio ti sará mostrata una parola, dovrai dirci se quella parola ESISTE oppure NON ESISTE."),
-(5, 'finaliparole', "L' esercizio di finali parole consiste nel presentarti l'inizio di una parola, e tu dovrai dirmi come termina ad esempio “diva” sarà l'inizio della parola “divano” oppure “divario”."),
-(6, 'fluenzefonologiche', "In questo gioco ti sará mostrata una lettera, tu dovrai indicare quante piú parole che ti vengono in mente che iniziano con quella lettera."),
-(7, 'fluenzesemantiche', "In questo gioco ti mostreremo una categoria e dovrai indicare quante piú parole possibili che ti vengono in mente inerente alla categoria mostrata."),
-(8, 'fluenzeverbali', "In questo esercizio ti verra mostrata di volta in volta una categoria, dovrai indicare quante piú parole ti vengono in mente inerente a quella categoria."),
-(9, 'immaginiEparole', "In questo gioco ti verrano mostrate 4 immagini, e una parola mancante, dovrai indovinare la parola mancante che associa le 4 immagini."),
-(10, 'letteremancanti', "In questo gioco ti verrano mostrate delle parole con delle lettere mancanti ed una categoria di riferimento, dovrai indicare quali sono le lettere mancanti."),
-(11, 'mesi', "In questo gioco ci saranno mesi dell'anno disposti casualmente, il tuo compito sará ordinarli in maniera corretta."),
-(12, 'musica', "Con il gioco musica ti faremo ascoltare 30 secondi di una canzone, il tuo compito sará riconoscere chi é l'autore di quella canzone tra le opzioni mostrate."),
-(13, 'racconti', "In questo esercizio ti racconteremo una breve storia, e una volta terminata ti faremo delle domande inerenti al racconto e dovrai rispondere."),
-(14, 'volti', "Ti mostreremo dei volti, il tuo compito sará riconoscere il personaggio e selezionare il nome corretto tra le varie risposte.");
+INSERT INTO `my_bettercallpepper`.`Categories` (`id_category`, `name_category`,`description_explaitation_category`, `has_vocal_input`) VALUES
+(1, 'appartenenza', 'In questo esercizio ti mostreremo di volta in volta una parola, dovrai indicare se la parola appartiene o meno alla categoria appartenenza.',0),
+(2, 'categorizzazione', 'In questo esercizio ti mostreremo  un nome di una persona o un oggetto, e 4 opzioni che indicano diverse categorie, dovrai indicare a quale categoria appartiene la parola.',0),
+(3, 'combinazionilettere', "Durante l'esercizio di combinazioni lettere  dovrai cercare di formare il maggior numero di parole con le lettere presentate.",0),
+(4, 'esistenzaparole', "Durante questo esercizio ti sará mostrata una parola, dovrai dirci se quella parola ESISTE oppure NON ESISTE.",0),
+(5, 'finaliparole', "L' esercizio di finali parole consiste nel presentarti l'inizio di una parola, e tu dovrai dirmi come termina ad esempio “diva” sarà l'inizio della parola “divano” oppure “divario”.",1),
+(6, 'fluenzefonologiche', "In questo gioco ti sará mostrata una lettera, tu dovrai indicare quante piú parole che ti vengono in mente che iniziano con quella lettera.",1),
+(7, 'fluenzesemantiche', "In questo gioco ti mostreremo una categoria e dovrai indicare quante piú parole possibili che ti vengono in mente inerente alla categoria mostrata.",1),
+(8, 'fluenzeverbali', "In questo esercizio ti verra mostrata di volta in volta una categoria, dovrai indicare quante piú parole ti vengono in mente inerente a quella categoria.",1),
+(9, 'immaginiEparole', "In questo gioco ti verrano mostrate 4 immagini, e una parola mancante, dovrai indovinare la parola mancante che associa le 4 immagini.",0),
+(10, 'letteremancanti', "In questo gioco ti verrano mostrate delle parole con delle lettere mancanti ed una categoria di riferimento, dovrai indicare quali sono le lettere mancanti.",0),
+(11, 'mesi', "In questo gioco ci saranno mesi dell'anno disposti casualmente, il tuo compito sará ordinarli in maniera corretta.",0),
+(12, 'musica', "Con il gioco musica ti faremo ascoltare 30 secondi di una canzone, il tuo compito sará riconoscere chi é l'autore di quella canzone tra le opzioni mostrate.",0),
+(13, 'racconti', "In questo esercizio ti racconteremo una breve storia, e una volta terminata ti faremo delle domande inerenti al racconto e dovrai rispondere.",0),
+(14, 'volti', "Ti mostreremo dei volti, il tuo compito sará riconoscere il personaggio e selezionare il nome corretto tra le varie risposte.",0);
 
 -- --------------------------------------------------------
 
@@ -367,12 +368,29 @@ INSERT INTO `my_bettercallpepper`.`Elderlies` (`id`, `name`, `surname`, `birth`,
 CREATE TABLE `my_bettercallpepper`.`Games` (
   `id_game` int(11) NOT NULL,
   `id_category` int(11) NOT NULL,
+  `id_elderly` int(11) NOT NULL,
   `name_game` varchar(32) NOT NULL,
   `risposte` json DEFAULT NULL COMMENT 'struttura {["pippo","pluto"]}. Json che rappresenta array di tutte le risposte possibili del gioco',
-  `domanda` json NOT NULL COMMENT "Json array cosi' composto [{parola: null, rispostaCorretta: '', domanda:null}] ",
+  `esercizi` json NOT NULL COMMENT "Json array cosi' composto [{parola: null, rispostaCorretta: null, domanda:null}]. Ogni nodo di questo json array rappresenta un esercizio di questo gioco",
   PRIMARY KEY (`id_game`),
-   FOREIGN KEY (`id_category`) REFERENCES Categories(`id_category`)
+  UNIQUE KEY unique_id_game_to_name_game (`id_game`, `name_game`),
+   FOREIGN KEY (`id_category`) REFERENCES Categories(`id_category`),
+   FOREIGN KEY (`id_elderly`) REFERENCES Elderlies(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--
+-- Dump dei dati per la tabella `Games`
+--
+
+INSERT INTO `my_bettercallpepper`.`Games`
+(`id_game`, `id_category`, `id_elderly`, `name_game`, `risposte`, `esercizi`)
+VALUES
+(1, 1, 1, 'Frutti Estivi', '["Si", "No"]', '[{"parola": "albicocche", "rispostaCorretta": "Si"}, {"parola": "alchechengi", "rispostaCorretta": "No"}]'),
+(2, 2, 1, 'Categorizziamo', '["Cantanti", "Frutta", "Verdura", "Mestieri"]', '[{"parola": "andriano celentano", "rispostaCorretta": "cantante"}, {"parola": "mandarino", "rispostaCorretta": "frutta"}, {"parola": "bietle", "rispostaCorretta": "verdura"}, {"parola": "carrozziere", "rispostaCorretta": "mestieri"}, {"parola": "cavolfiore", "rispostaCorretta": "verdura"}]');
+
+
+
 
 -- --------------------------------------------------------
 

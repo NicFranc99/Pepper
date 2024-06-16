@@ -333,6 +333,50 @@ function addElderCall($parID, $eldID)
 	));
 }
 
+function getAllCategory()
+{
+	$conn = db_connect();
+
+	$sql = "SELECT Categories.id_category,Categories.name_category,Categories.description_explaitation_category FROM Categories";
+	$stmt = $conn->prepare($sql);
+	$stmt->execute();
+
+	$list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $list;
+}
+
+function getGamesByElderId($eldID)
+{
+
+	$conn = db_connect();
+
+	$eldID = htmlspecialchars($eldID);
+	$sql = "SELECT 
+	    eld.id as id_ederly,
+		eld.name as name, 
+		eld.surname as surname, 
+		eld.gender as gender,
+		gm.id_game,
+		gm.id_category as id_category,
+		gm.name_game as title_game,
+		gm.risposte as risposte,
+		gm.esercizi as eservizi,
+		c.name_category as name_category,
+		c.description_explaitation_category as explaitation_text,
+		c.has_vocal_input as has_vocal_input
+		FROM Elderlies eld 
+		INNER JOIN Games gm ON eld.id = gm.id_elderly
+		INNER JOIN Categories c ON gm.id_category = c.id_category
+		WHERE eld.id = :eldID ORDER BY gm.id_game;";
+
+		$stmt = $conn->prepare($sql);
+		$stmt->execute(array(':eldID' => $eldID));
+
+		$list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    	return $list;
+}
+
 function getElderCall($eldID)
 {
 	$conn = db_connect();
