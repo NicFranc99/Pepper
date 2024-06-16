@@ -43,6 +43,7 @@ import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.presenter.CardPresenter;
 import com.example.pepperapp28aprile.utilities.DataManager;
+import com.example.pepperapp28aprile.utilities.PazienteService;
 import com.example.pepperapp28aprile.utilities.Phrases;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -70,6 +71,7 @@ public class PlaceholderFragmentGames extends Fragment {
     private static QiContext  qiContext;
     private Future<Void> requestSay;
     private Future<String> listenFuture;
+    private PazienteService pazienteService;
     public static Fragment newInstance(int index,String idPaziente) {
         id = idPaziente;
         PlaceholderFragmentGames fragment = new PlaceholderFragmentGames();
@@ -125,16 +127,22 @@ public class PlaceholderFragmentGames extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
+        pazienteService = new PazienteService();
         View fragmentLayout = null;
 
         fragmentLayout = inflater.inflate(R.layout.game_list_grid, container, false);
             gameList = new ArrayList<>();
             gridView = (GridView) fragmentLayout.findViewById(R.id.grid);
 
-        getPazienteById(id);
+            Persona paziente = pazienteService.getPazienteById(id);
+            paziente.setEserciziList(pazienteService.getGameListByEldId(id));
 
 
+        GameProfileActivity.gameArrayList = paziente.getEsercizi();
+        GameListAdapter adapter = new GameListAdapter(getActivity(), R.layout.category_card, paziente,(GameProfileActivity) getActivity());
+        gridView.setAdapter(adapter);
+
+            //getPazienteById(id);
 
         return fragmentLayout;
     }

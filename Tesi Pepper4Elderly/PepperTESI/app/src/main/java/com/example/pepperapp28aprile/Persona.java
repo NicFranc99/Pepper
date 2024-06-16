@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.pepperapp28aprile.utilities.Util;
+import com.google.common.collect.ArrayTable;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -34,6 +35,10 @@ public class Persona implements Serializable {
     private String citta;
     private String provincia;
     private String sesso;
+
+    public void setEserciziList(ArrayList<Persona.Game> gameList){
+        this.esercizi = gameList;
+    }
 
     public Persona() {
         image = new String();
@@ -198,6 +203,9 @@ public class Persona implements Serializable {
             this.descrizioneGioco = d;
         }
 
+        public void setDescrizioneGioco(String descrizione,String namePaziente) {
+            this.descrizioneGioco = "Salve" + " " + namePaziente + " " + descrizione;
+        }
         public String getTitleCategory() {
             return titleCategory;
         }
@@ -389,6 +397,18 @@ public class Persona implements Serializable {
 
         }
 
+        public void setDomanda(String parola, ArrayList<String> listaRisposte, String rispostaCorretta) {
+            String testoDomanda = "Appartiene alla categoria  " + titologioco.toUpperCase()
+                    + "  la parola";
+
+            short positionRispostaEsatta = (short)listaRisposte.indexOf(rispostaCorretta);
+
+            Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRisposte,
+                    positionRispostaEsatta);
+            setDomandaGioco(dom);
+
+        }
+
         /**
          * Ricorda che la chiave é la parola da mostrare e il valore é la categoria da
          * confrontare
@@ -406,7 +426,7 @@ public class Persona implements Serializable {
         private final String titoloGioco;
         private final HashMap<String, String> domande = new HashMap<>();
 
-        private final List<String> catRiferimento = new ArrayList<>();
+        private List<String> catRiferimento = new ArrayList<>();
 
         public Categorizzazione(String titoloGioco) {
 
@@ -445,6 +465,10 @@ public class Persona implements Serializable {
 
         public void addcatRiferimento(String category) {
             catRiferimento.add(category);
+        }
+
+        public void setRisposte(ArrayList<String> risposteList){
+            catRiferimento = risposteList;
         }
 
     }
