@@ -127,7 +127,7 @@ public class PlaceholderFragmentGames extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        pazienteService = new PazienteService();
+        pazienteService = new PazienteService(getContext());
         View fragmentLayout = null;
 
         fragmentLayout = inflater.inflate(R.layout.game_list_grid, container, false);

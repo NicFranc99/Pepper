@@ -1,5 +1,7 @@
 package com.example.pepperapp28aprile.utilities;
 
+import android.content.Context;
+
 import com.example.pepperapp28aprile.Persona;
 import com.example.pepperapp28aprile.models.Esercizio;
 import com.google.gson.Gson;
@@ -17,8 +19,8 @@ import java.util.ArrayList;
 public class PazienteService {
 
     private GameBuilder gameBuilder;
-    public PazienteService(){
-        gameBuilder = new GameBuilder();
+    public PazienteService(Context context){
+        gameBuilder = new GameBuilder(context);
     }
 
     public Persona getPazienteById(String id) {
@@ -66,19 +68,71 @@ public class PazienteService {
                  JsonObject rootelem = rootarr.get(i).getAsJsonObject();
 
                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.Appartenenza.class.getSimpleName())){
-                    Persona.Appartenenza appartenenzaGame = gameBuilder.buildAppartenenzaGame(rootelem);
-                    addGameToList(rootelem, appartenenzaGame, gameList);
+                    Persona.Appartenenza game = gameBuilder.buildAppartenenzaGame(rootelem);
+                    addGameToList(rootelem, game, gameList);
                 }
 
                  if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.Categorizzazione.class.getSimpleName())){
-                     Persona.Categorizzazione categorizzazioneGame = gameBuilder.buildCategorizzazioneGame(rootelem);
-                     addGameToList(rootelem, categorizzazioneGame, gameList);
+                     Persona.Categorizzazione game = gameBuilder.buildCategorizzazioneGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
                  }
 
                  if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.CombinazioniLettere.class.getSimpleName())){
-                     Persona.CombinazioniLettere combinazioniLettere = gameBuilder.buildCombinazioniLettereGame(rootelem);
-                     addGameToList(rootelem, combinazioniLettere, gameList);
+                     Persona.CombinazioniLettere game = gameBuilder.buildCombinazioniLettereGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
                  }
+
+                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.EsistenzaParole.class.getSimpleName())){
+                     Persona.EsistenzaParole game = gameBuilder.buildEsistenzaParoleGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
+                 }
+
+                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.FinaliParole.class.getSimpleName())){
+                     Persona.FinaliParole game = gameBuilder.buildFinaliParoleGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
+                 }
+
+                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.FluenzeFonologiche.class.getSimpleName())){
+                     Persona.FluenzeFonologiche game = gameBuilder.buildFluenzeFonologiche(rootelem);
+                     addGameToList(rootelem, game, gameList);
+                 }
+
+                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.FluenzeSemantiche.class.getSimpleName())){
+                     Persona.FluenzeSemantiche finaliParole = gameBuilder.buildFluenzeSemanticheGame(rootelem);
+                     addGameToList(rootelem, finaliParole, gameList);
+                 }
+
+                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.FluenzeVerbali.class.getSimpleName())){
+                     Persona.FluenzeVerbali game = gameBuilder.buildFluenzeVerbaliGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
+                 }
+
+                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.LettereMancanti.class.getSimpleName())){
+                     Persona.LettereMancanti game = gameBuilder.buildLettereMancantiGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
+                 }
+
+                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.Mesi.class.getSimpleName())){
+                     Persona.Mesi game = gameBuilder.buildMesiGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
+                 }
+
+                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.Musica.class.getSimpleName())){
+                     Persona.Musica game = gameBuilder.buildMusicaGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
+                 }
+
+                 if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.Volti.class.getSimpleName())){
+                     Persona.Volti game = gameBuilder.buildVoltiGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
+                 }
+
+                /* if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.Volti.class.getSimpleName())){
+                     Persona.Racconti game = gameBuilder.buildRaccontiGame(rootelem);
+                     addGameToList(rootelem, game, gameList);
+                 }
+
+                 */
              }
 
         } catch (Exception e) {

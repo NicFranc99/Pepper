@@ -506,7 +506,7 @@ public class Persona implements Serializable {
         }
     }
     public static class EsistenzaParole extends Game implements Serializable{
-
+        private ArrayList<String> listaRisposte;
         private final List<String> parole = new ArrayList<>();
 
         public EsistenzaParole(String titoloGioco) {
@@ -556,7 +556,32 @@ public class Persona implements Serializable {
                 });
             }
         }
+
+        public void setListaRisposte(ArrayList<String> risposte){
+            this.listaRisposte = risposte;
+        }
+
+        public void setParole(Context c, String parola, String testoDomanda) {
+                // Util.esistenzaParola(c, parola, new Util.RicercaParoleListener() {
+                Util.checkIfWordExistByPepperServer(c, parola, new Util.RicercaParoleListener() {
+                    //Util.checkWordExists(c, parola, new Util.RicercaParoleListener() {
+                    @Override
+                    public void esiste() {
+                        Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRisposte, (short) 0);
+                        setDomandaGioco(dom);
+                    }
+
+                    @Override
+                    public void nonesiste() {
+                        Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), listaRisposte, (short) 1);
+                        setDomandaGioco(dom);
+                    }
+                });
+
+        }
     }
+
+
 
     public static class FinaliParole extends Game implements Serializable{
 
@@ -580,6 +605,12 @@ public class Persona implements Serializable {
             Domanda dom = new Domanda(testo,value.toUpperCase());
             setDomandaGioco(dom);
         }
+
+        public void setParole(String textParola, String textDomanda) {
+            parole.add(textParola);
+            Domanda dom = new Domanda(textDomanda,textParola.toUpperCase());
+            setDomandaGioco(dom);
+        }
     }
     public static class FluenzeFonologiche extends Game implements Serializable{
 
@@ -596,6 +627,12 @@ public class Persona implements Serializable {
         public void setDomandaGioco() {
             String testo = "Ricorda: per terminare il gioco basta dire STOP, FINE GIOCO oppure FERMA GIOCO.\n Forma quante piú parole possibili che iniziano con la lettera";
             Domanda dom = new Domanda(testo, titoloGioco.toUpperCase());
+            setDomandaGioco(dom);
+        }
+
+        public void setDomandaGioco(String textDomanda, String lettera) {
+            String testo = "Ricorda: per terminare il gioco basta dire STOP, FINE GIOCO oppure FERMA GIOCO." + textDomanda;
+            Domanda dom = new Domanda(testo, lettera);
             setDomandaGioco(dom);
         }
     }
@@ -622,8 +659,14 @@ public class Persona implements Serializable {
         }
 
         public void setDomandaGioco() {
-            String testo = "Ricorda: per terminare il gioco basta dire STOP, FINE GIOCO oppure FERMA GIOCO.\n Indica piú parole possibili relative alla categoria";
+            String testo = "Ricardo: per terminare il gioco basta dire STOP, FINE GIOCO oppure FERMA GIOCO.\n Indica piú parole possibili relative alla categoria";
             Domanda dom = new Domanda(testo, titoloGioco.toUpperCase());
+            setDomandaGioco(dom);
+        }
+
+        public void setDomandaGioco(String textDomanda) {
+            String testo = "Ricorda: per terminare il gioco basta dire STOP, FINE GIOCO oppure FERMA GIOCO." + textDomanda;
+            Domanda dom = new Domanda(testo, this.categoria.toUpperCase());
             setDomandaGioco(dom);
         }
     }
@@ -647,6 +690,12 @@ public class Persona implements Serializable {
             setDomandaGioco(dom);
         }
 
+        public void setParole(String parola, String textDomanda) {
+            this.parole.add(parola);
+            Domanda dom = new Domanda(textDomanda,parola.toUpperCase());
+            setDomandaGioco(dom);
+        }
+
         public List<String> getParole() {
             return parole;
         }
@@ -661,6 +710,67 @@ public class Persona implements Serializable {
             super.setTitleCategory(this.getClass().getSimpleName());
             super.setNameIcon(R.drawable.letteremancanti);
             super.setTitleGame(titoloGioco);
+        }
+
+        public void setParole(String parola,String domanda) {
+            this.parole.add(parola);
+
+            String testoDomanda = domanda;
+
+            List<String> listaRispose = new ArrayList<>();
+
+            Random rand = new Random();
+
+            int max = (parola.length() / 2);
+            int min = 2;
+
+            int maxCarDaTogliere = rand.nextInt((max - min) + 1) + min;// genero un massimo di caratteri da togliere
+
+            List<Integer> posizioneRandomUscite = new ArrayList<>();
+
+            // genero le posizione da togliere casualmente
+            for (int i = 0; i < maxCarDaTogliere; i++) {
+                int posizioneRandom;
+
+                do {
+                    posizioneRandom = (int) (Math.random() * parola.length() - 1);
+                } while (posizioneRandomUscite.contains(posizioneRandom));
+
+                posizioneRandomUscite.add(posizioneRandom);
+
+            }
+
+            // ordino le posizioni generate dal numero piú piccolo al piú grande
+            Collections.sort(posizioneRandomUscite);
+
+            String rispostaGiusta = "";
+
+            StringBuffer sb = new StringBuffer(parola);
+
+            // mi memorizzo i caratteri tolti dalla parola e li sostituisco con i trattini
+            for (int i = 0; i < posizioneRandomUscite.size(); i++) {
+                rispostaGiusta = rispostaGiusta + parola.charAt(posizioneRandomUscite.get(i));
+                sb.setCharAt(posizioneRandomUscite.get(i), '_');
+            }
+
+            listaRispose.addAll(generaRisposte(3, rispostaGiusta));
+
+            Collections.shuffle(listaRispose);
+
+            short positionRispostaEsatta = (short) listaRispose.indexOf(rispostaGiusta);
+
+            Log.i("ParoleMassimo",
+                    "Parola: " + parola.toUpperCase() + " lung parole:  " + parola.length() + "  max da togliere:  "
+                            + maxCarDaTogliere + " Paola generata: " + sb.toString().toUpperCase()
+                            + " Risposta Giusta: " + rispostaGiusta + " Risposte: " + listaRispose.toString()
+                            + "posizione rispo esatta" + positionRispostaEsatta
+
+            );
+
+            Game.Domanda dom = new Game.Domanda(testoDomanda, sb.toString().toUpperCase(), listaRispose,
+                    positionRispostaEsatta);
+            setDomandaGioco(dom);
+
         }
 
         public void setParole(String parola) {
@@ -839,6 +949,26 @@ public class Persona implements Serializable {
             media.add(listaDomande.getUrlMedia());
 
             Game.Domanda dom = new Game.Domanda(testoDomanda, "", listaRispose, (short) positionRispostaEsatta, media);
+            dom.setTypeMedia(Game.Domanda.typeMedia.AUDIO);
+            setDomandaGioco(dom);
+
+        }
+
+        public void setListaDomande(Musica.Domanda listaDomande, String textDomanda) {
+            this.listaDomande.add(listaDomande);
+
+           // String testoDomanda = "Chi canta questa canzone?";
+            List<String> listaRispose = listaDomande.getRisposteSbagliate();
+
+            listaRispose.add(listaDomande.rispostaCorretta);
+            Collections.shuffle(listaRispose);
+
+            int positionRispostaEsatta = listaRispose.indexOf(listaDomande.rispostaCorretta);
+
+            List<String> media = new ArrayList<>();
+            media.add(listaDomande.getUrlMedia());
+
+            Game.Domanda dom = new Game.Domanda(textDomanda, "", listaRispose, (short) positionRispostaEsatta, media);
             dom.setTypeMedia(Game.Domanda.typeMedia.AUDIO);
             setDomandaGioco(dom);
 
