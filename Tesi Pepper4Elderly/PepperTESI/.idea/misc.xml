@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/drawable/ic_resizable_videocall.xml" value="0.1885" />
         <entry key="app/src/main/res/drawable/ic_separation_menu.xml" value="0.1885" />
         <entry key="app/src/main/res/drawable/icontitle.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/spunta_verde.xml" value="0.2255" />
         <entry key="app/src/main/res/drawable/styleanswer.xml" value="0.183" />
         <entry key="app/src/main/res/drawable/stylebuttonerrorresponce.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/stylebuttonwithstate.xml" value="0.1865" />
@@ -50,7 +51,7 @@
         <entry key="app/src/main/res/layout/answer_dialog_fragment.xml" value="0.2111650485436893" />
         <entry key="app/src/main/res/layout/answer_row.xml" value="0.2718631178707224" />
         <entry key="app/src/main/res/layout/buttontonav.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/category_card.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/category_card.xml" value="0.5" />
         <entry key="app/src/main/res/layout/command_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_check_mattutino.xml" value="0.28957365977205574" />
         <entry key="app/src/main/res/layout/cronologia.xml" value="0.28957365977205574" />

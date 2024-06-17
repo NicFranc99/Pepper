@@ -123,7 +123,12 @@ public class GameProfileActivity extends RobotActivity implements RobotLifecycle
         tv1.setText(Globals.Greeting + " " + name);
 
         TitleView sectionInfoElder = (TitleView) findViewById(R.id.imgsenior);
-        setElderlyImageByGender(sectionInfoElder);
+        try{
+            setElderlyImageByGender(sectionInfoElder);
+        }catch(Exception ex){
+
+        }
+
         PeopleListAdapter.tornaNav = tornaNav;
     }
 

@@ -4,6 +4,7 @@ package com.example.pepperapp28aprile;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.pepperapp28aprile.models.GameResult;
 import com.example.pepperapp28aprile.utilities.Util;
 import com.google.common.collect.ArrayTable;
 
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -180,6 +182,8 @@ public class Persona implements Serializable {
 
         private int setIndexInCategory = 0;
 
+        public GameResult gameResult;
+
         private String descrizioneGioco = "";
         private String titleCategory = "Titolo Categoria";
         private String titleGame = "Titolo Categoria";
@@ -192,6 +196,7 @@ public class Persona implements Serializable {
         public int getLivello() {
             return livello;
         }
+
 
         public String getDescrizioneGioco() {
             return descrizioneGioco;
@@ -444,12 +449,34 @@ public class Persona implements Serializable {
             short positionRispostaEsatta = -1;
 
             for (int i = 0; i < catRiferimento.size(); i++) {
-                if (catRiferimento.get(i).trim().equalsIgnoreCase(rispostaCorretta)) {
+                if (catRiferimento.get(i).trim().toLowerCase().equals(rispostaCorretta.toLowerCase())) {
                     positionRispostaEsatta = (short) i;
                     break;
                 }
             }
             Game.Domanda dom = new Game.Domanda(testoDomanda, parola.toUpperCase(), catRiferimento,
+                    positionRispostaEsatta);
+            setDomandaGioco(dom);
+
+        }
+
+        public void setDomanda(String rispostaCorretta, String parola, String domanda) throws Exception {
+            domande.put(parola, rispostaCorretta.trim());
+
+            short positionRispostaEsatta = -1;
+
+            for (int i = 0; i < catRiferimento.size(); i++) {
+
+                if (catRiferimento.get(i).trim().equalsIgnoreCase(rispostaCorretta.trim())) {
+                    positionRispostaEsatta = (short) i;
+                    break;
+                }
+            }
+
+            if(positionRispostaEsatta == -1){
+                throw new Exception("Nella categorizzazione hai inserito una risposta corretta ma che non esiste nell'insieme delle risposte");
+            }
+            Game.Domanda dom = new Game.Domanda(domanda, parola.toUpperCase(), catRiferimento,
                     positionRispostaEsatta);
             setDomandaGioco(dom);
 

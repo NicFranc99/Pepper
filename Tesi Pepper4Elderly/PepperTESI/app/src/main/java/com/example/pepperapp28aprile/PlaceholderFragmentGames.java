@@ -135,7 +135,7 @@ public class PlaceholderFragmentGames extends Fragment {
             gridView = (GridView) fragmentLayout.findViewById(R.id.grid);
 
             Persona paziente = pazienteService.getPazienteById(id);
-            paziente.setEserciziList(pazienteService.getGameListByEldId(id));
+            paziente.setEserciziList(pazienteService.getGameListByEldId(id,true));
 
 
         GameProfileActivity.gameArrayList = paziente.getEsercizi();

@@ -71,7 +71,7 @@ public class GameBuilder {
         return game;
     }
 
-    public Persona.Categorizzazione buildCategorizzazioneGame(JsonObject rootelem){
+    public Persona.Categorizzazione buildCategorizzazioneGame(JsonObject rootelem) throws Exception {
         Persona.Categorizzazione game = new Persona.Categorizzazione(rootelem.get("titleGame").getAsString());
         ArrayList<String> listaRisposte;
 
@@ -85,7 +85,7 @@ public class GameBuilder {
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
         for (Esercizio esercizio: esercizi) {
-            game.setDomanda(esercizio.rispostaCorretta, esercizio.parola);
+            game.setDomanda(esercizio.rispostaCorretta, esercizio.parola, esercizio.domanda);
         }
 
         return game;

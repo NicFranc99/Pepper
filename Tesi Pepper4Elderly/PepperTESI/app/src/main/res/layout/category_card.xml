@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/category_not_focused">
 
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/txt_category"
@@ -39,6 +41,5 @@
             android:textSize="@dimen/DIM_TEXT_CAT" />
 
     </LinearLayout>
-
 
 </FrameLayout>

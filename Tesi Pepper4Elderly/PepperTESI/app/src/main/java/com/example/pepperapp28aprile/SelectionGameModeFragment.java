@@ -22,6 +22,7 @@ import com.aldebaran.qi.sdk.object.conversation.Say;
 import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.utilities.DataManager;
+import com.example.pepperapp28aprile.utilities.PazienteService;
 import com.example.pepperapp28aprile.utilities.Phrases;
 
 public class SelectionGameModeFragment extends Fragment {
@@ -106,8 +107,17 @@ public class SelectionGameModeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 sayFuture.cancel(true);
-                Toast.makeText(getActivity(), "Multiplayer Mode Button Clicked", Toast.LENGTH_SHORT).show();
-                getPazienteById(idPaziente);
+               // Toast.makeText(getActivity(), "Multiplayer Mode Button Clicked", Toast.LENGTH_SHORT).show();
+                PazienteService pazienteService = new PazienteService(getContext());
+                Persona paziente = pazienteService.getPazienteById(idPaziente);
+
+                paziente.setEserciziList(pazienteService.getGameListByEldId(idPaziente,false));
+
+                Intent game = new Intent(getContext(), GameActivity.class);
+                GameActivity gameActivity = new GameActivity();
+                gameActivity.startGameActivity(paziente,0,getContext(),true);
+
+               // getPazienteById(idPaziente);
             }
         });
 

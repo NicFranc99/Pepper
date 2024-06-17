@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.pepperapp28aprile.Persona;
 import com.example.pepperapp28aprile.models.Esercizio;
+import com.example.pepperapp28aprile.models.GameResult;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -12,6 +13,7 @@ import com.google.gson.JsonParser;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -51,8 +53,8 @@ public class PazienteService {
         return paziente;
     }
 
-    public ArrayList<Persona.Game> getGameListByEldId(String id){
-        String sURL = "http://bettercallpepper.altervista.org/api/getGamesByElderId.php?eldid=" + id;
+    public ArrayList<Persona.Game> getGameListByEldId(String id,boolean orderByGamesWithoutResults){
+        String sURL = "http://bettercallpepper.altervista.org/api/getGamesByElderId.php?eldid=" + id + "&orderByGamesWithoutResults=" + orderByGamesWithoutResults;
         ArrayList<Persona.Game> gameList = new ArrayList<>();
         try {
             URL url = new URL(sURL);
@@ -145,9 +147,19 @@ public class PazienteService {
     private void addGameToList(JsonObject rootelem, Persona.Game game, ArrayList<Persona.Game> gameList){
         boolean hasVocalInput =  (rootelem.get("hasVocalInput").getAsInt() != 0);
         String gameDescription = rootelem.get("explaitationText").getAsString();
-        String namePaziente =  rootelem.get("nameEderly").getAsString();
+        String namePaziente =  rootelem.get("nameElderly").getAsString();
+        String creationDateResult = rootelem.has("creationDateResult") && !rootelem.get("creationDateResult").isJsonNull() ? rootelem.get("creationDateResult").getAsString() : null;
+        Integer idResult = rootelem.has("idResult") && !rootelem.get("idResult").isJsonNull() ? rootelem.get("idResult").getAsInt() : null;
+        Integer score = rootelem.has("score") && !rootelem.get("score").isJsonNull() ? rootelem.get("score").getAsInt() : null;
+
         game.setDescrizioneGioco(gameDescription,namePaziente);
         game.addInputType(getInputType(hasVocalInput));
+        game.setLivello(1);
+
+        if(idResult != null){
+            game.gameResult = new GameResult(score,creationDateResult,idResult);
+        }
+
         gameList.add(game);
     }
 
