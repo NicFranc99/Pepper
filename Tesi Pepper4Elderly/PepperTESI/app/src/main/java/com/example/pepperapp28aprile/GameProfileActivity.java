@@ -66,6 +66,7 @@ import com.example.pepperapp28aprile.map.RobotHelper;
 import com.example.pepperapp28aprile.models.Categoria;
 import com.example.pepperapp28aprile.models.Emergency;
 import com.example.pepperapp28aprile.utilities.DataManager;
+import com.example.pepperapp28aprile.utilities.PazienteService;
 import com.example.pepperapp28aprile.utilities.Phrases;
 import com.example.pepperapp28aprile.utilities.Util;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -230,12 +231,27 @@ public QiContext getQiContext(){
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.putExtra("item", position);
         intent.putExtra("paziente", paziente);
+        intent.putExtra("isMultyExecution", false);
         this.startActivity(intent);
         finish();
     }
 
     public void viewGameListByVoice(View view, String pepperString) {
         getPazienteById(this.idPaziente, pepperString);
+    }
+
+    public void startGameByPepperString(String idPaziente, String pepperString){
+        PazienteService pazienteService = new PazienteService(this);
+        Persona paziente = pazienteService.getPazienteById(idPaziente);
+        ArrayList<Persona.Game> gameList = pazienteService.getGameListByEldId(idPaziente,false);
+        paziente.setEserciziList(gameList);
+
+        for (int i = 0; i < paziente.getEsercizi().size(); i++) {
+            if (paziente.getEsercizi().get(i).getTitleGame().equalsIgnoreCase(pepperString)) {
+                startWeb(null, i, paziente);
+                return;
+            }
+        }
     }
 
     public RobotHelper getRobotHelper() {

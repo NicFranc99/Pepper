@@ -166,7 +166,8 @@ public class PlaceholderFragmentGames extends Fragment {
                     // Usa la frase ascoltata come necessario
                     Log.d("Pepper4RSA", "Pepper heard: " + heardPhrase);
 
-                    ((GameProfileActivity)getActivity()).viewGameListByVoice(null,heardPhrase);
+                   // ((GameProfileActivity)getActivity()).viewGameListByVoice(null,heardPhrase);
+                    ((GameProfileActivity)getActivity()).startGameByPepperString(id,heardPhrase);
 
                     // Ritorna un Future completato per continuare la catena
                     listenFuture.cancel(true);
