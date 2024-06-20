@@ -35,14 +35,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Aggiunto insert dei risultati dei giochi, chiamand rest api del server php sia al termine dei giochi in modalità single che in modalità multy">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/game_mode_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/game_mode_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_gamemode1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_gamemode2.xml" afterDir="false" />
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Aggiunte icone per la schermata di selezione della modalità di gioco: indipendente o assistita">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_selection_game_mode.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_selection_game_mode.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/question_game_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/question_game_fragment.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -355,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718887553979</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Aggiunte icone per la schermata di selezione della modalità di gioco: indipendente o assistita">
+      <created>1718898267885</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1718898267885</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -392,7 +395,8 @@
     <MESSAGE value="WIP: Fix game and created game result" />
     <MESSAGE value="Fix problema di ricezione vocale del gioco che l'utente vuole giocare (modalità single del menu di selezione del gioco)" />
     <MESSAGE value="Aggiunto insert dei risultati dei giochi, chiamand rest api del server php sia al termine dei giochi in modalità single che in modalità multy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunto insert dei risultati dei giochi, chiamand rest api del server php sia al termine dei giochi in modalità single che in modalità multy" />
+    <MESSAGE value="Aggiunte icone per la schermata di selezione della modalità di gioco: indipendente o assistita" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunte icone per la schermata di selezione della modalità di gioco: indipendente o assistita" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

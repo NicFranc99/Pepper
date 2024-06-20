@@ -68,7 +68,7 @@
             android:gravity="center"
             android:text="Albicocca"
             android:textColor="@color/black"
-            android:textSize="@dimen/DIM_TEXT_CAT"
+            android:textSize="50dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +126,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintVertical_bias="0.075" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
