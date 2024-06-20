@@ -11,9 +11,7 @@ import java.util.ArrayList;
 
 public class GameBuilder {
     private Gson gson;
-    private Context context;
-    public GameBuilder(Context context){
-        this.context = context;
+    public GameBuilder(){
         gson = new Gson();
     }
 
@@ -51,7 +49,7 @@ public class GameBuilder {
         return game;
     }
 
-    public Persona.EsistenzaParole buildEsistenzaParoleGame(JsonObject rootelem){
+    public Persona.EsistenzaParole buildEsistenzaParoleGame(JsonObject rootelem, Context context){
         Persona.EsistenzaParole game = new Persona.EsistenzaParole(rootelem.get("titleGame").getAsString());
         ArrayList<String> listaRisposte = null;
 

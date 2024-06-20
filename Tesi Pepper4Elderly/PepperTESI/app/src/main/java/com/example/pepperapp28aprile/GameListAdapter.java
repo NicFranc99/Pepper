@@ -95,7 +95,7 @@ public class GameListAdapter extends ArrayAdapter<Persona.Game> {
         //getting the hero of the specified position
         Persona.Game game = paziente.getEsercizi().get(position);
 
-        if(game.gameResult != null){
+        if(game.gameResult != null && game.gameResult.getIsActive()){
             rl.setBackgroundColor(this.getContext().getResources().getColor(R.color.grey));
        }
         gameTitleGameList.add(game.getTitleGame());

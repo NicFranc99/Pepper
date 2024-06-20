@@ -108,6 +108,10 @@ public class Persona implements Serializable {
         return id;
     }
 
+    public String getIdString() {
+        return String.valueOf(id);
+    }
+
     public String getName() {
         return name;
     }
@@ -175,7 +179,7 @@ public class Persona implements Serializable {
     }
 
     public abstract static class Game implements Serializable{
-
+        public String idGame;
         public enum TypeInputGame {
             SELEZIONE, SCRITTURA, VOCALE
         }
@@ -202,6 +206,9 @@ public class Persona implements Serializable {
             return descrizioneGioco;
         }
 
+        public void setIdGame(String idGame){
+            this.idGame = idGame;
+        }
         public void setDescrizioneGioco(String descrizione,Persona paziente) {
             String d = descrizione.replace("%nomeutente%", paziente.getName()).replace("%categoria%",
                     titleGame.toUpperCase());

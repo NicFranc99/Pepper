@@ -241,9 +241,9 @@ public QiContext getQiContext(){
     }
 
     public void startGameByPepperString(String idPaziente, String pepperString){
-        PazienteService pazienteService = new PazienteService(this);
+        PazienteService pazienteService = new PazienteService();
         Persona paziente = pazienteService.getPazienteById(idPaziente);
-        ArrayList<Persona.Game> gameList = pazienteService.getGameListByEldId(idPaziente,false);
+        ArrayList<Persona.Game> gameList = pazienteService.getGameListByEldId(idPaziente,false,this);
         paziente.setEserciziList(gameList);
 
         for (int i = 0; i < paziente.getEsercizi().size(); i++) {

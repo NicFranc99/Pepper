@@ -127,7 +127,7 @@ public class PlaceholderFragmentGames extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        pazienteService = new PazienteService(getContext());
+        pazienteService = new PazienteService();
         View fragmentLayout = null;
 
         fragmentLayout = inflater.inflate(R.layout.game_list_grid, container, false);
@@ -135,7 +135,7 @@ public class PlaceholderFragmentGames extends Fragment {
             gridView = (GridView) fragmentLayout.findViewById(R.id.grid);
 
             Persona paziente = pazienteService.getPazienteById(id);
-            paziente.setEserciziList(pazienteService.getGameListByEldId(id,true));
+            paziente.setEserciziList(pazienteService.getGameListByEldId(id,true,getContext()));
 
 
         GameProfileActivity.gameArrayList = paziente.getEsercizi();

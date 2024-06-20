@@ -11,18 +11,59 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class PazienteService {
 
     private GameBuilder gameBuilder;
-    public PazienteService(Context context){
-        gameBuilder = new GameBuilder(context);
+    public PazienteService(){
+        gameBuilder = new GameBuilder();
+    }
+
+    public void addGameResult(String idElder, String idGame, int score) {
+        String baseURL = "http://bettercallpepper.altervista.org/api/addGameResult.php";
+
+        try {
+            // Costruisci l'URL con i parametri GET
+            String urlString = baseURL + "?idelder=" + URLEncoder.encode(idElder, "UTF-8") +
+                    "&idgame=" + URLEncoder.encode(idGame, "UTF-8") +
+                    "&score=" + score;
+
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Imposta il metodo di richiesta a GET
+            connection.setRequestMethod("GET");
+
+            // Leggi la risposta del server
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine = null;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("Response: " + response.toString());
+            }
+
+            // Controlla la risposta del server
+            int responseCode = connection.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            // Chiudi la connessione
+            connection.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Persona getPazienteById(String id) {
@@ -53,7 +94,7 @@ public class PazienteService {
         return paziente;
     }
 
-    public ArrayList<Persona.Game> getGameListByEldId(String id,boolean orderByGamesWithoutResults){
+    public ArrayList<Persona.Game> getGameListByEldId(String id,boolean orderByGamesWithoutResults, Context context){
         String sURL = "http://bettercallpepper.altervista.org/api/getGamesByElderId.php?eldid=" + id + "&orderByGamesWithoutResults=" + orderByGamesWithoutResults;
         ArrayList<Persona.Game> gameList = new ArrayList<>();
         try {
@@ -85,7 +126,7 @@ public class PazienteService {
                  }
 
                  if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.EsistenzaParole.class.getSimpleName())){
-                     Persona.EsistenzaParole game = gameBuilder.buildEsistenzaParoleGame(rootelem);
+                     Persona.EsistenzaParole game = gameBuilder.buildEsistenzaParoleGame(rootelem,context);
                      addGameToList(rootelem, game, gameList);
                  }
 
@@ -148,16 +189,23 @@ public class PazienteService {
         boolean hasVocalInput =  (rootelem.get("hasVocalInput").getAsInt() != 0);
         String gameDescription = rootelem.get("explaitationText").getAsString();
         String namePaziente =  rootelem.get("nameElderly").getAsString();
+        String idGame = rootelem.get("idGame").getAsString();
         String creationDateResult = rootelem.has("creationDateResult") && !rootelem.get("creationDateResult").isJsonNull() ? rootelem.get("creationDateResult").getAsString() : null;
         Integer idResult = rootelem.has("idResult") && !rootelem.get("idResult").isJsonNull() ? rootelem.get("idResult").getAsInt() : null;
         Integer score = rootelem.has("score") && !rootelem.get("score").isJsonNull() ? rootelem.get("score").getAsInt() : null;
+        Integer isActiveInteger = rootelem.has("isActive") && !rootelem.get("isActive").isJsonNull() ? rootelem.get("isActive").getAsInt(): null;
 
+        boolean isActive = false;
+        if(isActiveInteger != null && isActiveInteger == 1){
+            isActive = true;
+        }
         game.setDescrizioneGioco(gameDescription,namePaziente);
         game.addInputType(getInputType(hasVocalInput));
         game.setLivello(1);
+        game.setIdGame(idGame);
 
         if(idResult != null){
-            game.gameResult = new GameResult(score,creationDateResult,idResult);
+            game.gameResult = new GameResult(score,creationDateResult,idResult,isActive);
         }
 
         gameList.add(game);

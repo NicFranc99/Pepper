@@ -108,10 +108,10 @@ public class SelectionGameModeFragment extends Fragment {
             public void onClick(View view) {
                 sayFuture.cancel(true);
                // Toast.makeText(getActivity(), "Multiplayer Mode Button Clicked", Toast.LENGTH_SHORT).show();
-                PazienteService pazienteService = new PazienteService(getContext());
+                PazienteService pazienteService = new PazienteService();
                 Persona paziente = pazienteService.getPazienteById(idPaziente);
 
-                paziente.setEserciziList(pazienteService.getGameListByEldId(idPaziente,false));
+                paziente.setEserciziList(pazienteService.getGameListByEldId(idPaziente,false,getContext()));
 
                 Intent game = new Intent(getContext(), GameActivity.class);
                 GameActivity gameActivity = new GameActivity();

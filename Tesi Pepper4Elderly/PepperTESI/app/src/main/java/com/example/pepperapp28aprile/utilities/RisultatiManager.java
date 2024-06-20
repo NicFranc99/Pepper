@@ -37,10 +37,28 @@ public class RisultatiManager {
         }
     }
 
+    /*
     public void fineGioco() {
         try {
             tempototale = t.stopGame();
             PepperLissenerActivity.isGameEnd = true;
+        } catch (ErrorGameNotStarted errorGameNotStarted) {
+            Log.e(LOG_ID, errorGameNotStarted.toString());
+        }
+    }
+    */
+
+
+    public void fineGioco(String idPaziente, String idGioco) {
+        try {
+            tempototale = t.stopGame();
+            PepperLissenerActivity.isGameEnd = true;
+            PazienteService pazienteService = new PazienteService();
+            Integer risposteSbagliate = 0;
+            for (Integer error: getListError()) {
+                risposteSbagliate += error;
+            }
+            pazienteService.addGameResult(idPaziente,idGioco,getListError().size() + risposteSbagliate);
         } catch (ErrorGameNotStarted errorGameNotStarted) {
             Log.e(LOG_ID, errorGameNotStarted.toString());
         }
