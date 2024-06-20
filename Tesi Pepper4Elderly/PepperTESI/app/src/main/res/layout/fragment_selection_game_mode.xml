@@ -4,49 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:layout_marginTop="160dp">
-
+    android:layout_marginTop="120dp">
 
     <Button
         android:id="@+id/game_mode_button_single"
         android:layout_width="0dp"
         android:layout_height="362dp"
-        android:layout_margin="10dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="50dp"
-        android:background="@color/white"
-        android:drawableTop="@drawable/ic_icn_setupmode"
+        android:layout_marginBottom="8dp"
+        android:drawableTop="@drawable/icon_gamemode1"
         android:fontFamily="@font/verdanab"
-        android:text="@string/setup_mode_button"
+        android:text="Modalità Indipendente"
         android:textAllCaps="false"
         android:textColor="@color/defaultcolor"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/game_mode_button_multy"
+        app:layout_constraintEnd_toStartOf="@+id/separator2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.426" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/separator2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/ic_separation_menu"
+        app:layout_constraintBottom_toBottomOf="@id/game_mode_button_single"
+        app:layout_constraintEnd_toStartOf="@id/game_mode_button_multy"
+        app:layout_constraintStart_toEndOf="@id/game_mode_button_single"
+        app:layout_constraintTop_toTopOf="@id/game_mode_button_single" />
 
     <Button
         android:id="@+id/game_mode_button_multy"
         android:layout_width="0dp"
         android:layout_height="362dp"
-        android:layout_margin="10dp"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="50dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/white"
-        android:drawableTop="@drawable/ic_icn_setupmode"
+        android:drawableTop="@drawable/icon_gamemode2"
         android:fontFamily="@font/verdanab"
-        android:text="@string/setup_mode_button"
+        android:text="Modalità Assistita"
         android:textAllCaps="false"
         android:textColor="@color/defaultcolor"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/game_mode_button_single"
-        app:layout_constraintVertical_bias="0.426" />
+        app:layout_constraintStart_toEndOf="@id/separator2"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
