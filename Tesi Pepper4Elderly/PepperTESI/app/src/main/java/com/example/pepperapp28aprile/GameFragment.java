@@ -924,8 +924,8 @@ public class GameFragment extends Fragment{
 
     private Future<Void> correctAnswer(){
         int[] animationsArray = {
-                R.raw.correct_answer_animation2,
-                R.raw.correct_answer_animation
+                R.raw.nice_reaction_01,
+                R.raw.nice_reaction_02
         };
 
         int randomNumberForAnimation = new Random().nextInt(animationsArray.length);
@@ -936,9 +936,15 @@ public class GameFragment extends Fragment{
 
     private Future<Void> wrongAnswer(){
 
+        int[] animationsArray = {
+                R.raw.sad_reaction_01,
+                R.raw.sad_reaction_02
+        };
+
+        int randomNumberForAnimation = new Random().nextInt(animationsArray.length);
         int randomNumberForText = new Random().nextInt(Phrases.phrasePepperWrongAnwswer.length);
 
-        return robotHelper.say(Phrases.phrasePepperWrongAnwswer[randomNumberForText],getActivity());
+        return robotHelper.sayAndMove(animationsArray[randomNumberForAnimation],Phrases.phrasePepperWrongAnwswer[randomNumberForText],getActivity());
     }
 
 

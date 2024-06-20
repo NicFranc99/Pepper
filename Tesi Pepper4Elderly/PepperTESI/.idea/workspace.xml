@@ -35,10 +35,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Aggiunte icone per la schermata di selezione della modalità di gioco: indipendente o assistita">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix dimensione domanda e parola nei giochi">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/explanation_animation.qianim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/nice_reaction_01.qianim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/nice_reaction_02.qianim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/sad_reaction_01.qianim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/sad_reaction_02.qianim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/question_game_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/question_game_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +94,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
   <component name="ProjectId" id="1roR8B0G6VkqtCcLWyUnvWSPRYI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -121,7 +129,7 @@
     <property name="android-custom-view/home/ubuntu/Android/Sdk/sources/android-30/android/widget/TextView.java_SELECTED" value="TextView" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/raw" />
     <property name="multi-representation-preview/home/ubuntu/Android/Sdk/sources/android-30/android/view/View.java_selected" value="Custom views" />
     <property name="multi-representation-preview/home/ubuntu/Android/Sdk/sources/android-30/android/widget/TextView.java_selected" value="Custom views" />
     <property name="project.structure.last.edited" value="Dependencies" />
@@ -131,8 +139,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/app/src/main/res/raw" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile" />
       <recent name="$PROJECT_DIR$/app/src/main/res" />
@@ -358,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718898267885</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Fix dimensione domanda e parola nei giochi">
+      <created>1718899289076</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1718899289076</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -396,7 +411,8 @@
     <MESSAGE value="Fix problema di ricezione vocale del gioco che l'utente vuole giocare (modalità single del menu di selezione del gioco)" />
     <MESSAGE value="Aggiunto insert dei risultati dei giochi, chiamand rest api del server php sia al termine dei giochi in modalità single che in modalità multy" />
     <MESSAGE value="Aggiunte icone per la schermata di selezione della modalità di gioco: indipendente o assistita" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunte icone per la schermata di selezione della modalità di gioco: indipendente o assistita" />
+    <MESSAGE value="Fix dimensione domanda e parola nei giochi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix dimensione domanda e parola nei giochi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
