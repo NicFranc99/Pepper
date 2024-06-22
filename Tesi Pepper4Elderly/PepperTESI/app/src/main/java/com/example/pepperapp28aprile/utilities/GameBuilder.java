@@ -1,6 +1,7 @@
 package com.example.pepperapp28aprile.utilities;
 
 import android.content.Context;
+import android.sax.RootElement;
 
 import com.example.pepperapp28aprile.Persona;
 import com.example.pepperapp28aprile.models.Esercizio;
@@ -137,6 +138,8 @@ public class GameBuilder {
         String eserciziString = rootelem.get("esercizi").getAsString();
 
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
+        setMediaurl(rootelem,esercizi);
+
 
         for (Esercizio esercizio: esercizi) {
             Persona.Musica.Domanda domanda = new Persona.Musica.Domanda();
@@ -156,6 +159,9 @@ public class GameBuilder {
         String eserciziString = rootelem.get("esercizi").getAsString();
 
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
+        String mediaUrlString = rootelem.has("mediaUrl") && !rootelem.get("mediaUrl").isJsonNull() ? rootelem.get("mediaUrl").getAsString() : null;
+
+        setMediaUrlForAllEsecizi(esercizi,mediaUrlString);
 
         for (Esercizio esercizio: esercizi) {
             game.urlMedia(esercizio.urlMedia);
@@ -176,13 +182,11 @@ public class GameBuilder {
         Persona.Racconti game = new Persona.Racconti(rootelem.get("titleGame").getAsString());
 
         String eserciziString = rootelem.get("esercizi").getAsString();
-        String mediaUrlString = rootelem.get("mediaUrl").getAsString();
         String testoRacconto = rootelem.get("freeText").getAsString();
-        String[] mediaUrl = gson.fromJson(mediaUrlString, String[].class);
 
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
-        setEsercizioMediaUrl(esercizi,mediaUrl);
+        setMediaurl(rootelem,esercizi);
         game.setTestoRacconto(testoRacconto);
         for (Esercizio esercizio: esercizi) {
             game.setUrlsMedia(esercizio.urlMedia);
@@ -199,11 +203,42 @@ public class GameBuilder {
         return game;
     }
 
-    private void setEsercizioMediaUrl(Esercizio[] esercizi, String[] mediaUrlList){
-        for (String mediaUrl:mediaUrlList)
-        {
-            for (Esercizio esercizio: esercizi) {
-                esercizio.urlMedia = mediaUrl;
+    //se nella colonna MediaUrl del database è stato definito almeno un valore:
+    // se è stato definito un solo valore viene utilizzato quel singolo media per tutte le domande
+    //Se ce ne sono più di uno allora si utilizza 1:1 e lo si assegna alla rispettiva domanda
+    //Se non contiene nessun elemento (null) allora si utilizzano i mediaUrl definiti nel json "esercizi[i].mediaUrl" del database
+    private void setMediaurl(JsonObject rootelem, Esercizio[] esercizi){
+        String mediaUrlString = rootelem.has("mediaUrl") && !rootelem.get("mediaUrl").isJsonNull() ? rootelem.get("mediaUrl").getAsString() : null;
+
+        if(mediaUrlString!=null){
+
+            String[] mediaUrlList = gson.fromJson(mediaUrlString, String[].class);
+            if(mediaUrlList.length == 1){
+                setMediaUrlForAllEsecizi(esercizi, mediaUrlList[0]);
+            }
+            setEserciziMediaUrlList(esercizi, mediaUrlList);
+        }
+    }
+
+    private void setEserciziMediaUrlList(Esercizio[] esercizi, String[] mediaUrlList){
+
+            for (String mediaUrl:mediaUrlList) {
+                for (Esercizio esercizio : esercizi) {
+                    esercizio.urlMedia = mediaUrl;
+                }
+            }
+    }
+
+    //Assegna ad ogni esercizio lo stesso mediaUrl, ad sesmepio viene utilizzato nel gioco dei volti che contiene la stessa immagine
+    private void setMediaUrlForAllEsecizi(Esercizio[] esercizi, String mediaUrlJsonString){
+
+        if(mediaUrlJsonString != null){
+            String[] mediaUrlList = gson.fromJson(mediaUrlJsonString, String[].class);
+            String firstMerdiaUrl = mediaUrlList[0];
+
+            for (Esercizio esercizio:esercizi)
+            {
+                esercizio.urlMedia = firstMerdiaUrl;
             }
         }
     }

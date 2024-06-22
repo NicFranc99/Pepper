@@ -35,15 +35,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix animazioni robot quando l'utente sbaglia o fornisce una risposta corretta">
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Implementato gioco racconti.&#10;Fix quando si clicca sul pulsante &quot;vai al menu&quot; al termine del gioco ora vengono caricati tutti i dati e si aggiorna la lista dei giochi già giocati nel menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/FinishGameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/FinishGameFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/TestoRaccontoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/TestoRaccontoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/GameBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/GameBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/PazienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/PazienteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -378,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718900895691</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Implementato gioco racconti.&#10;Fix quando si clicca sul pulsante &quot;vai al menu&quot; al termine del gioco ora vengono caricati tutti i dati e si aggiorna la lista dei giochi già giocati nel menu">
+      <created>1719076774234</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1719076774238</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -418,7 +420,8 @@
     <MESSAGE value="Aggiunte icone per la schermata di selezione della modalità di gioco: indipendente o assistita" />
     <MESSAGE value="Fix dimensione domanda e parola nei giochi" />
     <MESSAGE value="Fix animazioni robot quando l'utente sbaglia o fornisce una risposta corretta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix animazioni robot quando l'utente sbaglia o fornisce una risposta corretta" />
+    <MESSAGE value="Implementato gioco racconti.&#10;Fix quando si clicca sul pulsante &quot;vai al menu&quot; al termine del gioco ora vengono caricati tutti i dati e si aggiorna la lista dei giochi già giocati nel menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementato gioco racconti.&#10;Fix quando si clicca sul pulsante &quot;vai al menu&quot; al termine del gioco ora vengono caricati tutti i dati e si aggiorna la lista dei giochi già giocati nel menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -477,6 +480,11 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameListAdapter.java</url>
           <line>81</line>
           <option name="timeStamp" value="525" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java</url>
+          <line>132</line>
+          <option name="timeStamp" value="527" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

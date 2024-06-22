@@ -139,7 +139,7 @@ public class MediaManagerFragment extends Fragment {
         play.setOnClickListener(v -> {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.pause();
-                play.setImageDrawable(getContext().getDrawable(R.drawable.answer));
+                play.setImageDrawable(getContext().getDrawable(R.drawable.ic_play));
             } else {
                 mediaPlayer.start();
                 play.setImageDrawable(getContext().getDrawable(R.drawable.ic_pause));
