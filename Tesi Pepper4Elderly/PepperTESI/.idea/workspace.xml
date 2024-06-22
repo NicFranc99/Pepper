@@ -35,15 +35,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix dimensione domanda e parola nei giochi">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/explanation_animation.qianim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/nice_reaction_01.qianim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/nice_reaction_02.qianim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/sad_reaction_01.qianim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/sad_reaction_02.qianim" afterDir="false" />
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix animazioni robot quando l'utente sbaglia o fornisce una risposta corretta">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/FinishGameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/FinishGameFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/TestoRaccontoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/TestoRaccontoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/GameBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/GameBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/PazienteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/PazienteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/Util.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,9 +94,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
-  </component>
   <component name="ProjectId" id="1roR8B0G6VkqtCcLWyUnvWSPRYI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -125,6 +122,7 @@
     <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/widget/Button.java_SELECTED" value="Button" />
     <property name="android-custom-view/home/nicola/Android/Sdk/sources/android-30/android/widget/TextView.java_SELECTED" value="TextView" />
+    <property name="android-custom-view/home/nicola/Scrivania/Pepper/Pepper/Tesi Pepper4Elderly/PepperTESI/app/src/main/java/com/example/pepperapp28aprile/VerticalScrollingTextView.java_SELECTED" value="VerticalScrollingTextView" />
     <property name="android-custom-view/home/ubuntu/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-view/home/ubuntu/Android/Sdk/sources/android-30/android/widget/TextView.java_SELECTED" value="TextView" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
@@ -373,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718899289076</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Fix animazioni robot quando l'utente sbaglia o fornisce una risposta corretta">
+      <created>1718900895690</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1718900895691</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -412,7 +417,8 @@
     <MESSAGE value="Aggiunto insert dei risultati dei giochi, chiamand rest api del server php sia al termine dei giochi in modalità single che in modalità multy" />
     <MESSAGE value="Aggiunte icone per la schermata di selezione della modalità di gioco: indipendente o assistita" />
     <MESSAGE value="Fix dimensione domanda e parola nei giochi" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix dimensione domanda e parola nei giochi" />
+    <MESSAGE value="Fix animazioni robot quando l'utente sbaglia o fornisce una risposta corretta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix animazioni robot quando l'utente sbaglia o fornisce una risposta corretta" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -429,12 +435,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>679</line>
+          <line>678</line>
           <option name="timeStamp" value="273" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>899</line>
+          <line>898</line>
           <option name="timeStamp" value="432" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
@@ -459,8 +465,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>601</line>
-          <option name="timeStamp" value="521" />
+          <line>586</line>
+          <option name="timeStamp" value="523" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameListAdapter.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="524" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameListAdapter.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="525" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

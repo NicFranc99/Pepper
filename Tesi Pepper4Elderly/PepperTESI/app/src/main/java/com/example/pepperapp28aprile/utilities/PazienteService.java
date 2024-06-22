@@ -170,12 +170,10 @@ public class PazienteService {
                      addGameToList(rootelem, game, gameList);
                  }
 
-                /* if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.Volti.class.getSimpleName())){
+                if(rootelem.get("nameCategory").getAsString().equalsIgnoreCase(Persona.Racconti.class.getSimpleName())){
                      Persona.Racconti game = gameBuilder.buildRaccontiGame(rootelem);
                      addGameToList(rootelem, game, gameList);
                  }
-
-                 */
              }
 
         } catch (Exception e) {

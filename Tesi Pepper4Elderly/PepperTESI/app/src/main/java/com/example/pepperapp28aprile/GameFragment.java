@@ -261,7 +261,7 @@ public class GameFragment extends Fragment{
                             risultatiManager.stopDomanda();
                             risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                             getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
-                                    .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                    .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager,paziente.getIdString()))
                                     .commit();
                         }
                         else {
@@ -279,7 +279,7 @@ public class GameFragment extends Fragment{
 
                                                     risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                                                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
-                                                            .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                                            .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager,paziente.getIdString()))
                                                             .commit();
                                                 } else {
                                                     if (fragment != null) {
@@ -333,7 +333,7 @@ public class GameFragment extends Fragment{
 
                                                     risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                                                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
-                                                            .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                                            .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager,paziente.getIdString()))
                                                             .commit();
                                                 } else {
                                                     if (fragment != null) {
@@ -395,7 +395,7 @@ public class GameFragment extends Fragment{
 
                                     risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
-                                            .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                            .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager,paziente.getIdString()))
                                             .commit();
                                 } else {
                                     if (fragment != null) {
@@ -583,17 +583,16 @@ public class GameFragment extends Fragment{
                 positioslistclic.clear();
                 answerDialogFragment.setOnDismissListener(dialog -> {
                     if (lisaDomande.size() - 1 == positiongame) {
+                        risultatiManager.stopDomanda();
+                        risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                         if(!gameActivity.isMultyExecution) {
-                            risultatiManager.stopDomanda();
-                            risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
+
                             getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
                                     .commit();
                             getActivity().getSupportFragmentManager().beginTransaction()
-                                    .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                    .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager,paziente.getIdString()))
                                     .commit();
                         }else{
-                            risultatiManager.stopDomanda();
-                            risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                             //Se ci sono ancora giochi a cui giocare e da iterare gioca
                             if(paziente.getEsercizi().indexOf(game)+1  != paziente.getEsercizi().size()){
                                 GameActivity gameActivity = new GameActivity();
@@ -761,7 +760,7 @@ public class GameFragment extends Fragment{
                 risultatiManager.stopDomanda();
                 risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                 getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
-                        .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                        .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager,paziente.getIdString()))
                         .commit();
             }
             else {
@@ -783,7 +782,7 @@ public class GameFragment extends Fragment{
 
                                         risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                                         getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
-                                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager,paziente.getIdString()))
                                                 .commit();
                                     } else {
                                         if (fragment != null) {
@@ -847,7 +846,7 @@ public class GameFragment extends Fragment{
 
                                         risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                                         getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
-                                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager,paziente.getIdString()))
                                                 .commit();
                                     } else {
                                         if (fragment != null) {
@@ -901,7 +900,7 @@ public class GameFragment extends Fragment{
 
                         risultatiManager.fineGioco(paziente.getIdString(),game.idGame);
                         getActivity().getSupportFragmentManager().beginTransaction().remove(GameFragment.this)
-                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager))
+                                .add(containerFragment.getId(), new FinishGameFragment(game, risultatiManager,paziente.getIdString()))
                                 .commit();
                     } else {
                         if (fragment != null) {

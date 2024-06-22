@@ -171,17 +171,22 @@ public class GameBuilder {
         }
         return game;
     }
-/*
+
     public Persona.Racconti buildRaccontiGame(JsonObject rootelem){
         Persona.Racconti game = new Persona.Racconti(rootelem.get("titleGame").getAsString());
 
         String eserciziString = rootelem.get("esercizi").getAsString();
+        String mediaUrlString = rootelem.get("mediaUrl").getAsString();
+        String testoRacconto = rootelem.get("freeText").getAsString();
+        String[] mediaUrl = gson.fromJson(mediaUrlString, String[].class);
 
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
+        setEsercizioMediaUrl(esercizi,mediaUrl);
+        game.setTestoRacconto(testoRacconto);
         for (Esercizio esercizio: esercizi) {
-            game.urlMedia(esercizio.urlMedia);
-            Persona.Volti.Domanda domanda = new Persona.Volti.Domanda();
+            game.setUrlsMedia(esercizio.urlMedia);
+            Persona.Racconti.Domanda domanda = new Persona.Racconti.Domanda();
             domanda.setTestoDomanda(esercizio.domanda);
             domanda.setRispostaCorretta(esercizio.rispostaCorretta);
 
@@ -193,7 +198,16 @@ public class GameBuilder {
         }
         return game;
     }
-*/
+
+    private void setEsercizioMediaUrl(Esercizio[] esercizi, String[] mediaUrlList){
+        for (String mediaUrl:mediaUrlList)
+        {
+            for (Esercizio esercizio: esercizi) {
+                esercizio.urlMedia = mediaUrl;
+            }
+        }
+    }
+
     public Persona.Mesi buildMesiGame(JsonObject rootelem){
         Persona.Mesi game = new Persona.Mesi(rootelem.get("titleGame").getAsString());
 

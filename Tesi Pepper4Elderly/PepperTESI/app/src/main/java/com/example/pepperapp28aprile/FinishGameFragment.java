@@ -1,6 +1,9 @@
 package com.example.pepperapp28aprile;
 
 import android.animation.Animator;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.pepperapp28aprile.interfacedir.onCLickListener;
@@ -27,11 +31,13 @@ public class FinishGameFragment extends Fragment {
     private final Persona.Game game;
     private int positions;
     private View v;
+    private String idPaziente;
 
-    public FinishGameFragment(Persona.Game game, RisultatiManager risultatiManager){
+    public FinishGameFragment(Persona.Game game, RisultatiManager risultatiManager, String idPaziente){
         this.risultatiManager = risultatiManager;
         // this.positions=positions;
         this.game = game;
+        this.idPaziente = idPaziente;
     }
 
     @Override
@@ -51,8 +57,8 @@ public class FinishGameFragment extends Fragment {
         v.findViewById(R.id.btnStatistiche).setOnClickListener(v -> getActivity().getSupportFragmentManager().beginTransaction().remove(FinishGameFragment.this)
                 .add(container.getId(), new StatisticheFragment(risultatiManager)).commit());
 
-        v.findViewById(R.id.btnMenuPrincipale).setOnClickListener(v -> getActivity().finish());
-
+       // v.findViewById(R.id.btnMenuPrincipale).setOnClickListener(v -> getActivity().finish());
+        v.findViewById(R.id.btnMenuPrincipale).setOnClickListener(v -> closeActivityAndRunGameProfileActivity());
         finish.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -111,6 +117,15 @@ public class FinishGameFragment extends Fragment {
             }
         }
 
+    }
+
+
+    public void closeActivityAndRunGameProfileActivity() {
+
+        Intent intent = new Intent(this.getActivity(), GameProfileActivity.class);
+        intent.putExtra("load_fragment", false);
+        intent.putExtra("idPaziente", idPaziente);
+        startActivity(intent);
     }
 
     private void showRestartDialog() {

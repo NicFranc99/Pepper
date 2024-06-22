@@ -57,7 +57,7 @@ public class GameExplanationFragment extends Fragment {
                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameExplanationFragment.this)
                             .commit();
                     getActivity().getSupportFragmentManager().beginTransaction()
-                            .add(container.getId(), new TestoRaccontoFragment(g,position)).commit();
+                            .add(container.getId(), new TestoRaccontoFragment(g,paziente)).commit();
 
                 } else {
                     getActivity().getSupportFragmentManager().beginTransaction().remove(GameExplanationFragment.this)

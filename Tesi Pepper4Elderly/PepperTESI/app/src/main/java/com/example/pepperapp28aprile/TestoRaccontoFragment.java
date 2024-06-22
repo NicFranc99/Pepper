@@ -43,7 +43,6 @@ import java.util.List;
 public class TestoRaccontoFragment extends Fragment {
     private static final String ID_LOG_TESTO_RACCONTO_FRAGMENT = "TESTO_RACCONTO_FRAGMENT";
     private final String testoRacconto, titolo;
-    private final int positionGame;
     private TextView txtTestoRacconto, txttitoloracconto;
     private Persona.Game game;
     public  static Button domandaButton;
@@ -53,14 +52,15 @@ public class TestoRaccontoFragment extends Fragment {
     public  List<String> urlMedia;
     public  VerticalScrollingTextView tvContent;
     public GameActivity gameActivity;
-    public TestoRaccontoFragment(Persona.Game game,int positionGame) {
+    private Persona paziente;
+    public TestoRaccontoFragment(Persona.Game game,Persona paziente) {
         Persona.Racconti g = (Persona.Racconti) game;
         this.game = game;
-        this.positionGame = positionGame;
         testoRacconto = g.getTestoRacconto();
         titolo = g.getTitleGame();
         racconto = (Persona.Racconti)game;
         urlMedia = racconto.getListUrlsMedia();
+        this.paziente = paziente;
     }
 
     @Override
@@ -166,7 +166,7 @@ public class TestoRaccontoFragment extends Fragment {
            // tts.stop();
             getActivity().getSupportFragmentManager().beginTransaction().remove(TestoRaccontoFragment.this).commit();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(container.getId(), new GameFragment(game,positionGame)).commit();
+                    .add(container.getId(), new GameFragment(game,paziente)).commit();
 
         });
 
