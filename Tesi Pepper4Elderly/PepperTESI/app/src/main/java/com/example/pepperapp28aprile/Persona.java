@@ -676,8 +676,7 @@ public class Persona implements Serializable {
         }
 
         public void setDomandaGioco(String textDomanda, String lettera) {
-            String testo = "Ricorda: per terminare il gioco basta dire STOP, FINE GIOCO oppure FERMA GIOCO." + textDomanda;
-            Domanda dom = new Domanda(testo, lettera);
+            Domanda dom = new Domanda(textDomanda, lettera);
             setDomandaGioco(dom);
         }
     }

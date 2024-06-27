@@ -102,7 +102,7 @@
             android:id="@+id/btnvocalinput"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@color/category_no_focused"
+            android:background="@drawable/circle_background"
             android:elevation="5dp"
             android:padding="2dp"
             android:visibility="visible"

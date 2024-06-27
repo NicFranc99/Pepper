@@ -200,13 +200,18 @@ public class GameBuilder {
 
         String eserciziString = rootelem.get("esercizi").getAsString();
         String testoRacconto = rootelem.get("freeText").getAsString();
+        String mediaUrlString = rootelem.get("mediaUrl").getAsString();
 
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
+        String[] mediaUrlList = gson.fromJson(mediaUrlString, String[].class);
+
+        for(String media : mediaUrlList){
+            game.setUrlsMedia(media);
+        }
 
         setMediaurl(rootelem,esercizi);
         game.setTestoRacconto(testoRacconto);
         for (Esercizio esercizio: esercizi) {
-            game.setUrlsMedia(esercizio.urlMedia);
             Persona.Racconti.Domanda domanda = new Persona.Racconti.Domanda();
             domanda.setTestoDomanda(esercizio.domanda);
             domanda.setRispostaCorretta(esercizio.rispostaCorretta);
@@ -214,7 +219,6 @@ public class GameBuilder {
             for (String risposta: esercizio.risposte) {
                 domanda.setRispostaSbagliata(risposta);
             }
-
             game.setListaDomande(domanda);
         }
         return game;
@@ -238,12 +242,11 @@ public class GameBuilder {
     }
 
     private void setEserciziMediaUrlList(Esercizio[] esercizi, String[] mediaUrlList){
+        int lenght = esercizi.length;
 
-            for (String mediaUrl:mediaUrlList) {
-                for (Esercizio esercizio : esercizi) {
-                    esercizio.urlMedia = mediaUrl;
-                }
-            }
+        for(int i=0; i< lenght; i++){
+            esercizi[i].urlMedia = mediaUrlList[i];
+        }
     }
 
     //Assegna ad ogni esercizio lo stesso mediaUrl, ad sesmepio viene utilizzato nel gioco dei volti che contiene la stessa immagine
@@ -288,7 +291,7 @@ public class GameBuilder {
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
         for (Esercizio esercizio: esercizi) {
-            game.setDomandaGioco(esercizio.domanda, esercizio.parola);
+            game.setDomandaGioco(getDomandaGioco(rootelem,esercizio), esercizio.parola);
         }
 
         return game;
