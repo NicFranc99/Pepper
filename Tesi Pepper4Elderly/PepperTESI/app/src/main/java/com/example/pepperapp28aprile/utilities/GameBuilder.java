@@ -40,15 +40,31 @@ public class GameBuilder {
 
         String eserciziString = rootelem.get("esercizi").getAsString();
 
+
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
         for (Esercizio esercizio: esercizi) {
             game.setCategory(esercizio.parola);
-            game.setDomandaGioco(esercizio.domanda);
+
+
+
+            game.setDomandaGioco(getDomandaGioco(rootelem,esercizio));
         }
 
         return game;
     }
+
+    private String getDomandaGioco(JsonObject rootelem, Esercizio esercizio){
+        String domanda = rootelem.has("domanda") && !rootelem.get("domanda").isJsonNull() ? rootelem.get("domanda").getAsString() : null;
+
+        if(domanda == null){
+            return esercizio.domanda;
+        }
+
+        return domanda;
+    }
+
+
 
     public Persona.EsistenzaParole buildEsistenzaParoleGame(JsonObject rootelem, Context context){
         Persona.EsistenzaParole game = new Persona.EsistenzaParole(rootelem.get("titleGame").getAsString());
@@ -64,7 +80,7 @@ public class GameBuilder {
 
         game.setListaRisposte(listaRisposte);
         for (Esercizio esercizio: esercizi) {
-            game.setParole(context,esercizio.parola,esercizio.domanda);
+            game.setParole(context,esercizio.parola,getDomandaGioco(rootelem,esercizio));
         }
 
         return game;
@@ -79,12 +95,13 @@ public class GameBuilder {
         listaRisposte = gson.fromJson(risposteString, ArrayList.class);
         game.setRisposte(listaRisposte);
 
+
         String eserciziString = rootelem.get("esercizi").getAsString();
 
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
         for (Esercizio esercizio: esercizi) {
-            game.setDomanda(esercizio.rispostaCorretta, esercizio.parola, esercizio.domanda);
+            game.setDomanda(esercizio.rispostaCorretta, esercizio.parola, getDomandaGioco(rootelem,esercizio));
         }
 
         return game;
@@ -98,7 +115,7 @@ public class GameBuilder {
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
         for (Esercizio esercizio: esercizi) {
-            game.setParole(esercizio.parola,esercizio.domanda);
+            game.setParole(esercizio.parola,getDomandaGioco(rootelem,esercizio));
         }
 
         return game;
@@ -112,7 +129,7 @@ public class GameBuilder {
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
         for (Esercizio esercizio: esercizi) {
-            game.setParole(esercizio.parola, esercizio.domanda);
+            game.setParole(esercizio.parola, getDomandaGioco(rootelem,esercizio));
         }
 
         return game;
@@ -126,7 +143,7 @@ public class GameBuilder {
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
         for (Esercizio esercizio: esercizi) {
-            game.setParole(esercizio.parola, esercizio.domanda);
+            game.setParole(esercizio.parola, getDomandaGioco(rootelem,esercizio));
         }
 
         return game;
@@ -148,7 +165,7 @@ public class GameBuilder {
             for (String risposta: esercizio.risposte) {
                 domanda.setRispostaSbagliata(risposta);
             }
-            game.setListaDomande(domanda,esercizio.domanda);
+            game.setListaDomande(domanda,getDomandaGioco(rootelem, esercizio));
         }
         return game;
     }
@@ -280,6 +297,7 @@ public class GameBuilder {
     public Persona.CombinazioniLettere buildCombinazioniLettereGame(JsonObject rootelem){
         Persona.CombinazioniLettere game = new Persona.CombinazioniLettere(rootelem.get("titleGame").getAsString());
         String eserciziString = rootelem.get("esercizi").getAsString();
+        String domanda = rootelem.get("domanda").getAsString();
 
         Esercizio[] esercizi = gson.fromJson(eserciziString, Esercizio[].class);
 
@@ -287,7 +305,7 @@ public class GameBuilder {
             game.setLettera(esercizio.parola);
         }
 
-        game.setDomandaGioco();
+        game.setDomandaGioco(domanda);
         return game;
     }
 }

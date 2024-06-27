@@ -184,6 +184,8 @@ public class Persona implements Serializable {
             SELEZIONE, SCRITTURA, VOCALE
         }
 
+        public String pepperTextForStopGame = "Ricorda: per terminare il gioco basta dire STOP, FINE GIOCO oppure FERMA GIOCO";
+
         private int setIndexInCategory = 0;
 
         public GameResult gameResult;
@@ -538,6 +540,15 @@ public class Persona implements Serializable {
             Domanda dom = new Domanda(testo, elencoLettere);
             setDomandaGioco(dom);
         }
+
+        public void setDomandaGioco(String testo) {
+            String elencoLettere = "";
+            for (String l : letter) {
+                elencoLettere += l.toUpperCase() + "  ";
+            }
+            Domanda dom = new Domanda(testo, elencoLettere);
+            setDomandaGioco(dom);
+        }
     }
     public static class EsistenzaParole extends Game implements Serializable{
         private ArrayList<String> listaRisposte;
@@ -699,8 +710,8 @@ public class Persona implements Serializable {
         }
 
         public void setDomandaGioco(String textDomanda) {
-            String testo = "Ricorda: per terminare il gioco basta dire STOP, FINE GIOCO oppure FERMA GIOCO." + textDomanda;
-            Domanda dom = new Domanda(testo, this.categoria.toUpperCase());
+            //String testo = "Ricorda: per terminare il gioco basta dire STOP, FINE GIOCO oppure FERMA GIOCO." + textDomanda;
+            Domanda dom = new Domanda(textDomanda, this.categoria.toUpperCase());
             setDomandaGioco(dom);
         }
     }

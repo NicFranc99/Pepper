@@ -161,7 +161,12 @@ public class GameFragment extends Fragment{
             //qiContext = lissenerActivity.getQiContext();
 
         //Inizio processo parola gioco lissener
-        requestTextForPepper = domanda.getTestoDomanda()+ " " + domanda.getTestoParola();
+        if(game instanceof Persona.FluenzeSemantiche || game instanceof Persona.FluenzeFonologiche || game instanceof Persona.CombinazioniLettere ){
+            requestTextForPepper = game.pepperTextForStopGame + " " + domanda.getTestoDomanda()+ " " + domanda.getTestoParola();
+        }else{
+            requestTextForPepper = domanda.getTestoDomanda()+ " " + domanda.getTestoParola();
+        }
+
         if(game.getInputType().get(0) == Persona.Game.TypeInputGame.VOCALE)
         {
             containerAnimations.setVisibility(View.VISIBLE);
