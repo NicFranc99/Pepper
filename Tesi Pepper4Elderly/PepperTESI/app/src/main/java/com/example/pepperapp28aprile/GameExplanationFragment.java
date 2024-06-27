@@ -41,6 +41,8 @@ public class GameExplanationFragment extends Fragment {
         TextView txtSpiegazione = v.findViewById(R.id.txt_spiegazione);
         txtSpiegazione.setText(g.getDescrizioneGioco());
         gameActivity.sayDescription = gameActivity.getRobotHelper().say(g.getDescrizioneGioco());
+        gameActivity.getRobotHelper().animation(R.raw.explanation_animation);
+
         if (getContext().checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[] { Manifest.permission.RECORD_AUDIO }, 1);
         }

@@ -4,9 +4,11 @@ import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -15,10 +17,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.aldebaran.qi.Consumer;
+import com.aldebaran.qi.Future;
+import com.aldebaran.qi.sdk.Qi;
+import com.aldebaran.qi.sdk.QiContext;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.pepperapp28aprile.animations.Animations;
+import com.example.pepperapp28aprile.map.RobotHelper;
+import com.example.pepperapp28aprile.models.RecyclerViewAnswersAdapter;
 import com.example.pepperapp28aprile.utilities.Util;
 import com.example.pepperapp28aprile.utilities.VoiceManager;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -28,16 +37,18 @@ import java.io.IOException;
 public class MediaManagerFragment extends Fragment {
     private final String phatMedia;
     private final Persona.Game.Domanda.typeMedia typeMedia;
-    private MediaPlayer mediaPlayer;
+    public MediaPlayer mediaPlayer;
     private SeekBar seekBar;
-    private ShapeableImageView play;
+    public ShapeableImageView play;
     private Handler handler = new Handler();
     private TextView start, finish;
+    private GameFragment gameFragment;
 
     public MediaManagerFragment(String phatMedia, Persona.Game.Domanda.typeMedia typeMedia) {
         this.phatMedia = phatMedia;
         this.typeMedia = typeMedia;
     }
+
 
     @Nullable
     @Override
@@ -134,7 +145,8 @@ public class MediaManagerFragment extends Fragment {
             updateSeekBar();
         }
 
-        mediaPlayer.setOnCompletionListener(mp -> play.setImageDrawable(getContext().getDrawable(R.drawable.ic_replay)));
+       // mediaPlayer.setOnCompletionListener(mp -> play.setImageDrawable(getContext().getDrawable(R.drawable.ic_replay)));
+        setOnCompletedListener();
 
         play.setOnClickListener(v -> {
             if (mediaPlayer.isPlaying()) {
@@ -173,10 +185,12 @@ public class MediaManagerFragment extends Fragment {
         }
     };
 
-    public void start(){
+    public void start(GameFragment fragment){
         requireActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                gameFragment = fragment;
+
                 // Operazioni dell'interfaccia utente
                 mediaPlayer.start();
                 updateSeekBar();
@@ -185,5 +199,49 @@ public class MediaManagerFragment extends Fragment {
         });
 
 
+    }
+
+    private void setOnCompletedListener(){
+        mediaPlayer.setOnCompletionListener(mp ->
+        {
+            play.setImageDrawable(getContext().getDrawable(R.drawable.ic_replay));
+            gameFragment.recyclerView.setVisibility(View.VISIBLE);
+
+            gameFragment.requestSay.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
+                // Pepper inizia a parlare
+                gameFragment.requestSay = gameFragment.robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + Util.toString(GameFragment.domanda.getListaRispose()))
+                        .andThenCompose(result -> {
+                            gameFragment.listenFuture = gameFragment.robotHelper.setListener(GameFragment.domanda.getListaRispose(), gameFragment.qiContext);
+                            return gameFragment.listenFuture.andThenCompose(heardPhrase -> {
+                                // Usa la frase ascoltata come necessario
+                                Log.d("Pepper4RSA", "Pepper heard: " + heardPhrase);
+                                // Ritorna un Future completato per continuare la catena
+
+
+// Ottieni l'item alla posizione specificata
+                                RecyclerAnswers item = gameFragment.adapter.getItemByText(heardPhrase);
+
+                                int positionToClick = gameFragment.adapter.getPositionByItem(item);
+// Trova la view alla posizione specificata
+                                RecyclerView.ViewHolder viewHolder = gameFragment.recyclerView.findViewHolderForAdapterPosition(positionToClick);
+
+                                if (viewHolder != null && gameFragment.adapter.listener != null) {
+                                    View itemView = viewHolder.itemView;
+
+                                    gameFragment.adapter.listener.onItemClick(itemView, heardPhrase, positionToClick);
+                                }
+
+                                // Ritorna un Future completato per continuare la catena
+                                gameFragment.listenFuture.cancel(true);
+                                return Future.of(null);
+                            });
+                        }).thenConsume(future -> { //Verifico se c'e' un problema con l'esecuzione del future per l'ascolto
+                            if (future.hasError()) {
+                                Log.e("Pepper4RSA", "Error while speaking or listening: ", future.getError());
+                            }
+                        });
+            }));
+
+        });
     }
 }

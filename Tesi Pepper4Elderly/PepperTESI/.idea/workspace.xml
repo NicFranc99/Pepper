@@ -35,10 +35,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Implementato gioco racconti.&#10;Fix quando si clicca sul pulsante &quot;vai al menu&quot; al termine del gioco ora vengono caricati tutti i dati e si aggiorna la lista dei giochi già giocati nel menu">
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Ora è possibile definire i mediaUrl all'interno del database per tutti gli esercizi oppure uno singolo alla volta (valorizzando il json esercizi[i].mediaUrl).&#10;Fix bug immagine di stop player del gioco Musica quando si tenta di stoppare manualmente dal toutch la canzone corrente.">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/funny_01.qianim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/funny_02.qianim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameExplanationFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/GameBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/GameBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -380,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1719076774238</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Ora è possibile definire i mediaUrl all'interno del database per tutti gli esercizi oppure uno singolo alla volta (valorizzando il json esercizi[i].mediaUrl).&#10;Fix bug immagine di stop player del gioco Musica quando si tenta di stoppare manualmente dal toutch la canzone corrente.">
+      <created>1719078797186</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1719078797186</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -421,40 +431,36 @@
     <MESSAGE value="Fix dimensione domanda e parola nei giochi" />
     <MESSAGE value="Fix animazioni robot quando l'utente sbaglia o fornisce una risposta corretta" />
     <MESSAGE value="Implementato gioco racconti.&#10;Fix quando si clicca sul pulsante &quot;vai al menu&quot; al termine del gioco ora vengono caricati tutti i dati e si aggiorna la lista dei giochi già giocati nel menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementato gioco racconti.&#10;Fix quando si clicca sul pulsante &quot;vai al menu&quot; al termine del gioco ora vengono caricati tutti i dati e si aggiorna la lista dei giochi già giocati nel menu" />
+    <MESSAGE value="Ora è possibile definire i mediaUrl all'interno del database per tutti gli esercizi oppure uno singolo alla volta (valorizzando il json esercizi[i].mediaUrl).&#10;Fix bug immagine di stop player del gioco Musica quando si tenta di stoppare manualmente dal toutch la canzone corrente." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ora è possibile definire i mediaUrl all'interno del database per tutti gli esercizi oppure uno singolo alla volta (valorizzando il json esercizi[i].mediaUrl).&#10;Fix bug immagine di stop player del gioco Musica quando si tenta di stoppare manualmente dal toutch la canzone corrente." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>237</line>
+          <line>241</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>414</line>
+          <line>418</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>678</line>
+          <line>686</line>
           <option name="timeStamp" value="273" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>898</line>
+          <line>906</line>
           <option name="timeStamp" value="432" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>277</line>
+          <line>281</line>
           <option name="timeStamp" value="433" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java</url>
-          <line>98</line>
-          <option name="timeStamp" value="471" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/PlaceholderFragmentGames.java</url>
@@ -468,23 +474,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
-          <line>586</line>
+          <line>594</line>
           <option name="timeStamp" value="523" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameListAdapter.java</url>
-          <line>97</line>
-          <option name="timeStamp" value="524" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameListAdapter.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="525" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java</url>
-          <line>132</line>
-          <option name="timeStamp" value="527" />
+          <line>119</line>
+          <option name="timeStamp" value="528" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

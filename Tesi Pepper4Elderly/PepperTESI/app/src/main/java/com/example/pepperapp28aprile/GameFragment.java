@@ -54,16 +54,16 @@ import java.util.concurrent.Executors;
 
 public class GameFragment extends Fragment{
     private View v;
-    private RecyclerView recyclerView;
+    public RecyclerView recyclerView;
     private ArrayList<RecyclerAnswers> recyclerAnswersArrayList;
-    private List<Persona.Game.Domanda> lisaDomande;
+    public List<Persona.Game.Domanda> lisaDomande;
     private MediaManagerFragment fragment;
     private ViewGroup containerFragment;
     private RisultatiManager risultatiManager;
-    private Persona.Game game;
+    public Persona.Game game;
     public static int positiongame = 0;
-    private RobotHelper robotHelper;
-    private QiContext qiContext;
+    public RobotHelper robotHelper;
+    public QiContext qiContext;
     public static PepperLissenerActivity lissenerActivity;
     public static String rispostaUtente;
     public GameActivity gameActivity;
@@ -76,10 +76,10 @@ public class GameFragment extends Fragment{
     private SpeechRecognizer speechRecognizer;
     private Intent speechRecognizerIntent;
     public static Persona.Game.Domanda domanda;
-    private Future<Void> requestSay;
-    private Future<String> listenFuture;
+    public Future<Void> requestSay;
+    public Future<String> listenFuture;
     private String parolaDettaApepper;
-    private RecyclerViewAnswersAdapter adapter;
+    public RecyclerViewAnswersAdapter adapter;
     private Persona paziente;
     /*public GameFragment(int positionGame, Persona.Game.TypeInputGame chose) {
         this.positionGame = positionGame;
@@ -142,6 +142,10 @@ public class GameFragment extends Fragment{
         TextView testoparola = v.findViewById(R.id.testoparola);
         containerAnimations = v.findViewById(R.id.viewanim);
 
+        //Nascondo le risposte appena inizia il gioco musicale
+        if(game instanceof  Persona.Musica){
+            recyclerView.setVisibility(View.INVISIBLE);
+        }
 
 
 
@@ -509,22 +513,23 @@ public class GameFragment extends Fragment{
             //Quando pepper termina di dire la domanda, gli faccio dire le risposte disponibili
             if (!(game instanceof Persona.FluenzeVerbali || game instanceof Persona.FluenzeSemantiche || game instanceof Persona.FluenzeFonologiche)) {
 
+
+
                 requestSay.andThenConsume(Qi.onUiThread((Consumer<Void>) ignore -> {
+                    if (game instanceof Persona.Musica) {
+                        fragment.start(this);
+                    }
+                    else{
+
+
                     // Pepper inizia a parlare
                     requestSay = robotHelper.say(getContext().getString(R.string.answers_introduction) + "   " + risposte)
-                            .andThenCompose(action -> {
-                                // Se è un gioco musicale, avvia il player
-                                if (game instanceof Persona.Musica) {
-                                    fragment.start();
-                                }
-                                return Future.of(null);
-                            }).andThenCompose(result -> {
-                                 listenFuture = robotHelper.setListener(domanda.getListaRispose(), qiContext);
+                            .andThenCompose(result -> {
+                                listenFuture = robotHelper.setListener(domanda.getListaRispose(), qiContext);
                                 return listenFuture.andThenCompose(heardPhrase -> {
                                     // Usa la frase ascoltata come necessario
                                     Log.d("Pepper4RSA", "Pepper heard: " + heardPhrase);
                                     // Ritorna un Future completato per continuare la catena
-
 
 
 // Ottieni l'item alla posizione specificata
@@ -549,11 +554,14 @@ public class GameFragment extends Fragment{
                                     Log.e("Pepper4RSA", "Error while speaking or listening: ", future.getError());
                                 }
                             });
+
+                }
                 }));
 
 
             }
         }
+
 
         adapter.setListener((v, item, position) -> {
 
@@ -922,9 +930,12 @@ public class GameFragment extends Fragment{
     }
 
     private Future<Void> correctAnswer(){
+
         int[] animationsArray = {
                 R.raw.nice_reaction_01,
-                R.raw.nice_reaction_02
+                R.raw.nice_reaction_02,
+                R.raw.funny_01,
+                R.raw.funny_02
         };
 
         int randomNumberForAnimation = new Random().nextInt(animationsArray.length);
