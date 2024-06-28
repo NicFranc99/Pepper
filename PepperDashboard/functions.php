@@ -318,6 +318,38 @@ function getParentCall($parID)
     	return;	
 }
 
+function addGameResult($idelder, $idgame,$score)
+{
+	$conn = db_connect();
+
+	$idelder = filter_var($idelder, FILTER_SANITIZE_NUMBER_INT);
+	$idgame = filter_var($idgame, FILTER_SANITIZE_NUMBER_INT);
+	$score = filter_var($score, FILTER_SANITIZE_NUMBER_INT);
+	
+	    // Controlla se esiste già una riga per idgame e idElder con isActive = 1
+    $sql_check = "SELECT id_result FROM GameResults WHERE id_elderly = :idelder AND id_game = :idgame AND is_active = 1;";
+    $stmt_check = $conn->prepare($sql_check);
+    $stmt_check->execute(array(':idelder' => $idelder, ':idgame' => $idgame));
+    $row = $stmt_check->fetch(PDO::FETCH_ASSOC);
+
+    if ($row) {
+        // Esiste già una riga con isActive = 1, esegui un UPDATE per impostare isActive = 0
+        $id_result = $row['id_result'];
+        $sql_update = "UPDATE GameResults SET is_active = 0 WHERE id_result = :id_result";
+        $stmt_update = $conn->prepare($sql_update);
+        $stmt_update->execute(array(':id_result' => $id_result));
+    }
+
+    // Esegui un INSERT per aggiungere i nuovi dati
+	$sql = "INSERT INTO GameResults(id_elderly,id_game,score) VALUES (:idelder, :idgame, :score)";
+	$stmt = $conn->prepare($sql);
+	$stmt->execute(array(
+    ':idelder' => $idelder,
+    ':idgame' => $idgame,
+    ':score' => $score
+	));
+}
+
 function addElderCall($parID, $eldID)
 {
 	$conn = db_connect();
@@ -346,34 +378,104 @@ function getAllCategory()
     return $list;
 }
 
-function getGamesByElderId($eldID)
+function getGamesByElderId($eldID,$orderByGamesWithoutResults)
+{
+
+	$conn = db_connect();
+
+	$eldID = htmlspecialchars($eldID);
+	$orderByGamesWithoutResults = htmlspecialchars($orderByGamesWithoutResults);
+	
+	if($orderByGamesWithoutResults == false )
+	{
+				$sql = "SELECT 
+    eld.id AS idElderly,
+    eld.name AS nameElderly,
+    gm.id_game AS idGame,
+    gm.id_category AS idCategory,
+    gm.name_game AS titleGame,
+    gm.risposte AS risposte,
+    gm.esercizi AS esercizi,
+    gm.mediaUrl AS mediaUrl,
+    gm.freeText,
+    gm.domanda,
+    c.name_category AS nameCategory,
+    c.description_explaitation_category AS explaitationText,
+    c.has_vocal_input AS hasVocalInput,
+    gr.id_result AS idResult,
+    gr.score AS score,
+    gr.creation_date AS creationDateResult,
+    gr.is_active AS isActive
+FROM Elderlies eld 
+INNER JOIN Games gm ON eld.id = gm.id_elderly
+INNER JOIN Categories c ON gm.id_category = c.id_category
+LEFT JOIN GameResults gr ON gr.id_elderly = eld.id AND gr.id_game = gm.id_game
+WHERE eld.id = :eldID AND (gr.is_active = 1 OR gr.is_active IS NULL);";
+	}
+	else{
+		$sql = "SELECT 
+    eld.id AS idElderly,
+    eld.name AS nameElderly,
+    gm.id_game AS idGame,
+    gm.id_category AS idCategory,
+    gm.name_game AS titleGame,
+    gm.risposte AS risposte,
+    gm.esercizi AS esercizi,
+    gm.mediaUrl AS mediaUrl,
+    gm.domanda,
+    gm.freeText,
+    c.name_category AS nameCategory,
+    c.description_explaitation_category AS explaitationText,
+    c.has_vocal_input AS hasVocalInput,
+    gr.id_result AS idResult,
+    gr.score AS score,
+    gr.creation_date AS creationDateResult,
+    gr.is_active AS isActive
+FROM Elderlies eld 
+INNER JOIN Games gm ON eld.id = gm.id_elderly
+INNER JOIN Categories c ON gm.id_category = c.id_category
+LEFT JOIN GameResults gr ON gr.id_elderly = eld.id AND gr.id_game = gm.id_game
+WHERE eld.id = :eldID AND (gr.is_active = 1 OR gr.is_active IS NULL)
+ORDER BY 
+    CASE   
+        WHEN gr.is_active IS NULL THEN 0
+        ELSE 1                            
+    END,
+    idGame;";
+	}
+
+
+		$stmt = $conn->prepare($sql);
+		$stmt->execute(array(':eldID' => $eldID));
+
+		$list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+   		 return $list;
+}
+
+function getElderById($eldID)
 {
 
 	$conn = db_connect();
 
 	$eldID = htmlspecialchars($eldID);
 	$sql = "SELECT 
-	    eld.id as id_ederly,
-		eld.name as name, 
-		eld.surname as surname, 
-		eld.gender as gender,
-		gm.id_game,
-		gm.id_category as id_category,
-		gm.name_game as title_game,
-		gm.risposte as risposte,
-		gm.esercizi as eservizi,
-		c.name_category as name_category,
-		c.description_explaitation_category as explaitation_text,
-		c.has_vocal_input as has_vocal_input
+	        eld.id as idEderly,
+	        eld.name as name,
+	        eld.surname as surname,
+	        eld.place as city,
+	        eld.room as room,
+	        eld.gender as gender,
+	        eld.birth as birthDate,
+	        eld.propic as propic
+	        
 		FROM Elderlies eld 
-		INNER JOIN Games gm ON eld.id = gm.id_elderly
-		INNER JOIN Categories c ON gm.id_category = c.id_category
-		WHERE eld.id = :eldID ORDER BY gm.id_game;";
+		WHERE eld.id = :eldID;";
 
 		$stmt = $conn->prepare($sql);
 		$stmt->execute(array(':eldID' => $eldID));
 
-		$list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$list = $stmt->fetch(PDO::FETCH_ASSOC);
     	return $list;
 }
 
