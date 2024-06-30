@@ -10,7 +10,7 @@ function db_connect() {
     	$hostname = "localhost";
     	$dbname = "my_bettercallpepper";
     	$user = 'root';
-    	$pass = '';
+    	$pass = 'peppergames';
     	$db = new PDO ("mysql:host=$hostname;dbname=$dbname", $user, $pass);
 	} 
 	catch (PDOException $e) {

@@ -28,6 +28,7 @@ if(!isset($_SESSION['username']))
 
     <!-- Bootstrap CSS-->
     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Vendor CSS-->
     <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
@@ -81,7 +82,7 @@ if(!isset($_SESSION['username']))
 							if($_SESSION['popup'] == "editelder" && $_SESSION['popupok'] == false)
 							{
 								alert("danger", "Anziano", "Errore nella modifica dell'anziano");
-							}							
+							}								
 						    unset($_SESSION['popup']);
                             unset($_SESSION['popupok']);
 						}
@@ -115,6 +116,7 @@ if(!isset($_SESSION['username']))
                                                 echo '<td><img class="rounded-circle mx-auto d-block imgminsize" width="120" height="120" src="'.$elder['propic'].'"></td>';												
 												echo '<td><b>' . $elder['name'] . " " . $elder['surname'] . '</b><br> nato il '.$elder['birth'].'<br>a '.$elder['place'].' ('.$elder['prov'].')<br>';
 												echo '<a class="btn btn-sm btn-info" href="contacts.php?id='.$elder['id'].'"><i class="fas fa-address-book"></i> Contatti</a>';
+												echo '<a class="btn btn-sm btn-info m-l-5" href="viewElderGames.php?id='.$elder['id'].'&eldName='.$elder['name'].'"><i class="bi bi-joystick"></i> Giochi</a>';
 												echo '</td>';
 												if($elder['status'] == 1)
 													echo '<td>Active';
