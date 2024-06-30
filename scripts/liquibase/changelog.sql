@@ -279,21 +279,20 @@ CREATE TABLE `my_bettercallpepper`.`Categories` (
 -- Dump dei dati per la tabella `Categories`
 --
 
-INSERT INTO `my_bettercallpepper`.`Categories` (`id_category`, `name_category`,`description_explaitation_category`, `has_vocal_input`) VALUES
-(1, 'appartenenza', 'In questo esercizio ti mostreremo di volta in volta una parola, dovrai indicare se la parola appartiene o meno alla categoria appartenenza.',0),
-(2, 'categorizzazione', 'In questo esercizio ti mostreremo  un nome di una persona o un oggetto, e 4 opzioni che indicano diverse categorie, dovrai indicare a quale categoria appartiene la parola.',0),
-(3, 'combinazionilettere', "Durante l'esercizio di combinazioni lettere  dovrai cercare di formare il maggior numero di parole con le lettere presentate.",0),
-(4, 'esistenzaparole', "Durante questo esercizio ti sará mostrata una parola, dovrai dirci se quella parola ESISTE oppure NON ESISTE.",0),
-(5, 'finaliparole', "L' esercizio di finali parole consiste nel presentarti l'inizio di una parola, e tu dovrai dirmi come termina ad esempio “diva” sarà l'inizio della parola “divano” oppure “divario”.",1),
-(6, 'fluenzefonologiche', "In questo gioco ti sará mostrata una lettera, tu dovrai indicare quante piú parole che ti vengono in mente che iniziano con quella lettera.",1),
-(7, 'fluenzesemantiche', "In questo gioco ti mostreremo una categoria e dovrai indicare quante piú parole possibili che ti vengono in mente inerente alla categoria mostrata.",1),
-(8, 'fluenzeverbali', "In questo esercizio ti verra mostrata di volta in volta una categoria, dovrai indicare quante piú parole ti vengono in mente inerente a quella categoria.",1),
-(9, 'immaginiEparole', "In questo gioco ti verrano mostrate 4 immagini, e una parola mancante, dovrai indovinare la parola mancante che associa le 4 immagini.",0),
-(10, 'letteremancanti', "In questo gioco ti verrano mostrate delle parole con delle lettere mancanti ed una categoria di riferimento, dovrai indicare quali sono le lettere mancanti.",0),
-(11, 'mesi', "In questo gioco ci saranno mesi dell'anno disposti casualmente, il tuo compito sará ordinarli in maniera corretta.",0),
-(12, 'musica', "Con il gioco musica ti faremo ascoltare 30 secondi di una canzone, il tuo compito sará riconoscere chi é l'autore di quella canzone tra le opzioni mostrate.",0),
-(13, 'racconti', "In questo esercizio ti racconteremo una breve storia, e una volta terminata ti faremo delle domande inerenti al racconto e dovrai rispondere.",0),
-(14, 'volti', "Ti mostreremo dei volti, il tuo compito sará riconoscere il personaggio e selezionare il nome corretto tra le varie risposte.",0);
+INSERT INTO `Categories` (`id_category`, `name_category`, `description_explaitation_category`, `has_vocal_input`) VALUES
+(1, 'appartenenza', 'In questo esercizio ti mostreremo di volta in volta una parola, dovrai indicare se la parola appartiene o meno alla categoria appartenenza.', 0),
+(2, 'categorizzazione', 'In questo esercizio ti mostreremo  un nome di una persona o un oggetto, e 4 opzioni che indicano diverse categorie, dovrai indicare a quale categoria appartiene la parola.', 0),
+(3, 'combinazionilettere', "Durante l'esercizio di combinazioni lettere  dovrai cercare di formare il maggior numero di parole con le lettere presentate.", 1),
+(4, 'esistenzaparole', "Durante questo esercizio ti sará mostrata una parola, dovrai dirci se quella parola ESISTE oppure NON ESISTE.", 0),
+(5, 'finaliparole', "L'esercizio di finali parole consiste nel presentarti l'inizio di una parola, e tu dovrai dirmi come termina ad esempio “diva” sarà l'inizio della parola “divano” oppure “divario”.", 1),
+(6, 'fluenzefonologiche', 'In questo gioco ti sará mostrata una lettera, tu dovrai indicare quante piú parole che ti vengono in mente che iniziano con quella lettera.', 1),
+(7, 'fluenzesemantiche', 'In questo gioco ti mostreremo una categoria e dovrai indicare quante piú parole possibili che ti vengono in mente inerente alla categoria mostrata.', 1),
+(8, 'fluenzeverbali', 'In questo esercizio ti verra mostrata di volta in volta una categoria, dovrai indicare quante piú parole ti vengono in mente inerente a quella categoria.', 1),
+(9, 'letteremancanti', 'In questo gioco ti verrano mostrate delle parole con delle lettere mancanti ed una categoria di riferimento, dovrai indicare quali sono le lettere mancanti.', 0),
+(10, 'mesi', "In questo gioco ti verranno fatte delle domande sui diversi mesi dell'anno, il tuo compito sará quello di rispondere correttamente alle domande.", 0),
+(11, 'musica', "Con il gioco musica ti faremo ascoltare 30 secondi di una canzone, il tuo compito sará riconoscere chi é l'autore di quella canzone tra le opzioni mostrate.", 0),
+(12, 'racconti', 'In questo esercizio ti racconteremo una breve storia, e una volta terminata ti faremo delle domande inerenti al racconto e dovrai rispondere.', 0),
+(13, 'volti', 'Ti mostreremo dei volti, il tuo compito sará riconoscere il personaggio e selezionare il nome corretto tra le varie risposte.', 0);
 
 -- --------------------------------------------------------
 
@@ -366,12 +365,15 @@ INSERT INTO `my_bettercallpepper`.`Elderlies` (`id`, `name`, `surname`, `birth`,
 --
 
 CREATE TABLE `my_bettercallpepper`.`Games` (
-  `id_game` int(11) NOT NULL,
-  `id_category` int(11) NOT NULL,
-  `id_elderly` int(11) NOT NULL,
+  `id_game` int NOT NULL,
+  `id_category` int NOT NULL,
+  `id_elderly` int NOT NULL,
   `name_game` varchar(32) NOT NULL,
   `risposte` json DEFAULT NULL COMMENT 'struttura {["pippo","pluto"]}. Json che rappresenta array di tutte le risposte possibili del gioco',
-  `esercizi` json NOT NULL COMMENT "Json array cosi' composto [{parola: null, rispostaCorretta: null, domanda:null}]. Ogni nodo di questo json array rappresenta un esercizio di questo gioco",
+  `domanda` text,
+  `esercizi` json NOT NULL COMMENT 'Json array cosi'' composto [{parola: null, rispostaCorretta: null, domanda:null}]. Ogni nodo di questo json array rappresenta un esercizio di questo gioco',
+  `freeText` text,
+  `mediaUrl` json DEFAULT NULL,
   PRIMARY KEY (`id_game`),
   UNIQUE KEY unique_id_game_to_name_game (`id_game`, `name_game`),
    FOREIGN KEY (`id_category`) REFERENCES Categories(`id_category`),
@@ -383,14 +385,22 @@ CREATE TABLE `my_bettercallpepper`.`Games` (
 -- Dump dei dati per la tabella `Games`
 --
 
-INSERT INTO `my_bettercallpepper`.`Games`
-(`id_game`, `id_category`, `id_elderly`, `name_game`, `risposte`, `esercizi`)
-VALUES
-(1, 1, 1, 'Frutti Estivi', '["Si", "No"]', '[{"parola": "albicocche", "rispostaCorretta": "Si"}, {"parola": "alchechengi", "rispostaCorretta": "No"}]'),
-(2, 2, 1, 'Categorizziamo', '["Cantanti", "Frutta", "Verdura", "Mestieri"]', '[{"parola": "andriano celentano", "rispostaCorretta": "cantante"}, {"parola": "mandarino", "rispostaCorretta": "frutta"}, {"parola": "bietle", "rispostaCorretta": "verdura"}, {"parola": "carrozziere", "rispostaCorretta": "mestieri"}, {"parola": "cavolfiore", "rispostaCorretta": "verdura"}]');
-
-
-
+INSERT INTO `Games` (`id_game`, `id_category`, `id_elderly`, `name_game`, `risposte`, `domanda`, `esercizi`, `freeText`, `mediaUrl`) VALUES
+(1, 1, 1, 'Frutti Estivi', '[\"Si\", \"No\"]', NULL, '[{\"parola\": \"albicocche\", \"rispostaCorretta\": \"Si\"}, {\"parola\": \"alchechengi\", \"rispostaCorretta\": \"No\"}]', NULL, NULL),
+(2, 2, 1, 'Categorizziamo', '[\"Cantanti\", \"Frutta\", \"Verdura\", \"Mestieri\"]', 'A quale categoria appartiene la parola: ', '[{\"parola\": \"andriano celentano\", \"rispostaCorretta\": \"cantanti\"}, {\"parola\": \"mandarino\", \"rispostaCorretta\": \"frutta\"}, {\"parola\": \"bietole\", \"rispostaCorretta\": \"verdura\"}, {\"parola\": \"carrozziere\", \"rispostaCorretta\": \"mestieri\"}, {\"parola\": \"cavolfiore\", \"rispostaCorretta\": \"verdura\"}]', NULL, NULL),
+(3, 3, 1, 'Combiniamo le lettere', NULL, 'Forma quante piú parole possibili con queste lettere', '[{\"parola\": \"e\"}, {\"parola\": \"m\"}]', NULL, NULL),
+(4, 4, 1, 'Esistenza Parole', '[\"Esiste\", \"Non Esiste\"]', 'Esiste o non esiste', '[{\"parola\": \"vaso\"}, {\"parola\": \"cane\"}, {\"parola\": \"casco\"}, {\"parola\": \"castaro\"}, {\"parola\": \"nettare\"}, {\"parola\": \"minto\"}, {\"parola\": \"lonfo\"}, {\"parola\": \"bambino\"}, {\"parola\": \"gluisce\"}, {\"parola\": \"trono\"}]', NULL, NULL),
+(5, 5, 1, 'Finali parole', NULL, 'Completa la parola che inizia con:', '[{\"parola\": \"diva\"}, {\"parola\": \"acqua\"}, {\"parola\": \"ali\"}, {\"parola\": \"dolo\"}, {\"parola\": \"tav\"}]', NULL, NULL),
+(6, 6, 1, 'Fluenze Fonologiche', NULL, 'Forma quante piú parole possibili che iniziano con la lettera: ', '[{\"parola\": \"E\"}]', NULL, NULL),
+(7, 7, 1, 'Vestiario', NULL, 'Indica piú parole possibili relative alla categoria: ', '[{\"parola\": \"Vestiti\"}]', NULL, NULL),
+(8, 8, 1, 'Fluenze Verbali', NULL, 'Indica la prima cosa che ti viene in mente quanto senti la parola: ', '[{\"parola\": \"genitori\"}, {\"parola\": \"scuola\"}, {\"parola\": \"sport\"}, {\"parola\": \"cibo\"}]', NULL, NULL),
+(9, 9, 1, 'Lettere Mancanti', NULL, 'Inserisci le lettere mancanti della parola appartenente alla categoria NATALE', '[{\"parola\": \"VIGILIA\"}, {\"parola\": \"VISCHIO\"}, {\"parola\": \"ASINELLO\"}, {\"parola\": \"PENDOLO\"}, {\"parola\": \"CAVATAPPI\"}]', NULL, NULL),
+(10, 10, 1, 'Mesi', NULL, NULL, '[{\"domanda\": \"Quando inizia la primavera?\", \"risposte\": [\"Aprile\", \"Giugno\"], \"rispostaCorretta\": \"Marzo\"}, {\"domanda\": \"Quando inizia la l\'inverno?\", \"risposte\": [\"Novembre\", \"Gennario\"], \"rispostaCorretta\": \"Dicembre\"}, {\"domanda\": \"Quando inizia l\'autunno?\", \"risposte\": [\"Ottobre\", \"Agosto\"], \"rispostaCorretta\": \"Settembre\"}]', NULL, NULL),
+(11, 11, 1, 'Musica', NULL, 'Chi canta questa canzone?', '[{\"risposte\": [\"Fausto Leali\", \"Adriano Celentano\"], \"rispostaCorretta\": \"Massimo Ranieri\"}, {\"risposte\": [\"Mina\", \"Anna Oxa\"], \"rispostaCorretta\": \"Rita Pavone\"}, {\"risposte\": [\"Massimo Ranieri\", \"Claudio Baglioni\"], \"rispostaCorretta\": \"Edoardo Vianello\"}, {\"risposte\": [\"Franco Califano\", \"Albano Carrisi\"], \"rispostaCorretta\": \"Adriano Celentano\"}, {\"risposte\": [\"Max Pezzali\", \"Renato Zero\"], \"rispostaCorretta\": \"Mina\"}]', NULL, '[\"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2Frose%20rosse%20-%20massimo%20ranieri.mp3?alt=media&token=07b71179-c357-4192-b12f-2ccdbb4c7fc3\", \"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FDatemi%20un%20martello.mp3?alt=media&token=dd9d7735-2dd9-4b14-af48-274c864977e9\", \"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FAbbronzatissima.mp3?alt=media&token=6640bd72-7c27-4994-a059-df6036c9a069\", \"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2F24%20mila%20baci%20(Remastered).mp3?alt=media&token=f89a53f4-81a5-42ca-891f-409768c11d9e\", \"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/songMusicQuiz%2FMINA%20-%20Stessa%20spiaggia%20stesso%20mare.mp3?alt=media&token=f47d04cb-ebea-4a7e-b967-724e63934729\"]'),
+(12, 13, 1, 'Volti', NULL, NULL, '[{\"domanda\": \"Quale e\' il suo nome?\", \"risposte\": [\"Carlo\", \"Francesco\"], \"rispostaCorretta\": \"Antonio\"}, {\"domanda\": \"Chi e\' per te questo signore? \", \"risposte\": [\"Zio\", \"Nonno\"], \"rispostaCorretta\": \"Fratello\"}, {\"domanda\": \"Quale e\' il suo lavoro?\", \"risposte\": [\"Muratore\", \"Elettricista\"], \"rispostaCorretta\": \"Meccanico\"}]', NULL, '[\"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/imagesQuiz%2FvoltiImage1.jpg?alt=media&token=7e2f23bb-7013-4217-bef3-303095179cec\"]'),
+(13, 1, 2, 'Frutti Estivi', '[\"Si\", \"No\"]', NULL, '[{\"parola\": \"albicocche\", \"rispostaCorretta\": \"Si\"}, {\"parola\": \"alchechengi\", \"rispostaCorretta\": \"No\"}]', NULL, NULL),
+(14, 2, 2, 'Categorizziamo', '[\"Cantanti\", \"Frutta\", \"Verdura\", \"Mestieri\"]', NULL, '[{\"parola\": \"andriano celentano\", \"domanda\": \"A quale categoria appartiene la parola: \", \"rispostaCorretta\": \"cantanti\"}, {\"parola\": \"mandarino\", \"domanda\": \"A quale categoria appartiene la parola: \", \"rispostaCorretta\": \"frutta\"}, {\"parola\": \"bietole\", \"domanda\": \"A quale categoria appartiene la parola: \", \"rispostaCorretta\": \"verdura\"}, {\"parola\": \"carrozziere\", \"domanda\": \"A quale categoria appartiene la parola: \", \"rispostaCorretta\": \"mestieri\"}, {\"parola\": \"cavolfiore\", \"domanda\": \"A quale categoria appartiene la parola: \", \"rispostaCorretta\": \"verdura\"}]', NULL, NULL),
+(15, 12, 2, 'Elisabetta', NULL, NULL, '[{\"domanda\": \"Quanti erano i fratelli?\", \"risposte\": [\"Uno\", \"Due\", \"Cinque\"], \"rispostaCorretta\": \"Tre\"}, {\"domanda\": \"Cosa capitò a Lorenzo?\", \"risposte\": [\"Si sposò con Elisabetta\", \"Partì con Elisabetta\"], \"rispostaCorretta\": \"Fu ucciso dai fratelli\"}, {\"domanda\": \"Come si chiama la sorella minore?\", \"risposte\": [\"Maria\", \"Pina\", \"Addolorata\"], \"rispostaCorretta\": \"Elisabetta\"}]', 'Nella città di Messina vi abitavano tre fratelli, ricchi mercanti, con la sorella minore Elisabetta, fanciulla molto bella non ancora maritata. Questa si innamorò di un giovane di nome Lorenzo che lavorava presso il fondaco dei tre fratelli. Anche Lorenzo si innamorò di Elisabetta e i due incominciarono a frequentarsi segretamente. Il fratello maggiore accortosi della relazione né parlò agli altri due fratelli e tutti e tre, dopo aver portato Lorenzo in luogo solitario lo uccisero e lo seppellirono. Una notte comparve in sogno a Elisabetta Lorenzo che le dice di essere stato ucciso dai suoi fratelli e le rivelò dove era seppellito. La fanciulla vi si recò, scavò e tagliò la testa dal corpo che dopo averla fasciata mise in un vaso e ricoprì di terra e vi piantò delle piante. Spesso la fanciulla riversava lacrime sul vaso e i fratelli avvertiti dai vicini, le tolsero il vaso e scoperta la testa la sotterrarono. Dopo i tre fratelli partirono per Napoli affinché non si sapesse la storia e la sorella continuando a versare lacrime morì.  ', '[\"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta0.jpg?alt=media&token=c80cc643-9a09-499b-996b-fcc2186c5091\", \"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta1.jpg?alt=media&token=85c7b808-bf57-4e0f-bf13-236d35727732\", \"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta2.png?alt=media&token=e5c7a954-0d4d-4a5c-b351-ef5ecb10f936\", \"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta3.jpg?alt=media&token=726820f7-5c42-4ed2-8a0e-a654ae47e049\", \"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta4.jpg?alt=media&token=53bb036e-cc24-4e20-b841-4eab0639fa5d\", \"https://firebasestorage.googleapis.com/v0/b/amicoreminders-nsfphc.appspot.com/o/storyImagesQuiz%2FElisabetta%2FLisabetta5.jpg?alt=media&token=2db1dd5e-086e-40b3-8ce9-bcb0c9275772\"]');
 
 -- --------------------------------------------------------
 
@@ -400,15 +410,37 @@ VALUES
 --
 
 CREATE TABLE `my_bettercallpepper`.`GameResults` (
-  `id_result` int(11) NOT NULL,
-  `id_elderly` int(11) NOT NULL,
-  `id_game` int(11) NOT NULL,
+  `id_result` int NOT NULL,
+  `id_elderly` int NOT NULL,
+  `id_game` int NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `score` int(11) NOT NULL,
+  `score` int NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
    PRIMARY KEY (`id_result`),
    FOREIGN KEY (`id_elderly`) REFERENCES Elderlies(`id`),
    FOREIGN KEY (`id_game`) REFERENCES Games(`id_game`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `GameResults`
+--
+
+INSERT INTO `GameResults` (`id_result`, `id_elderly`, `id_game`, `creation_date`, `score`, `is_active`) VALUES
+(67, 1, 1, '2024-06-27 14:56:45', 3, 0),
+(66, 2, 13, '2024-06-27 13:22:40', 2, 1),
+(65, 1, 10, '2024-06-27 13:20:32', 4, 1),
+(64, 1, 1, '2024-06-27 13:20:14', 2, 0),
+(63, 1, 1, '2024-06-27 10:37:33', 2, 0),
+(62, 1, 1, '2024-06-27 10:31:05', 2, 0),
+(61, 1, 11, '2024-06-22 17:51:50', 9, 1),
+(60, 1, 12, '2024-06-22 17:44:46', 7, 1),
+(59, 1, 12, '2024-06-22 17:43:53', 4, 0),
+(58, 2, 15, '2024-06-22 17:18:13', 4, 1),
+(57, 2, 14, '2024-06-22 17:17:23', 5, 1),
+(56, 2, 13, '2024-06-22 17:17:12', 2, 0),
+(55, 1, 2, '2024-06-22 17:16:56', 6, 1),
+(54, 1, 1, '2024-06-22 17:12:43', 3, 0),
+(68, 1, 1, '2024-06-29 18:27:31', 4, 1);
 
 
 -- --------------------------------------------------------
