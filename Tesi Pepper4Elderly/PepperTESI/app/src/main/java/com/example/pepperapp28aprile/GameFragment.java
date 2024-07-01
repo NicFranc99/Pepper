@@ -966,7 +966,7 @@ public class GameFragment extends Fragment{
     private boolean checkIfWordIsAlreadyPresent(String inputWord){
         int count = 1;
         for (String s : fluenzeFonologicheWord) {
-            if (s == inputWord) {
+            if (s.equalsIgnoreCase(inputWord)) {
                 count++;
             }
         }

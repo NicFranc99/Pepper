@@ -35,21 +35,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Ora è possibile recuperare la domanda dalla colonna della tabela Games.Domanda se si desidera avere esercizi diversi dello stesso gioco ma con la stessa domanda, in caso diverso si recupera la domanda dal nodo json della colonna Games.Esercizi.&#10;Rimosso testo &quot;Dimmi stop o ferma gioco&quot; sull'interfaccia ma viene solo detta dal robot">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/circle_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b14b7920-b109-4189-a383-36c42f845647" name="Default Changelist" comment="Fix background del microfono e del play che era nero. Fix recupero dei mediaUrl dal database">
+      <change beforePath="$PROJECT_DIR$/../ParenteAppTesi/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ParenteAppTesi/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/Persona.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/GameBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/utilities/GameBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/music_view_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/music_view_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/question_game_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/question_game_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[emulator-5578]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[172.20.10.6:5555]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -126,7 +122,7 @@
     <property name="android-custom-view/home/ubuntu/Android/Sdk/sources/android-30/android/widget/TextView.java_SELECTED" value="TextView" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/raw" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ParenteAppTesi" />
     <property name="multi-representation-preview/home/ubuntu/Android/Sdk/sources/android-30/android/view/View.java_selected" value="Custom views" />
     <property name="multi-representation-preview/home/ubuntu/Android/Sdk/sources/android-30/android/widget/TextView.java_selected" value="Custom views" />
     <property name="project.structure.last.edited" value="Dependencies" />
@@ -405,7 +401,14 @@
       <option name="project" value="LOCAL" />
       <updated>1719495426824</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Fix background del microfono e del play che era nero. Fix recupero dei mediaUrl dal database">
+      <created>1719508133899</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1719508133899</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -449,7 +452,8 @@
     <MESSAGE value="Ora è possibile definire i mediaUrl all'interno del database per tutti gli esercizi oppure uno singolo alla volta (valorizzando il json esercizi[i].mediaUrl).&#10;Fix bug immagine di stop player del gioco Musica quando si tenta di stoppare manualmente dal toutch la canzone corrente." />
     <MESSAGE value="Fix gioco musicale: Ora le risposte possibili vengono mostrate solo quando il paziente ha terminato di ascoltare tutta la canzone. Aggiunta di 2 animazioni per pepper quando si fornisce la risposta corretta" />
     <MESSAGE value="Ora è possibile recuperare la domanda dalla colonna della tabela Games.Domanda se si desidera avere esercizi diversi dello stesso gioco ma con la stessa domanda, in caso diverso si recupera la domanda dal nodo json della colonna Games.Esercizi.&#10;Rimosso testo &quot;Dimmi stop o ferma gioco&quot; sull'interfaccia ma viene solo detta dal robot" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ora è possibile recuperare la domanda dalla colonna della tabela Games.Domanda se si desidera avere esercizi diversi dello stesso gioco ma con la stessa domanda, in caso diverso si recupera la domanda dal nodo json della colonna Games.Esercizi.&#10;Rimosso testo &quot;Dimmi stop o ferma gioco&quot; sull'interfaccia ma viene solo detta dal robot" />
+    <MESSAGE value="Fix background del microfono e del play che era nero. Fix recupero dei mediaUrl dal database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix background del microfono e del play che era nero. Fix recupero dei mediaUrl dal database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -508,6 +512,21 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/MediaManagerFragment.java</url>
           <line>56</line>
           <option name="timeStamp" value="536" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>383</line>
+          <option name="timeStamp" value="537" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>380</line>
+          <option name="timeStamp" value="538" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/pepperapp28aprile/GameFragment.java</url>
+          <line>966</line>
+          <option name="timeStamp" value="539" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
