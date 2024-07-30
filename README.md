@@ -8,4 +8,4 @@ Per qualsiasi informazione e per i file del sito gestionale contattare gli svilu
 ### Contatti Telegram degli sviluppatori:
 #### Andriani Simone: @simone_andriani	(Tesi Pepper4Elderly e caso di studio Telepresenza)
 #### Chiapperini Davide: @DaveChia	(Caso di studio Telepresenza)
-#### Francavilla Nicola: @nikyfranc99	(Caso di studio Telepresenza)
+#### Francavilla Nicola: @nikyfranc99	(Tesi "Esercizi di Stimolazione Cognitiva per Anziani mediante il SocialRobot Pepper" e Caso di studio Telepresenza)
